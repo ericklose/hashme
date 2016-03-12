@@ -99,9 +99,11 @@
 		A61929071C94912A00D8C945 /* Hash Me */ = {
 			isa = PBXGroup;
 			children = (
+				A619293B1C94915B00D8C945 /* Resources */,
+				A619293A1C94915600D8C945 /* Model */,
+				A61929391C94915200D8C945 /* View */,
+				A61929381C94914B00D8C945 /* Controller */,
 				A61929081C94912A00D8C945 /* AppDelegate.swift */,
-				A619290A1C94912A00D8C945 /* FirstViewController.swift */,
-				A619290C1C94912A00D8C945 /* SecondViewController.swift */,
 				A619290E1C94912A00D8C945 /* Main.storyboard */,
 				A61929111C94912A00D8C945 /* Assets.xcassets */,
 				A61929131C94912A00D8C945 /* LaunchScreen.storyboard */,
@@ -126,6 +128,36 @@
 				A619292C1C94912A00D8C945 /* Info.plist */,
 			);
 			path = "Hash MeUITests";
+			sourceTree = "<group>";
+		};
+		A61929381C94914B00D8C945 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A619290A1C94912A00D8C945 /* FirstViewController.swift */,
+				A619290C1C94912A00D8C945 /* SecondViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		A61929391C94915200D8C945 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A619293A1C94915600D8C945 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A619293B1C94915B00D8C945 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
