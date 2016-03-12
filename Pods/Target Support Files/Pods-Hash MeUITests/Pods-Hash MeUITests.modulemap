@@ -1,0 +1,6 @@
+framework module Pods_Hash_MeUITests {
+  umbrella header "Pods-Hash MeUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
