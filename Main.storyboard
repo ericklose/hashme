@@ -63,9 +63,7 @@
                                 </constraints>
                                 <state key="normal" image="fb-icon"/>
                                 <connections>
-<<<<<<< HEAD
                                     <segue destination="IFe-ZI-2g4" kind="show" identifier="loggedIn" id="kQX-Ut-t8l"/>
-=======
                                     <action selector="fbbtnPressed:" destination="Mp2-v8-DQK" eventType="touchUpInside" id="0ua-tH-Ig2"/>
                                     <segue destination="IFe-ZI-2g4" kind="show" identifier="loggedIn" id="kQX-Ut-t8l"/>
                                 </connections>
@@ -98,7 +96,6 @@
                                 <state key="normal" title="LOG IN WITH EMAIL"/>
                                 <connections>
                                     <action selector="attemptLogin:" destination="Mp2-v8-DQK" eventType="touchUpInside" id="FzZ-k4-nRF"/>
->>>>>>> c1523e6695a73bcf3a29e606334ab93c55e3aeee
                                 </connections>
                             </button>
                         </subviews>
