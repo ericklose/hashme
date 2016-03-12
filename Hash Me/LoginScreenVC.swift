@@ -38,6 +38,7 @@ class LoginScreenVC: UIViewController {
     @IBAction func fbbtnPressed(sender: UIButton!) {
         let facebookLogin = FBSDKLoginManager()
         
+        
         facebookLogin.logInWithReadPermissions(["email"]) { (facebookResult: FBSDKLoginManagerLoginResult!, facebookError: NSError!) -> Void in
             
             if facebookError != nil {

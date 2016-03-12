@@ -59,7 +59,7 @@
                                 <rect key="frame" x="245" y="267" width="218" height="65"/>
                                 <state key="normal" image="fb-icon"/>
                                 <connections>
-                                    <segue destination="IFe-ZI-2g4" kind="show" id="kQX-Ut-t8l"/>
+                                    <segue destination="IFe-ZI-2g4" kind="show" identifier="loggedIn" id="kQX-Ut-t8l"/>
                                 </connections>
                             </button>
                         </subviews>
