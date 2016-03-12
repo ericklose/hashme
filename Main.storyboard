@@ -55,9 +55,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZm-Im-eul">
-                                <rect key="frame" x="281" y="285" width="38" height="30"/>
-                                <state key="normal" title="Login"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZm-Im-eul">
+                                <rect key="frame" x="245" y="267" width="218" height="65"/>
+                                <state key="normal" image="fb-icon"/>
                                 <connections>
                                     <segue destination="IFe-ZI-2g4" kind="show" id="kQX-Ut-t8l"/>
                                 </connections>
@@ -65,9 +65,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <outlet property="facebookLogin" destination="AZm-Im-eul" id="B45-DM-bR5"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nn7-IJ-94M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -92,4 +89,7 @@
             <point key="canvasLocation" x="-477" y="94"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="fb-icon" width="65" height="65"/>
+    </resources>
 </document>
