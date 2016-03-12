@@ -21,6 +21,18 @@
 		A6A0E3DA1C9498050003EE0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E3D91C9498050003EE0E /* Main.storyboard */; };
 		A6A0E3DB1C9498050003EE0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E3D91C9498050003EE0E /* Main.storyboard */; };
 		A6A0E3DC1C9498050003EE0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E3D91C9498050003EE0E /* Main.storyboard */; };
+		A6A0E3E01C94A08D0003EE0E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A0E3DD1C94A08D0003EE0E /* FBSDKCoreKit.framework */; };
+		A6A0E3E11C94A08D0003EE0E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A0E3DD1C94A08D0003EE0E /* FBSDKCoreKit.framework */; };
+		A6A0E3E21C94A08D0003EE0E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A0E3DD1C94A08D0003EE0E /* FBSDKCoreKit.framework */; };
+		A6A0E3E31C94A08D0003EE0E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A0E3DE1C94A08D0003EE0E /* FBSDKLoginKit.framework */; };
+		A6A0E3E41C94A08D0003EE0E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A0E3DE1C94A08D0003EE0E /* FBSDKLoginKit.framework */; };
+		A6A0E3E51C94A08D0003EE0E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A0E3DE1C94A08D0003EE0E /* FBSDKLoginKit.framework */; };
+		A6A0E3E61C94A08D0003EE0E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A0E3DF1C94A08D0003EE0E /* FBSDKShareKit.framework */; };
+		A6A0E3E71C94A08D0003EE0E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A0E3DF1C94A08D0003EE0E /* FBSDKShareKit.framework */; };
+		A6A0E3E81C94A08D0003EE0E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A0E3DF1C94A08D0003EE0E /* FBSDKShareKit.framework */; };
+		A6A0E3EA1C94A4650003EE0E /* LoginScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3E91C94A4650003EE0E /* LoginScreenVC.swift */; };
+		A6A0E3EB1C94A4650003EE0E /* LoginScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3E91C94A4650003EE0E /* LoginScreenVC.swift */; };
+		A6A0E3EC1C94A4650003EE0E /* LoginScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3E91C94A4650003EE0E /* LoginScreenVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +70,10 @@
 		A619292C1C94912A00D8C945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6A0E3D51C9496A00003EE0E /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		A6A0E3D91C9498050003EE0E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
+		A6A0E3DD1C94A08D0003EE0E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		A6A0E3DE1C94A08D0003EE0E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		A6A0E3DF1C94A08D0003EE0E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		A6A0E3E91C94A4650003EE0E /* LoginScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginScreenVC.swift; sourceTree = "<group>"; };
 		BF5100A58A6D9E427296C7F2 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -66,7 +82,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6A0E3E61C94A08D0003EE0E /* FBSDKShareKit.framework in Frameworks */,
 				47A685478A602CA8B763154C /* Pods.framework in Frameworks */,
+				A6A0E3E01C94A08D0003EE0E /* FBSDKCoreKit.framework in Frameworks */,
+				A6A0E3E31C94A08D0003EE0E /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +93,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6A0E3E41C94A08D0003EE0E /* FBSDKLoginKit.framework in Frameworks */,
+				A6A0E3E11C94A08D0003EE0E /* FBSDKCoreKit.framework in Frameworks */,
+				A6A0E3E71C94A08D0003EE0E /* FBSDKShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +103,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6A0E3E51C94A08D0003EE0E /* FBSDKLoginKit.framework in Frameworks */,
+				A6A0E3E21C94A08D0003EE0E /* FBSDKCoreKit.framework in Frameworks */,
+				A6A0E3E81C94A08D0003EE0E /* FBSDKShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +115,9 @@
 		1045C5914488D847D37221C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6A0E3DD1C94A08D0003EE0E /* FBSDKCoreKit.framework */,
+				A6A0E3DE1C94A08D0003EE0E /* FBSDKLoginKit.framework */,
+				A6A0E3DF1C94A08D0003EE0E /* FBSDKShareKit.framework */,
 				BF5100A58A6D9E427296C7F2 /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -165,6 +193,7 @@
 			children = (
 				A619290A1C94912A00D8C945 /* FirstViewController.swift */,
 				A619290C1C94912A00D8C945 /* SecondViewController.swift */,
+				A6A0E3E91C94A4650003EE0E /* LoginScreenVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -378,6 +407,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6A0E3EA1C94A4650003EE0E /* LoginScreenVC.swift in Sources */,
 				A619290D1C94912A00D8C945 /* SecondViewController.swift in Sources */,
 				A61929091C94912A00D8C945 /* AppDelegate.swift in Sources */,
 				A619290B1C94912A00D8C945 /* FirstViewController.swift in Sources */,
@@ -389,6 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6A0E3EB1C94A4650003EE0E /* LoginScreenVC.swift in Sources */,
 				A61929201C94912A00D8C945 /* Hash_MeTests.swift in Sources */,
 				A6A0E3D71C9496A00003EE0E /* DataService.swift in Sources */,
 			);
@@ -398,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6A0E3EC1C94A4650003EE0E /* LoginScreenVC.swift in Sources */,
 				A619292B1C94912A00D8C945 /* Hash_MeUITests.swift in Sources */,
 				A6A0E3D81C9496A00003EE0E /* DataService.swift in Sources */,
 			);
@@ -518,6 +550,10 @@
 			baseConfigurationReference = 52927BA7EB0468E45C3E7B38 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Hash Me/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hollyanderic.Hash-Me";
@@ -530,6 +566,10 @@
 			baseConfigurationReference = 95A7A265369CD9D77AD603C0 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Hash Me/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hollyanderic.Hash-Me";
@@ -541,6 +581,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Hash MeTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hollyanderic.Hash-MeTests";
@@ -553,6 +597,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Hash MeTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hollyanderic.Hash-MeTests";
@@ -564,6 +612,10 @@
 		A61929361C94912A00D8C945 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Hash MeUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hollyanderic.Hash-MeUITests";
@@ -576,6 +628,10 @@
 		A61929371C94912A00D8C945 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Hash MeUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hollyanderic.Hash-MeUITests";
