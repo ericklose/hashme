@@ -44,6 +44,7 @@ class LoginScreenVC: UIViewController {
             if facebookError != nil {
                 print("Facebook login failed. Error \(facebookError)")
             } else {
+                print(FBSDKAccessToken.currentAccessToken().tokenString)
                 let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
                 print("successfully logged in with facbeook: \(accessToken)")
                 
