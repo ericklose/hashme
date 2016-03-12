@@ -15,19 +15,19 @@ class DataService {
     static let ds = DataService()
     
     private var _REF_BASE = Firebase(url: "\(URL_BASE)")
-    private var _REF_POST = Firebase(url: "\(URL_BASE)/posts")
-    private var _REF_USERS = Firebase(url: "\(URL_BASE)/users")
+    private var _REF_TRAILS = Firebase(url: "\(URL_BASE)/trails")
+    private var _REF_HASHERS = Firebase(url: "\(URL_BASE)/hashers")
     
     var REF_BASE: Firebase {
         return _REF_BASE
     }
     
-    var REF_POST: Firebase {
-        return _REF_POST
+    var REF_TRAILS: Firebase {
+        return _REF_TRAILS
     }
     
-    var REF_USERS: Firebase {
-        return _REF_USERS
+    var REF_HASHERS: Firebase {
+        return _REF_HASHERS
     }
     
     var REF_USER_CURRENT: Firebase {
@@ -37,6 +37,6 @@ class DataService {
     }
     
     func createFirebaseUser(uid: String, user: Dictionary<String, String>) {
-        REF_USERS.childByAppendingPath(uid).setValue(user)
+        REF_HASHERS.childByAppendingPath(uid).setValue(user)
     }
 }
