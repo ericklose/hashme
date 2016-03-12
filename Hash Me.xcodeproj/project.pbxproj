@@ -15,6 +15,9 @@
 		A61929151C94912A00D8C945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61929131C94912A00D8C945 /* LaunchScreen.storyboard */; };
 		A61929201C94912A00D8C945 /* Hash_MeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619291F1C94912A00D8C945 /* Hash_MeTests.swift */; };
 		A619292B1C94912A00D8C945 /* Hash_MeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619292A1C94912A00D8C945 /* Hash_MeUITests.swift */; };
+		A6A0E3D61C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
+		A6A0E3D71C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
+		A6A0E3D81C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,7 @@
 		A61929261C94912A00D8C945 /* Hash MeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hash MeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A619292A1C94912A00D8C945 /* Hash_MeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hash_MeUITests.swift; sourceTree = "<group>"; };
 		A619292C1C94912A00D8C945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6A0E3D51C9496A00003EE0E /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,7 @@
 		A619293B1C94915B00D8C945 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A6A0E3D51C9496A00003EE0E /* DataService.swift */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -297,6 +302,7 @@
 				A619290D1C94912A00D8C945 /* SecondViewController.swift in Sources */,
 				A61929091C94912A00D8C945 /* AppDelegate.swift in Sources */,
 				A619290B1C94912A00D8C945 /* FirstViewController.swift in Sources */,
+				A6A0E3D61C9496A00003EE0E /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A61929201C94912A00D8C945 /* Hash_MeTests.swift in Sources */,
+				A6A0E3D71C9496A00003EE0E /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A619292B1C94912A00D8C945 /* Hash_MeUITests.swift in Sources */,
+				A6A0E3D81C9496A00003EE0E /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +531,7 @@
 				A61929311C94912A00D8C945 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A61929321C94912A00D8C945 /* Build configuration list for PBXNativeTarget "Hash MeTests" */ = {
 			isa = XCConfigurationList;
@@ -531,6 +540,7 @@
 				A61929341C94912A00D8C945 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A61929351C94912A00D8C945 /* Build configuration list for PBXNativeTarget "Hash MeUITests" */ = {
 			isa = XCConfigurationList;
@@ -539,6 +549,7 @@
 				A61929371C94912A00D8C945 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
