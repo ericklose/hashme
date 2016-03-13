@@ -15,6 +15,7 @@ class DataService {
     static let ds = DataService()
     
     private var _REF_BASE = Firebase(url: "\(URL_BASE)")
+
     private var _REF_TRAILS = Firebase(url: "\(URL_BASE)/trails")
     private var _REF_HASHERS = Firebase(url: "\(URL_BASE)/hashers")
     
