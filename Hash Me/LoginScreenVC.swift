@@ -38,11 +38,18 @@ class LoginScreenVC: UIViewController {
     @IBAction func fbbtnPressed(sender: UIButton!) {
         let facebookLogin = FBSDKLoginManager()
         
-        facebookLogin.logInWithReadPermissions(["email"]) { (facebookResult: FBSDKLoginManagerLoginResult!, facebookError: NSError!) -> Void in
+//this is Eric's code for the new, non-deprecated login function
+        facebookLogin.logInWithReadPermissions(["email"], fromViewController: self) { (facebookResult: FBSDKLoginManagerLoginResult!, facebookError: NSError!) -> Void in
+            
+        
+        
+// this is the login function from our course which I'm keeping in case there's an issue with the new one (above)
+//        facebookLogin.logInWithReadPermissions(["email"]) { (facebookResult: FBSDKLoginManagerLoginResult!, facebookError: NSError!) -> Void in
             
             if facebookError != nil {
                 print("Facebook login failed. Error \(facebookError)")
             } else {
+                print(FBSDKAccessToken.currentAccessToken().tokenString)
                 let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
                 print("successfully logged in with facbeook: \(accessToken)")
                 
