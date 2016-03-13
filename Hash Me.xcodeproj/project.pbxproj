@@ -9,13 +9,8 @@
 /* Begin PBXBuildFile section */
 		47A685478A602CA8B763154C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5100A58A6D9E427296C7F2 /* Pods.framework */; };
 		A61929091C94912A00D8C945 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61929081C94912A00D8C945 /* AppDelegate.swift */; };
-<<<<<<< HEAD
-		A619290B1C94912A00D8C945 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619290A1C94912A00D8C945 /* FirstViewController.swift */; };
 		A619290D1C94912A00D8C945 /* HasherDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619290C1C94912A00D8C945 /* HasherDataVC.swift */; };
-=======
 		A619290B1C94912A00D8C945 /* TrailListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619290A1C94912A00D8C945 /* TrailListVC.swift */; };
-		A619290D1C94912A00D8C945 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619290C1C94912A00D8C945 /* SecondViewController.swift */; };
->>>>>>> 2e30fe92d1f0c332bedd59b9734a34727ff449d5
 		A61929121C94912A00D8C945 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A61929111C94912A00D8C945 /* Assets.xcassets */; };
 		A61929151C94912A00D8C945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61929131C94912A00D8C945 /* LaunchScreen.storyboard */; };
 		A61929201C94912A00D8C945 /* Hash_MeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619291F1C94912A00D8C945 /* Hash_MeTests.swift */; };
@@ -72,13 +67,8 @@
 		95A7A265369CD9D77AD603C0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A61929051C94912A00D8C945 /* Hash Me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hash Me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A61929081C94912A00D8C945 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		A619290A1C94912A00D8C945 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		A619290C1C94912A00D8C945 /* HasherDataVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasherDataVC.swift; sourceTree = "<group>"; };
-=======
 		A619290A1C94912A00D8C945 /* TrailListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailListVC.swift; sourceTree = "<group>"; };
-		A619290C1C94912A00D8C945 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
->>>>>>> 2e30fe92d1f0c332bedd59b9734a34727ff449d5
 		A61929111C94912A00D8C945 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A61929141C94912A00D8C945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A61929161C94912A00D8C945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -215,13 +205,8 @@
 		A61929381C94914B00D8C945 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				A619290A1C94912A00D8C945 /* FirstViewController.swift */,
 				A619290C1C94912A00D8C945 /* HasherDataVC.swift */,
-=======
 				A619290A1C94912A00D8C945 /* TrailListVC.swift */,
-				A619290C1C94912A00D8C945 /* SecondViewController.swift */,
->>>>>>> 2e30fe92d1f0c332bedd59b9734a34727ff449d5
 				A6A0E3E91C94A4650003EE0E /* LoginScreenVC.swift */,
 			);
 			name = Controller;
