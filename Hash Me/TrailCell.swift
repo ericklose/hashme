@@ -19,6 +19,10 @@ class TrailCell: UITableViewCell {
     @IBOutlet weak var trailStartLocation: UILabel!
     @IBOutlet weak var trailDescription: UILabel!
     
+    var trail: TrailData!
+    var request: Request?
+    
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,5 +34,22 @@ class TrailCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    
+    
+    func configureCell(trail: TrailData) {
+        self.trail = trail
+        
+        self.trailDate.text = trail.trailDate
+        self.trailKennel.text = trail.trailKennel
+        self.trailHares.text = trail.trailHares
+        self.trailStartLocation.text = trail.trailStartLocation
+        self.trailDescription.text = trail.trailDescription
+        
+        
+    }
+
+    
+    
 
 }
