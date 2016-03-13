@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 import Firebase
 
 class TrailData {
@@ -17,6 +16,8 @@ class TrailData {
     private var _trailHares: String!
     private var _trailStartLocation: String!
     private var _trailDescription: String!
+    private var _trailKey: String!
+    private var _trailRef: Firebase!
     
     var trailDate: String {
         return _trailDate
@@ -38,9 +39,43 @@ class TrailData {
         return _trailDescription
     }
     
+    var trailKey: String {
+        return _trailKey
+    }
     
-    init(trailDate: String, trailKennel: String) {
+    init(trailDate: String, trailKennel: String, trailDescription: String) {
+        self._trailDate = trailDate
+        self._trailKennel = trailKennel
+        self._trailDescription = trailDescription
         
     }
     
+    init(trailKey: String, dictionary: Dictionary<String, AnyObject>) {
+        
+        self._trailKey = trailKey
+        
+        if let trailDate = dictionary["trailDate"] as? String {
+            self._trailDate = trailDate
+        }
+        
+        if let trailKennel = dictionary["trailKennel"] as? String {
+            self._trailKennel = trailKennel
+        }
+        
+        if let trailHares = dictionary["trailHares"] as? String {
+            self._trailHares = trailHares
+        }
+        
+        if let trailStartLocation = dictionary["trailStartLocation"] as? String {
+            self._trailStartLocation = trailStartLocation
+        }
+        
+        if let trailDescription = dictionary["trailDescription"] as? String {
+            self._trailDescription = trailDescription
+        }
+      
+        self._trailRef = DataService.ds.REF_TRAILS.childByAppendingPath(self._trailKey)
+    }
+    
 }
+
