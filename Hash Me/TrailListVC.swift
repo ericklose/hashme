@@ -99,25 +99,8 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 }
 
 
-//    
-//    func buildTrailList() {
-//    for row in rows {
-//    let pokeId = Int(row["id"]!)!
-//    let name = row["identifier"]!
-//    let trailInCell = TrailData(trailDate: String, trailKennel: String, trailDescription: String)
-//    pokemon.append(poke)
-//    }
-//    }
 
-//    func postTrailToFirebase(trailDate: String, trailHares: String, trailKennel: String) {
-//        
-//        var trail: Dictionary<String, AnyObject> = [
-//            "trailDate": trailDate.text,
-//            "trailKennel": trailKennel.text,
-//            "trailHares": trailHares.text,
-//            "trailStartLocation": trailStartLocation.text,
-//            "trailDescription": trailDescription.text
-//            ]
+
 //            
 //
 //

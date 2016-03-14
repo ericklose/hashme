@@ -15,6 +15,9 @@
 		A61929151C94912A00D8C945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61929131C94912A00D8C945 /* LaunchScreen.storyboard */; };
 		A61929201C94912A00D8C945 /* Hash_MeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619291F1C94912A00D8C945 /* Hash_MeTests.swift */; };
 		A619292B1C94912A00D8C945 /* Hash_MeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619292A1C94912A00D8C945 /* Hash_MeUITests.swift */; };
+		A64554E31C975BC60016373E /* AddNewTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64554E21C975BC60016373E /* AddNewTrailVC.swift */; };
+		A64554E41C975BC60016373E /* AddNewTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64554E21C975BC60016373E /* AddNewTrailVC.swift */; };
+		A64554E51C975BC60016373E /* AddNewTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64554E21C975BC60016373E /* AddNewTrailVC.swift */; };
 		A6A0E3D61C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
 		A6A0E3D71C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
 		A6A0E3D81C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
@@ -87,6 +90,7 @@
 		A61929261C94912A00D8C945 /* Hash MeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hash MeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A619292A1C94912A00D8C945 /* Hash_MeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hash_MeUITests.swift; sourceTree = "<group>"; };
 		A619292C1C94912A00D8C945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A64554E21C975BC60016373E /* AddNewTrailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewTrailVC.swift; sourceTree = "<group>"; };
 		A6A0E3D51C9496A00003EE0E /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		A6A0E3DD1C94A08D0003EE0E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		A6A0E3DE1C94A08D0003EE0E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -221,6 +225,7 @@
 				A619290A1C94912A00D8C945 /* TrailListVC.swift */,
 				A6A0E3E91C94A4650003EE0E /* LoginScreenVC.swift */,
 				A6CB71361C96210600F27D12 /* ManageTrailVC.swift */,
+				A64554E21C975BC60016373E /* AddNewTrailVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -449,6 +454,7 @@
 				A61929091C94912A00D8C945 /* AppDelegate.swift in Sources */,
 				A619290B1C94912A00D8C945 /* TrailListVC.swift in Sources */,
 				A6A0E3D61C9496A00003EE0E /* DataService.swift in Sources */,
+				A64554E31C975BC60016373E /* AddNewTrailVC.swift in Sources */,
 				A6CB713F1C9733AE00F27D12 /* AttendeeData.swift in Sources */,
 				A6A0E3EE1C94AAB40003EE0E /* Constants.swift in Sources */,
 				DA15804B1C9740400042614A /* AttendeeCell.swift in Sources */,
@@ -467,6 +473,7 @@
 				A6BBA7B01C9524690030DB53 /* TrailCell.swift in Sources */,
 				A6CB71401C9733AE00F27D12 /* AttendeeData.swift in Sources */,
 				A6A0E3D71C9496A00003EE0E /* DataService.swift in Sources */,
+				A64554E41C975BC60016373E /* AddNewTrailVC.swift in Sources */,
 				A6A0E3EF1C94AAB40003EE0E /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,6 +490,7 @@
 				A6BBA7B11C9524690030DB53 /* TrailCell.swift in Sources */,
 				A6CB71411C9733AE00F27D12 /* AttendeeData.swift in Sources */,
 				A6A0E3D81C9496A00003EE0E /* DataService.swift in Sources */,
+				A64554E51C975BC60016373E /* AddNewTrailVC.swift in Sources */,
 				A6A0E3F01C94AAB40003EE0E /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
