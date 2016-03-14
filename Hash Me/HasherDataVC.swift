@@ -30,30 +30,42 @@ class HasherDataVC: UIViewController {
             
             
             if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
-                let nerdNameLbl = hasherDict["hasherNerdName"]!
+                let nerdNameLbl = hasherDict["hasherNerdNames"]!
                 self.nerdNameLbl.text = "\(nerdNameLbl)"
                 print("nerd: \(nerdNameLbl)")
                 
-                if let hashNames = hasherDict["hasherHashNames"] as? Dictionary<String, AnyObject> {
-                    
+                let hashNames = hasherDict["hasherHashNames"] as? Dictionary<String, AnyObject>
+                
                     self.hashNamesLbl.text = ""
                     
-                    let keyArray = [String](hashNames.keys)
+                    let keyArray = [String](hashNames!.keys)
                     print(keyArray[0])
                     self.hashNamesLbl.text = keyArray[0]
-                    
-//                    if keyArray.count > 1 {
-//                        for var x = 1; x < keyArray.count; x++ {
-//                            if let name = keyArray[x] {
-//                                print(name)
-//                             //   self.hashNamesLbl.text! += ", \(name)"
-//                            }
-//                        }
-//                    }
+                
+                    if keyArray.count > 1 {
+                        for var x = 1; x < keyArray.count; x++ {
+                            let name = keyArray[x]
+                                print(name)
+                                self.hashNamesLbl.text! += ", \(name)"
+                        }
+                    }
                 }
                 
-            }
+            //}
             
+//            
+//            // You should check to see if a value exists for `orch_array` first.
+//            if let dict: AnyObject = NSUserDefaults().dictionaryForKey("orch_array")?[orchId] {
+//                // Then force downcast.
+//                let orch = dict as! [String: String]
+//                orch[appleId] // No error
+//            }
+//            2. Use optional binding to check if orch is nil:
+//            
+//            if let orch = NSUserDefaults().dictionaryForKey("orch_array")?[orchId] as? [String: String] {
+//                orch[appleId] // No error
+//            }
+//            
             
 //            if let moves = dict["moves"] as? [Dictionary<String, AnyObject>]
 //                where moves.count > 0 {
