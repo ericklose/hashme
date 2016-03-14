@@ -41,12 +41,20 @@ class HasherDataVC: UIViewController {
                     let keyArray = [String](hashNames!.keys)
                     print(keyArray[0])
                     self.hashNamesLbl.text = keyArray[0]
+<<<<<<< HEAD
                 
+=======
+                    
+>>>>>>> 9a25ef9afbca23db1db3d1f76f21eb88d20a69ff
                     if keyArray.count > 1 {
                         for var x = 1; x < keyArray.count; x++ {
                             let name = keyArray[x]
                                 print(name)
                                 self.hashNamesLbl.text! += ", \(name)"
+<<<<<<< HEAD
+=======
+                            
+>>>>>>> 9a25ef9afbca23db1db3d1f76f21eb88d20a69ff
                         }
                     }
                 }

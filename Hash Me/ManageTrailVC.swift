@@ -20,6 +20,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var specificTrailDescription: UILabel!
     
     var trails: TrailData!
+    var attendee: Attendee!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +55,16 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let attendee = attendee[indexPath.row]
         
+        if let cell = tableView.dequeueReusableCellWithIdentifier("attendeeCell") as? AttendeeCell {
+            
+            cell.configureCell(attendee)
+            
+            return cell
+        } else {
+            return AttendeeCell()
+        }
     }
 
 }
