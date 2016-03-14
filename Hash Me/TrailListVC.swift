@@ -61,11 +61,11 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         let trail: TrailData!
-        
         trail = trails[indexPath.row]
-        
         performSegueWithIdentifier("manageTrail", sender: trail)
+    
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
