@@ -7,19 +7,26 @@
 //
 
 import UIKit
+import Firebase
 
-class ManageTrailVC: UIViewController {
+class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var trailAttendeeTableView: UITableView!
     
     @IBOutlet weak var specificTrailDate: UILabel!
     @IBOutlet weak var specificTrailKennel: UILabel!
+    @IBOutlet weak var specificTrailStartLocation: UILabel!
+    @IBOutlet weak var specificTrailHares: UILabel!
+    @IBOutlet weak var specificTrailDescription: UILabel!
     
     var trails: TrailData!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //print(trails)
-        //specificTrailDate.hidden = true
+        trailAttendeeTableView.delegate = self
+        trailAttendeeTableView.dataSource = self
+        
         self.updateTrailDetails()
         
         
@@ -31,22 +38,23 @@ class ManageTrailVC: UIViewController {
     }
     
     func updateTrailDetails() {
-        specificTrailDate.text = trails.trailDescription
+        specificTrailDate.text = trails.trailDate
         specificTrailKennel.text = trails.trailHares
+        specificTrailStartLocation.text = trails.trailStartLocation
+        specificTrailHares.text = trails.trailHares
+        specificTrailDescription.text = trails.trailDescription
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
     }
-    
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
