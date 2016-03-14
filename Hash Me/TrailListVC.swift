@@ -61,7 +61,9 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let nextScreenTrail: TrailData!
         
+        performSegueWithIdentifier("manageTrail", sender: self.trails)
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -72,9 +74,9 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         let trail = trails[indexPath.row]
         
-        if let cell = tableView.dequeueReusableCellWithIdentifier("TrailCell") as? TrailCell {
+        if let cell = tableView.dequeueReusableCellWithIdentifier("trailCell") as? TrailCell {
             
-            cell.request?.cancel()
+            cell.configureCell(trail)
             
             return cell
         } else {
@@ -82,6 +84,18 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
         
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "manageTrail" {
+            if let manageTrailVC = segue.destinationViewController as? ManageTrailVC {
+                if let nextScreenTrail = sender as? TrailData {
+                    manageTrailVC.trail = nextScreenTrail
+                }
+            }
+        }
+    }
+    
+    
     
     }
     
