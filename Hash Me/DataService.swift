@@ -37,7 +37,7 @@ class DataService {
         return hasher!
     }
     
-    func createFirebaseUser(uid: String, user: Dictionary<String, String>) {
-        REF_HASHERS.childByAppendingPath(uid).setValue(user)
+    func createFirebaseUser(uid: String, hasher: Dictionary<String, String>) {
+        REF_HASHERS.childByAppendingPath(uid).setValue(hasher)
     }
 }
