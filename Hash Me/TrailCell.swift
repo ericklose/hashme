@@ -23,19 +23,17 @@ class TrailCell: UITableViewCell {
     //var request: Request?
     
     
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-    
-    
     
     func configureCell(trail: TrailData) {
         self.trail = trail
@@ -46,10 +44,7 @@ class TrailCell: UITableViewCell {
         self.trailStartLocation.text = trail.trailStartLocation
         self.trailDescription.text = trail.trailDescription
         
-        
     }
-
     
-    
-
 }
+

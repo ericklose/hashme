@@ -61,7 +61,7 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let nextScreenTrail: TrailData!
+        let trails: TrailData!
         
         performSegueWithIdentifier("manageTrail", sender: self.trails)
     }
@@ -88,17 +88,25 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "manageTrail" {
             if let manageTrailVC = segue.destinationViewController as? ManageTrailVC {
-                if let nextScreenTrail = sender as? TrailData {
-                    manageTrailVC.trail = nextScreenTrail
+                if let trailInCell = sender as? TrailData {
+                    manageTrailVC.trails = trailInCell
                 }
             }
         }
     }
-    
-    
-    
-    }
-    
+}
+
+
+//    
+//    func buildTrailList() {
+//    for row in rows {
+//    let pokeId = Int(row["id"]!)!
+//    let name = row["identifier"]!
+//    let trailInCell = TrailData(trailDate: String, trailKennel: String, trailDescription: String)
+//    pokemon.append(poke)
+//    }
+//    }
+
 //    func postTrailToFirebase(trailDate: String, trailHares: String, trailKennel: String) {
 //        
 //        var trail: Dictionary<String, AnyObject> = [

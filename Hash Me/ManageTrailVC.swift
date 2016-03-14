@@ -13,16 +13,15 @@ class ManageTrailVC: UIViewController {
     @IBOutlet weak var specificTrailDate: UILabel!
     @IBOutlet weak var specificTrailKennel: UILabel!
     
-    var trail: TrailData!
+    var trails: TrailData!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       // print("desc: \(trails.trailDescription)")
-
-       // if let
-        specificTrailDate.text = trail.trailDescription
-        specificTrailKennel.text = trail.trailHares
+        //print(trails)
+        specificTrailDate.hidden = true
+        //self.updateTrailDetails()
+        
         
     }
 
@@ -30,6 +29,14 @@ class ManageTrailVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func updateTrailDetails() {
+        specificTrailDate.text = trails.trailDescription
+        specificTrailKennel.text = trails.trailHares
+        
+    }
+    
+    
     
 
     /*

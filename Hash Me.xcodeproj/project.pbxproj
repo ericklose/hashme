@@ -18,9 +18,6 @@
 		A6A0E3D61C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
 		A6A0E3D71C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
 		A6A0E3D81C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
-		A6A0E3DA1C9498050003EE0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E3D91C9498050003EE0E /* Main.storyboard */; };
-		A6A0E3DB1C9498050003EE0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E3D91C9498050003EE0E /* Main.storyboard */; };
-		A6A0E3DC1C9498050003EE0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E3D91C9498050003EE0E /* Main.storyboard */; };
 		A6A0E3E01C94A08D0003EE0E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A0E3DD1C94A08D0003EE0E /* FBSDKCoreKit.framework */; };
 		A6A0E3E11C94A08D0003EE0E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A0E3DD1C94A08D0003EE0E /* FBSDKCoreKit.framework */; };
 		A6A0E3E21C94A08D0003EE0E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A0E3DD1C94A08D0003EE0E /* FBSDKCoreKit.framework */; };
@@ -45,6 +42,9 @@
 		A6CB71371C96210600F27D12 /* ManageTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB71361C96210600F27D12 /* ManageTrailVC.swift */; };
 		A6CB71381C96210600F27D12 /* ManageTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB71361C96210600F27D12 /* ManageTrailVC.swift */; };
 		A6CB71391C96210600F27D12 /* ManageTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB71361C96210600F27D12 /* ManageTrailVC.swift */; };
+		A6CB713B1C9644FF00F27D12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CB713A1C9644FF00F27D12 /* Main.storyboard */; };
+		A6CB713C1C9644FF00F27D12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CB713A1C9644FF00F27D12 /* Main.storyboard */; };
+		A6CB713D1C9644FF00F27D12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CB713A1C9644FF00F27D12 /* Main.storyboard */; };
 		DAD2CF9F1C95F9960048C2C8 /* HasherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD2CF9E1C95F9960048C2C8 /* HasherData.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,7 +82,6 @@
 		A619292A1C94912A00D8C945 /* Hash_MeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hash_MeUITests.swift; sourceTree = "<group>"; };
 		A619292C1C94912A00D8C945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6A0E3D51C9496A00003EE0E /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
-		A6A0E3D91C9498050003EE0E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
 		A6A0E3DD1C94A08D0003EE0E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		A6A0E3DE1C94A08D0003EE0E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		A6A0E3DF1C94A08D0003EE0E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -91,6 +90,7 @@
 		A6BBA7AE1C9524690030DB53 /* TrailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailCell.swift; sourceTree = "<group>"; };
 		A6BBA7B21C9525560030DB53 /* TrailData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailData.swift; sourceTree = "<group>"; };
 		A6CB71361C96210600F27D12 /* ManageTrailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageTrailVC.swift; sourceTree = "<group>"; };
+		A6CB713A1C9644FF00F27D12 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BF5100A58A6D9E427296C7F2 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD2CF9E1C95F9960048C2C8 /* HasherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasherData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,8 +180,8 @@
 				A61929391C94915200D8C945 /* View */,
 				A61929381C94914B00D8C945 /* Controller */,
 				A61929081C94912A00D8C945 /* AppDelegate.swift */,
+				A6CB713A1C9644FF00F27D12 /* Main.storyboard */,
 				A61929111C94912A00D8C945 /* Assets.xcassets */,
-				A6A0E3D91C9498050003EE0E /* Main.storyboard */,
 				A61929131C94912A00D8C945 /* LaunchScreen.storyboard */,
 				A61929161C94912A00D8C945 /* Info.plist */,
 			);
@@ -353,7 +353,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6A0E3DA1C9498050003EE0E /* Main.storyboard in Resources */,
+				A6CB713B1C9644FF00F27D12 /* Main.storyboard in Resources */,
 				A61929151C94912A00D8C945 /* LaunchScreen.storyboard in Resources */,
 				A61929121C94912A00D8C945 /* Assets.xcassets in Resources */,
 			);
@@ -363,7 +363,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6A0E3DB1C9498050003EE0E /* Main.storyboard in Resources */,
+				A6CB713C1C9644FF00F27D12 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,7 +371,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6A0E3DC1C9498050003EE0E /* Main.storyboard in Resources */,
+				A6CB713D1C9644FF00F27D12 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
