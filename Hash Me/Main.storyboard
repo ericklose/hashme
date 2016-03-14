@@ -324,11 +324,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="0Ib-e1-Pkx">
-                        <barButtonItem key="rightBarButtonItem" title="+" id="fcX-m2-shq">
-                            <connections>
-                                <segue destination="DFk-tR-U37" kind="show" identifier="addNewTrail" id="rmA-fe-cSm"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="+" id="fcX-m2-shq"/>
                     </navigationItem>
                     <connections>
                         <outlet property="trailTableView" destination="pOb-S4-jhQ" id="iLw-sQ-b1b"/>
@@ -400,7 +396,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZm-Im-eul">
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZm-Im-eul">
                                 <rect key="frame" x="256" y="28" width="88" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="0LK-Tv-fp8"/>
@@ -412,7 +408,7 @@
                                     <segue destination="IFe-ZI-2g4" kind="show" identifier="loggedIn" id="kQX-Ut-t8l"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fd2-mn-fOq">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fd2-mn-fOq">
                                 <rect key="frame" x="166" y="245" width="269" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="a1P-aE-RiG"/>
@@ -421,7 +417,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Il9-Vc-0OY">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Il9-Vc-0OY">
                                 <rect key="frame" x="166" y="298" width="269" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="1zJ-ab-KBc"/>
@@ -506,7 +502,4 @@
     <resources>
         <image name="fb-icon" width="65" height="65"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Zp2-WH-YPg"/>
-    </inferredMetricsTieBreakers>
 </document>
