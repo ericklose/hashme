@@ -57,7 +57,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let attendee = attendees[indexPath.row]
         
-        if let cell = tableView.dequeueReusableCellWithIdentifier("attendeeCell") as? AttendeeCell {
+        if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
             
             cell.configureCell(attendee)
             
