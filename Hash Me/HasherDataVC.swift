@@ -30,6 +30,7 @@ class HasherDataVC: UIViewController {
             if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
                 let nerdNameLbl = hasherDict["hasherNerdName"]!
                 self.nerdNameLbl.text = "\(nerdNameLbl)"
+                self.nerdNameTxtFld.text = "\(nerdNameLbl)"
                 print("nerd: \(nerdNameLbl)")
                 
                 let hashNames = hasherDict["hasherHashNames"] as? Dictionary<String, AnyObject>
@@ -48,12 +49,61 @@ class HasherDataVC: UIViewController {
                         
                     }
                 }
+                
+                let kennelMemberships = hasherDict["hasherKennelMemberships"] as? Dictionary<String, AnyObject>
+                
+                self.kennelMembershipsLbl.text = ""
+                
+                let kennelArray = [String](kennelMemberships!.keys)
+                print(kennelArray[0])
+                self.kennelMembershipsLbl.text = kennelArray[0]
+                
+                if kennelArray.count > 1 {
+                    for var x = 1; x < kennelArray.count; x++ {
+                        let kennel = kennelArray[x]
+                        print(kennel)
+                        self.kennelMembershipsLbl.text! += ", \(kennel)"
+                        
+                    }
+                }
+                
+                
+                
+                
+                
             }
             
         })
         
         
     }
+    
+    
+    func addNewHashNameToFirebase(hashName: String!) {
+        
+        if hashName != "Add Hash Name" && hashName != "" {
+            
+            let addName = ["\(hashName)": "true"]
+            let hasherPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)/hasherHashNames")
+            
+            hasherPath.updateChildValues(addName)
+        }
+        
+    }
+    
+    func addNewKennelMembershipToFirebase(kennelName: String!) {
+        
+        if kennelName != "Add Kennel" && kennelName != "" {
+            
+            let addKennel = ["\(kennelName)": "true"]
+            let kennelPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)/hasherKennelMemberships")
+            
+            kennelPath.updateChildValues(addKennel)
+        }
+        
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -69,8 +119,8 @@ class HasherDataVC: UIViewController {
     }
     
     @IBAction func updateInfoPressed(sender: AnyObject) {
-        
-        
+        addNewHashNameToFirebase(hashNamesTxtFld.text)
+        addNewKennelMembershipToFirebase(kennelMembershipsTxtFld.text)
     }
     
     
