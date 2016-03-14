@@ -9,6 +9,7 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Firebase
 
 class LoginScreenVC: UIViewController {
     
@@ -110,7 +111,6 @@ class LoginScreenVC: UIViewController {
                 }
                 
             })
-            
             
         } else {
             showErrorAlert("Email and Password Required", msg: "You must enter an email and a password")
