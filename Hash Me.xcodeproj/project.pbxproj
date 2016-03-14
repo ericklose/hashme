@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		47A685478A602CA8B763154C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5100A58A6D9E427296C7F2 /* Pods.framework */; };
 		A61929091C94912A00D8C945 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61929081C94912A00D8C945 /* AppDelegate.swift */; };
-		A619290D1C94912A00D8C945 /* HasherDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619290C1C94912A00D8C945 /* HasherDataVC.swift */; };
 		A619290B1C94912A00D8C945 /* TrailListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619290A1C94912A00D8C945 /* TrailListVC.swift */; };
+		A619290D1C94912A00D8C945 /* HasherDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619290C1C94912A00D8C945 /* HasherDataVC.swift */; };
 		A61929121C94912A00D8C945 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A61929111C94912A00D8C945 /* Assets.xcassets */; };
 		A61929151C94912A00D8C945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61929131C94912A00D8C945 /* LaunchScreen.storyboard */; };
 		A61929201C94912A00D8C945 /* Hash_MeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619291F1C94912A00D8C945 /* Hash_MeTests.swift */; };
@@ -42,6 +42,9 @@
 		A6BBA7B31C9525560030DB53 /* TrailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBA7B21C9525560030DB53 /* TrailData.swift */; };
 		A6BBA7B41C9525560030DB53 /* TrailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBA7B21C9525560030DB53 /* TrailData.swift */; };
 		A6BBA7B51C9525560030DB53 /* TrailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBA7B21C9525560030DB53 /* TrailData.swift */; };
+		A6CB71371C96210600F27D12 /* ManageTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB71361C96210600F27D12 /* ManageTrailVC.swift */; };
+		A6CB71381C96210600F27D12 /* ManageTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB71361C96210600F27D12 /* ManageTrailVC.swift */; };
+		A6CB71391C96210600F27D12 /* ManageTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB71361C96210600F27D12 /* ManageTrailVC.swift */; };
 		DAD2CF9F1C95F9960048C2C8 /* HasherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD2CF9E1C95F9960048C2C8 /* HasherData.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,8 +70,8 @@
 		95A7A265369CD9D77AD603C0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A61929051C94912A00D8C945 /* Hash Me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hash Me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A61929081C94912A00D8C945 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A619290C1C94912A00D8C945 /* HasherDataVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasherDataVC.swift; sourceTree = "<group>"; };
 		A619290A1C94912A00D8C945 /* TrailListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailListVC.swift; sourceTree = "<group>"; };
+		A619290C1C94912A00D8C945 /* HasherDataVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasherDataVC.swift; sourceTree = "<group>"; };
 		A61929111C94912A00D8C945 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A61929141C94912A00D8C945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A61929161C94912A00D8C945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,6 +90,7 @@
 		A6A0E3ED1C94AAB40003EE0E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A6BBA7AE1C9524690030DB53 /* TrailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailCell.swift; sourceTree = "<group>"; };
 		A6BBA7B21C9525560030DB53 /* TrailData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailData.swift; sourceTree = "<group>"; };
+		A6CB71361C96210600F27D12 /* ManageTrailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageTrailVC.swift; sourceTree = "<group>"; };
 		BF5100A58A6D9E427296C7F2 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD2CF9E1C95F9960048C2C8 /* HasherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasherData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -208,6 +212,7 @@
 				A619290C1C94912A00D8C945 /* HasherDataVC.swift */,
 				A619290A1C94912A00D8C945 /* TrailListVC.swift */,
 				A6A0E3E91C94A4650003EE0E /* LoginScreenVC.swift */,
+				A6CB71361C96210600F27D12 /* ManageTrailVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -427,6 +432,7 @@
 			files = (
 				A6BBA7B31C9525560030DB53 /* TrailData.swift in Sources */,
 				DAD2CF9F1C95F9960048C2C8 /* HasherData.swift in Sources */,
+				A6CB71371C96210600F27D12 /* ManageTrailVC.swift in Sources */,
 				A6BBA7AF1C9524690030DB53 /* TrailCell.swift in Sources */,
 				A6A0E3EA1C94A4650003EE0E /* LoginScreenVC.swift in Sources */,
 				A619290D1C94912A00D8C945 /* HasherDataVC.swift in Sources */,
@@ -444,6 +450,7 @@
 				A6A0E3EB1C94A4650003EE0E /* LoginScreenVC.swift in Sources */,
 				A61929201C94912A00D8C945 /* Hash_MeTests.swift in Sources */,
 				A6BBA7B41C9525560030DB53 /* TrailData.swift in Sources */,
+				A6CB71381C96210600F27D12 /* ManageTrailVC.swift in Sources */,
 				A6BBA7B01C9524690030DB53 /* TrailCell.swift in Sources */,
 				A6A0E3D71C9496A00003EE0E /* DataService.swift in Sources */,
 				A6A0E3EF1C94AAB40003EE0E /* Constants.swift in Sources */,
@@ -457,6 +464,7 @@
 				A6A0E3EC1C94A4650003EE0E /* LoginScreenVC.swift in Sources */,
 				A619292B1C94912A00D8C945 /* Hash_MeUITests.swift in Sources */,
 				A6BBA7B51C9525560030DB53 /* TrailData.swift in Sources */,
+				A6CB71391C96210600F27D12 /* ManageTrailVC.swift in Sources */,
 				A6BBA7B11C9524690030DB53 /* TrailCell.swift in Sources */,
 				A6A0E3D81C9496A00003EE0E /* DataService.swift in Sources */,
 				A6A0E3F01C94AAB40003EE0E /* Constants.swift in Sources */,
