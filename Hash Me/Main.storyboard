@@ -433,22 +433,37 @@
                                                     <rect key="frame" x="8" y="12" width="544" height="161"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OrG-Rn-8eR">
+<<<<<<< HEAD
+                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
+                                                            <subviews>
+                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hash Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hPH-YD-8zq">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="30"/>
+=======
                                                             <rect key="frame" x="0.0" y="0.0" width="118" height="60"/>
                                                             <subviews>
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hash Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hPH-YD-8zq">
                                                                     <rect key="frame" x="0.0" y="0.0" width="118" height="30"/>
+>>>>>>> 9a25ef9afbca23db1db3d1f76f21eb88d20a69ff
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nerd Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kva-eG-dVD">
+<<<<<<< HEAD
+                                                                    <rect key="frame" x="0.0" y="30" width="120" height="30"/>
+=======
                                                                     <rect key="frame" x="0.0" y="30" width="118" height="30"/>
+>>>>>>> 9a25ef9afbca23db1db3d1f76f21eb88d20a69ff
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7bT-eH-Psf">
+<<<<<<< HEAD
+                                                            <rect key="frame" x="120" y="0.0" width="61" height="110"/>
+=======
                                                             <rect key="frame" x="118" y="0.0" width="61" height="110"/>
+>>>>>>> 9a25ef9afbca23db1db3d1f76f21eb88d20a69ff
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Present" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeX-xb-HII">
                                                                     <rect key="frame" x="0.0" y="0.0" width="61" height="17"/>
@@ -468,7 +483,11 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="kJ3-ih-bnS">
+<<<<<<< HEAD
+                                                            <rect key="frame" x="181" y="0.0" width="175" height="108"/>
+=======
                                                             <rect key="frame" x="179" y="0.0" width="173" height="108"/>
+>>>>>>> 9a25ef9afbca23db1db3d1f76f21eb88d20a69ff
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paid Full" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9x-Lr-r4Y">
                                                                     <rect key="frame" x="0.0" y="0.0" width="55" height="17"/>
@@ -492,19 +511,33 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Dp0-QD-ZLv">
+<<<<<<< HEAD
+                                                            <rect key="frame" x="355" y="0.0" width="189" height="148"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Paid Other" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAu-qc-Wmz">
+                                                                    <rect key="frame" x="60" y="0.0" width="69" height="17"/>
+=======
                                                             <rect key="frame" x="352" y="0.0" width="192" height="148"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Paid Other" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAu-qc-Wmz">
                                                                     <rect key="frame" x="61" y="0.0" width="69" height="17"/>
+>>>>>>> 9a25ef9afbca23db1db3d1f76f21eb88d20a69ff
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="HmD-hK-PHt">
+<<<<<<< HEAD
+                                                                    <rect key="frame" x="17" y="17" width="156" height="31"/>
+                                                                </slider>
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iqk-IB-C19">
+                                                                    <rect key="frame" x="35" y="47" width="119" height="101"/>
+=======
                                                                     <rect key="frame" x="16" y="17" width="160" height="31"/>
                                                                 </slider>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iqk-IB-C19">
                                                                     <rect key="frame" x="36" y="47" width="119" height="101"/>
+>>>>>>> 9a25ef9afbca23db1db3d1f76f21eb88d20a69ff
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
