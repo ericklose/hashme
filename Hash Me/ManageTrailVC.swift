@@ -19,8 +19,8 @@ class ManageTrailVC: UIViewController {
         super.viewDidLoad()
         
         //print(trails)
-        specificTrailDate.hidden = true
-        //self.updateTrailDetails()
+        //specificTrailDate.hidden = true
+        self.updateTrailDetails()
         
         
     }
