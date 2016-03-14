@@ -28,14 +28,23 @@ class TrailData {
     }
     
     var trailHares: String {
+        if _trailHares == nil {
+            return "TBD"
+        }
         return _trailHares
     }
     
     var trailStartLocation: String {
+        if _trailStartLocation == nil {
+            return "TBD"
+        }
         return _trailStartLocation
     }
     
     var trailDescription: String {
+        if _trailDescription == nil {
+            return "TBD"
+        }
         return _trailDescription
     }
     

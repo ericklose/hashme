@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4dx-wJ-7OM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Mp2-v8-DQK">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -200,7 +200,7 @@
         <!--TrailListVC-->
         <scene sceneID="SqI-uf-jvr">
             <objects>
-                <viewController id="PbG-px-5FX" userLabel="TrailListVC" sceneMemberID="viewController">
+                <viewController id="PbG-px-5FX" userLabel="TrailListVC" customClass="TrailListVC" customModule="Hash_Me" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BcQ-rz-y7i"/>
                         <viewControllerLayoutGuide type="bottom" id="9nv-3L-pIu"/>
@@ -216,7 +216,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="487"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="211" id="Y8a-Hp-Xw4" customClass="TrailCell" customModule="Hash_Me" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="trailCell" rowHeight="211" id="Y8a-Hp-Xw4" customClass="TrailCell" customModule="Hash_Me" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="92" width="560" height="211"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Y8a-Hp-Xw4" id="xyh-xh-kMr">
@@ -300,6 +300,7 @@
                                                     <outlet property="trailHares" destination="gTk-hv-LfE" id="H3d-rQ-nVu"/>
                                                     <outlet property="trailKennel" destination="mv5-rf-uG3" id="L8V-o5-cBJ"/>
                                                     <outlet property="trailStartLocation" destination="cqt-m6-ufL" id="ZoB-GS-NEQ"/>
+                                                    <segue destination="DFk-tR-U37" kind="show" identifier="manageTrail" id="Zp2-WH-YPg"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -322,11 +323,70 @@
                             <constraint firstItem="4jG-2R-srD" firstAttribute="leading" secondItem="tEW-5s-Wud" secondAttribute="leadingMargin" id="yGE-8P-79z"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="32v-CS-Tlr"/>
+                    <navigationItem key="navigationItem" id="0Ib-e1-Pkx">
+                        <barButtonItem key="rightBarButtonItem" title="+" id="fcX-m2-shq">
+                            <connections>
+                                <segue destination="DFk-tR-U37" kind="show" identifier="addNewTrail" id="rmA-fe-cSm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="trailTableView" destination="pOb-S4-jhQ" id="iLw-sQ-b1b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PEu-zr-Etx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1155" y="-237"/>
+            <point key="canvasLocation" x="1967" y="-237"/>
+        </scene>
+        <!--ManageTrailVC-->
+        <scene sceneID="a9V-cJ-DNx">
+            <objects>
+                <viewController id="DFk-tR-U37" userLabel="ManageTrailVC" customClass="ManageTrailVC" customModule="Hash_Me" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VzL-ce-y3m"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gwr-Z7-XY9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SI4-R2-cNg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TRAIL INFO!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUw-BE-mpT">
+                                <rect key="frame" x="253" y="289" width="94" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iKB-1a-eE0">
+                                <rect key="frame" x="285" y="318" width="36" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Kennel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNv-IO-GZw">
+                                <rect key="frame" x="269" y="347" width="52" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iKB-1a-eE0" firstAttribute="centerX" secondItem="dUw-BE-mpT" secondAttribute="centerX" id="KC5-zk-rC9"/>
+                            <constraint firstItem="PNv-IO-GZw" firstAttribute="top" secondItem="iKB-1a-eE0" secondAttribute="bottom" constant="8" id="OMO-xm-Szz"/>
+                            <constraint firstItem="dUw-BE-mpT" firstAttribute="centerX" secondItem="SI4-R2-cNg" secondAttribute="centerX" id="bEW-Au-gFf"/>
+                            <constraint firstItem="PNv-IO-GZw" firstAttribute="centerX" secondItem="dUw-BE-mpT" secondAttribute="centerX" id="bRz-sG-3Hd"/>
+                            <constraint firstItem="iKB-1a-eE0" firstAttribute="top" secondItem="dUw-BE-mpT" secondAttribute="bottom" constant="8" id="mbc-ri-c0F"/>
+                            <constraint firstItem="dUw-BE-mpT" firstAttribute="centerY" secondItem="SI4-R2-cNg" secondAttribute="centerY" id="oSi-WD-0cO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="specificTrailDate" destination="iKB-1a-eE0" id="cdg-x6-c0C"/>
+                        <outlet property="specificTrailKennel" destination="PNv-IO-GZw" id="PQO-fo-qpZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wT6-Jm-87Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2739" y="-594"/>
         </scene>
         <!--Login ScreenVC-->
         <scene sceneID="LEX-AF-KqM">
@@ -415,7 +475,7 @@
                         <color key="backgroundColor" red="1" green="0.24332497189999999" blue="0.86801403740000005" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="PbG-px-5FX" kind="relationship" relationship="viewControllers" id="bpo-uT-EBR"/>
+                        <segue destination="lCG-0D-44O" kind="relationship" relationship="viewControllers" id="bpo-uT-EBR"/>
                         <segue destination="yTu-ow-R3c" kind="relationship" relationship="viewControllers" id="mHq-g2-qRF"/>
                     </connections>
                 </tabBarController>
@@ -423,26 +483,30 @@
             </objects>
             <point key="canvasLocation" x="386" y="94"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="pHC-Xp-AaA">
+        <!--Item 1-->
+        <scene sceneID="oCS-q5-jyb">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4dx-wJ-7OM" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lCG-0D-44O" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item 1" id="32v-CS-Tlr"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iDi-I0-1pI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J8X-2J-67z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Mp2-v8-DQK" kind="relationship" relationship="rootViewController" id="tGa-d6-bKF"/>
+                        <segue destination="PbG-px-5FX" kind="relationship" relationship="rootViewController" id="u7j-yG-5dp"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rLd-YK-RFf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tPx-Aw-MQV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1153" y="124"/>
+            <point key="canvasLocation" x="1155" y="-237"/>
         </scene>
     </scenes>
     <resources>
         <image name="fb-icon" width="65" height="65"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Zp2-WH-YPg"/>
+    </inferredMetricsTieBreakers>
 </document>
