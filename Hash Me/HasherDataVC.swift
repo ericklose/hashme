@@ -42,14 +42,14 @@ class HasherDataVC: UIViewController {
                     print(keyArray[0])
                     self.hashNamesLbl.text = keyArray[0]
                     
-//                    if keyArray.count > 1 {
-//                        for var x = 1; x < keyArray.count; x++ {
-//                            if let name = keyArray[x] {
-//                                print(name)
-//                             //   self.hashNamesLbl.text! += ", \(name)"
-//                            }
-//                        }
-//                    }
+                    if keyArray.count > 1 {
+                        for var x = 1; x < keyArray.count; x++ {
+                            let name = keyArray[x]
+                                print(name)
+                                self.hashNamesLbl.text! += ", \(name)"
+                            
+                        }
+                    }
                 }
                 
             }
