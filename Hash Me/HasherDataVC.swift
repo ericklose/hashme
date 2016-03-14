@@ -28,7 +28,7 @@ class HasherDataVC: UIViewController {
             
             
             if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
-                let nerdNameLbl = hasherDict["hasherNerdNames"]!
+                let nerdNameLbl = hasherDict["hasherNerdName"]!
                 self.nerdNameLbl.text = "\(nerdNameLbl)"
                 print("nerd: \(nerdNameLbl)")
                 
