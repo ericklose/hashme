@@ -20,7 +20,6 @@ class TrailCell: UITableViewCell {
     @IBOutlet weak var trailDescription: UILabel!
     
     var trail: TrailData!
-    //var request: Request?
     
     
     

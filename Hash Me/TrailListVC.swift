@@ -26,7 +26,6 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         
         DataService.ds.REF_TRAILS.observeEventType(.Value, withBlock: { snapshot in
-            print(snapshot.value)
             
             self.trails = []
             if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
@@ -75,11 +74,8 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let trail = trails[indexPath.row]
-        
         if let cell = tableView.dequeueReusableCellWithIdentifier("trailCell") as? TrailCell {
-            
             cell.configureCell(trail)
-            
             return cell
         } else {
             return TrailCell()
