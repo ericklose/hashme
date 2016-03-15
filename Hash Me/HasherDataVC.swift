@@ -103,6 +103,26 @@ class HasherDataVC: UIViewController {
         
     }
     
+    func editNerdNameInFirebase(nerdName: String!) {
+        
+        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
+            print(snapshot.value)
+            
+            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
+                let existingNerdName = hasherDict["hasherNerdName"] as! String
+           
+            if nerdName != existingNerdName && nerdName != "" {
+                let namePath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)")
+                
+                namePath.updateChildValues(["hasherNerdName" : nerdName])
+                
+        }
+        
+            }
+        })
+                
+                
+    }
     
     
     override func didReceiveMemoryWarning() {
@@ -121,6 +141,13 @@ class HasherDataVC: UIViewController {
     @IBAction func updateInfoPressed(sender: AnyObject) {
         addNewHashNameToFirebase(hashNamesTxtFld.text)
         addNewKennelMembershipToFirebase(kennelMembershipsTxtFld.text)
+        editNerdNameInFirebase(nerdNameTxtFld.text)
+        
+        nerdNameTxtFld.hidden = true
+        hashNamesTxtFld.hidden = true
+        kennelMembershipsTxtFld.hidden = true
+        updateInfoBtn.hidden = true
+        addInfoBtn.hidden = false
     }
     
     
