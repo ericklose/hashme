@@ -11,11 +11,13 @@ import Firebase
 
 class Attendee: Hasher {
     
-    private var _paid_full: Bool!
-    private var _attendeeTrailId: String!
     
-    var paid_full: Bool {
-        return _paid_full
+    private var _attendee_paid: Int!
+    private var _attendeeTrailId: String!
+
+    
+    var attendee_paid: Int {
+        return _attendee_paid
     }
     
     var attendeeTrailId: String {
