@@ -197,6 +197,25 @@
             </objects>
             <point key="canvasLocation" x="1155" y="424"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="zHH-VY-bYj">
+            <objects>
+                <viewController id="6gS-Ud-dOf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tvH-Ae-DlG"/>
+                        <viewControllerLayoutGuide type="bottom" id="a0X-qU-84R"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XDC-Wi-2Fw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="2Tz-Ht-5eS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tpp-sv-Tfe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1112" y="1096"/>
+        </scene>
         <!--TrailListVC-->
         <scene sceneID="SqI-uf-jvr">
             <objects>
@@ -400,7 +419,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="kJ3-ih-bnS">
-                                                            <rect key="frame" x="148" y="0.0" width="143" height="108"/>
+                                                            <rect key="frame" x="147" y="0.0" width="142" height="108"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paid Full" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9x-Lr-r4Y">
                                                                     <rect key="frame" x="0.0" y="0.0" width="55" height="17"/>
@@ -424,19 +443,19 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Dp0-QD-ZLv">
-                                                            <rect key="frame" x="291" y="0.0" width="253" height="77"/>
+                                                            <rect key="frame" x="289" y="0.0" width="256" height="77"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Paid Other" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAu-qc-Wmz">
-                                                                    <rect key="frame" x="92" y="0.0" width="69" height="17"/>
+                                                                    <rect key="frame" x="94" y="0.0" width="69" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="HmD-hK-PHt">
-                                                                    <rect key="frame" x="1" y="17" width="252" height="31"/>
+                                                                    <rect key="frame" x="0.0" y="17" width="256" height="31"/>
                                                                 </slider>
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Reduced Pay Reason" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nzQ-K2-9PG">
-                                                                    <rect key="frame" x="48" y="47" width="157" height="30"/>
+                                                                    <rect key="frame" x="50" y="47" width="157" height="30"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
@@ -672,7 +691,7 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="1Ow-9I-IIj">
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="1Ow-9I-IIj">
                                         <rect key="frame" x="0.0" y="157" width="560" height="90"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trail Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h49-Rn-4x7">
@@ -842,6 +861,7 @@
                     <connections>
                         <segue destination="lCG-0D-44O" kind="relationship" relationship="viewControllers" id="bpo-uT-EBR"/>
                         <segue destination="yTu-ow-R3c" kind="relationship" relationship="viewControllers" id="mHq-g2-qRF"/>
+                        <segue destination="6gS-Ud-dOf" kind="relationship" relationship="viewControllers" id="fZo-17-JjG"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kFd-qG-1aM" userLabel="First Responder" sceneMemberID="firstResponder"/>
