@@ -10,7 +10,7 @@ import UIKit
 
 class AddNewTrailVC: UIViewController {
     
-    @IBOutlet weak var newTrailDate: UITextField!
+    @IBOutlet weak var newTrailDate: UILabel!
     @IBOutlet weak var newTrailKennel: UITextField!
     @IBOutlet weak var newTrailHares: UITextField!
     @IBOutlet weak var newTrailStartLocation: UITextField!
@@ -29,7 +29,6 @@ class AddNewTrailVC: UIViewController {
         newTrailHashCash.text = "Monies!!!"
         newTrailDescription.text = "fuck this shit"
         
-        //datePicker
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,18 +66,12 @@ class AddNewTrailVC: UIViewController {
         
     }
     
-    @IBAction func trailDatePicker(sender: UITextField) {
-        
-        let datePickerView  : UIDatePicker = UIDatePicker()
-        datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
-        sender.inputView = datePickerView
-        datePickerView.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+
+    @IBAction func trailDatePicker(sender: UIButton) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM/dd/YY HH:mm"
+        newTrailDate.text = dateFormatter.stringFromDate(datePicker.date)
     }
     
-    func handleDatePicker(sender: UIDatePicker) {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd MMM yyyy"
-        newTrailDate.text = dateFormatter.stringFromDate(sender.date)
-    }
 
 }
