@@ -41,7 +41,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             if let generalDict = snapshot.value as? Dictionary<String, AnyObject> {
                 let attendeeArray = generalDict["trailAttendees"] as? Dictionary<String, AnyObject>
                 
-                attendeeKeyArray = [Attendee](attendeeArray!.keys)
+              //  attendeeKeyArray = [Attendee](attendeeArray!.keys)
                 
             }
             
