@@ -17,11 +17,18 @@ class AddNewTrailVC: UIViewController {
     @IBOutlet weak var newTrailHashCash: UITextField!
     @IBOutlet weak var newTrailDescription: UITextField!
     
-    let datePicker: UIDatePicker
+    //let datePicker: UIDatePicker
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        newTrailDate.text = "tomorrow"
+        newTrailKennel.text = "Boston"
+        newTrailHares.text = "your mom"
+        newTrailStartLocation.text = "your butt"
+        newTrailHashCash.text = "Monies!!!"
+        newTrailDescription.text = "fuck this shit"
+        
         // Do any additional setup after loading the view.
     }
 
