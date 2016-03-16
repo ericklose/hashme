@@ -36,6 +36,13 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         thisCurrentTrail.observeEventType(.Value, withBlock: { snapshot in
             print("snapshot:\(snapshot.value)")
+            
+//            if let attendeeDict = snapshot.value as? Dictionary<String, Array> {
+//                
+//            }
+            
+            
+            
 //
 //            self.attendees = []
               if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
