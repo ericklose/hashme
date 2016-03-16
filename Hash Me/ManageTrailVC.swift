@@ -21,6 +21,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     var trails: TrailData!
     var attendees = [Attendee]()
+    var attendeeKeyArray = [Attendee]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +38,12 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         thisCurrentTrail.observeEventType(.Value, withBlock: { snapshot in
             print("snapshot:\(snapshot.value)")
             
-//            if let attendeeDict = snapshot.value as? Dictionary<String, Array> {
-//                
-//            }
-            
-            
+            if let attendeeDict = snapshot.value as? Dictionary<String, AnyObject> {
+                let attendeeArray = attendeeDict["trailAttendees"] as? Dictionary<String, AnyObject>
+                
+                var attendeeKeyArray = [String](attendeeArray!.keys)
+                
+            }
             
 //
 //            self.attendees = []
@@ -87,16 +89,16 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-//        let attendee = attendees[indexPath.row]
-//        
-//        if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
-//            cell.configureCell(attendee)
-//            return cell
-//        } else {
-//            return AttendeeCell()
-//        }
+        let attendee = self.attendeeKeyArray[indexPath.row]
         
-        return AttendeeCell()
+        if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
+            cell.configureCell(attendee)
+            return cell
+        } else {
+            return AttendeeCell()
+        }
+        
+   //     return AttendeeCell()
     }
 
 }
