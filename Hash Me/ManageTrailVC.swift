@@ -38,7 +38,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 let attendeeArray = generalDict["trailAttendees"] as? Dictionary<String, AnyObject>
                 print("keyarray:\(attendeeArray)")
                 
-<<<<<<< HEAD
                 if attendeeArray != nil {
                     //not comfortable with exclamation point below
                     //let person: Attendee
@@ -46,7 +45,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                     if let personDict = person as? Dictionary<String, AnyObject> {
                         let paid = personDict["paid"]
                         print("paid: \(paid)")
-=======
               //  attendeeKeyArray = [Attendee](attendeeArray!.keys)
                 
             }
@@ -61,7 +59,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
 //                        let key = snap.key
 //                        let attendee = Attendee(dictionary: attendeeDict)
 //                        self.attendees.append(attendee)
->>>>>>> 35b8c14f875009e66ca9a48e67b6b823d9c7b236
                     }
                 }
                 }
