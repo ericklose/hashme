@@ -355,7 +355,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="trailAttendeeCell" rowHeight="178" id="0wr-hr-0L3" customClass="AttendeeCell" customModule="Hash_Me" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="560" height="178"/>
+                                        <rect key="frame" x="0.0" y="92" width="560" height="178"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0wr-hr-0L3" id="iRT-bd-WHi">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="177.5"/>
@@ -365,22 +365,22 @@
                                                     <rect key="frame" x="8" y="12" width="544" height="162"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OrG-Rn-8eR">
-                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="60"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="99" height="60"/>
                                                             <subviews>
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hash Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hPH-YD-8zq">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="99" height="30"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nerd Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kva-eG-dVD">
-                                                                    <rect key="frame" x="0.0" y="30" width="100" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="30" width="99" height="30"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7bT-eH-Psf">
-                                                            <rect key="frame" x="100" y="0.0" width="51" height="110"/>
+                                                            <rect key="frame" x="99" y="0.0" width="51" height="110"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Present" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeX-xb-HII">
                                                                     <rect key="frame" x="0.0" y="0.0" width="51" height="17"/>
@@ -400,7 +400,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="kJ3-ih-bnS">
-                                                            <rect key="frame" x="150" y="0.0" width="146" height="108"/>
+                                                            <rect key="frame" x="149" y="0.0" width="144" height="108"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paid Full" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9x-Lr-r4Y">
                                                                     <rect key="frame" x="0.0" y="0.0" width="55" height="17"/>
@@ -424,19 +424,19 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Dp0-QD-ZLv">
-                                                            <rect key="frame" x="296" y="0.0" width="249" height="77"/>
+                                                            <rect key="frame" x="293" y="0.0" width="251" height="77"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Paid Other" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAu-qc-Wmz">
-                                                                    <rect key="frame" x="90" y="0.0" width="69" height="17"/>
+                                                                    <rect key="frame" x="92" y="0.0" width="69" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="HmD-hK-PHt">
-                                                                    <rect key="frame" x="2" y="17" width="244" height="31"/>
+                                                                    <rect key="frame" x="2" y="17" width="248" height="31"/>
                                                                 </slider>
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Reduced Pay Reason" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nzQ-K2-9PG">
-                                                                    <rect key="frame" x="46" y="47" width="157" height="30"/>
+                                                                    <rect key="frame" x="48" y="47" width="157" height="30"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
@@ -499,7 +499,7 @@
                                             <constraint firstAttribute="bottom" secondItem="VFT-jZ-DsI" secondAttribute="bottom" id="Vfa-Zl-reI"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="NBk-XR-k5X">
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="NBk-XR-k5X">
                                         <rect key="frame" x="153" y="0.0" width="408" height="464"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Boston H3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lc7-MT-IRx">
@@ -525,7 +525,7 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="OfB-8D-1VM">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="OfB-8D-1VM">
                                                 <rect key="frame" x="0.0" y="51" width="408" height="413"/>
                                                 <string key="text">A trail? OMG you'll never believe the theme because it's totally not the same rehashed shit over and over or annoyingly obscure. This time it's not! It's going to be a short trail with lots of booze! Can you believe it??? Heck, let's throw in some onsies and crossdressing too!!</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
