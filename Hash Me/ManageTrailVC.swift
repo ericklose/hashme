@@ -28,20 +28,20 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         trailAttendeeTableView.delegate = self
         trailAttendeeTableView.dataSource = self
         
-        print(trails.trailKey)
+     //   print(trails.trailKey)
         
         let thisCurrentTrail = Firebase(url: "\(DataService.ds.REF_TRAILS)").childByAppendingPath(trails.trailKey)
-        print(thisCurrentTrail)
+      //  print(thisCurrentTrail)
 
         updateTrailDetails()
         
         thisCurrentTrail.observeEventType(.Value, withBlock: { snapshot in
             print("snapshot:\(snapshot.value)")
             
-            if let attendeeDict = snapshot.value as? Dictionary<String, AnyObject> {
-                let attendeeArray = attendeeDict["trailAttendees"] as? Dictionary<String, AnyObject>
+            if let generalDict = snapshot.value as? Dictionary<String, AnyObject> {
+                let attendeeArray = generalDict["trailAttendees"] as? Dictionary<String, AnyObject>
                 
-                var attendeeKeyArray = [String](attendeeArray!.keys)
+                attendeeKeyArray = [Attendee](attendeeArray!.keys)
                 
             }
             
@@ -62,7 +62,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
 //            
 //            self.trailAttendeeTableView.reloadData()
        })
-        
+        print("keyarray:\(attendeeKeyArray)")
         
     }
 
