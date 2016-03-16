@@ -17,6 +17,7 @@ class AddNewTrailVC: UIViewController {
     @IBOutlet weak var newTrailHashCash: UITextField!
     @IBOutlet weak var newTrailDescription: UITextField!
     
+    let datePicker: UIDatePicker
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,7 @@ class AddNewTrailVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     @IBAction func onPressedSaveButton(sender: AnyObject) {
         postTrailToFirebase()
@@ -57,4 +59,19 @@ class AddNewTrailVC: UIViewController {
             self.navigationController?.popViewControllerAnimated(true)
     
     }
+    
+    @IBAction func trailDatePicker(sender: UITextField) {
+        
+        let datePickerView  : UIDatePicker = UIDatePicker()
+        datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
+        sender.inputView = datePickerView
+        datePickerView.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    func handleDatePicker(sender: UIDatePicker) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        newTrailDate.text = dateFormatter.stringFromDate(sender.date)
+    }
+    
 }
