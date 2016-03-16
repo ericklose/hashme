@@ -26,7 +26,6 @@ class HasherDataVC: UIViewController {
         DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
             print(snapshot.value)
             
-            
             if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
                 let nerdNameLbl = hasherDict["hasherNerdName"]!
                 self.nerdNameLbl.text = "\(nerdNameLbl)"
@@ -46,7 +45,6 @@ class HasherDataVC: UIViewController {
                         let name = keyArray[x]
                         print(name)
                         self.hashNamesLbl.text! += ", \(name)"
-                        
                     }
                 }
                 
@@ -66,18 +64,10 @@ class HasherDataVC: UIViewController {
                         
                     }
                 }
-                
-                
-                
-                
-                
             }
             
         })
-        
-        
     }
-    
     
     func addNewHashNameToFirebase(hashName: String!) {
         
@@ -110,18 +100,18 @@ class HasherDataVC: UIViewController {
             
             if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
                 let existingNerdName = hasherDict["hasherNerdName"] as! String
-           
-            if nerdName != existingNerdName && nerdName != "" {
-                let namePath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)")
                 
-                namePath.updateChildValues(["hasherNerdName" : nerdName])
+                if nerdName != existingNerdName && nerdName != "" {
+                    let namePath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)")
+                    
+                    namePath.updateChildValues(["hasherNerdName" : nerdName])
+                    
+                }
                 
-        }
-        
             }
         })
-                
-                
+        
+        
     }
     
     
@@ -149,8 +139,6 @@ class HasherDataVC: UIViewController {
         updateInfoBtn.hidden = true
         addInfoBtn.hidden = false
     }
-    
-    
     
 }
 

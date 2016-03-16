@@ -66,12 +66,12 @@ class AddNewTrailVC: UIViewController {
         
     }
     
-
+    
     @IBAction func trailDatePicker(sender: UIButton) {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY HH:mm"
         newTrailDate.text = dateFormatter.stringFromDate(datePicker.date)
     }
     
-
+    
 }

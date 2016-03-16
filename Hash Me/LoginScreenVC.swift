@@ -15,13 +15,13 @@ class LoginScreenVC: UIViewController {
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -39,13 +39,13 @@ class LoginScreenVC: UIViewController {
     @IBAction func fbbtnPressed(sender: UIButton!) {
         let facebookLogin = FBSDKLoginManager()
         
-//this is Eric's code for the new, non-deprecated login function
+        //this is Eric's code for the new, non-deprecated login function
         facebookLogin.logInWithReadPermissions(["email"], fromViewController: self) { (facebookResult: FBSDKLoginManagerLoginResult!, facebookError: NSError!) -> Void in
             
-        
-        
-// this is the login function from our course which I'm keeping in case there's an issue with the new one (above)
-//        facebookLogin.logInWithReadPermissions(["email"]) { (facebookResult: FBSDKLoginManagerLoginResult!, facebookError: NSError!) -> Void in
+            
+            
+            // this is the login function from our course which I'm keeping in case there's an issue with the new one (above)
+            //        facebookLogin.logInWithReadPermissions(["email"]) { (facebookResult: FBSDKLoginManagerLoginResult!, facebookError: NSError!) -> Void in
             
             if facebookError != nil {
                 print("Facebook login failed. Error \(facebookError)")

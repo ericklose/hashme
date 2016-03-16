@@ -21,14 +21,14 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     var trails: TrailData!
     var attendees = [Attendee]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         trailAttendeeTableView.delegate = self
         trailAttendeeTableView.dataSource = self
         
         let thisCurrentTrail = Firebase(url: "\(DataService.ds.REF_TRAILS)").childByAppendingPath(trails.trailKey)
-
+        
         updateTrailDetails()
         
         thisCurrentTrail.observeEventType(.Value, withBlock: { snapshot in
@@ -42,51 +42,29 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                     //not comfortable with exclamation point below
                     //let person: Attendee
                     for person in attendeeArray! {
-                    if let personDict = person as? Dictionary<String, AnyObject> {
-                        let paid = personDict["paid"]
-                        print("paid: \(paid)")
-              //  attendeeKeyArray = [Attendee](attendeeArray!.keys)
-                
-            }
-            
-//
-//            self.attendees = []
-              if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-
-                for snap in snapshots {
-                    print("SNAP: \(snap)")
-//                    if let attendeeDict = snap.value as? Dictionary<String, AnyObject> {
-//                        let key = snap.key
-//                        let attendee = Attendee(dictionary: attendeeDict)
-//                        self.attendees.append(attendee)
+                        if let personDict = person as? Dictionary<String, AnyObject> {
+                            let paid = personDict["paid"]
+                            print("paid: \(paid)")
+                            //  attendeeKeyArray = [Attendee](attendeeArray!.keys)
+                        }
+                        //
+                        //            self.attendees = []
+                        if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+                            for snap in snapshots {
+                                print("SNAP: \(snap)")
+                                //                    if let attendeeDict = snap.value as? Dictionary<String, AnyObject> {
+                                //                        let key = snap.key
+                                //                        let attendee = Attendee(dictionary: attendeeDict)
+                                //                        self.attendees.append(attendee)
+                            }
+                        }
                     }
                 }
-                }
-           
-//                if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-//                    print("snapshots:\(snapshots)")
-//
-//                    for snap in snapshots {
-//            
-//                        if let attendees = snap.value as? Dictionary<String, AnyObject> {
-//                        let key = snap.key
-//                        print("key: \(key)")
-//                        
-//                     //   let attendee = Attendee(hasher: Hasher)
-//                     //   self.attendees.append(attendee)
-//                        }
-//                        
-//                    }
-//
-//                    }
-                
-                }
-          
-//            self.trailAttendeeTableView.reloadData()
-       })
-        
+                //            self.trailAttendeeTableView.reloadData()
+            }
+        })
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -103,23 +81,26 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-//        let attendeeList = self.attendeeKeyArray[indexPath.row]
-//        
-//        if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
-//            cell.configureCell(attendee)
-//            return cell
-//        } else {
-//            return AttendeeCell()
-//        }
+        //        let attendeeList = self.attendeeKeyArray[indexPath.row]
+        //        
+        //        if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
+        //            cell.configureCell(attendee)
+        //            return cell
+        //        } else {
+        //            return AttendeeCell()
+        //        }
         
         return AttendeeCell()
     }
-
+    
 }
+
+
+
