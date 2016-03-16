@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     
     @IBOutlet weak var trailTableView: UITableView!
     
@@ -45,12 +45,12 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         })
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -64,7 +64,7 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         let trail: TrailData!
         trail = trails[indexPath.row]
         performSegueWithIdentifier("manageTrail", sender: trail)
-    
+        
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -100,23 +100,23 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
 
 
-//            
+//
 //
 //
 //// Steal this syntax for a list of Hares
 ////        if imgUrl != nil {
 ////            post["imageUrl"] = imgUrl!
 ////        }
-//        
+//
 //        let firebasePost = DataService.ds.REF_TRAILS.childByAutoId()
 //        firebasePost.setValue(trail)
-//        
-//        
-//        
+//
+//
+//
 //        postField.text = ""
 //        imageSelectorImage.image = UIImage(named: "camera")
 //        imageSelected = false
-//        
+//
 //        tableView.reloadData()
 //    }
 //    
