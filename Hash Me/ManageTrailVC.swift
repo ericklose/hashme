@@ -21,17 +21,13 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     var trails: TrailData!
     var attendees = [Attendee]()
-    var attendeeKeyArray = [Attendee]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         trailAttendeeTableView.delegate = self
         trailAttendeeTableView.dataSource = self
         
-     //   print(trails.trailKey)
-        
         let thisCurrentTrail = Firebase(url: "\(DataService.ds.REF_TRAILS)").childByAppendingPath(trails.trailKey)
-      //  print(thisCurrentTrail)
 
         updateTrailDetails()
         
@@ -40,29 +36,40 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             if let generalDict = snapshot.value as? Dictionary<String, AnyObject> {
                 let attendeeArray = generalDict["trailAttendees"] as? Dictionary<String, AnyObject>
+                print("keyarray:\(attendeeArray)")
                 
-                attendeeKeyArray = [Attendee](attendeeArray!.keys)
-                
-            }
-            
-//
-//            self.attendees = []
-              if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-
-                for snap in snapshots {
-                    print("SNAP: \(snap)")
-//                    if let attendeeDict = snap.value as? Dictionary<String, AnyObject> {
-//                        let key = snap.key
-//                        let attendee = Attendee(dictionary: attendeeDict)
-//                        self.attendees.append(attendee)
+                if attendeeArray != nil {
+                    //not comfortable with exclamation point below
+                    //let person: Attendee
+                    for person in attendeeArray! {
+                    if let personDict = person as? Dictionary<String, AnyObject> {
+                        let paid = personDict["paid"]
+                        print("paid: \(paid)")
                     }
                 }
-            
-//            }
+                }
+           
+//                if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+//                    print("snapshots:\(snapshots)")
+//
+//                    for snap in snapshots {
 //            
+//                        if let attendees = snap.value as? Dictionary<String, AnyObject> {
+//                        let key = snap.key
+//                        print("key: \(key)")
+//                        
+//                     //   let attendee = Attendee(hasher: Hasher)
+//                     //   self.attendees.append(attendee)
+//                        }
+//                        
+//                    }
+//
+//                    }
+                
+                }
+          
 //            self.trailAttendeeTableView.reloadData()
        })
-        print("keyarray:\(attendeeKeyArray)")
         
     }
 
@@ -89,16 +96,16 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let attendee = self.attendeeKeyArray[indexPath.row]
+//        let attendeeList = self.attendeeKeyArray[indexPath.row]
+//        
+//        if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
+//            cell.configureCell(attendee)
+//            return cell
+//        } else {
+//            return AttendeeCell()
+//        }
         
-        if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
-            cell.configureCell(attendee)
-            return cell
-        } else {
-            return AttendeeCell()
-        }
-        
-   //     return AttendeeCell()
+        return AttendeeCell()
     }
 
 }

@@ -37,10 +37,8 @@ class Hasher {
         return _hasherTrailsHared
     }
     
-    init (nerd: String, hasher: Array<String>, kennel: Array<String>) {
-        self._hasherNerdName = nerd
+    init (hasher: Array<String>) {
         self._hasherHashNames = hasher
-        self._hasherKennelMemberships = kennel
     }
     
 }
