@@ -90,6 +90,9 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     manageTrailVC.trails = trailInCell
                 }
             }
+            
+            
+            
         }
     }
 }
@@ -118,5 +121,4 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 //    }
 //    
 //
-//}
 
