@@ -27,25 +27,32 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         trailAttendeeTableView.delegate = self
         trailAttendeeTableView.dataSource = self
         
-        DataService.ds.REF_TRAILS.childByAppendingPath("\(trails)").observeEventType(.Value, withBlock: { snapshot in
-            print(snapshot.value)
-            
-            self.attendees = []
-            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                
+        print(trails.trailKey)
+        
+        let thisCurrentTrail = Firebase(url: "\(DataService.ds.REF_TRAILS)").childByAppendingPath(trails.trailKey)
+        print(thisCurrentTrail)
+
+        updateTrailDetails()
+        
+        thisCurrentTrail.observeEventType(.Value, withBlock: { snapshot in
+            print("snapshot:\(snapshot.value)")
+//
+//            self.attendees = []
+              if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+
                 for snap in snapshots {
-                    
-                    if let attendeeDict = snap.value as? Dictionary<String, AnyObject> {
-                        let key = snap.key
-                        let attendee = Attendee(dictionary: attendeeDict)
-                        self.attendees.append(attendee)
+                    print("SNAP: \(snap)")
+//                    if let attendeeDict = snap.value as? Dictionary<String, AnyObject> {
+//                        let key = snap.key
+//                        let attendee = Attendee(dictionary: attendeeDict)
+//                        self.attendees.append(attendee)
                     }
                 }
-                
-            }
             
-            self.trailAttendeeTableView.reloadData()
-        })
+//            }
+//            
+//            self.trailAttendeeTableView.reloadData()
+       })
         
         
     }
@@ -73,14 +80,16 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let attendee = attendees[indexPath.row]
+//        let attendee = attendees[indexPath.row]
+//        
+//        if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
+//            cell.configureCell(attendee)
+//            return cell
+//        } else {
+//            return AttendeeCell()
+//        }
         
-        if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
-            cell.configureCell(attendee)
-            return cell
-        } else {
-            return AttendeeCell()
-        }
+        return AttendeeCell()
     }
 
 }

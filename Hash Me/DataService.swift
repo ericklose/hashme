@@ -41,7 +41,7 @@ class DataService {
         let hasher = Firebase(url: "\(URL_BASE)").childByAppendingPath("hashers").childByAppendingPath(uid)
         return hasher!
     }
-    
+        
     func createFirebaseUser(uid: String, hasher: Dictionary<String, String>) {
         REF_HASHERS.childByAppendingPath(uid).setValue(hasher)
     }
