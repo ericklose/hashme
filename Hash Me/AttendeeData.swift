@@ -24,10 +24,4 @@ class Attendee: Hasher {
         return _attendeeTrailId
     }
     
-//    convenience init(name: String, attended: String) {
-//        self.init(hasherNerdName: name)
-//       _attendeeTrailId = attended
-//    }
-    
-    
 }

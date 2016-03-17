@@ -98,27 +98,3 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 }
 
 
-
-
-//
-//
-//
-//// Steal this syntax for a list of Hares
-////        if imgUrl != nil {
-////            post["imageUrl"] = imgUrl!
-////        }
-//
-//        let firebasePost = DataService.ds.REF_TRAILS.childByAutoId()
-//        firebasePost.setValue(trail)
-//
-//
-//
-//        postField.text = ""
-//        imageSelectorImage.image = UIImage(named: "camera")
-//        imageSelected = false
-//
-//        tableView.reloadData()
-//    }
-//    
-//
-

@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		47A685478A602CA8B763154C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5100A58A6D9E427296C7F2 /* Pods.framework */; };
+		A6188D601C9A174600BAE354 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61929081C94912A00D8C945 /* AppDelegate.swift */; };
+		A6188D611C9A174700BAE354 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61929081C94912A00D8C945 /* AppDelegate.swift */; };
+		A6188D621C9A175300BAE354 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A61929111C94912A00D8C945 /* Assets.xcassets */; };
+		A6188D631C9A175300BAE354 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A61929111C94912A00D8C945 /* Assets.xcassets */; };
+		A6188D641C9A175800BAE354 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61929131C94912A00D8C945 /* LaunchScreen.storyboard */; };
+		A6188D651C9A175A00BAE354 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61929131C94912A00D8C945 /* LaunchScreen.storyboard */; };
+		A6188D661C9A175F00BAE354 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A61929161C94912A00D8C945 /* Info.plist */; };
+		A6188D671C9A175F00BAE354 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A61929161C94912A00D8C945 /* Info.plist */; };
+		A6188D681C9A176000BAE354 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A61929161C94912A00D8C945 /* Info.plist */; };
+		A6188D691C9A176600BAE354 /* AttendeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA15804A1C9740400042614A /* AttendeeCell.swift */; };
+		A6188D6A1C9A176600BAE354 /* AttendeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA15804A1C9740400042614A /* AttendeeCell.swift */; };
 		A61929091C94912A00D8C945 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61929081C94912A00D8C945 /* AppDelegate.swift */; };
 		A619290B1C94912A00D8C945 /* TrailListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619290A1C94912A00D8C945 /* TrailListVC.swift */; };
 		A619290D1C94912A00D8C945 /* HasherDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619290C1C94912A00D8C945 /* HasherDataVC.swift */; };
@@ -385,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6188D661C9A175F00BAE354 /* Info.plist in Resources */,
 				A6CB713B1C9644FF00F27D12 /* Main.storyboard in Resources */,
 				A61929151C94912A00D8C945 /* LaunchScreen.storyboard in Resources */,
 				A61929121C94912A00D8C945 /* Assets.xcassets in Resources */,
@@ -395,6 +407,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6188D671C9A175F00BAE354 /* Info.plist in Resources */,
+				A6188D641C9A175800BAE354 /* LaunchScreen.storyboard in Resources */,
+				A6188D621C9A175300BAE354 /* Assets.xcassets in Resources */,
 				A6CB713C1C9644FF00F27D12 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +418,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6188D681C9A176000BAE354 /* Info.plist in Resources */,
+				A6188D651C9A175A00BAE354 /* LaunchScreen.storyboard in Resources */,
+				A6188D631C9A175300BAE354 /* Assets.xcassets in Resources */,
 				A6CB713D1C9644FF00F27D12 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,9 +506,11 @@
 				A6FB47621C9A0E0A00B370CD /* KennelCell.swift in Sources */,
 				A6A0E3EB1C94A4650003EE0E /* LoginScreenVC.swift in Sources */,
 				DA15804C1C974C780042614A /* HasherData.swift in Sources */,
+				A6188D601C9A174600BAE354 /* AppDelegate.swift in Sources */,
 				A61929201C94912A00D8C945 /* Hash_MeTests.swift in Sources */,
 				A6BBA7B41C9525560030DB53 /* TrailData.swift in Sources */,
 				A6CB71381C96210600F27D12 /* ManageTrailVC.swift in Sources */,
+				A6188D691C9A176600BAE354 /* AttendeeCell.swift in Sources */,
 				A6BBA7B01C9524690030DB53 /* TrailCell.swift in Sources */,
 				A6CB71401C9733AE00F27D12 /* AttendeeData.swift in Sources */,
 				DA5E78191C975A2A003A0E01 /* HasherDataVC.swift in Sources */,
@@ -509,9 +529,11 @@
 				A6FB47631C9A0E0A00B370CD /* KennelCell.swift in Sources */,
 				A6A0E3EC1C94A4650003EE0E /* LoginScreenVC.swift in Sources */,
 				DA15804D1C974C790042614A /* HasherData.swift in Sources */,
+				A6188D611C9A174700BAE354 /* AppDelegate.swift in Sources */,
 				A619292B1C94912A00D8C945 /* Hash_MeUITests.swift in Sources */,
 				A6BBA7B51C9525560030DB53 /* TrailData.swift in Sources */,
 				A6CB71391C96210600F27D12 /* ManageTrailVC.swift in Sources */,
+				A6188D6A1C9A176600BAE354 /* AttendeeCell.swift in Sources */,
 				A6BBA7B11C9524690030DB53 /* TrailCell.swift in Sources */,
 				A6CB71411C9733AE00F27D12 /* AttendeeData.swift in Sources */,
 				DA5E781A1C975A2B003A0E01 /* HasherDataVC.swift in Sources */,
