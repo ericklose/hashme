@@ -39,7 +39,7 @@ class AttendeeCell: UITableViewCell {
         self.attendee = attendee
         
         self.hasherNerdName.text = attendee.hasherNerdName
-        self.hasherHashNames.text = attendee.hasherHashNames[0]
+        self.hasherHashNames.text = attendee.hasherHashNames
         self.hasherPresent.on = true
         self.hasherIsVirgin.on = false
         self.hasherIsVisitor.on = false
