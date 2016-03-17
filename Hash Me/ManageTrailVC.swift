@@ -42,29 +42,31 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 
                 if attendeeDict != nil {
                     for var x = 0; x < attendeeDict!.count; x++ {
-                        print("PRINT THE KEY \(attendeeKeys[x])")
-                       let testerVar = attendeeDict![attendeeKeys[x]]
-                        print("DGSLDGJSN \(testerVar)")
-                        print(testerVar!["paid"])
-                        if let paidHasher = attendeeDict!["\(attendeeKeys[x])"] as? [Dictionary<String, AnyObject>] {
-                        print(attendeeKeys[x])
-                            print("test")
-                            let paid1 = attendeeDict!["\(attendeeKeys[x])/paid"]
-                            print("PAID1: \(paid1)")
-                            let paid2 = attendeeDict!["paid"]
-                            print("PAID2: \(paid2)")
-                        print("PaidHASHER: \(paidHasher)")
-//                        let paid3 = attendeeDict[attendeeKeys]["paid"]
-//                        print("PAID3: \(paid3)")
-                        }
-                        }
+                        let attendingHasher = Firebase(url: "\(DataService.ds.REF_HASHERS)").childByAppendingPath(attendeeKeys[x])
+                        
+                        attendingHasher.observeEventType(.Value, withBlock: { hasherSnapshot in
+                            
+                            if let attendeeDetailsDict = hasherSnapshot.value as? Dictionary<String, AnyObject> {
+                                print("hi")
+                                let attendeeHashNames = attendeeDetailsDict["hasherHashNames"] as? Dictionary<String, AnyObject>
+                                
+                                let keyArray = [String](attendeeHashNames!.keys)
+                                let attendeeHashName = keyArray[0]
+                                
+                                
+                                let attendee = Attendee(hasher: attendeeHashName)
+                                print("attendee data: \(attendee)")
+                                self.attendees.append(attendee)
+                                print("attendees data first: \(self.attendees)")
+                            }
+                        })
                     }
-                
                 }
-                //            self.trailAttendeeTableView.reloadData()
-            })
-        
+            }
+                        self.trailAttendeeTableView.reloadData()
+        })
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -84,21 +86,18 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return attendees.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        //        let attendeeList = self.attendeeKeyArray[indexPath.row]
-        //        
-        //        if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
-        //            cell.configureCell(attendee)
-        //            return cell
-        //        } else {
-        //            return AttendeeCell()
-        //        }
-        
-        return AttendeeCell()
+        print("current attendee data: \(attendees)")
+        let thisAttendee = attendees[indexPath.row]
+            if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
+            cell.configureCell(thisAttendee)
+            return cell
+        } else {
+            return AttendeeCell()
+        }
     }
     
 }

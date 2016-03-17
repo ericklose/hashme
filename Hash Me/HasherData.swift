@@ -12,7 +12,7 @@ import Firebase
 class Hasher {
     
     private var _hasherNerdName: String!
-    private var _hasherHashNames: Array<String>!
+    private var _hasherHashNames: String!
     private var _hasherKennelMemberships: Array<String>!
     private var _hasherTrailsAttended: Array<String>?
     private var _hasherTrailsHared: Array<String>?
@@ -21,7 +21,7 @@ class Hasher {
         return _hasherNerdName
     }
     
-    var hasherHashNames: Array<String> {
+    var hasherHashNames: String {
         return _hasherHashNames
     }
     
@@ -37,7 +37,7 @@ class Hasher {
         return _hasherTrailsHared
     }
     
-    init (hasher: Array<String>) {
+    init (hasher: String) {
         self._hasherHashNames = hasher
     }
     

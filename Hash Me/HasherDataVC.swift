@@ -24,9 +24,10 @@ class HasherDataVC: UIViewController {
         super.viewDidLoad()
         
         DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
-            print(snapshot.value)
+            //print(snapshot.value)
             
             if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
+                print("Hasher Dict: \(hasherDict)")
                 let nerdNameLbl = hasherDict["hasherNerdName"]!
                 self.nerdNameLbl.text = "\(nerdNameLbl)"
                 self.nerdNameTxtFld.text = "\(nerdNameLbl)"
