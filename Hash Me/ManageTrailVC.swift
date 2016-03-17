@@ -32,37 +32,38 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         updateTrailDetails()
         
         thisCurrentTrail.observeEventType(.Value, withBlock: { snapshot in
-            print("snapshot:\(snapshot.value)")
+            //print("Trail Snapshot:\(snapshot.value)")
             
             if let generalDict = snapshot.value as? Dictionary<String, AnyObject> {
-                let attendeeArray = generalDict["trailAttendees"] as? Dictionary<String, AnyObject>
-                print("keyarray:\(attendeeArray)")
+                let attendeeDict = generalDict["trailAttendees"] as? Dictionary<String, AnyObject>
+                print("ATTENDEE DICT:\(attendeeDict)")
+                let attendeeKeys = [String](attendeeDict!.keys)
+                print("Just the keys are: \(attendeeKeys)")
                 
-                if attendeeArray != nil {
-                    //not comfortable with exclamation point below
-                    //let person: Attendee
-                    for person in attendeeArray! {
-                        if let personDict = person as? Dictionary<String, AnyObject> {
-                            let paid = personDict["paid"]
-                            print("paid: \(paid)")
-                            //  attendeeKeyArray = [Attendee](attendeeArray!.keys)
+                if attendeeDict != nil {
+                    for var x = 0; x < attendeeDict!.count; x++ {
+                        print("PRINT THE KEY \(attendeeKeys[x])")
+                       let testerVar = attendeeDict![attendeeKeys[x]]
+                        print("DGSLDGJSN \(testerVar)")
+                        print(testerVar!["paid"])
+                        if let paidHasher = attendeeDict!["\(attendeeKeys[x])"] as? [Dictionary<String, AnyObject>] {
+                        print(attendeeKeys[x])
+                            print("test")
+                            let paid1 = attendeeDict!["\(attendeeKeys[x])/paid"]
+                            print("PAID1: \(paid1)")
+                            let paid2 = attendeeDict!["paid"]
+                            print("PAID2: \(paid2)")
+                        print("PaidHASHER: \(paidHasher)")
+//                        let paid3 = attendeeDict[attendeeKeys]["paid"]
+//                        print("PAID3: \(paid3)")
                         }
-                        //
-                        //            self.attendees = []
-                        if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                            for snap in snapshots {
-                                print("SNAP: \(snap)")
-                                //                    if let attendeeDict = snap.value as? Dictionary<String, AnyObject> {
-                                //                        let key = snap.key
-                                //                        let attendee = Attendee(dictionary: attendeeDict)
-                                //                        self.attendees.append(attendee)
-                            }
                         }
                     }
+                
                 }
                 //            self.trailAttendeeTableView.reloadData()
-            }
-        })
+            })
+        
     }
     
     override func didReceiveMemoryWarning() {
