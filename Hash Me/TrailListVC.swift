@@ -28,6 +28,7 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         DataService.ds.REF_TRAILS.observeEventType(.Value, withBlock: { snapshot in
             
             self.trails = []
+            
             if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
                 
                 for snap in snapshots {
