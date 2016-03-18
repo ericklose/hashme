@@ -11,11 +11,16 @@ import Firebase
 
 class Hasher {
     
+    private var _hasherId: String!
     private var _hasherNerdName: String!
     private var _hasherHashNames: String!
     private var _hasherKennelMemberships: Array<String>!
     private var _hasherTrailsAttended: Array<String>?
     private var _hasherTrailsHared: Array<String>?
+    
+    var hasherId: String {
+        return _hasherId
+    }
     
     var hasherNerdName: String {
         return _hasherNerdName
@@ -37,8 +42,14 @@ class Hasher {
         return _hasherTrailsHared
     }
     
-    init (hasher: String) {
-        self._hasherHashNames = hasher
+    init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>) {
+        
+        
+        self._hasherId = hasherInitId
+        
+        if let hasherInitNerdName = hasherInitDict["hasherNerdName"] as? String {
+            self._hasherNerdName = hasherInitNerdName
+        }
     }
     
 }

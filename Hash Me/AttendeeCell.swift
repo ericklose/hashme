@@ -22,7 +22,7 @@ class AttendeeCell: UITableViewCell {
     @IBOutlet weak var hasherPaidReduced: UISlider!
     @IBOutlet weak var hasherPaidReducedReason: UITextField!
     
-    var attendee: Attendee!
+    var attendee: Hasher!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,7 +35,7 @@ class AttendeeCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(attendee: Attendee) {
+    func configureCell(attendee: Hasher) {
         self.attendee = attendee
         
         self.hasherNerdName.text = attendee.hasherNerdName
