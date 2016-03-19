@@ -23,7 +23,10 @@ class Hasher {
     }
     
     var hasherNerdName: String {
+        if _hasherNerdName != nil {
         return _hasherNerdName
+        }
+        return "Incognito!"
     }
     
     var hasherHashNames: Dictionary<String, AnyObject> {
