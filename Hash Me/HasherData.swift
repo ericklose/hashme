@@ -13,8 +13,8 @@ class Hasher {
     
     private var _hasherId: String!
     private var _hasherNerdName: String!
-    private var _hasherHashNames: String!
-    private var _hasherKennelMemberships: Array<String>!
+    private var _hasherHashNames: Dictionary<String, AnyObject>!
+    private var _hasherKennelMemberships: Dictionary<String, AnyObject>!
     private var _hasherTrailsAttended: Array<String>?
     private var _hasherTrailsHared: Array<String>?
     
@@ -26,11 +26,11 @@ class Hasher {
         return _hasherNerdName
     }
     
-    var hasherHashNames: String {
+    var hasherHashNames: Dictionary<String, AnyObject> {
         return _hasherHashNames
     }
     
-    var hasherKennelMemberships: Array<String> {
+    var hasherKennelMemberships: Dictionary<String, AnyObject> {
         return _hasherKennelMemberships
     }
   
