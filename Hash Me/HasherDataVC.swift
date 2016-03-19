@@ -33,40 +33,84 @@ class HasherDataVC: UIViewController {
                 self.nerdNameTxtFld.text = "\(nerdNameLbl)"
                 print("nerd: \(nerdNameLbl)")
                 
-                let hashNames = hasherDict["hasherHashNames"] as? Dictionary<String, AnyObject>
-                
-                self.hashNamesLbl.text = ""
-                
-                let keyArray = [String](hashNames!.keys)
-                print(keyArray[0])
-                self.hashNamesLbl.text = keyArray[0]
-                
-                if keyArray.count > 1 {
-                    for var x = 1; x < keyArray.count; x++ {
-                        let name = keyArray[x]
-                        print(name)
-                        self.hashNamesLbl.text! += ", \(name)"
-                    }
-                }
-                
-                let kennelMemberships = hasherDict["hasherKennelMemberships"] as? Dictionary<String, AnyObject>
-                
-                self.kennelMembershipsLbl.text = ""
-                
-                let kennelArray = [String](kennelMemberships!.keys)
-                print(kennelArray[0])
-                self.kennelMembershipsLbl.text = kennelArray[0]
-                
-                if kennelArray.count > 1 {
-                    for var x = 1; x < kennelArray.count; x++ {
-                        let kennel = kennelArray[x]
-                        print(kennel)
-                        self.kennelMembershipsLbl.text! += ", \(kennel)"
+                if let hashNames = hasherDict["hasherHashNames"] as? Dictionary<String, String> {
+                    
+                    self.hashNamesLbl.text = ""
+                    
+                    let primaryHashName = hashNames.allKeysForValue("Primary")
+                    print("primary hash name: \(primaryHashName)")
+                    let primary = primaryHashName[0]
+                    self.hashNamesLbl.text = primary
+                    
+                    if hashNames.count > 1 {
+                        let altHashNames = [String](hashNames.keys)
                         
+                        for var x = 0; x < altHashNames.count; x++ {
+                            let altName = altHashNames[x]
+                            if altName != primary {
+                                self.hashNamesLbl.text! += ", \(altName)"
+                            }
+                            
+                            if let kennelNames = hasherDict["hasherKennelMemberships"] as? Dictionary<String, String> {
+                                self.kennelMembershipsLbl.text = ""
+                                
+                                let primaryKennelName = kennelNames.allKeysForValue("Primary")
+                                print("primary kennel name: \(primaryKennelName)")
+                                let primaryK = primaryKennelName[0]
+                                
+                                //call kennel data to change kennelid into actual name
+                                DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+                                    print(snapshot.value)
+                                
+                                    if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
+                                        if let kennelDict2 = kennelDict[primaryK] as? Dictionary<String, String> {
+                                            let primaryKName = kennelDict2["name"]!
+                                            print("kennelname: \(primaryKName)")
+                                            self.kennelMembershipsLbl.text = primaryKName
+                                        }
+                                
+                            }
+
+                            })
+                                
+                            
+                                
+                                if kennelNames.count > 1 {
+                                    let altKennelNames = [String](kennelNames.keys)
+                                    print(altKennelNames)
+                                    
+                                    for var x = 0; x < altKennelNames.count; x++ {
+                                        let altKennel = altKennelNames[x]
+                                        if altKennel != primaryK {
+                                            
+                                            DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+                                                print(snapshot.value)
+                                                
+                                                if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
+                                                    print("secondsnapshot: \(snapshot.value)")
+                                                    print("altkennel: \(altKennel)")
+                                                    if let kennelDict2 = kennelDict[altKennel] as? Dictionary<String, AnyObject> {
+                                            
+                                                    let altKName = kennelDict2["name"]!
+                                                    print("altkennelname: \(altKName)")
+                                                    self.kennelMembershipsLbl.text! += ", \(altKName)"
+                                                    }
+                                                    
+                                                }
+                                            })
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                            
+                        }
+   
                     }
                 }
+                
+                
             }
-            
         })
     }
     
