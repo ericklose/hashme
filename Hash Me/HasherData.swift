@@ -26,7 +26,7 @@ class Hasher {
         if _hasherNerdName != nil {
         return _hasherNerdName
         }
-        return "Incognito!"
+        return "Incognito 75!"
     }
     
     var hasherHashNames: Dictionary<String, AnyObject> {
@@ -52,6 +52,7 @@ class Hasher {
         
         if let hasherInitNerdName = hasherInitDict["hasherNerdName"] as? String {
             self._hasherNerdName = hasherInitNerdName
+            print("super deep: \(hasherInitNerdName)")
         }
     }
     

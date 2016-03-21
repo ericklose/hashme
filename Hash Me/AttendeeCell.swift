@@ -39,6 +39,7 @@ class AttendeeCell: UITableViewCell {
         self.attendee = attendee
         
         self.hasherNerdName.text = attendee.hasherNerdName
+        print("1: \(attendee.hasherNerdName)")
      // *****NEED TO FIX NOW THAT DATA STRUCTURE OF HASHERHASHNAMES IS DIFFERENT
     //    self.hasherHashNames.text = attendee.hasherHashNames
         self.hasherPresent.on = true
