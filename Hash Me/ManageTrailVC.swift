@@ -37,57 +37,44 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     override func viewDidAppear(animated: Bool) {
-        let thisCurrentTrail = Firebase(url: "\(DataService.ds.REF_TRAILS)").childByAppendingPath(trails.trailKey)
-        
         updateTrailDetails()
         
-        thisCurrentTrail.observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { hasherSnapshot in
             
-            if let generalDict = snapshot.value as? Dictionary<String, AnyObject> {
-                let attendeeDict = generalDict["trailAttendees"] as? Dictionary<String, AnyObject>
+            if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FDataSnapshot] {
                 
-                if attendeeDict != nil {
+                self.attendees = []
+                self.potentialAttendees = []
+                self.trailRoster = []
+                
+                for hasherSnap in hasherSnapshots {
                     
-                    let attendeeKeys = [String](attendeeDict!.keys)
+                    if let hasherDataDict = hasherSnap.value as? Dictionary<String, AnyObject> {
                     
-                    DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { hasherSnapshot in
-                        
-                        self.attendees = []
-                        
-                        if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FDataSnapshot] {
-                            for hasherSnap in hasherSnapshots {
-                                if let hasherDataDict = hasherSnap.value as? Dictionary<String, AnyObject> {
-                                    
-                                    if let isMarkedAsPresent = hasherSnap.value["trailsAttended"] as? Dictionary<String, AnyObject> {
-                                        let trailList = [String](isMarkedAsPresent.keys)
-                                        for trailListed in trailList {
-                                            if trailListed == self.trails.trailKey {
-                                                let hasherKey = hasherSnap.key
-                                                let attendee = Hasher(hasherInitId: hasherKey, hasherInitDict: hasherDataDict)
-                                                print("wierd \(hasherKey): \(attendee.hasherNerdName)")
-                                                self.attendees.append(attendee)
-                                            }
-                                     //ERROR: Somewhere in here it's just doing a boolean check on if the user has been to A trail rather than THIS trail. It's probably where the ELSE is nested in the series of if-lets
-                                        
-                                        }
-                                    } else {
-                                        let hasherKey = hasherSnap.key
-                                        let potentialAttendee = Hasher(hasherInitId: hasherKey, hasherInitDict: hasherDataDict)
-                                        print("wtf \(hasherKey): \(potentialAttendee.hasherNerdName)")
-                                        self.potentialAttendees.append(potentialAttendee)
-                                    }
-                                }
-                            }
+                    if let isMarkedAsPresent = hasherDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
+                        let trailList = [String](isMarkedAsPresent.keys)
+                        if trailList.contains(self.trails.trailKey) {
+                            let hasherKey = hasherSnap.key
+                            let attendee = Hasher(hasherInitId: hasherKey, hasherInitDict: hasherDataDict)
+                            self.attendees.append(attendee)
+                        } else {
+                            let hasherKey = hasherSnap.key
+                            let potentialAttendee = Hasher(hasherInitId: hasherKey, hasherInitDict: hasherDataDict)
+                            self.potentialAttendees.append(potentialAttendee)
                         }
-                        self.trailRoster = self.attendees + self.potentialAttendees
-                        self.trailAttendeeTableView.reloadData()
-                    })
+                    } else {
+                        let hasherKey = hasherSnap.key
+                        let potentialAttendee = Hasher(hasherInitId: hasherKey, hasherInitDict: hasherDataDict)
+                        self.potentialAttendees.append(potentialAttendee)
+                    }
                 }
             }
+            }
+            self.trailRoster = self.attendees + self.potentialAttendees
+            self.trailAttendeeTableView.reloadData()
         })
-print(trails.trailKey)
     }
-
+    
     func updateTrailDetails() {
         specificTrailDate.text = trails.trailDate
         specificTrailKennel.text = trails.trailHares
@@ -112,7 +99,6 @@ print(trails.trailKey)
         } else {
             return AttendeeCell()
         }
-        
     }
     
 }
