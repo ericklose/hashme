@@ -22,12 +22,21 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     var trails: TrailData!
     var attendees = [Hasher]()
     var potentialAttendees = [Hasher]()
+    var trailRoster = [Hasher]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         trailAttendeeTableView.delegate = self
         trailAttendeeTableView.dataSource = self
         
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         let thisCurrentTrail = Firebase(url: "\(DataService.ds.REF_TRAILS)").childByAppendingPath(trails.trailKey)
         
         updateTrailDetails()
@@ -36,53 +45,49 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             if let generalDict = snapshot.value as? Dictionary<String, AnyObject> {
                 let attendeeDict = generalDict["trailAttendees"] as? Dictionary<String, AnyObject>
-                print("ATTENDEE DICT:\(attendeeDict)")
-                let attendeeKeys = [String](attendeeDict!.keys)
-                print("Just the keys are: \(attendeeKeys)")
                 
                 if attendeeDict != nil {
+                    
+                    let attendeeKeys = [String](attendeeDict!.keys)
                     
                     DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { hasherSnapshot in
                         
                         self.attendees = []
                         
                         if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FDataSnapshot] {
-                            if let hasherDataDict = hasherSnapshot.value as? Dictionary<String, AnyObject> {
-                                for hasherSnap in hasherSnapshots {
+                            for hasherSnap in hasherSnapshots {
+                                if let hasherDataDict = hasherSnap.value as? Dictionary<String, AnyObject> {
                                     
                                     if let isMarkedAsPresent = hasherSnap.value["trailsAttended"] as? Dictionary<String, AnyObject> {
                                         let trailList = [String](isMarkedAsPresent.keys)
                                         for trailListed in trailList {
                                             if trailListed == self.trails.trailKey {
-                                                
-                                                let attendee = Hasher(hasherInitId: hasherSnap.key, hasherInitDict: hasherDataDict)
-                                                print ("the attendee is: \(attendee)")
+                                                let hasherKey = hasherSnap.key
+                                                let attendee = Hasher(hasherInitId: hasherKey, hasherInitDict: hasherDataDict)
+                                                print("wierd \(hasherKey): \(attendee.hasherNerdName)")
                                                 self.attendees.append(attendee)
-                                            } else {
-                                                let potentialAttendee = Hasher(hasherInitId: hasherSnap.key, hasherInitDict: hasherDataDict)
-                                                print("the potential is: \(potentialAttendee.hasherNerdName)")
-                                                self.potentialAttendees.append(potentialAttendee)
-                                                
                                             }
+                                     //ERROR: Somewhere in here it's just doing a boolean check on if the user has been to A trail rather than THIS trail. It's probably where the ELSE is nested in the series of if-lets
+                                        
                                         }
+                                    } else {
+                                        let hasherKey = hasherSnap.key
+                                        let potentialAttendee = Hasher(hasherInitId: hasherKey, hasherInitDict: hasherDataDict)
+                                        print("wtf \(hasherKey): \(potentialAttendee.hasherNerdName)")
+                                        self.potentialAttendees.append(potentialAttendee)
                                     }
                                 }
                             }
-                            
                         }
+                        self.trailRoster = self.attendees + self.potentialAttendees
                         self.trailAttendeeTableView.reloadData()
                     })
                 }
             }
         })
+print(trails.trailKey)
     }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
     func updateTrailDetails() {
         specificTrailDate.text = trails.trailDate
         specificTrailKennel.text = trails.trailHares
@@ -96,18 +101,19 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return attendees.count
+        return trailRoster.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let thisAttendee = attendees[indexPath.row]
+        let thisAttendee = trailRoster[indexPath.row]
         if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
             cell.configureCell(thisAttendee)
             return cell
         } else {
             return AttendeeCell()
         }
-    } 
+        
+    }
     
 }
 
