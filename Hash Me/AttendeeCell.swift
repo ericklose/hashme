@@ -22,7 +22,7 @@ class AttendeeCell: UITableViewCell {
     @IBOutlet weak var hasherPaidReduced: UISlider!
     @IBOutlet weak var hasherPaidReducedReason: UITextField!
     
-    var attendee: Hasher!
+    var attendee: Attendee!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,13 +34,18 @@ class AttendeeCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
     
-    func configureCell(attendee: Hasher) {
+    func configureCell(attendee: Attendee) {
         self.attendee = attendee
         self.hasherNerdName.text = attendee.hasherNerdName
-     // *****NEED TO FIX NOW THAT DATA STRUCTURE OF HASHERHASHNAMES IS DIFFERENT
-    //    self.hasherHashNames.text = attendee.hasherHashNames
-        self.hasherPresent.on = true
+        self.hasherHashNames.text = attendee.attendeeRelevantHashName
+// Need to pass Attendee specific data
+//        if trailList.contains(self.trails.trailKey) {
+//        self.hasherPresent.on = true
+//        } else {
+//            self.hasherPresent.on = false
+//        }
         self.hasherIsVirgin.on = false
         self.hasherIsVisitor.on = false
         self.hasherPaidFull.on = false

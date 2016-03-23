@@ -20,9 +20,9 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var specificTrailDescription: UILabel!
     
     var trails: TrailData!
-    var attendees = [Hasher]()
-    var potentialAttendees = [Hasher]()
-    var trailRoster = [Hasher]()
+    var attendees = [Attendee]()
+    var potentialAttendees = [Attendee]()
+    var trailRoster = [Attendee]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,22 +49,22 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 
                 for hasherSnap in hasherSnapshots {
                     
-                    if let hasherDataDict = hasherSnap.value as? Dictionary<String, AnyObject> {
+                    if let attendeeDataDict = hasherSnap.value as? Dictionary<String, AnyObject> {
                     
-                    if let isMarkedAsPresent = hasherDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
+                    if let isMarkedAsPresent = attendeeDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
                         let trailList = [String](isMarkedAsPresent.keys)
                         if trailList.contains(self.trails.trailKey) {
                             let hasherKey = hasherSnap.key
-                            let attendee = Hasher(hasherInitId: hasherKey, hasherInitDict: hasherDataDict)
+                            let attendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel)
                             self.attendees.append(attendee)
                         } else {
                             let hasherKey = hasherSnap.key
-                            let potentialAttendee = Hasher(hasherInitId: hasherKey, hasherInitDict: hasherDataDict)
+                            let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel)
                             self.potentialAttendees.append(potentialAttendee)
                         }
                     } else {
                         let hasherKey = hasherSnap.key
-                        let potentialAttendee = Hasher(hasherInitId: hasherKey, hasherInitDict: hasherDataDict)
+                        let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel)
                         self.potentialAttendees.append(potentialAttendee)
                     }
                 }
