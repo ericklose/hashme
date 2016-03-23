@@ -53,6 +53,12 @@
 		A6BBA7B31C9525560030DB53 /* TrailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBA7B21C9525560030DB53 /* TrailData.swift */; };
 		A6BBA7B41C9525560030DB53 /* TrailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBA7B21C9525560030DB53 /* TrailData.swift */; };
 		A6BBA7B51C9525560030DB53 /* TrailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBA7B21C9525560030DB53 /* TrailData.swift */; };
+		A6C7AEE61CA33D5E0080814C /* AttendeeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C7AEE51CA33D5E0080814C /* AttendeeData.swift */; };
+		A6C7AEE71CA33D5E0080814C /* AttendeeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C7AEE51CA33D5E0080814C /* AttendeeData.swift */; };
+		A6C7AEE81CA33D5E0080814C /* AttendeeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C7AEE51CA33D5E0080814C /* AttendeeData.swift */; };
+		A6C7AEEA1CA343290080814C /* OldManageTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C7AEE91CA343290080814C /* OldManageTrailVC.swift */; };
+		A6C7AEEB1CA343290080814C /* OldManageTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C7AEE91CA343290080814C /* OldManageTrailVC.swift */; };
+		A6C7AEEC1CA343290080814C /* OldManageTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C7AEE91CA343290080814C /* OldManageTrailVC.swift */; };
 		A6CB71371C96210600F27D12 /* ManageTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB71361C96210600F27D12 /* ManageTrailVC.swift */; };
 		A6CB71381C96210600F27D12 /* ManageTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB71361C96210600F27D12 /* ManageTrailVC.swift */; };
 		A6CB71391C96210600F27D12 /* ManageTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB71361C96210600F27D12 /* ManageTrailVC.swift */; };
@@ -118,6 +124,8 @@
 		A6A0E3ED1C94AAB40003EE0E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A6BBA7AE1C9524690030DB53 /* TrailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailCell.swift; sourceTree = "<group>"; };
 		A6BBA7B21C9525560030DB53 /* TrailData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailData.swift; sourceTree = "<group>"; };
+		A6C7AEE51CA33D5E0080814C /* AttendeeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendeeData.swift; sourceTree = "<group>"; };
+		A6C7AEE91CA343290080814C /* OldManageTrailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldManageTrailVC.swift; sourceTree = "<group>"; };
 		A6CB71361C96210600F27D12 /* ManageTrailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageTrailVC.swift; sourceTree = "<group>"; };
 		A6CB713A1C9644FF00F27D12 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A6FB47581C9A0D2B00B370CD /* KennelListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelListVC.swift; sourceTree = "<group>"; };
@@ -248,6 +256,7 @@
 				A6CB71361C96210600F27D12 /* ManageTrailVC.swift */,
 				A64554E21C975BC60016373E /* AddNewTrailVC.swift */,
 				A6FB47581C9A0D2B00B370CD /* KennelListVC.swift */,
+				A6C7AEE91CA343290080814C /* OldManageTrailVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -268,6 +277,7 @@
 				A6BBA7B21C9525560030DB53 /* TrailData.swift */,
 				DAD2CF9E1C95F9960048C2C8 /* HasherData.swift */,
 				A6FB475C1C9A0D5700B370CD /* KennelData.swift */,
+				A6C7AEE51CA33D5E0080814C /* AttendeeData.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -476,11 +486,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6BBA7B31C9525560030DB53 /* TrailData.swift in Sources */,
+				A6C7AEE61CA33D5E0080814C /* AttendeeData.swift in Sources */,
 				A6FB47591C9A0D2B00B370CD /* KennelListVC.swift in Sources */,
 				DAD2CF9F1C95F9960048C2C8 /* HasherData.swift in Sources */,
 				A6CB71371C96210600F27D12 /* ManageTrailVC.swift in Sources */,
 				A6BBA7AF1C9524690030DB53 /* TrailCell.swift in Sources */,
 				A6A0E3EA1C94A4650003EE0E /* LoginScreenVC.swift in Sources */,
+				A6C7AEEA1CA343290080814C /* OldManageTrailVC.swift in Sources */,
 				A619290D1C94912A00D8C945 /* HasherDataVC.swift in Sources */,
 				A61929091C94912A00D8C945 /* AppDelegate.swift in Sources */,
 				A6FB47611C9A0E0A00B370CD /* KennelCell.swift in Sources */,
@@ -498,11 +510,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6FB47621C9A0E0A00B370CD /* KennelCell.swift in Sources */,
+				A6C7AEE71CA33D5E0080814C /* AttendeeData.swift in Sources */,
 				A6A0E3EB1C94A4650003EE0E /* LoginScreenVC.swift in Sources */,
 				DA15804C1C974C780042614A /* HasherData.swift in Sources */,
 				A6188D601C9A174600BAE354 /* AppDelegate.swift in Sources */,
 				A61929201C94912A00D8C945 /* Hash_MeTests.swift in Sources */,
 				A6BBA7B41C9525560030DB53 /* TrailData.swift in Sources */,
+				A6C7AEEB1CA343290080814C /* OldManageTrailVC.swift in Sources */,
 				A6CB71381C96210600F27D12 /* ManageTrailVC.swift in Sources */,
 				A6188D691C9A176600BAE354 /* AttendeeCell.swift in Sources */,
 				A6BBA7B01C9524690030DB53 /* TrailCell.swift in Sources */,
@@ -520,11 +534,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6FB47631C9A0E0A00B370CD /* KennelCell.swift in Sources */,
+				A6C7AEE81CA33D5E0080814C /* AttendeeData.swift in Sources */,
 				A6A0E3EC1C94A4650003EE0E /* LoginScreenVC.swift in Sources */,
 				DA15804D1C974C790042614A /* HasherData.swift in Sources */,
 				A6188D611C9A174700BAE354 /* AppDelegate.swift in Sources */,
 				A619292B1C94912A00D8C945 /* Hash_MeUITests.swift in Sources */,
 				A6BBA7B51C9525560030DB53 /* TrailData.swift in Sources */,
+				A6C7AEEC1CA343290080814C /* OldManageTrailVC.swift in Sources */,
 				A6CB71391C96210600F27D12 /* ManageTrailVC.swift in Sources */,
 				A6188D6A1C9A176600BAE354 /* AttendeeCell.swift in Sources */,
 				A6BBA7B11C9524690030DB53 /* TrailCell.swift in Sources */,
