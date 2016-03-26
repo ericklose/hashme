@@ -17,23 +17,32 @@ class Attendee: Hasher {
     private var _attendeePaidNotes: String!
     private var _attendeeHomeKennel: String!
     private var _attendeeVirginSponsor: String!
+    //private var _attendeeAttending: Bool!
     
+    var attendeeAttending: Bool!
+
     
     var attendeeRelevantHashName: String {
         return _attendeeRelevantHashName
     }
     
+    var attendeeRelevantTrailId: String {
+        return _attendeeRelevantTrailId
+    }
+    
     
     /*
+     
+     From Hasher Class you get HasherId, HasherNerdName
+     
+     */
     
-    From Hasher Class you get HasherId, HasherNerdName
     
-    */
-    
-    
-    convenience init(attendeeInitId: String, attendeeInitDict: Dictionary<String, AnyObject>, attendeeInitTrailId: String, attendeeInitKennelId: String) {
+    convenience init(attendeeInitId: String, attendeeInitDict: Dictionary<String, AnyObject>, attendeeInitTrailId: String, attendeeInitKennelId: String, attendeeAttendingInit: Bool) {
         self.init(hasherInitId: attendeeInitId, hasherInitDict: attendeeInitDict)
-        //super.hasherId = attendeeInitId
+        //super._hasherId = attendeeInitId
+        self._attendeeRelevantTrailId = attendeeInitTrailId
+        self.attendeeAttending = attendeeAttendingInit
         
         if let attendeeInitHashNamesDict = attendeeInitDict["hasherHashNames"] as? Dictionary<String, String> {
             if let attendeeInitRelevantHashName1 = attendeeInitHashNamesDict.allKeysForValue(attendeeInitKennelId) as? [String] {

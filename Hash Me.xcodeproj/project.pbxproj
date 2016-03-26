@@ -14,7 +14,6 @@
 		A6188D631C9A175300BAE354 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A61929111C94912A00D8C945 /* Assets.xcassets */; };
 		A6188D641C9A175800BAE354 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61929131C94912A00D8C945 /* LaunchScreen.storyboard */; };
 		A6188D651C9A175A00BAE354 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61929131C94912A00D8C945 /* LaunchScreen.storyboard */; };
-		A6188D661C9A175F00BAE354 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A61929161C94912A00D8C945 /* Info.plist */; };
 		A6188D671C9A175F00BAE354 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A61929161C94912A00D8C945 /* Info.plist */; };
 		A6188D681C9A176000BAE354 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A61929161C94912A00D8C945 /* Info.plist */; };
 		A6188D691C9A176600BAE354 /* AttendeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA15804A1C9740400042614A /* AttendeeCell.swift */; };
@@ -357,7 +356,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Eric Klose";
 				TargetAttributes = {
 					A61929041C94912A00D8C945 = {
@@ -401,7 +400,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6188D661C9A175F00BAE354 /* Info.plist in Resources */,
 				A6CB713B1C9644FF00F27D12 /* Main.storyboard in Resources */,
 				A61929151C94912A00D8C945 /* LaunchScreen.storyboard in Resources */,
 				A61929121C94912A00D8C945 /* Assets.xcassets in Resources */,

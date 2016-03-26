@@ -45,7 +45,7 @@ class HasherDataVC: UIViewController {
                     if hashNames.count > 1 {
                         let altHashNames = [String](hashNames.keys)
                         
-                        for var x = 0; x < altHashNames.count; x++ {
+                        for var x = 0; x < altHashNames.count; x += 1 {
                             let altName = altHashNames[x]
                             if altName != primary {
                                 self.hashNamesLbl.text! += ", \(altName)"
@@ -61,19 +61,19 @@ class HasherDataVC: UIViewController {
                                 //call kennel data to change kennelid into actual name
                                 DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
                                     print(snapshot.value)
-                                
+                                    
                                     if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
                                         if let kennelDict2 = kennelDict[primaryK] as? Dictionary<String, String> {
                                             let primaryKName = kennelDict2["name"]!
                                             print("kennelname: \(primaryKName)")
                                             self.kennelMembershipsLbl.text = primaryKName
                                         }
+                                        
+                                    }
+                                    
+                                })
                                 
-                            }
-
-                            })
                                 
-                            
                                 
                                 if kennelNames.count > 1 {
                                     let altKennelNames = [String](kennelNames.keys)
@@ -90,10 +90,10 @@ class HasherDataVC: UIViewController {
                                                     print("secondsnapshot: \(snapshot.value)")
                                                     print("altkennel: \(altKennel)")
                                                     if let kennelDict2 = kennelDict[altKennel] as? Dictionary<String, AnyObject> {
-                                            
-                                                    let altKName = kennelDict2["name"]!
-                                                    print("altkennelname: \(altKName)")
-                                                    self.kennelMembershipsLbl.text! += ", \(altKName)"
+                                                        
+                                                        let altKName = kennelDict2["name"]!
+                                                        print("altkennelname: \(altKName)")
+                                                        self.kennelMembershipsLbl.text! += ", \(altKName)"
                                                     }
                                                     
                                                 }
@@ -105,7 +105,7 @@ class HasherDataVC: UIViewController {
                             }
                             
                         }
-   
+                        
                     }
                 }
                 
