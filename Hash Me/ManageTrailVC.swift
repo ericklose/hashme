@@ -18,6 +18,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var specificTrailStartLocation: UILabel!
     @IBOutlet weak var specificTrailHares: UILabel!
     @IBOutlet weak var specificTrailDescription: UILabel!
+
     
     var trails: TrailData!
     var attendees = [Attendee]()
@@ -39,6 +40,8 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     override func viewDidAppear(animated: Bool) {
         updateTrailDetails()
         
+        //print("trail sender: \(trails)")
+        
         DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { hasherSnapshot in
             
             if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FDataSnapshot] {
@@ -50,25 +53,25 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 for hasherSnap in hasherSnapshots {
                     
                     if let attendeeDataDict = hasherSnap.value as? Dictionary<String, AnyObject> {
-                    
-                    if let isMarkedAsPresent = attendeeDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
-                        let trailList = [String](isMarkedAsPresent.keys)
-                        if trailList.contains(self.trails.trailKey) {
-                            let hasherKey = hasherSnap.key
-                            let attendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel)
-                            self.attendees.append(attendee)
+                        
+                        if let isMarkedAsPresent = attendeeDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
+                            let trailList = [String](isMarkedAsPresent.keys)
+                            if trailList.contains(self.trails.trailKey) {
+                                let hasherKey = hasherSnap.key
+                                let attendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: true)
+                                self.attendees.append(attendee)
+                            } else {
+                                let hasherKey = hasherSnap.key
+                                let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false)
+                                self.potentialAttendees.append(potentialAttendee)
+                            }
                         } else {
                             let hasherKey = hasherSnap.key
-                            let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel)
+                            let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false)
                             self.potentialAttendees.append(potentialAttendee)
                         }
-                    } else {
-                        let hasherKey = hasherSnap.key
-                        let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel)
-                        self.potentialAttendees.append(potentialAttendee)
                     }
                 }
-            }
             }
             self.trailRoster = self.attendees + self.potentialAttendees
             self.trailAttendeeTableView.reloadData()
@@ -101,6 +104,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
+
 }
 
 

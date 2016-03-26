@@ -14,7 +14,6 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     @IBOutlet weak var trailTableView: UITableView!
     
-    
     var trails = [TrailData]()
     
     
@@ -90,9 +89,6 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     manageTrailVC.trails = trailInCell
                 }
             }
-            
-            
-            
         }
     }
 }
