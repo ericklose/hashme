@@ -27,9 +27,13 @@ class AttendeeCell: UITableViewCell {
     @IBOutlet weak var hasherCurrentPayLbl: UILabel!
     
     var attendee: Attendee!
+    var trailAttendencePath: Firebase!
+    var trailsAttendedPath: Firebase!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // Initialization code
     }
     
@@ -42,6 +46,10 @@ class AttendeeCell: UITableViewCell {
     
     func configureCell(attendee: Attendee) {
         self.attendee = attendee
+        
+        trailAttendencePath = DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(attendee.hasherId)
+        trailsAttendedPath = DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).childByAppendingPath("trailsAttended").childByAppendingPath(attendee.attendeeRelevantTrailId)
+        
         self.hasherNerdName.text = attendee.hasherNerdName
         self.hasherHashNames.text = attendee.attendeeRelevantHashName
 
@@ -57,30 +65,77 @@ class AttendeeCell: UITableViewCell {
         self.hasherVirginSponsorIs.text = ""
         self.hasherVisitorFrom.text = ""
         self.hasherPaySlider.value = 10
-        self.hasherMinPayLbl.text = "0"
-        self.hasherMaxPayLbl.text = "20"
-        self.hasherCurrentPayLbl.text = "10"
+        self.hasherMinPayLbl.text = "$0"
+        self.hasherMaxPayLbl.text = "$20"
+        self.hasherCurrentPayLbl.text = "$10"
         self.hasherPaidReducedReason.text = "various reasons"
         
     }
     
     @IBAction func toggleAttendingToggle(sender: UISwitch) {
         
-        let trailAttendencePath1 = DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees")
-        let trailAttendencePath2 = DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).childByAppendingPath("trailsAttended")
-    
         if hasherAttendingTrailToggle.on == true {
-            trailAttendencePath1.updateChildValues([attendee.hasherId : "true"])
-            trailAttendencePath2.updateChildValues([attendee.attendeeRelevantTrailId : "true"])
+            trailAttendencePath.updateChildValues(["trailAttendeePresent" : "true"])
+            trailsAttendedPath.updateChildValues(["hasherAttendedTrail" : "true"])
         } else if hasherAttendingTrailToggle.on  == false {
-            trailAttendencePath1.childByAppendingPath(attendee.hasherId).removeValue()
-            trailAttendencePath2.childByAppendingPath(attendee.attendeeRelevantTrailId).removeValue()
+            trailAttendencePath.removeValue()
+            trailsAttendedPath.removeValue()
+        }
+    }
+    
+    @IBAction func hasherPaidFullToggleToggled(sender: UISwitch) {
+        if self.hasherPaidFull.on == true {
+            trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : 15])
+            trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : 15])
+            hasherCurrentPayLbl.text = "$15"
+            hasherPaySlider.value = 15
+        } else if self.hasherPaidFull.on == false {
+            trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : 0])
+            trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : 0])
         }
     }
     
     @IBAction func sliderValueChanged(sender: UISlider) {
+        self.hasherPaidFull.on = false
+        
         let selectedValue = Int(sender.value)
         hasherCurrentPayLbl.text = "$" + String(stringInterpolationSegment: selectedValue)
+        
+        self.trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : selectedValue])
+        self.trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : selectedValue])
+    }
+
+    
+    @IBAction func hasherPaidDiscountReason(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func hasherIsVirginToggled(sender: UISwitch) {
+        if self.hasherIsVirgin.on == true {
+            trailAttendencePath.updateChildValues(["trailAttendeeIsVirgin" : true])
+            trailsAttendedPath.updateChildValues(["hasherVirginTrail" : true])
+        } else if self.hasherIsVirgin.on == false {
+            trailAttendencePath.childByAppendingPath("trailAttendeeIsVirgin").removeValue()
+            trailsAttendedPath.childByAppendingPath("hasherVirginTrail").removeValue()
+        }
+    }
+    
+    @IBAction func hasherVirginSponsorIs(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func hasherIsVisitorToggled(sender: UISwitch) {
+        if self.hasherIsVisitor.on == true {
+            trailAttendencePath.updateChildValues(["trailAttendeeIsVisitor" : true])
+            trailsAttendedPath.updateChildValues(["hasherWasVisiting" : true])
+        } else if self.hasherIsVisitor.on == false {
+            trailAttendencePath.childByAppendingPath("trailAttendeeIsVisitor").removeValue()
+            trailsAttendedPath.childByAppendingPath("hasherWasVisiting").removeValue()
+        }
+    }
+    
+    @IBAction func hasherIsVisitingFrom(sender: AnyObject) {
+        
     }
     
     

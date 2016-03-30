@@ -40,8 +40,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     override func viewDidAppear(animated: Bool) {
         updateTrailDetails()
         
-        //print("trail sender: \(trails)")
-        
         DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { hasherSnapshot in
             
             if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FDataSnapshot] {

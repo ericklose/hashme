@@ -20,7 +20,6 @@ class Attendee: Hasher {
     //private var _attendeeAttending: Bool!
     
     var attendeeAttending: Bool!
-
     
     var attendeeRelevantHashName: String {
         return _attendeeRelevantHashName
@@ -28,6 +27,10 @@ class Attendee: Hasher {
     
     var attendeeRelevantTrailId: String {
         return _attendeeRelevantTrailId
+    }
+    
+    var attendeePaidAmount: Int {
+        return _attendeePaidAmount
     }
     
     
@@ -57,6 +60,14 @@ class Attendee: Hasher {
                         }
                     }
                 }
+            }
+        }
+        
+        if let attendeeTrailsInfoDict = attendeeInitDict["trailsAttended"] as? Dictionary<String, AnyObject> {
+            if let attendeeCurrentTrailInfo = attendeeTrailsInfoDict[attendeeRelevantTrailId] as? Dictionary<String, AnyObject> {
+                self._attendeePaidAmount = attendeeCurrentTrailInfo["hasherPaidTrailAmt"] as! Int
+                self._attendeePaidNotes = attendeeCurrentTrailInfo["hasherPaidReducedReason"] as! String
+                
             }
         }
     }
