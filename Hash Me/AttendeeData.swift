@@ -16,6 +16,7 @@ class Attendee: Hasher {
     private var _attendeePaidAmount: Int!
     private var _attendeePaidNotes: String!
     private var _attendeeHomeKennel: String!
+    private var _attendeeVirginTrail: Bool!
     private var _attendeeVirginSponsor: String!
     //private var _attendeeAttending: Bool!
     
@@ -31,6 +32,18 @@ class Attendee: Hasher {
     
     var attendeePaidAmount: Int {
         return _attendeePaidAmount
+    }
+    
+    var attendeePaidNotes: String {
+        return _attendeePaidNotes
+    }
+    
+    var attendeeVirginTrail: Bool {
+        return _attendeeVirginTrail
+    }
+    
+    var attendeeVirginSponsor: String {
+        return _attendeeVirginSponsor
     }
     
     
@@ -65,8 +78,23 @@ class Attendee: Hasher {
         
         if let attendeeTrailsInfoDict = attendeeInitDict["trailsAttended"] as? Dictionary<String, AnyObject> {
             if let attendeeCurrentTrailInfo = attendeeTrailsInfoDict[attendeeRelevantTrailId] as? Dictionary<String, AnyObject> {
-                self._attendeePaidAmount = attendeeCurrentTrailInfo["hasherPaidTrailAmt"] as! Int
-                self._attendeePaidNotes = attendeeCurrentTrailInfo["hasherPaidReducedReason"] as! String
+                
+                if let initPaid = attendeeCurrentTrailInfo["hasherPaidTrailAmt"] as? Int {
+                    self._attendeePaidAmount = initPaid
+                    print("1: \(_attendeePaidAmount)")
+                }
+                
+                if let initPaidReducedReason = attendeeCurrentTrailInfo["hasherPaidReducedReason"] as? String {
+                    self._attendeePaidNotes = initPaidReducedReason
+                    print("2: \(_attendeePaidNotes)")
+                }
+                
+                if let initIsVirgin = attendeeCurrentTrailInfo["hasherVirginTrail"] as? Bool {
+                    self._attendeeVirginTrail = initIsVirgin
+                    print("3: \(_attendeeVirginTrail)")
+                }
+                
+                //if let initVirginSponsor = attendeeCurrentTrailInfo["]
                 
             }
         }
