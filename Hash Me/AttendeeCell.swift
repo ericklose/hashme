@@ -19,9 +19,12 @@ class AttendeeCell: UITableViewCell {
     @IBOutlet weak var hasherPaidFull: UISwitch!
     @IBOutlet weak var hasherVisitorFrom: UITextField!
     @IBOutlet weak var hasherVirginSponsorIs: UITextField!
-    @IBOutlet weak var hasherPaidReduced: UISlider!
+    @IBOutlet weak var hasherPaySlider: UISlider!
     @IBOutlet weak var hasherPaidReducedReason: UITextField!
     @IBOutlet weak var hasherAttendingTrailToggle: UISwitch!
+    @IBOutlet weak var hasherMinPayLbl: UILabel!
+    @IBOutlet weak var hasherMaxPayLbl: UILabel!
+    @IBOutlet weak var hasherCurrentPayLbl: UILabel!
     
     var attendee: Attendee!
     
@@ -53,22 +56,32 @@ class AttendeeCell: UITableViewCell {
         self.hasherPaidFull.on = false
         self.hasherVirginSponsorIs.text = ""
         self.hasherVisitorFrom.text = ""
-        self.hasherPaidReduced.value = 10
+        self.hasherPaySlider.value = 10
+        self.hasherMinPayLbl.text = "0"
+        self.hasherMaxPayLbl.text = "20"
+        self.hasherCurrentPayLbl.text = "10"
         self.hasherPaidReducedReason.text = "various reasons"
         
     }
     
     @IBAction func toggleAttendingToggle(sender: UISwitch) {
+        
+        let trailAttendencePath1 = DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees")
+        let trailAttendencePath2 = DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).childByAppendingPath("trailsAttended")
+    
         if hasherAttendingTrailToggle.on == true {
-            let trailAttendencePath1 = DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees")
             trailAttendencePath1.updateChildValues([attendee.hasherId : "true"])
-            let trailAttendencePath2 = DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).childByAppendingPath("trailsAttended")
             trailAttendencePath2.updateChildValues([attendee.attendeeRelevantTrailId : "true"])
         } else if hasherAttendingTrailToggle.on  == false {
-            let trailAttendencePath1 = DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(attendee.hasherId)
-            trailAttendencePath1.removeValue()
-            let trailAttendencePath2 = DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).childByAppendingPath("trailsAttended").childByAppendingPath(attendee.attendeeRelevantTrailId)
-            trailAttendencePath2.removeValue()
+            trailAttendencePath1.childByAppendingPath(attendee.hasherId).removeValue()
+            trailAttendencePath2.childByAppendingPath(attendee.attendeeRelevantTrailId).removeValue()
         }
     }
+    
+    @IBAction func sliderValueChanged(sender: UISlider) {
+        let selectedValue = Int(sender.value)
+        hasherCurrentPayLbl.text = "$" + String(stringInterpolationSegment: selectedValue)
+    }
+    
+    
 }
