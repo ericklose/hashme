@@ -17,7 +17,6 @@ class DataService {
     private var _REF_BASE = Firebase(url: "\(URL_BASE)")
     private var _REF_TRAILS = Firebase(url: "\(URL_BASE)/trails")
     private var _REF_HASHERS = Firebase(url: "\(URL_BASE)/hashers")
-    private var _REF_TRAILS_ATTENDED = Firebase(url: "\(URL_BASE)/hashers/???/trailsattended")
     private var _REF_KENNELS = Firebase(url: "\(URL_BASE)/kennels")
     
     var REF_BASE: Firebase {
@@ -30,10 +29,6 @@ class DataService {
     
     var REF_HASHERS: Firebase {
         return _REF_HASHERS
-    }
-    
-    var REF_TRAILS_ATTENDED: Firebase {
-        return _REF_TRAILS_ATTENDED
     }
     
     var REF_KENNELS: Firebase {

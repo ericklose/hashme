@@ -29,12 +29,11 @@ class AttendeeCell: UITableViewCell {
     var attendee: Attendee!
     var trailAttendencePath: Firebase!
     var trailsAttendedPath: Firebase!
-
+    var hashCash = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        // Initialization code
+        
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -44,8 +43,9 @@ class AttendeeCell: UITableViewCell {
     }
     
     
-    func configureCell(attendee: Attendee) {
+    func configureCell(attendee: Attendee, hashCash: Int) {
         self.attendee = attendee
+        self.hashCash = hashCash
         
         trailAttendencePath = DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(attendee.hasherId)
         trailsAttendedPath = DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).childByAppendingPath("trailsAttended").childByAppendingPath(attendee.attendeeRelevantTrailId)
@@ -58,18 +58,16 @@ class AttendeeCell: UITableViewCell {
         } else {
             self.hasherPresent.on = false
         }
-        
-        self.hasherIsVirgin.on = false
-        self.hasherIsVisitor.on = false
+        self.hasherIsVirgin.on = attendee.attendeeVirginTrail
+        self.hasherIsVisitor.on = attendee.attendeeVisitingTrail
         self.hasherPaidFull.on = false
-        self.hasherVirginSponsorIs.text = ""
-        self.hasherVisitorFrom.text = ""
-        self.hasherPaySlider.value = 10
+        self.hasherVirginSponsorIs.text = attendee.attendeeVirginSponsor
+        self.hasherVisitorFrom.text = attendee.attendeeVisitingFrom
+        self.hasherPaySlider.value = Float(attendee.attendeePaidAmount)
         self.hasherMinPayLbl.text = "$0"
-        self.hasherMaxPayLbl.text = "$20"
-        self.hasherCurrentPayLbl.text = "$10"
-        self.hasherPaidReducedReason.text = "various reasons"
-        
+        self.hasherMaxPayLbl.text = "$\((Int(hashCash/20)+1)*20)"
+        self.hasherCurrentPayLbl.text = "$\(attendee.attendeePaidAmount)"
+        self.hasherPaidReducedReason.text = attendee.attendeePaidNotes
     }
     
     @IBAction func toggleAttendingToggle(sender: UISwitch) {
@@ -85,10 +83,10 @@ class AttendeeCell: UITableViewCell {
     
     @IBAction func hasherPaidFullToggleToggled(sender: UISwitch) {
         if self.hasherPaidFull.on == true {
-            trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : 15])
-            trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : 15])
-            hasherCurrentPayLbl.text = "$15"
-            hasherPaySlider.value = 15
+            trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : "\(hashCash)"])
+            trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : "\(hashCash)"])
+            hasherCurrentPayLbl.text = "$\(hashCash)"
+            hasherPaySlider.value = Float(hashCash)
         } else if self.hasherPaidFull.on == false {
             trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : 0])
             trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : 0])
@@ -96,9 +94,14 @@ class AttendeeCell: UITableViewCell {
     }
     
     @IBAction func sliderValueChanged(sender: UISlider) {
-        self.hasherPaidFull.on = false
-        
         let selectedValue = Int(sender.value)
+
+        if selectedValue - hashCash < 1 {
+        self.hasherPaidFull.on = true
+        } else {
+        self.hasherPaidFull.on = false
+        }
+        
         hasherCurrentPayLbl.text = "$" + String(stringInterpolationSegment: selectedValue)
         
         self.trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : selectedValue])
@@ -106,7 +109,7 @@ class AttendeeCell: UITableViewCell {
     }
 
     
-    @IBAction func hasherPaidDiscountReason(sender: AnyObject) {
+    @IBAction func hasherPaidDiscountReason(sender: UITextField) {
         
     }
     
@@ -120,8 +123,14 @@ class AttendeeCell: UITableViewCell {
         }
     }
     
-    @IBAction func hasherVirginSponsorIs(sender: AnyObject) {
-        
+    @IBAction func hasherVirginSponsorIs(sender: UITextField) {
+        if self.hasherVirginSponsorIs.text == "" {
+            trailAttendencePath.childByAppendingPath("trailAttendeeVirginSponsor").removeValue()
+            trailsAttendedPath.childByAppendingPath("hasherVirginSponsor").removeValue()
+        } else {
+            trailAttendencePath.updateChildValues(["trailAttendeeVirginSponsor" : self.hasherVirginSponsorIs.text!])
+            trailsAttendedPath.updateChildValues(["hasherVirginSponsor" : self.hasherVirginSponsorIs.text!])
+        }
     }
     
     @IBAction func hasherIsVisitorToggled(sender: UISwitch) {
@@ -134,8 +143,14 @@ class AttendeeCell: UITableViewCell {
         }
     }
     
-    @IBAction func hasherIsVisitingFrom(sender: AnyObject) {
-        
+    @IBAction func hasherIsVisitingFrom(sender: UITextField) {
+        if self.hasherVisitorFrom.text == "" {
+            trailAttendencePath.childByAppendingPath("trailAttendeeVisitingFrom").removeValue()
+            trailsAttendedPath.childByAppendingPath("hasherVisitingFrom").removeValue()
+        } else {
+            trailAttendencePath.updateChildValues(["trailAttendeeVisitingFrom" : self.hasherVisitorFrom.text!])
+            trailsAttendedPath.updateChildValues(["hasherVisitingFrom" : self.hasherVisitorFrom.text!])
+        }
     }
     
     
