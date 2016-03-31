@@ -20,11 +20,12 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     @IBOutlet weak var kennelMembershipsTxtFld: UITextField!
     @IBOutlet weak var updateInfoBtn: UIButton!
     @IBOutlet weak var nerdNamePencil: UIButton!
-    @IBOutlet weak var addKennelLbl: UILabel!
     @IBOutlet weak var kennelPickerView: UIPickerView!
     @IBOutlet weak var kennelPencil: UIButton!
     
     var kennelPickerDataSource = [String]()
+    var kennelChoice: String!
+    var kennelChoiceId: String!
     
     
     override func viewDidLoad() {
@@ -62,6 +63,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                                 
                                 let primaryKennelName = kennelNames.allKeysForValue("Primary")
                                 let primaryK = primaryKennelName[0]
+                                print("primary: \(primaryK)")
                                 
                                 //call kennel data to change kennelid into actual name
                                 DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
@@ -188,10 +190,9 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     
     @IBAction func editKennelPressed(sender: AnyObject) {
         kennelPickerView.reloadAllComponents()
-        addKennelLbl.hidden = false
         kennelPickerView.hidden = false
         kennelPencil.hidden = true
-        //      updateInfoBtn.hidden = false
+        updateInfoBtn.hidden = false
         
     }
     
@@ -207,6 +208,51 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         return kennelPickerDataSource[row]
     }
     
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.kennelChoice = kennelPickerDataSource[row]
+        print(kennelChoice)
+    }
+    
+    func addNewKennel (kennelChoice: String) {
+    
+        DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+            
+            if let kennelSnapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+                
+                for snapshot in kennelSnapshots {
+                    if let kennelNames = snapshot.value as? Dictionary<String, AnyObject> {
+                        let kennelName = kennelNames["name"]!
+                        if kennelName as! String == kennelChoice {
+                        self.kennelChoiceId = snapshot.key
+                        }
+                    }
+                }
+            }
+        })
+        
+        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
+            
+            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
+                if let kennelDict = hasherDict["hasherKennelMemberships"] as? Dictionary<String, AnyObject> {
+                    if (kennelDict[self.kennelChoiceId] != nil) {
+                        // checking to make sure hasher isn't already a member of given kennel
+                        
+                    } else {
+                        let addKennel = ["\(self.kennelChoiceId)": "true"]
+                        let kennelPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)/hasherKennelMemberships")
+                        kennelPath.updateChildValues(addKennel)
+                    }
+                    self.kennelPickerView.hidden = true
+                    self.kennelPencil.hidden = false
+                }
+            }
+            })
+    }
+    
+    
+    
+    
+    
     
     //    @IBAction func editInfoPressed(sender: AnyObject) {
     //        nerdNameTxtFld.hidden = false
@@ -220,6 +266,12 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         addNewHashNameToFirebase(hashNamesTxtFld.text)
         addNewKennelMembershipToFirebase(kennelMembershipsTxtFld.text)
         editNerdNameInFirebase(nerdNameTxtFld.text)
+        
+        if self.kennelChoice == nil {
+            kennelChoice = kennelPickerDataSource[0]
+        }
+        
+        addNewKennel(kennelChoice)
         
         nerdNameTxtFld.hidden = true
         hashNamesTxtFld.hidden = true
