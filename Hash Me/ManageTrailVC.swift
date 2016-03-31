@@ -24,6 +24,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     var attendees = [Attendee]()
     var potentialAttendees = [Attendee]()
     var trailRoster = [Attendee]()
+    var hashCash: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +95,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let thisAttendee = trailRoster[indexPath.row]
+        print("random HC: \(self.trails.trailHashCash)")
         if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
             cell.configureCell(thisAttendee, hashCash: self.trails.trailHashCash)
             return cell

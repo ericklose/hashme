@@ -13,6 +13,8 @@ class AttendeeCell: UITableViewCell {
     
     @IBOutlet weak var hasherNerdName: UITextField!
     @IBOutlet weak var hasherHashNames: UITextField!
+    @IBOutlet weak var hasherHashNameLbl: UILabel!
+    @IBOutlet weak var hasherNerdNameLbl: UILabel!
     @IBOutlet weak var hasherPresent: UISwitch!
     @IBOutlet weak var hasherIsVisitor: UISwitch!
     @IBOutlet weak var hasherIsVirgin: UISwitch!
@@ -50,9 +52,30 @@ class AttendeeCell: UITableViewCell {
         trailAttendencePath = DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(attendee.hasherId)
         trailsAttendedPath = DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).childByAppendingPath("trailsAttended").childByAppendingPath(attendee.attendeeRelevantTrailId)
         
-        self.hasherNerdName.text = attendee.hasherNerdName
-        self.hasherHashNames.text = attendee.attendeeRelevantHashName
-
+        if attendee.hasherNerdName == "" {
+            self.hasherNerdNameLbl.hidden = true
+            self.hasherNerdName.hidden = false
+            self.hasherNerdName.text = ""
+        } else {
+            self.hasherNerdName.hidden = true
+            self.hasherNerdNameLbl.hidden = false
+            self.hasherNerdName.text = ""
+            self.hasherNerdNameLbl.text = attendee.hasherNerdName
+        }
+        print("1")
+        if attendee.attendeeRelevantHashName == "" {
+            print("a")
+            self.hasherHashNameLbl.hidden = true
+            self.hasherHashNames.hidden = false
+            self.hasherHashNames.text = ""
+        } else {
+            print("b")
+            self.hasherHashNames.hidden = true
+            self.hasherHashNameLbl.hidden = false
+            self.hasherHashNames.text = ""
+            self.hasherHashNameLbl.text = attendee.attendeeRelevantHashName
+        }
+        
         if attendee.attendeeAttending == true {
             self.hasherPresent.on = true
         } else {
@@ -95,11 +118,11 @@ class AttendeeCell: UITableViewCell {
     
     @IBAction func sliderValueChanged(sender: UISlider) {
         let selectedValue = Int(sender.value)
-
+        
         if selectedValue - hashCash < 1 {
-        self.hasherPaidFull.on = true
+            self.hasherPaidFull.on = true
         } else {
-        self.hasherPaidFull.on = false
+            self.hasherPaidFull.on = false
         }
         
         hasherCurrentPayLbl.text = "$" + String(stringInterpolationSegment: selectedValue)
@@ -107,10 +130,16 @@ class AttendeeCell: UITableViewCell {
         self.trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : selectedValue])
         self.trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : selectedValue])
     }
-
+    
     
     @IBAction func hasherPaidDiscountReason(sender: UITextField) {
-        
+        if self.hasherPaidReducedReason.text == "" {
+            trailAttendencePath.childByAppendingPath("trailAttendeePaidReducedReason").removeValue()
+            trailsAttendedPath.childByAppendingPath("hasherPaidReducedReason").removeValue()
+        } else {
+            trailAttendencePath.updateChildValues(["trailAttendeePaidReducedReason" : self.hasherPaidReducedReason.text!])
+            trailsAttendedPath.updateChildValues(["hasherPaidReducedReason" : self.hasherPaidReducedReason.text!])
+        }
     }
     
     @IBAction func hasherIsVirginToggled(sender: UISwitch) {
