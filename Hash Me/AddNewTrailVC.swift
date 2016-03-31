@@ -12,6 +12,7 @@ class AddNewTrailVC: UIViewController {
     
     @IBOutlet weak var newTrailDate: UILabel!
     @IBOutlet weak var newTrailKennel: UITextField!
+    @IBOutlet weak var newTrailTitle: UITextField!
     @IBOutlet weak var newTrailHares: UITextField!
     @IBOutlet weak var newTrailStartLocation: UITextField!
     @IBOutlet weak var newTrailHashCash: UITextField!
@@ -24,6 +25,7 @@ class AddNewTrailVC: UIViewController {
         
         newTrailDate.text = "tomorrow"
         newTrailKennel.text = "Boston"
+        newTrailTitle.text = "Cool Trail!"
         newTrailHares.text = "your mom"
         newTrailStartLocation.text = "your butt"
         newTrailHashCash.text = "Monies!!!"
@@ -43,12 +45,19 @@ class AddNewTrailVC: UIViewController {
     
     func postTrailToFirebase() {
         
+        if newTrailHashCash.text == nil {
+            let trailHashCash = 0
+        } else {
+            let trailHashCash = Int(newTrailHashCash.text!)
+        }
+        
         let trail: Dictionary<String, AnyObject> = [
             "trailDate": newTrailDate.text!,
             "trailKennel": newTrailKennel.text!,
+            "trailTitle": newTrailTitle.text!,
             "trailHares": newTrailHares.text!,
             "trailStartLocation": newTrailStartLocation.text!,
-            "trailHashCash": newTrailHashCash.text!,
+            "trailHashCash": newTrailHashCash,
             "trailDescription": newTrailDescription.text!
         ]
         
@@ -57,6 +66,7 @@ class AddNewTrailVC: UIViewController {
         
         newTrailDate.text = ""
         newTrailKennel.text = ""
+        newTrailTitle.text = ""
         newTrailHares.text = ""
         newTrailStartLocation.text = ""
         newTrailHashCash.text = ""
