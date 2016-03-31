@@ -35,7 +35,7 @@ class TrailData {
     
     var trailHashCash: Int {
         if _trailHashCash == nil {
-            return 5
+            return 25
         }
         return _trailHashCash
     }
