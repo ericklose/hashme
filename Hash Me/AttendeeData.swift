@@ -33,10 +33,8 @@ class Attendee: Hasher {
     
     var attendeePaidAmount: Int {
         if _attendeePaidAmount != nil {
-            print("y")
             return _attendeePaidAmount
         } else {
-            print("n")
             return 0
         }
     }

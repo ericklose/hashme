@@ -63,18 +63,25 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                                     let attendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: true)
                                     self.attendees.append(attendee)
                                 } else {
-                                    let hasherKey = hasherSnap.key
-                                    let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false)
-                                    self.potentialAttendees.append(potentialAttendee)
+                                    self.addPotential(hasherSnap.key, attendeeDataDict: attendeeDataDict)
                                 }
+                            } else {
+                                self.addPotential(hasherSnap.key, attendeeDataDict: attendeeDataDict)
                             }
+                        } else {
+                            self.addPotential(hasherSnap.key, attendeeDataDict: attendeeDataDict)
                         }
                     }
                 }
             }
-            self.trailRoster = self.attendees + self.potentialAttendees
-            self.trailAttendeeTableView.reloadData()
-        })
+                self.trailRoster = self.attendees + self.potentialAttendees
+                self.trailAttendeeTableView.reloadData()
+            })
+    }
+    
+    func addPotential(hasherKey: String, attendeeDataDict: Dictionary <String, AnyObject>) {
+        let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false)
+        self.potentialAttendees.append(potentialAttendee)
     }
     
     func updateTrailDetails() {
@@ -95,7 +102,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let thisAttendee = trailRoster[indexPath.row]
-        print("random HC: \(self.trails.trailHashCash)")
         if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
             cell.configureCell(thisAttendee, hashCash: self.trails.trailHashCash)
             return cell

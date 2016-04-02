@@ -81,7 +81,7 @@ class AttendeeCell: UITableViewCell {
         
         self.hasherIsVirgin.on = attendee.attendeeVirginTrail
         self.hasherIsVisitor.on = attendee.attendeeVisitingTrail
-
+        
         if Int(attendee.attendeePaidAmount) == Int(self.hashCash) {
             self.hasherPaidFull.on = true
         } else {
@@ -186,5 +186,12 @@ class AttendeeCell: UITableViewCell {
         }
     }
     
+    @IBAction func hasherNerdNameAdded(sender: UITextField) {
+        
+    }
+    
+    @IBAction func hasherHashNameAdded(sender: UITextField) {
+        DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAutoId().childByAppendingPath(hasherHashNames.text)
+    }
     
 }
