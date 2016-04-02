@@ -15,7 +15,6 @@ class AttendeeCell: UITableViewCell {
     @IBOutlet weak var hasherHashNames: UITextField!
     @IBOutlet weak var hasherHashNameLbl: UILabel!
     @IBOutlet weak var hasherNerdNameLbl: UILabel!
-    @IBOutlet weak var hasherPresent: UISwitch!
     @IBOutlet weak var hasherIsVisitor: UISwitch!
     @IBOutlet weak var hasherIsVirgin: UISwitch!
     @IBOutlet weak var hasherPaidFull: UISwitch!
@@ -62,14 +61,12 @@ class AttendeeCell: UITableViewCell {
             self.hasherNerdName.text = ""
             self.hasherNerdNameLbl.text = attendee.hasherNerdName
         }
-        print("1")
+        
         if attendee.attendeeRelevantHashName == "" {
-            print("a")
             self.hasherHashNameLbl.hidden = true
             self.hasherHashNames.hidden = false
             self.hasherHashNames.text = ""
         } else {
-            print("b")
             self.hasherHashNames.hidden = true
             self.hasherHashNameLbl.hidden = false
             self.hasherHashNames.text = ""
@@ -77,13 +74,22 @@ class AttendeeCell: UITableViewCell {
         }
         
         if attendee.attendeeAttending == true {
-            self.hasherPresent.on = true
+            self.hasherAttendingTrailToggle.on = true
         } else {
-            self.hasherPresent.on = false
+            self.hasherAttendingTrailToggle.on = false
         }
+        
         self.hasherIsVirgin.on = attendee.attendeeVirginTrail
         self.hasherIsVisitor.on = attendee.attendeeVisitingTrail
-        self.hasherPaidFull.on = false
+
+        if Int(attendee.attendeePaidAmount) == Int(self.hashCash) {
+            print("y \(Int(attendee.attendeePaidAmount) - Int(self.hashCash))")
+            self.hasherPaidFull.on = true
+        } else {
+            print("n \(Int(attendee.attendeePaidAmount) - Int(self.hashCash))")
+            self.hasherPaidFull.on = false
+        }
+        
         self.hasherVirginSponsorIs.text = attendee.attendeeVirginSponsor
         self.hasherVisitorFrom.text = attendee.attendeeVisitingFrom
         self.hasherPaySlider.value = Float(attendee.attendeePaidAmount)
@@ -95,7 +101,6 @@ class AttendeeCell: UITableViewCell {
     }
     
     @IBAction func toggleAttendingToggle(sender: UISwitch) {
-        
         if hasherAttendingTrailToggle.on == true {
             trailAttendencePath.updateChildValues(["trailAttendeePresent" : "true"])
             trailsAttendedPath.updateChildValues(["hasherAttendedTrail" : "true"])
@@ -106,12 +111,12 @@ class AttendeeCell: UITableViewCell {
     }
     
     @IBAction func hasherPaidFullToggleToggled(sender: UISwitch) {
-        if self.hasherPaidFull.on == true {
+        if hasherPaidFull.on == true {
             trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : "\(hashCash)"])
             trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : "\(hashCash)"])
             hasherCurrentPayLbl.text = "$\(hashCash)"
-            hasherPaySlider.value = Float(hashCash)
-        } else if self.hasherPaidFull.on == false {
+            hasherPaySlider.setValue(Float(hashCash), animated: true)
+        } else if hasherPaidFull.on == false {
             trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : 0])
             trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : 0])
         }
