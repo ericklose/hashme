@@ -87,6 +87,7 @@ class AttendeeCell: UITableViewCell {
         self.hasherVirginSponsorIs.text = attendee.attendeeVirginSponsor
         self.hasherVisitorFrom.text = attendee.attendeeVisitingFrom
         self.hasherPaySlider.value = Float(attendee.attendeePaidAmount)
+        self.hasherPaySlider.maximumValue = Float(((hashCash/20)+1)*20)
         self.hasherMinPayLbl.text = "$0"
         self.hasherMaxPayLbl.text = "$\((Int(hashCash/20)+1)*20)"
         self.hasherCurrentPayLbl.text = "$\(attendee.attendeePaidAmount)"
@@ -119,10 +120,10 @@ class AttendeeCell: UITableViewCell {
     @IBAction func sliderValueChanged(sender: UISlider) {
         let selectedValue = Int(sender.value)
         
-        if selectedValue - hashCash < 1 {
-            self.hasherPaidFull.on = true
+        if Int(selectedValue) == Int(hashCash) {
+            self.hasherPaidFull.setOn(true, animated: true)
         } else {
-            self.hasherPaidFull.on = false
+            self.hasherPaidFull.setOn(false, animated: true)
         }
         
         hasherCurrentPayLbl.text = "$" + String(stringInterpolationSegment: selectedValue)
