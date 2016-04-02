@@ -58,49 +58,51 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                                 self.hashNamesLbl.text! += ", \(altName)"
                             }
                             
-                            if let kennelNames = hasherDict["hasherKennelMemberships"] as? Dictionary<String, String> {
-                                self.kennelMembershipsLbl.text = ""
+                        }
+                        
+                    }
+                    
+                }
+                
+                if let kennelNames = hasherDict["hasherKennelMemberships"] as? Dictionary<String, String> {
+                    self.kennelMembershipsLbl.text = ""
+                    
+                    let primaryKennelName = kennelNames.allKeysForValue("Primary")
+                    let primaryK = primaryKennelName[0]
+                    
+                    //call kennel data to change kennelid into actual name
+                    DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+                        
+                        if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
+                            
+                            if let kennelDict2 = kennelDict[primaryK] as? Dictionary<String, AnyObject> {
+                                let primaryKName = kennelDict2["name"]!
+                                self.kennelMembershipsLbl.text = primaryKName as! String
+                            }
+                            
+                        }
+                        
+                    })
+                    
+                    
+                    
+                    if kennelNames.count > 1 {
+                        let altKennelNames = [String](kennelNames.keys)
+                        
+                        for var x = 0; x < altKennelNames.count; x++ {
+                            let altKennel = altKennelNames[x]
+                            if altKennel != primaryK {
                                 
-                                let primaryKennelName = kennelNames.allKeysForValue("Primary")
-                                let primaryK = primaryKennelName[0]
-                                print("primary: \(primaryK)")
-                                
-                                //call kennel data to change kennelid into actual name
                                 DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
                                     
                                     if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
-                                        if let kennelDict2 = kennelDict[primaryK] as? Dictionary<String, String> {
-                                            let primaryKName = kennelDict2["name"]!
-                                            self.kennelMembershipsLbl.text = primaryKName
+                                        if let kennelDict2 = kennelDict[altKennel] as? Dictionary<String, AnyObject> {
+                                            let altKName = kennelDict2["name"]!
+                                            self.kennelMembershipsLbl.text! += ", \(altKName)"
                                         }
                                         
                                     }
-                                    
                                 })
-                                
-                                
-                                
-                                if kennelNames.count > 1 {
-                                    let altKennelNames = [String](kennelNames.keys)
-                                    
-                                    for var x = 0; x < altKennelNames.count; x++ {
-                                        let altKennel = altKennelNames[x]
-                                        if altKennel != primaryK {
-                                            
-                                            DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
-                                                
-                                                if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
-                                                    if let kennelDict2 = kennelDict[altKennel] as? Dictionary<String, AnyObject> {
-                                                        let altKName = kennelDict2["name"]!
-                                                        self.kennelMembershipsLbl.text! += ", \(altKName)"
-                                                    }
-                                                    
-                                                }
-                                            })
-                                        }
-                                        
-                                    }
-                                }
                             }
                             
                         }
@@ -214,7 +216,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     }
     
     func addNewKennel (kennelChoice: String) {
-    
+        
         DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
             
             if let kennelSnapshots = snapshot.children.allObjects as? [FDataSnapshot] {
@@ -223,7 +225,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                     if let kennelNames = snapshot.value as? Dictionary<String, AnyObject> {
                         let kennelName = kennelNames["name"]!
                         if kennelName as! String == kennelChoice {
-                        self.kennelChoiceId = snapshot.key
+                            self.kennelChoiceId = snapshot.key
                         }
                     }
                 }
@@ -246,7 +248,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                     self.kennelPencil.hidden = false
                 }
             }
-            })
+        })
     }
     
     
