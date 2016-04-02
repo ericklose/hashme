@@ -26,7 +26,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     var kennelPickerDataSource = [String]()
     var kennelChoice: String!
     var kennelChoiceId: String!
-    
+    var kennels = [KennelData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +78,11 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                             if let kennelDict2 = kennelDict[primaryK] as? Dictionary<String, AnyObject> {
                                 let primaryKName = kennelDict2["name"]!
                                 self.kennelMembershipsLbl.text = primaryKName as! String
+                                let kennel = KennelData(kennelInitId: primaryK, kennelInitDict: kennelDict2, kennelInitName: primaryKName as! String)
+                                self.kennels.append(kennel)
+                                let test = self.kennels[0]
+                                let test2 = test.kennelId
+                                print("kennels: \(test2)")
                             }
                             
                         }
