@@ -102,7 +102,6 @@ class TrailData {
         
         if let trailHashCash = dictionary["trailHashCash"] as? Int {
             self._trailHashCash = trailHashCash
-            print("HC: \(_trailHashCash)")
         }
         
         self._trailRef = DataService.ds.REF_TRAILS.childByAppendingPath(self._trailKey)

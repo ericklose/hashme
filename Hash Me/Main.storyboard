@@ -599,6 +599,9 @@
                                                                                     <rect key="frame" x="0.0" y="0.0" width="209" height="32"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                     <textInputTraits key="textInputTraits"/>
+                                                                                    <connections>
+                                                                                        <action selector="hasherHashNameAdded:" destination="0wr-hr-0L3" eventType="editingDidEnd" id="f0g-Jx-SBa"/>
+                                                                                    </connections>
                                                                                 </textField>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Hashy McHasher the Hashiest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df0-P1-b7r">
                                                                                     <rect key="frame" x="209" y="0.0" width="232" height="32"/>
@@ -615,6 +618,9 @@
                                                                                     <rect key="frame" x="0.0" y="0.0" width="215" height="30"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                     <textInputTraits key="textInputTraits"/>
+                                                                                    <connections>
+                                                                                        <action selector="hasherNerdNameAdded:" destination="0wr-hr-0L3" eventType="editingDidEnd" id="cGH-nz-yJz"/>
+                                                                                    </connections>
                                                                                 </textField>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Nerdy McNerder the Nerdiest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ir-8G-N61">
                                                                                     <rect key="frame" x="215" y="0.0" width="226" height="30"/>
