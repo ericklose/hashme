@@ -33,8 +33,10 @@ class Attendee: Hasher {
     
     var attendeePaidAmount: Int {
         if _attendeePaidAmount != nil {
+            print("y")
             return _attendeePaidAmount
         } else {
+            print("n")
             return 0
         }
     }
@@ -112,7 +114,6 @@ class Attendee: Hasher {
                 if let attendeeCurrentTrailInfo = attendeeTrailsInfoDict[attendeeRelevantTrailId] as? Dictionary<String, AnyObject> {
                     
                     if let initPaid = attendeeCurrentTrailInfo["hasherPaidTrailAmt"] as? Int {
-                        print("paid amt: \(initPaid)")
                         self._attendeePaidAmount = initPaid
                     }
                     
