@@ -283,5 +283,13 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         nerdNameLbl.hidden = false
     }
     
+    func createButton () {
+        let button = UIButton();
+        button.setTitle("X", forState: .Normal)
+        button.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        button.frame = CGRectMake(5, 5, 200, 100)
+        self.view.addSubview(button)
+    }
+    
 }
 
