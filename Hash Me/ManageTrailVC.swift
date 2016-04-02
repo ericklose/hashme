@@ -18,7 +18,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var specificTrailStartLocation: UILabel!
     @IBOutlet weak var specificTrailHares: UILabel!
     @IBOutlet weak var specificTrailDescription: UILabel!
-
+    
     
     var trails: TrailData!
     var attendees = [Attendee]()
@@ -53,21 +53,21 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                     
                     if let attendeeDataDict = hasherSnap.value as? Dictionary<String, AnyObject> {
                         
-                        if let isMarkedAsPresent = attendeeDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
-                            let trailList = [String](isMarkedAsPresent.keys)
-                            if trailList.contains(self.trails.trailKey) {
-                                let hasherKey = hasherSnap.key
-                                let attendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: true)
-                                self.attendees.append(attendee)
-                            } else {
-                                let hasherKey = hasherSnap.key
-                                let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false)
-                                self.potentialAttendees.append(potentialAttendee)
+                        if let atThisTrail = attendeeDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
+                            let thisTrail = self.trails.trailKey
+                            
+                            if let thisTrailDict = atThisTrail[thisTrail] as? Dictionary<String, AnyObject> {
+                                
+                                if (thisTrailDict["hasherAttendedTrail"] as? String) != nil {
+                                    let hasherKey = hasherSnap.key
+                                    let attendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: true)
+                                    self.attendees.append(attendee)
+                                } else {
+                                    let hasherKey = hasherSnap.key
+                                    let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false)
+                                    self.potentialAttendees.append(potentialAttendee)
+                                }
                             }
-                        } else {
-                            let hasherKey = hasherSnap.key
-                            let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false)
-                            self.potentialAttendees.append(potentialAttendee)
                         }
                     }
                 }
@@ -104,7 +104,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
-
+    
 }
 
 

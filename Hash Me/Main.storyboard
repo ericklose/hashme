@@ -696,7 +696,6 @@
                                             <outlet property="hasherPaidFull" destination="GVJ-Td-Sbv" id="uWA-qJ-LcK"/>
                                             <outlet property="hasherPaidReducedReason" destination="nzQ-K2-9PG" id="s4x-Mi-1ZK"/>
                                             <outlet property="hasherPaySlider" destination="HmD-hK-PHt" id="5dg-qU-fns"/>
-                                            <outlet property="hasherPresent" destination="QBc-QW-fR3" id="sZC-jj-rEo"/>
                                             <outlet property="hasherVirginSponsorIs" destination="Npz-qQ-vac" id="L2o-2D-BKI"/>
                                             <outlet property="hasherVisitorFrom" destination="Dqg-Dy-3GT" id="Rnk-m4-sqk"/>
                                         </connections>

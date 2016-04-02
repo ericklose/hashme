@@ -112,6 +112,7 @@ class Attendee: Hasher {
                 if let attendeeCurrentTrailInfo = attendeeTrailsInfoDict[attendeeRelevantTrailId] as? Dictionary<String, AnyObject> {
                     
                     if let initPaid = attendeeCurrentTrailInfo["hasherPaidTrailAmt"] as? Int {
+                        print("paid amt: \(initPaid)")
                         self._attendeePaidAmount = initPaid
                     }
                     
