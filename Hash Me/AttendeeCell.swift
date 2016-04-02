@@ -83,17 +83,15 @@ class AttendeeCell: UITableViewCell {
         self.hasherIsVisitor.on = attendee.attendeeVisitingTrail
 
         if Int(attendee.attendeePaidAmount) == Int(self.hashCash) {
-            print("y \(Int(attendee.attendeePaidAmount) - Int(self.hashCash))")
             self.hasherPaidFull.on = true
         } else {
-            print("n \(Int(attendee.attendeePaidAmount) - Int(self.hashCash))")
             self.hasherPaidFull.on = false
         }
         
         self.hasherVirginSponsorIs.text = attendee.attendeeVirginSponsor
         self.hasherVisitorFrom.text = attendee.attendeeVisitingFrom
-        self.hasherPaySlider.value = Float(attendee.attendeePaidAmount)
         self.hasherPaySlider.maximumValue = Float(((hashCash/20)+1)*20)
+        self.hasherPaySlider.setValue(Float(attendee.attendeePaidAmount), animated: true)
         self.hasherMinPayLbl.text = "$0"
         self.hasherMaxPayLbl.text = "$\((Int(hashCash/20)+1)*20)"
         self.hasherCurrentPayLbl.text = "$\(attendee.attendeePaidAmount)"
@@ -112,8 +110,8 @@ class AttendeeCell: UITableViewCell {
     
     @IBAction func hasherPaidFullToggleToggled(sender: UISwitch) {
         if hasherPaidFull.on == true {
-            trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : "\(hashCash)"])
-            trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : "\(hashCash)"])
+            trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : hashCash])
+            trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : hashCash])
             hasherCurrentPayLbl.text = "$\(hashCash)"
             hasherPaySlider.setValue(Float(hashCash), animated: true)
         } else if hasherPaidFull.on == false {
