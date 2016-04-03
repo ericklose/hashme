@@ -80,9 +80,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                                 self.kennelMembershipsLbl.text = primaryKName as! String
                                 let kennel = KennelData(kennelInitId: primaryK, kennelInitDict: kennelDict2, kennelInitName: primaryKName as! String)
                                 self.kennels.append(kennel)
-                                let test = self.kennels[0]
-                                let test2 = test.kennelId
-                                print("kennels: \(test2)")
+
                             }
                             
                         }
@@ -104,6 +102,8 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                                         if let kennelDict2 = kennelDict[altKennel] as? Dictionary<String, AnyObject> {
                                             let altKName = kennelDict2["name"]!
                                             self.kennelMembershipsLbl.text! += ", \(altKName)"
+                                            let kennel = KennelData(kennelInitId: altKennel, kennelInitDict: kennelDict2, kennelInitName: altKName as! String)
+                                            self.kennels.append(kennel)
                                         }
                                         
                                     }
