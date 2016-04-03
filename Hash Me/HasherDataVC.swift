@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var nerdNameLbl: UILabel!
     @IBOutlet weak var hashNamesLbl: UILabel!
@@ -22,6 +22,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     @IBOutlet weak var nerdNamePencil: UIButton!
     @IBOutlet weak var kennelPickerView: UIPickerView!
     @IBOutlet weak var kennelPencil: UIButton!
+    @IBOutlet weak var kennelListTableView: UITableView!
     
     var kennelPickerDataSource = [String]()
     var kennelChoice: String!
@@ -33,6 +34,9 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         
         self.kennelPickerView.dataSource = self
         self.kennelPickerView.delegate = self
+        
+        self.kennelListTableView.dataSource = self
+        self.kennelListTableView.delegate = self
         
         DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
             
@@ -286,6 +290,24 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         updateInfoBtn.hidden = true
         nerdNamePencil.hidden = false
         nerdNameLbl.hidden = false
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return kennels.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let thisKennel = kennels[indexPath.row]
+        if let cell = tableView.dequeueReusableCellWithIdentifier("kennelCell") as? KennelCell {
+            cell.configureCell(thisKennel)
+            return cell
+        } else {
+            return KennelCell()
+        }
     }
     
     func createButton () {
