@@ -27,6 +27,7 @@ class KennelData {
         
         if let kennelInitName = kennelInitDict["name"] as? String {
             self._kennelName = kennelInitName
+            print(kennelInitName)
         }
     }
     
