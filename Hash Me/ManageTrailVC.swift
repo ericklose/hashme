@@ -75,6 +75,9 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 }
             }
                 self.trailRoster = self.attendees + self.potentialAttendees
+            let fakeDict = Dictionary<String, AnyObject>()
+                let blankCell = Attendee(attendeeInitId: "placeholder", attendeeInitDict: fakeDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false)
+                self.trailRoster.insert(blankCell, atIndex: 0)
                 self.trailAttendeeTableView.reloadData()
             })
     }
@@ -83,7 +86,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false)
         self.potentialAttendees.append(potentialAttendee)
     }
-    
     
     func updateTrailDetails() {
         specificTrailDate.text = trails.trailDate
@@ -103,12 +105,16 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let thisAttendee = trailRoster[indexPath.row]
+        if indexPath.row == 0 {
+            return AttendeeCell()
+        } else {
         if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
             cell.configureCell(thisAttendee, hashCash: self.trails.trailHashCash)
             return cell
         } else {
             return AttendeeCell()
         }
+    }
     }
     
     
