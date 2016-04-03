@@ -84,6 +84,8 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         self.potentialAttendees.append(potentialAttendee)
     }
     
+    func add 
+    
     func updateTrailDetails() {
         specificTrailDate.text = trails.trailDate
         specificTrailKennel.text = trails.trailHares
