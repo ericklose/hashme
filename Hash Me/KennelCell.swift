@@ -9,6 +9,9 @@
 import UIKit
 
 class KennelCell: UITableViewCell {
+    
+    @IBOutlet weak var kennelNameLbl: UILabel!
+    @IBOutlet weak var deleteXButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,6 +22,12 @@ class KennelCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func configureCell(kennel: KennelData) {
+      kennelNameLbl.text = kennel.kennelName
+        print("kennelName: \(kennel.kennelName)")
+     
     }
 
 }
