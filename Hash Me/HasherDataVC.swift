@@ -300,13 +300,14 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         return kennels.count
     }
     
+    //NEED TO CONNECT HASHERCELL OUTLETS AND CHANGE NAME OF TABLE VIEW CELL ON STORYBOARD TO HASHERCELL AND DEQUEUE
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let thisKennel = kennels[indexPath.row]
-        if let cell = tableView.dequeueReusableCellWithIdentifier("kennelCell") as? KennelCell {
+        if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? HasherCell {
             cell.configureCell(thisKennel)
             return cell
         } else {
-            return KennelCell()
+            return HasherCell()
         }
     }
     
