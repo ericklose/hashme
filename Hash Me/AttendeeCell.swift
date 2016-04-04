@@ -187,11 +187,17 @@ class AttendeeCell: UITableViewCell {
     }
     
     @IBAction func hasherNerdNameAdded(sender: UITextField) {
-        
+        print("nerd name: \(self.hasherNerdName.text)")
     }
     
     @IBAction func hasherHashNameAdded(sender: UITextField) {
-        DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAutoId().childByAppendingPath(hasherHashNames.text)
+        //let newHashName = hasherHashNames.text
+        print("editing ended: \(hasherHashNames.text)")
+        DataService.ds.REF_HASHERS.childByAutoId().childByAppendingPath("hasherHashNames").updateChildValues([hasherHashNames.text!: "primary"])
+            
+            //.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees")
+        
+        print("editing still ended")
     }
     
 }
