@@ -101,7 +101,7 @@ class Attendee: Hasher {
                             if attendeeInitRelevantHashName2 != [] {
                                 self._attendeeRelevantHashName = attendeeInitRelevantHashName2[0]
                             } else {
-                                self._attendeeRelevantHashName = "NFN ... yet"
+                                self._attendeeRelevantHashName = ""
                             }
                         }
                     }

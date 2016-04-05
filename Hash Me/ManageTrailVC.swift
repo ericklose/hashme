@@ -74,11 +74,13 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                     }
                 }
             }
-                self.trailRoster = self.attendees + self.potentialAttendees
-            let fakeDict = Dictionary<String, AnyObject>()
-                let blankCell = Attendee(attendeeInitId: "placeholder", attendeeInitDict: fakeDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false)
-                self.trailRoster.insert(blankCell, atIndex: 0)
-                self.trailAttendeeTableView.reloadData()
+            self.trailRoster = self.attendees + self.potentialAttendees
+            let fakeNames: [String: AnyObject] = ["": "primary"]
+            let fakeDict: [String: AnyObject] = ["hasherNerdName": "", "hasherHashNames": fakeNames]
+            let placeholder = "placeholder"
+            let blankCell = Attendee(attendeeInitId: placeholder, attendeeInitDict: fakeDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false)
+            self.trailRoster.insert(blankCell, atIndex: 0)
+            self.trailAttendeeTableView.reloadData()
             })
     }
     
@@ -105,16 +107,16 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let thisAttendee = trailRoster[indexPath.row]
-        if indexPath.row == 0 {
-            return AttendeeCell()
-        } else {
+        //if indexPath.row == 0 {
+        //    return AttendeeCell()
+        //} else {
         if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
             cell.configureCell(thisAttendee, hashCash: self.trails.trailHashCash)
             return cell
         } else {
             return AttendeeCell()
         }
-    }
+    //}
     }
     
     
