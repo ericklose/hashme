@@ -193,8 +193,9 @@ class AttendeeCell: UITableViewCell {
     @IBAction func hasherHashNameAdded(sender: UITextField) {
         //let newHashName = hasherHashNames.text
         print("editing ended: \(hasherHashNames.text)")
+        
         DataService.ds.REF_HASHERS.childByAutoId().childByAppendingPath("hasherHashNames").updateChildValues([hasherHashNames.text!: "primary"])
-            
+        
             //.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees")
         
         print("editing still ended")
