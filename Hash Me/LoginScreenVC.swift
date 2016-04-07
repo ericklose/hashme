@@ -39,13 +39,7 @@ class LoginScreenVC: UIViewController {
     @IBAction func fbbtnPressed(sender: UIButton!) {
         let facebookLogin = FBSDKLoginManager()
         
-        //this is Eric's code for the new, non-deprecated login function
         facebookLogin.logInWithReadPermissions(["email"], fromViewController: self) { (facebookResult: FBSDKLoginManagerLoginResult!, facebookError: NSError!) -> Void in
-            
-            
-            
-            // this is the login function from our course which I'm keeping in case there's an issue with the new one (above)
-            //        facebookLogin.logInWithReadPermissions(["email"]) { (facebookResult: FBSDKLoginManagerLoginResult!, facebookError: NSError!) -> Void in
             
             if facebookError != nil {
                 print("Facebook login failed. Error \(facebookError)")
@@ -67,11 +61,8 @@ class LoginScreenVC: UIViewController {
                         NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
                         self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                     }
-                    
                 })
-                
             }
-            
         }
     }
     
@@ -81,9 +72,7 @@ class LoginScreenVC: UIViewController {
             DataService.ds.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
                 
                 if error != nil {
-                    
                     print(error)
-                    
                     if error.code == STATUS_ACCOUNT_NONEXIST {
                         DataService.ds.REF_BASE.createUser(email, password: pwd, withValueCompletionBlock: { error, result in
                             
@@ -96,12 +85,9 @@ class LoginScreenVC: UIViewController {
                                     
                                     let hasher = ["provider": authData.provider!, "blah": "emailtest"]
                                     DataService.ds.createFirebaseUser(authData.uid, hasher: hasher)
-                                    
                                 })
-                                
                                 self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                             }
-                            
                         })
                     } else {
                         self.showErrorAlert("Could Not Login", msg: "Please check your username or password")
@@ -111,7 +97,6 @@ class LoginScreenVC: UIViewController {
                     NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
                     self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                 }
-                
             })
             
         } else {

@@ -107,16 +107,12 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let thisAttendee = trailRoster[indexPath.row]
-        //if indexPath.row == 0 {
-        //    return AttendeeCell()
-        //} else {
         if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
             cell.configureCell(thisAttendee, hashCash: self.trails.trailHashCash)
             return cell
         } else {
             return AttendeeCell()
         }
-    //}
     }
     
     
