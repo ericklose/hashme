@@ -52,6 +52,9 @@ class AttendeeCell: UITableViewCell {
         self.attendee = attendee
         self.hashCash = hashCash
         
+        hasherVisitorFrom.text = "TEST"
+        hasherVirginSponsorIs.text = "TEST"
+        
         trailAttendencePath = DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(attendee.hasherId)
         trailsAttendedPath = DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).childByAppendingPath("trailsAttended").childByAppendingPath(attendee.attendeeRelevantTrailId)
         
@@ -84,8 +87,8 @@ class AttendeeCell: UITableViewCell {
             self.hasherIsVirgin.on = attendee.attendeeVirginTrail
             self.hasherVirginSponsorIs.text = attendee.attendeeVirginSponsor
         } else {
-            self.hasherIsVirgin.hidden = true
-            self.hasherVirginSponsorIs.hidden = true
+//            self.hasherIsVirgin.hidden = true
+//            self.hasherVirginSponsorIs.hidden = true
         }
         
         if attendee.attendeeVisitingTrail == true {
@@ -94,8 +97,8 @@ class AttendeeCell: UITableViewCell {
             self.hasherIsVisitor.on = attendee.attendeeVisitingTrail
             self.hasherVisitorFrom.text = attendee.attendeeVisitingFrom
         } else {
-            self.hasherVisitorFrom.hidden = true
-            self.hasherIsVisitor.hidden = true
+      //      self.hasherVisitorFrom.hidden = true
+//            self.hasherIsVisitor.hidden = true
         }
     
         self.hasherPaySlider.maximumValue = Float(((hashCash/20)+1)*20)
@@ -248,6 +251,7 @@ class AttendeeCell: UITableViewCell {
         hasherMinPayLbl.hidden = false
         hasherCurrentPayLbl.hidden = false
         paidOtherLbl.hidden = false
+        
     }
     
     @IBAction func hasherHashNameAdded(sender: UITextField) {
