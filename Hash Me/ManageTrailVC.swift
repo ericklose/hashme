@@ -101,6 +101,10 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         return 1
     }
     
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 60
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return trailRoster.count
     }

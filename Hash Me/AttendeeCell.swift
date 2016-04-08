@@ -235,9 +235,9 @@ class AttendeeCell: UITableViewCell {
     @IBAction func moreButtonPressed(sender: UIButton) {
         moreButton.hidden = true
         hasherIsVirgin.hidden = false
+        hasherVirginSponsorIs.hidden = false
         hasherIsVisitor.hidden = false
         hasherVisitorFrom.hidden = false
-        hasherVirginSponsorIs.hidden = false
         hasherPaySlider.hidden = false
         hasherPaidReducedReason.hidden = false
         hasherMaxPayLbl.hidden = false
