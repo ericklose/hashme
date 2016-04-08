@@ -27,6 +27,8 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     var kennelChoice: String!
     var kennelChoiceId: String!
     var kennels = [KennelData]()
+    var hasher = [Hasher]()
+    var kennelDict: Dictionary<String, AnyObject>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,109 +39,148 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         self.kennelListTableView.dataSource = self
         self.kennelListTableView.delegate = self
         
-        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
-            
-            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
-                let nerdNameLbl = hasherDict["hasherNerdName"]!
-                self.nerdNameLbl.text = "\(nerdNameLbl)"
-                self.nerdNameTxtFld.text = "\(nerdNameLbl)"
-                
-                if let hashNames = hasherDict["hasherHashNames"] as? Dictionary<String, String> {
-                    
-                    self.hashNamesLbl.text = ""
-                    
-                    let primaryHashName = hashNames.allKeysForValue("Primary")
-                    let primary = primaryHashName[0]
-                    self.hashNamesLbl.text = primary
-                    
-                    if hashNames.count > 1 {
-                        let altHashNames = [String](hashNames.keys)
-                        
-                        for var x = 0; x < altHashNames.count; x += 1 {
-                            let altName = altHashNames[x]
-                            if altName != primary {
-                                self.hashNamesLbl.text! += ", \(altName)"
-                            }
-                            
-                        }
-                        
-                    }
-                    
-                }
-                
-                if let kennelNames = hasherDict["hasherKennelMemberships"] as? Dictionary<String, String> {
-                    self.kennelMembershipsLbl.text = ""
-                    
-                    let primaryKennelName = kennelNames.allKeysForValue("Primary")
-                    let primaryK = primaryKennelName[0]
-                    
-                    //call kennel data to change kennelid into actual name
-                    DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
-                        
-                        if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
-                            
-                            if let kennelDict2 = kennelDict[primaryK] as? Dictionary<String, AnyObject> {
-                                let primaryKName = kennelDict2["name"]!
-                                self.kennelMembershipsLbl.text = primaryKName as! String
-                                let kennel = KennelData(kennelInitId: primaryK, kennelInitDict: kennelDict2, kennelInitName: primaryKName as! String)
-                                self.kennels.append(kennel)
-
-                            }
-                            
-                        }
-                        
-                    })
-                    
-                    
-                    
-                    if kennelNames.count > 1 {
-                        let altKennelNames = [String](kennelNames.keys)
-                        
-                        for var x = 0; x < altKennelNames.count; x++ {
-                            let altKennel = altKennelNames[x]
-                            if altKennel != primaryK {
-                                
-                                DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
-                                    
-                                    if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
-                                        if let kennelDict2 = kennelDict[altKennel] as? Dictionary<String, AnyObject> {
-                                            let altKName = kennelDict2["name"]!
-                                            self.kennelMembershipsLbl.text! += ", \(altKName)"
-                                            let kennel = KennelData(kennelInitId: altKennel, kennelInitDict: kennelDict2, kennelInitName: altKName as! String)
-                                            self.kennels.append(kennel)
-                                            self.kennelListTableView.reloadData()
-                                        }
-                                        
-                                    }
-                                })
-                            }
-                            
-                        }
-                        
-                    }
-                }
-                
-                
-            }
-        })
-        
-        
+        //call kennel data to change kennelid into actual name
         DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
             
-            if let kennelSnapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+            if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
                 
-                for snapshot in kennelSnapshots {
-                    
-                    if let kennelNames = snapshot.value as? Dictionary<String, AnyObject> {
-                        let kennelName = kennelNames["name"]!
-                        self.kennelPickerDataSource.append(kennelName as! String)
-                    }
+//                if let kennelDict2 = kennelDict[String(primaryHashKennel)] as? Dictionary<String, String> {
+//                    let primaryKennelName = kennelDict2["name"]!
+//                    
+//                    let kennel = KennelData(kennelInitId: primaryHashKennel as! String, kennelInitDict: kennelDict2, kennelInitName: primaryKennelName)
+//                    self.kennels.append(kennel)
+//
+//                }
+                
+            }
+            
+        })
+        
+        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
+            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+                print("snapshot: \(snapshot)")
+                for snap in snapshots {
+            print("snap: \(snap)")
+            if let hasherDict = snap.value as? Dictionary<String, AnyObject> {
+                let key = snap.key
+           //    let hasher = Hasher(hasherInitId: key, hasherInitDict: hasherDict, kennelInitDict: self.kennelDict)
+    
+            }
                     
                 }
             }
+            })
             
             
-        })
+//            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
+//                let nerdNameLbl = hasherDict["hasherNerdName"]!
+//                self.nerdNameLbl.text = "\(nerdNameLbl)"
+//                self.nerdNameTxtFld.text = "\(nerdNameLbl)"
+//                
+//                let primaryHashName = hasherDict["hasherPrimaryHashName"]
+//                let primaryHashKennel = hasherDict["hasherPrimaryKennel"]
+//                
+//                
+//                
+                
+                
+                
+                
+//                if let hashNames = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, String> {
+//                    
+//                    let primaryHashName = hashNames.allKeysForValue("Primary")
+//                    let primary = primaryHashName[0]
+//                    self.hashNamesLbl.text = primary
+//                    
+//                    if hashNames.count > 1 {
+//                        let altHashNames = [String](hashNames.keys)
+//                        
+//                        for var x = 0; x < altHashNames.count; x += 1 {
+//                            let altName = altHashNames[x]
+//                            if altName != primary {
+//                                self.hashNamesLbl.text! += ", \(altName)"
+//                            }
+//                            
+//                        }
+//                        
+//                    }
+//                    
+//                }
+                
+//                if let hasherKennelsAndNames = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, String> {
+//                    
+//                    let primaryKennelName = kennelNames.allKeysForValue("Primary")
+//                    let primaryK = primaryKennelName[0]
+//                    
+//                    //call kennel data to change kennelid into actual name
+//                    DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+//                        
+//                        if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
+//                            
+//                            if let kennelDict2 = kennelDict[primaryK] as? Dictionary<String, AnyObject> {
+//                                let primaryKName = kennelDict2["name"]!
+//                                self.kennelMembershipsLbl.text = primaryKName as! String
+//                                let kennel = KennelData(kennelInitId: primaryK, kennelInitDict: kennelDict2, kennelInitName: primaryKName as! String)
+//                                self.kennels.append(kennel)
+//
+//                            }
+//                            
+//                        }
+//                        
+//                    })
+//                    
+//                    
+//                    
+//                    if kennelNames.count > 1 {
+//                        let altKennelNames = [String](kennelNames.keys)
+//                        
+//                        for var x = 0; x < altKennelNames.count; x++ {
+//                            let altKennel = altKennelNames[x]
+//                            if altKennel != primaryK {
+//                                
+//                                DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+//                                    
+//                                    if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
+//                                        if let kennelDict2 = kennelDict[altKennel] as? Dictionary<String, AnyObject> {
+//                                            let altKName = kennelDict2["name"]!
+//                                            self.kennelMembershipsLbl.text! += ", \(altKName)"
+//                                            let kennel = KennelData(kennelInitId: altKennel, kennelInitDict: kennelDict2, kennelInitName: altKName as! String)
+//                                            self.kennels.append(kennel)
+//                                            self.kennelListTableView.reloadData()
+//                                        }
+//                                        
+//                                    }
+//                                })
+//                            }
+//                            
+//                        }
+//                        
+//                    }
+//                }
+//                
+//                
+//            }
+//        })
+//        
+//        
+//        DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+//            
+//            if let kennelSnapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+//                
+//                for snapshot in kennelSnapshots {
+//                    
+//                    if let kennelNames = snapshot.value as? Dictionary<String, AnyObject> {
+//                        let kennelName = kennelNames["name"]!
+//                        self.kennelPickerDataSource.append(kennelName as! String)
+//                    }
+//                    
+//                }
+//            }
+//            
+//            
+//        })
+        
+        
         
     }
     
@@ -182,7 +223,6 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                 
             }
         })
-        
         
     }
     
@@ -265,8 +305,8 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 
     
     @IBAction func updateInfoPressed(sender: AnyObject) {
-        addNewHashNameToFirebase(hashNamesTxtFld.text)
-        addNewKennelMembershipToFirebase(kennelMembershipsTxtFld.text)
+//        addNewHashNameToFirebase(hashNamesTxtFld.text)
+//        addNewKennelMembershipToFirebase(kennelMembershipsTxtFld.text)
         editNerdNameInFirebase(nerdNameTxtFld.text)
         
         if self.kennelChoice == nil {
@@ -276,8 +316,8 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         addNewKennel(kennelChoice)
         
         nerdNameTxtFld.hidden = true
-        hashNamesTxtFld.hidden = true
-        kennelMembershipsTxtFld.hidden = true
+//        hashNamesTxtFld.hidden = true
+//        kennelMembershipsTxtFld.hidden = true
         updateInfoBtn.hidden = true
         nerdNamePencil.hidden = false
         nerdNameLbl.hidden = false
@@ -297,21 +337,16 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let thisKennel = kennels[indexPath.row]
-        if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? HasherCell {
-            cell.configureCell(thisKennel)
+        if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? KennelCell {
+          //  cell.configureCell(thisKennel)
+            cell.configureCell()
             return cell
         } else {
-            return HasherCell()
+            return KennelCell()
         }
     }
     
-//    func createButton () {
-//        let button = UIButton();
-//        button.setTitle("X", forState: .Normal)
-//        button.setTitleColor(UIColor.blueColor(), forState: .Normal)
-//        button.frame = CGRectMake(5, 5, 200, 100)
-//        self.view.addSubview(button)
-//    }
+
     
 }
 
