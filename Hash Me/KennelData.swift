@@ -13,6 +13,7 @@ class KennelData {
     
     private var _kennelId: String!
     private var _kennelName: String!
+    private var _kennelDict: Dictionary<String, AnyObject>!
     
     var kennelId: String {
         return _kennelId
@@ -22,13 +23,18 @@ class KennelData {
         return _kennelName
     }
     
+    var kennelDict: Dictionary<String, AnyObject> {
+        return _kennelDict
+    }
+    
     init (kennelInitId: String, kennelInitDict: Dictionary<String, AnyObject>, kennelInitName: String) {
         self._kennelId = kennelInitId
         
         if let kennelInitName = kennelInitDict["name"] as? String {
             self._kennelName = kennelInitName
-            print("kennelinitnamefromkenneldata: \(kennelInitName)")
         }
+        
+        self._kennelDict = kennelInitDict
     }
     
     

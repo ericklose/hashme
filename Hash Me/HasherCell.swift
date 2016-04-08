@@ -26,7 +26,55 @@ class HasherCell: UITableViewCell {
     
     func configureCell(kennel: KennelData) {
         kennelNameLbl.text = kennel.kennelName
-        print("kennelName: \(kennel.kennelName)")
+        
+        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
+            
+            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
+                
+                if let hashNames = hasherDict["hasherHashNames"] as? Dictionary<String, String> {
+                    
+                    let primaryHashName = hashNames.allKeysForValue("Primary")
+                    let primary = primaryHashName[0]
+                    print("primary: \(primary)")
+                 //   self.hashNamesLbl.text = primary
+                    
+                    if hashNames.count > 1 {
+                  //      let altHashNames = hasherDict["hasherHashName"] as? Dictionary<String, AnyObject>
+                        
+                        
+                        
+                        for var x = 0; x < hashNames.count; x += 1 {
+                            let altHashNames = [String](hashNames.keys)
+                            let altName = altHashNames[x]
+                            print("altName: \(altName)")
+                            
+                         
+                            if altName != primary {
+                               let altNameKennelId = hashNames[altName]!
+                                print("altNameKennelId: \(altNameKennelId)")
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+            }
+            })
+        
+        
+        
+        if let kennelStatus = kennel.kennelDict["kennelId"] {
+            if kennelStatus as! String == "Primary" {
+                //attach primary hash name
+                
+                
+                
+                
+            } else {
+                //not sure
+            }
+        }
         
     }
 
