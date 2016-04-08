@@ -84,6 +84,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                                 self.kennelMembershipsLbl.text = primaryKName as! String
                                 let kennel = KennelData(kennelInitId: primaryK, kennelInitDict: kennelDict2, kennelInitName: primaryKName as! String)
                                 self.kennels.append(kennel)
+                                print("primarykennel: \(self.kennels[0])")
 
                             }
                             
@@ -108,6 +109,8 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                                             self.kennelMembershipsLbl.text! += ", \(altKName)"
                                             let kennel = KennelData(kennelInitId: altKennel, kennelInitDict: kennelDict2, kennelInitName: altKName as! String)
                                             self.kennels.append(kennel)
+                                            print("altkennel: \(self.kennels[1])")
+                                            self.kennelListTableView.reloadData()
                                         }
                                         
                                     }
@@ -122,6 +125,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                 
             }
         })
+        
         
         DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
             
@@ -221,7 +225,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.kennelChoice = kennelPickerDataSource[row]
-        print(kennelChoice)
+        //print(kennelChoice)
     }
     
     func addNewKennel (kennelChoice: String) {
@@ -258,6 +262,8 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                 }
             }
         })
+        
+       // self.kennelListTableView.reloadData()
     }
     
     
@@ -297,16 +303,22 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("kennelcount:\(kennels.count)")
         return kennels.count
     }
     
-    //NEED TO CONNECT HASHERCELL OUTLETS AND CHANGE NAME OF TABLE VIEW CELL ON STORYBOARD TO HASHERCELL AND DEQUEUE
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 30
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let thisKennel = kennels[indexPath.row]
         if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? HasherCell {
             cell.configureCell(thisKennel)
+            print("hashercell")
             return cell
         } else {
+            print("else")
             return HasherCell()
         }
     }

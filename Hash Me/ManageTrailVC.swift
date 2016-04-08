@@ -13,6 +13,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     @IBOutlet weak var trailAttendeeTableView: UITableView!
     
+    @IBOutlet weak var attendeeSearchBar: UISearchBar!
     @IBOutlet weak var specificTrailDate: UILabel!
     @IBOutlet weak var specificTrailKennel: UILabel!
     @IBOutlet weak var specificTrailStartLocation: UILabel!
