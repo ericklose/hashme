@@ -9,11 +9,14 @@
 import UIKit
 import Firebase
 
-class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var trailAttendeeTableView: UITableView!
     
     @IBOutlet weak var attendeeSearchBar: UISearchBar!
+    var inSearchMode = false
+    
+    
     @IBOutlet weak var specificTrailDate: UILabel!
     @IBOutlet weak var specificTrailKennel: UILabel!
     @IBOutlet weak var specificTrailStartLocation: UILabel!
@@ -23,6 +26,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     var trails: TrailData!
     var attendees = [Attendee]()
+    var filteredHashers = [Attendee]()
     var potentialAttendees = [Attendee]()
     var trailRoster = [Attendee]()
     var hashCash: Int!
@@ -31,7 +35,8 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         super.viewDidLoad()
         trailAttendeeTableView.delegate = self
         trailAttendeeTableView.dataSource = self
-        
+        attendeeSearchBar.delegate = self
+        attendeeSearchBar.returnKeyType = UIReturnKeyType.Done
     }
     
     override func didReceiveMemoryWarning() {
@@ -82,7 +87,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             let blankCell = Attendee(attendeeInitId: placeholder.key, attendeeInitDict: fakeDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false)
             self.trailRoster.insert(blankCell, atIndex: 0)
             self.trailAttendeeTableView.reloadData()
-            })
+        })
     }
     
     func addPotential(hasherKey: String, attendeeDataDict: Dictionary <String, AnyObject>) {
@@ -107,16 +112,46 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return trailRoster.count
+        if inSearchMode {
+            return filteredHashers.count
+        } else {
+            return trailRoster.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let thisAttendee = trailRoster[indexPath.row]
+        //let thisAttendee = trailRoster[indexPath.row]
         if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
-            cell.configureCell(thisAttendee, hashCash: self.trails.trailHashCash)
+            
+            let hasherResult: Attendee!
+            
+            if inSearchMode {
+                hasherResult = filteredHashers[indexPath.row]
+            } else {
+                hasherResult = trailRoster[indexPath.row]
+            }
+            
+            cell.configureCell(hasherResult, hashCash: self.trails.trailHashCash)
             return cell
         } else {
             return AttendeeCell()
+        }
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == "" {
+            inSearchMode = false
+            view.endEditing(true)
+            self.trailAttendeeTableView.reloadData()
+        } else {
+            inSearchMode = true
+            let lower = searchBar.text!.lowercaseString
+            filteredHashers = trailRoster.filter({$0.attendeeRelevantHashName.lowercaseString.rangeOfString(lower) != nil || $0.hasherNerdName.lowercaseString.rangeOfString(lower) != nil})
+            self.trailAttendeeTableView.reloadData()
         }
     }
     
