@@ -14,7 +14,6 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     @IBOutlet weak var nerdNameLbl: UILabel!
     @IBOutlet weak var hashNamesLbl: UILabel!
     @IBOutlet weak var kennelMembershipsLbl: UILabel!
-    //    @IBOutlet weak var addInfoBtn: UIButton!
     @IBOutlet weak var nerdNameTxtFld: UITextField!
     @IBOutlet weak var hashNamesTxtFld: UITextField!
     @IBOutlet weak var kennelMembershipsTxtFld: UITextField!
@@ -84,7 +83,6 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                                 self.kennelMembershipsLbl.text = primaryKName as! String
                                 let kennel = KennelData(kennelInitId: primaryK, kennelInitDict: kennelDict2, kennelInitName: primaryKName as! String)
                                 self.kennels.append(kennel)
-                                print("primarykennel: \(self.kennels[0])")
 
                             }
                             
@@ -109,7 +107,6 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                                             self.kennelMembershipsLbl.text! += ", \(altKName)"
                                             let kennel = KennelData(kennelInitId: altKennel, kennelInitDict: kennelDict2, kennelInitName: altKName as! String)
                                             self.kennels.append(kennel)
-                                            print("altkennel: \(self.kennels[1])")
                                             self.kennelListTableView.reloadData()
                                         }
                                         
@@ -263,21 +260,9 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
             }
         })
         
-       // self.kennelListTableView.reloadData()
     }
     
-    
-    
-    
-    
-    
-    //    @IBAction func editInfoPressed(sender: AnyObject) {
-    //        nerdNameTxtFld.hidden = false
-    //        hashNamesTxtFld.hidden = false
-    //        kennelMembershipsTxtFld.hidden = false
-    //        updateInfoBtn.hidden = false
-    //        addInfoBtn.hidden = true
-    //    }
+
     
     @IBAction func updateInfoPressed(sender: AnyObject) {
         addNewHashNameToFirebase(hashNamesTxtFld.text)
@@ -303,7 +288,6 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("kennelcount:\(kennels.count)")
         return kennels.count
     }
     
@@ -315,21 +299,19 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         let thisKennel = kennels[indexPath.row]
         if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? HasherCell {
             cell.configureCell(thisKennel)
-            print("hashercell")
             return cell
         } else {
-            print("else")
             return HasherCell()
         }
     }
     
-    func createButton () {
-        let button = UIButton();
-        button.setTitle("X", forState: .Normal)
-        button.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        button.frame = CGRectMake(5, 5, 200, 100)
-        self.view.addSubview(button)
-    }
+//    func createButton () {
+//        let button = UIButton();
+//        button.setTitle("X", forState: .Normal)
+//        button.setTitleColor(UIColor.blueColor(), forState: .Normal)
+//        button.frame = CGRectMake(5, 5, 200, 100)
+//        self.view.addSubview(button)
+//    }
     
 }
 
