@@ -66,23 +66,6 @@ class AttendeeCell: UITableViewCell {
             self.hasherNerdNameLbl.text = attendee.hasherNerdName
         }
         
-        if attendee.attendeeRelevantHashName == "" {
-            self.hasherPaidFull.hidden = true
-            self.hasherAttendingTrailToggle.hidden = true
-            self.hasherNerdName.hidden = true
-            self.hasherHashNameLbl.hidden = true
-            self.hasherHashNames.hidden = false
-            self.hasherHashNames.text = ""
-            self.moreButton.hidden = true
-            self.paidFullLbl.hidden = true
-            self.presentLbl.hidden = true
-        } else {
-            self.hasherHashNames.hidden = true
-            self.hasherHashNameLbl.hidden = false
-            self.hasherHashNames.text = ""
-            self.hasherHashNameLbl.text = attendee.attendeeRelevantHashName
-        }
-        
         if attendee.attendeeAttending == true {
             self.hasherAttendingTrailToggle.on = true
         } else {
@@ -114,7 +97,7 @@ class AttendeeCell: UITableViewCell {
             self.hasherVisitorFrom.hidden = true
             self.hasherIsVisitor.hidden = true
         }
-        
+    
         self.hasherPaySlider.maximumValue = Float(((hashCash/20)+1)*20)
         self.hasherPaySlider.setValue(Float(attendee.attendeePaidAmount), animated: true)
         self.hasherMinPayLbl.text = "$0"
@@ -129,6 +112,10 @@ class AttendeeCell: UITableViewCell {
             self.hasherCurrentPayLbl.hidden = true
             self.hasherPaidReducedReason.hidden = true
             self.paidOtherLbl.hidden = true
+            self.paidFullLbl.hidden = false
+            self.hasherPaidFull.hidden = false
+            self.hasherAttendingTrailToggle.hidden = false
+            self.presentLbl.hidden = false
         } else {
             self.hasherPaySlider.hidden = false
             self.hasherMinPayLbl.hidden = false
@@ -136,6 +123,23 @@ class AttendeeCell: UITableViewCell {
             self.hasherCurrentPayLbl.hidden = false
             self.hasherPaidReducedReason.hidden = false
             self.paidOtherLbl.hidden = false
+        }
+        
+        if attendee.attendeeRelevantHashName == "" {
+            self.hasherPaidFull.hidden = true
+            self.hasherAttendingTrailToggle.hidden = true
+            self.hasherNerdName.hidden = true
+            self.hasherHashNameLbl.hidden = true
+            self.hasherHashNames.hidden = false
+            self.hasherHashNames.text = ""
+            self.moreButton.hidden = true
+            self.paidFullLbl.hidden = true
+            self.presentLbl.hidden = true
+        } else {
+            self.hasherHashNames.hidden = true
+            self.hasherHashNameLbl.hidden = false
+            self.hasherHashNames.text = ""
+            self.hasherHashNameLbl.text = attendee.attendeeRelevantHashName
         }
         
     }

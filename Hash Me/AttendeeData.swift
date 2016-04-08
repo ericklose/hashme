@@ -24,7 +24,11 @@ class Attendee: Hasher {
     var attendeeAttending: Bool!
     
     var attendeeRelevantHashName: String {
+        if _attendeeRelevantHashName != nil {
         return _attendeeRelevantHashName
+        } else {
+            return ""
+        }
     }
     
     var attendeeRelevantTrailId: String {
