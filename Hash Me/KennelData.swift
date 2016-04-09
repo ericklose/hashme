@@ -64,45 +64,31 @@ class KennelData {
     }
     
     init (kennelInitId: String, kennelInitDict: Dictionary<String, AnyObject>, kennelInitName: String) {
-        print("kennelDict: \(kennelInitDict)")
         self._kennelId = kennelInitId
         self._kennelDict = kennelInitDict
         
         if let kennelInitName = kennelInitDict["name"] as? String {
             self._kennelName = kennelInitName
-            print("name: \(self._kennelName)")
         }
         
         if let kennelInitSchedule = kennelInitDict["kennelSchedule"] as? String {
             self._kennelSchedule = kennelInitSchedule
-            
-            print("schedule: \(self._kennelSchedule)")
         }
         
         if let kennelInitUsState = kennelInitDict["kennelUsState"] as? String {
             self._kennelUsState = kennelInitUsState
-            
-            print("state: \(self._kennelUsState)")
         }
         
         if let kennelInitCountry = kennelInitDict["kennelCountry"] as? String {
             self._kennelCountry = kennelInitCountry
-            
-            print("country: \(self._kennelCountry)")
         }
         
         if self._kennelCountry == "USA" {
             self._kennelLocation = _kennelUsState + ", " + _kennelCountry
-            
-            print("loc1: \(self._kennelLocation)")
         } else if self._kennelUsState == nil {
             self._kennelLocation = _kennelCountry
-            
-            print("loc2: \(self._kennelLocation)")
         } else {
             self._kennelLocation = "location unknown"
-            
-            print("loc3: \(self._kennelLocation)")
         }
         
     }

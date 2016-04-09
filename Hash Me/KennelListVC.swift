@@ -65,7 +65,7 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         let kennel: KennelData!
         kennel = kennels[indexPath.row]
         performSegueWithIdentifier("manageKennel", sender: kennel)
-        
+                
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -85,7 +85,36 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
 
     @IBAction func addNewKennel(sender: UIButton) {
+        postKennelToFirebase()
+    }
+
+    func postKennelToFirebase() {
         
+        let kennel: Dictionary<String, AnyObject> = [
+            "kennelName": newKennelName.text!,
+            "kennelCountry": newKennelCountry.text!,
+            "kennelUsState": newKennelUsState.text!,
+            "name": newKennelName.text!
+        ]
+        
+        let firebasePost = DataService.ds.REF_KENNELS.childByAutoId()
+        firebasePost.setValue(kennel)
+        
+        newKennelName.text = ""
+        newKennelCountry.text = ""
+        newKennelUsState.text = ""
+        
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "manageKennel" {
+            if let manageKennelVC = segue.destinationViewController as? ManageKennelVC {
+                if let kennelInCell = sender as? KennelData {
+                    manageKennelVC.kennels = kennelInCell
+                }
+            }
+        }
     }
 
 }
