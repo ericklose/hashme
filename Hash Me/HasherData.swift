@@ -17,6 +17,7 @@ class Hasher {
     private var _hasherKennelMemberships: Dictionary<String, AnyObject>!
     private var _hasherTrailsAttended: Array<String>?
     private var _hasherTrailsHared: Array<String>?
+    private var _kennelInitDict: Dictionary<String, AnyObject>!
     
     var hasherId: String {
         return _hasherId
@@ -45,12 +46,29 @@ class Hasher {
         return _hasherTrailsHared
     }
     
-    init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>) {
+    var kennelInitDict: Dictionary<String, AnyObject> {
+        return _kennelInitDict
+    }
+    
+    init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>, kennelInitDict: Dictionary<String, AnyObject>) {
+        self._kennelInitDict = kennelInitDict
+        
+        self._hasherId = hasherInitId
+        
+        if let hasherInitNerdName = hasherInitDict["hasherNerdName"] as? String {
+            self._hasherNerdName = hasherInitNerdName
+        }
+        
+    }
+    
+     init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>) {
         self._hasherId = hasherInitId
         
         if let hasherInitNerdName = hasherInitDict["hasherNerdName"] as? String {
             self._hasherNerdName = hasherInitNerdName
         }
     }
+    
+
     
 }

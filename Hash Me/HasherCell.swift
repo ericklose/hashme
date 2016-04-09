@@ -24,6 +24,7 @@ class HasherCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
     func configureCell(kennel: KennelData) {
         kennelNameLbl.text = kennel.kennelName
         
@@ -36,20 +37,15 @@ class HasherCell: UITableViewCell {
                     let primaryHashName = hashNames.allKeysForValue("Primary")
                     let primary = primaryHashName[0]
                     print("primary: \(primary)")
-                 //   self.hashNamesLbl.text = primary
-                    
+        
                     if hashNames.count > 1 {
-                  //      let altHashNames = hasherDict["hasherHashName"] as? Dictionary<String, AnyObject>
-                        
-                        
                         
                         for var x = 0; x < hashNames.count; x += 1 {
                             let altHashNames = [String](hashNames.keys)
                             let altName = altHashNames[x]
-                            print("altName: \(altName)")
-                            
                          
                             if altName != primary {
+                                print("altName: \(altName)")
                                let altNameKennelId = hashNames[altName]!
                                 print("altNameKennelId: \(altNameKennelId)")
                             }
@@ -67,8 +63,7 @@ class HasherCell: UITableViewCell {
         if let kennelStatus = kennel.kennelDict["kennelId"] {
             if kennelStatus as! String == "Primary" {
                 //attach primary hash name
-                
-                
+             
                 
                 
             } else {

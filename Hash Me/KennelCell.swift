@@ -26,13 +26,13 @@ class KennelCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func configureCell(kennel: KennelData) {
         self.kennel = kennel
         
         self.kennelName.text = kennel.kennelName
         self.kennelLocation.text = kennel.kennelLocation
         self.kennelSchedule.text = kennel.kennelSchedule
-    }
+
 
 }
