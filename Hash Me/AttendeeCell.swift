@@ -26,7 +26,6 @@ class AttendeeCell: UITableViewCell {
     @IBOutlet weak var hasherMinPayLbl: UILabel!
     @IBOutlet weak var hasherMaxPayLbl: UILabel!
     @IBOutlet weak var hasherCurrentPayLbl: UILabel!
-    @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var paidOtherLbl: UILabel!
     @IBOutlet weak var paidFullLbl: UILabel!
     @IBOutlet weak var presentLbl: UILabel!
@@ -52,22 +51,11 @@ class AttendeeCell: UITableViewCell {
         self.attendee = attendee
         self.hashCash = hashCash
         
-        hasherVisitorFrom.text = "TEST"
-        hasherVirginSponsorIs.text = "TEST"
-        
         trailAttendencePath = DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(attendee.hasherId)
         trailsAttendedPath = DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).childByAppendingPath("trailsAttended").childByAppendingPath(attendee.attendeeRelevantTrailId)
         
-        if attendee.hasherNerdName == "" {
-            self.hasherNerdNameLbl.hidden = true
-            self.hasherNerdName.hidden = false
-            self.hasherNerdName.text = ""
-        } else {
-            self.hasherNerdName.hidden = true
-            self.hasherNerdNameLbl.hidden = false
-            self.hasherNerdName.text = ""
-            self.hasherNerdNameLbl.text = attendee.hasherNerdName
-        }
+        
+        self.hasherNerdNameLbl.text = attendee.hasherNerdName
         
         if attendee.attendeeAttending == true {
             self.hasherAttendingTrailToggle.on = true
@@ -81,26 +69,12 @@ class AttendeeCell: UITableViewCell {
             self.hasherPaidFull.on = false
         }
         
-        if attendee.attendeeVirginTrail == true {
-            self.hasherIsVirgin.hidden = false
-            self.hasherVirginSponsorIs.hidden = false
-            self.hasherIsVirgin.on = attendee.attendeeVirginTrail
-            self.hasherVirginSponsorIs.text = attendee.attendeeVirginSponsor
-        } else {
-//            self.hasherIsVirgin.hidden = true
-//            self.hasherVirginSponsorIs.hidden = true
-        }
+        self.hasherIsVirgin.on = attendee.attendeeVirginTrail
+        self.hasherVirginSponsorIs.text = attendee.attendeeVirginSponsor
+        self.hasherIsVisitor.on = attendee.attendeeVisitingTrail
+        self.hasherVisitorFrom.text = attendee.attendeeVisitingFrom
         
-        if attendee.attendeeVisitingTrail == true {
-            self.hasherVisitorFrom.hidden = false
-            self.hasherIsVisitor.hidden = false
-            self.hasherIsVisitor.on = attendee.attendeeVisitingTrail
-            self.hasherVisitorFrom.text = attendee.attendeeVisitingFrom
-        } else {
-      //      self.hasherVisitorFrom.hidden = true
-//            self.hasherIsVisitor.hidden = true
-        }
-    
+        
         self.hasherPaySlider.maximumValue = Float(((hashCash/20)+1)*20)
         self.hasherPaySlider.setValue(Float(attendee.attendeePaidAmount), animated: true)
         self.hasherMinPayLbl.text = "$0"
@@ -108,34 +82,11 @@ class AttendeeCell: UITableViewCell {
         self.hasherCurrentPayLbl.text = "$\(attendee.attendeePaidAmount)"
         self.hasherPaidReducedReason.text = attendee.attendeePaidNotes
         
-        if attendee.attendeePaidAmount == 0 || attendee.attendeePaidAmount == hashCash {
-            self.hasherPaySlider.hidden = true
-            self.hasherMinPayLbl.hidden = true
-            self.hasherMaxPayLbl.hidden = true
-            self.hasherCurrentPayLbl.hidden = true
-            self.hasherPaidReducedReason.hidden = true
-            self.paidOtherLbl.hidden = true
-            self.paidFullLbl.hidden = false
-            self.hasherPaidFull.hidden = false
-            self.hasherAttendingTrailToggle.hidden = false
-            self.presentLbl.hidden = false
-        } else {
-            self.hasherPaySlider.hidden = false
-            self.hasherMinPayLbl.hidden = false
-            self.hasherMaxPayLbl.hidden = false
-            self.hasherCurrentPayLbl.hidden = false
-            self.hasherPaidReducedReason.hidden = false
-            self.paidOtherLbl.hidden = false
-        }
         
         if attendee.attendeeRelevantHashName == "" {
-            self.hasherPaidFull.hidden = true
-            self.hasherAttendingTrailToggle.hidden = true
-            self.hasherNerdName.hidden = true
             self.hasherHashNameLbl.hidden = true
             self.hasherHashNames.hidden = false
             self.hasherHashNames.text = ""
-            self.moreButton.hidden = true
             self.paidFullLbl.hidden = true
             self.presentLbl.hidden = true
         } else {
@@ -237,21 +188,6 @@ class AttendeeCell: UITableViewCell {
     
     @IBAction func hasherNerdNameAdded(sender: UITextField) {
         print("nerd name: \(self.hasherNerdName.text)")
-    }
-    
-    @IBAction func moreButtonPressed(sender: UIButton) {
-        moreButton.hidden = true
-        hasherIsVirgin.hidden = false
-        hasherVirginSponsorIs.hidden = false
-        hasherIsVisitor.hidden = false
-        hasherVisitorFrom.hidden = false
-        hasherPaySlider.hidden = false
-        hasherPaidReducedReason.hidden = false
-        hasherMaxPayLbl.hidden = false
-        hasherMinPayLbl.hidden = false
-        hasherCurrentPayLbl.hidden = false
-        paidOtherLbl.hidden = false
-        
     }
     
     @IBAction func hasherHashNameAdded(sender: UITextField) {
