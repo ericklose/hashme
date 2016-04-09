@@ -33,6 +33,6 @@ class KennelCell: UITableViewCell {
         self.kennelName.text = kennel.kennelName
         self.kennelLocation.text = kennel.kennelLocation
         self.kennelSchedule.text = kennel.kennelSchedule
-
+    }
 
 }

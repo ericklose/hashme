@@ -339,7 +339,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         let thisKennel = kennels[indexPath.row]
         if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? KennelCell {
           //  cell.configureCell(thisKennel)
-            cell.configureCell()
+            //cell.configureCell()
             return cell
         } else {
             return KennelCell()
