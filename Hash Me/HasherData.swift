@@ -76,17 +76,7 @@ class Hasher {
         
         
         
-        DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
-            
-            if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
-                print("kenneldict: \(kennelDict)")
-                
-            }
-        })
-        
-        
-                 //combine dict into dict
-        
+               
        
         
         

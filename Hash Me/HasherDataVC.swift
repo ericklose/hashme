@@ -44,10 +44,28 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
             if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
                 print("snapshotY: \(snapshot)")
             
-                if let hasherDict = snapshot.value as? Dictionary<String, AnyObject>{
+                if var hasherDict = snapshot.value as? Dictionary<String, AnyObject>{
+                    
+                    DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+                        
+                        if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
+                            
+                            //create kennelDict2 to get only kennel id and name to add to hasherdict
+                            
+                            print("kenneldict: \(kennelDict)")
+                            
+                             hasherDict["addedKennelDict"] = kennelDict
+                             print("hasherDictNew: \(hasherDict)")
+                            
+                        }
+                        
+                        
+                    })
+                    
                     let hasher = Hasher(hasherInitId: KEY_UID, hasherInitDict: hasherDict)
                     print("hashernerdname: \(hasher.hasherNerdName)")
                    print("HPHN: \(hasher.hasherPrimaryHashName)")
+
                     
                //     print("hashNamesAndKennels: \(hasher.hashNamesAndKennels)")
                     
@@ -55,6 +73,18 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                 
                             }
         })
+        
+        
+        
+        
+
+        
+        
+
+       
+        
+        
+        
 
         
                     
