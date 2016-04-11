@@ -16,13 +16,27 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var attendeeSearchBar: UISearchBar!
     var inSearchMode = false
     
-    
+    //Outlets for the trail info
     @IBOutlet weak var specificTrailDate: UILabel!
     @IBOutlet weak var specificTrailKennel: UILabel!
     @IBOutlet weak var specificTrailStartLocation: UILabel!
     @IBOutlet weak var specificTrailHares: UILabel!
     @IBOutlet weak var specificTrailDescription: UILabel!
     
+    //Outlets for the Add New Hasher section
+    @IBOutlet weak var newHasherHashName: UITextField!
+    @IBOutlet weak var newHasherNerdName: UITextField!
+    @IBOutlet weak var newHasherAttendingToggle: UISwitch!
+    @IBOutlet weak var newHasherPaidToggle: UISwitch!
+    
+    //Outlets for the questionable section of Add New Hasher
+    @IBOutlet weak var newHasherVisitorFrom: UITextField!
+    @IBOutlet weak var newHasherVirginSponsorIs: UITextField!
+    @IBOutlet weak var newHasherPaySlider: UISlider!
+    @IBOutlet weak var newHasherMinPayLbl: UILabel!
+    @IBOutlet weak var newHasherMaxPayLbl: UILabel!
+    @IBOutlet weak var newHasherCurrentPayLbl: UILabel!
+    @IBOutlet weak var newHasherReducedPayReason: UITextField!
     
     var trails: TrailData!
     var attendees = [Attendee]()
@@ -37,6 +51,14 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         trailAttendeeTableView.dataSource = self
         attendeeSearchBar.delegate = self
         attendeeSearchBar.returnKeyType = UIReturnKeyType.Done
+        
+        updateTrailDetails()
+        
+        newHasherPaySlider.maximumValue = Float(((hashCash/20)+1)*20)
+        newHasherPaySlider.setValue(Float(hashCash), animated: true)
+        newHasherMinPayLbl.text = "$0"
+        newHasherMaxPayLbl.text = "$\((Int(hashCash/20)+1)*20)"
+        newHasherCurrentPayLbl.text = "$\(hashCash)"
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,7 +67,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     override func viewDidAppear(animated: Bool) {
-        updateTrailDetails()
         
         DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { hasherSnapshot in
             
@@ -81,11 +102,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 }
             }
             self.trailRoster = self.attendees + self.potentialAttendees
-            let fakeNames: [String: AnyObject] = ["": "primary"]
-            let fakeDict: [String: AnyObject] = ["hasherNerdName": "", "hasherHashNames": fakeNames]
-            let placeholder = DataService.ds.REF_HASHERS.childByAutoId()
-            let blankCell = Attendee(attendeeInitId: placeholder.key, attendeeInitDict: fakeDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false)
-            self.trailRoster.insert(blankCell, atIndex: 0)
             self.trailAttendeeTableView.reloadData()
         })
     }
@@ -96,6 +112,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func updateTrailDetails() {
+        hashCash = trails.trailHashCash
         specificTrailDate.text = trails.trailDate
         specificTrailKennel.text = trails.trailHares
         specificTrailStartLocation.text = trails.trailStartLocation
@@ -138,6 +155,24 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let specificAttendee: Attendee!
+        specificAttendee = trailRoster[indexPath.row]
+        performSegueWithIdentifier("attendeeDetails", sender: specificAttendee)
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "attendeeDetails" {
+            if let attendeeDetailsVC = segue.destinationViewController as? AttendeeDetailsVC {
+                if let attendeeInCell = sender as? Attendee {
+                    attendeeDetailsVC.specificAttendee = attendeeInCell
+                }
+            }
+        }
+    }
+    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         view.endEditing(true)
     }
@@ -155,6 +190,29 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
+    @IBAction func addNewHasher(sender: UIButton) {
+        
+        let newHasher: Dictionary<String, AnyObject> = [
+            "hasherPrimaryHashName": newHasherHashName.text!,
+            "hasherPrimaryKennel": newHasherVisitorFrom.text!,
+            "trailsAttended": trails.trailKey,
+            "hasherNerdName": newHasherNerdName.text!,
+        ]
+        
+        let firebasePost = DataService.ds.REF_HASHERS.childByAutoId()
+        firebasePost.setValue(newHasher)
+        
+        newHasherHashName.text = ""
+        newHasherNerdName.text = ""
+        newHasherAttendingToggle.on = false
+        newHasherPaidToggle.on = false
+        newHasherVisitorFrom.text = ""
+        newHasherVirginSponsorIs.text = ""
+        newHasherCurrentPayLbl.text = "$\(hashCash)"
+        newHasherPaySlider.setValue(Float(hashCash), animated: true)
+        //self.navigationController?.popViewControllerAnimated(true)
+        
+    }
     
 }
 
