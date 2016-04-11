@@ -27,7 +27,8 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     var kennelChoice: String!
     var kennelChoiceId: String!
     var kennels = [KennelData]()
-    var hasher = [Hasher]()
+   // var hasher = [Hasher]()
+    var hasher: Hasher!
     var kennelDict: Dictionary<String, AnyObject>!
     
     override func viewDidLoad() {
@@ -38,6 +39,25 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         
         self.kennelListTableView.dataSource = self
         self.kennelListTableView.delegate = self
+        
+        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
+            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+                print("snapshotY: \(snapshot)")
+            
+                if let hasherDict = snapshot.value as? Dictionary<String, AnyObject>{
+                    let hasher = Hasher(hasherInitId: KEY_UID, hasherInitDict: hasherDict)
+                    print("hashernerdname: \(hasher.hasherNerdName)")
+                   print("HPHN: \(hasher.hasherPrimaryHashName)")
+                    
+               //     print("hashNamesAndKennels: \(hasher.hashNamesAndKennels)")
+                    
+                }
+                
+                            }
+        })
+
+        
+                    
         
         //call kennel data to change kennelid into actual name
         DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
@@ -58,9 +78,9 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         
         DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
             if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                print("snapshot: \(snapshot)")
+              //  print("snapshot: \(snapshot)")
                 for snap in snapshots {
-            print("snap: \(snap)")
+         //   print("snap: \(snap)")
             if let hasherDict = snap.value as? Dictionary<String, AnyObject> {
                 let key = snap.key
            //    let hasher = Hasher(hasherInitId: key, hasherInitDict: hasherDict, kennelInitDict: self.kennelDict)
