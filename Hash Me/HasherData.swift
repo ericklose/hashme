@@ -18,6 +18,8 @@ class Hasher {
     private var _hasherTrailsAttended: Array<String>?
     private var _hasherTrailsHared: Array<String>?
     private var _kennelInitDict: Dictionary<String, AnyObject>!
+    private var _hasherPrimaryHashName: String!
+    private var _hasherPrimaryKennel: String!
     
     var hasherId: String {
         return _hasherId
@@ -50,25 +52,86 @@ class Hasher {
         return _kennelInitDict
     }
     
-    init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>, kennelInitDict: Dictionary<String, AnyObject>) {
-        self._kennelInitDict = kennelInitDict
-        
-        self._hasherId = hasherInitId
-        
-        if let hasherInitNerdName = hasherInitDict["hasherNerdName"] as? String {
-            self._hasherNerdName = hasherInitNerdName
+    var hasherPrimaryHashName: String {
+        if _hasherPrimaryHashName != nil {
+            return _hasherPrimaryHashName
+        } else {
+            return "Has no primary hash name"
         }
-        
     }
     
-     init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>) {
-        self._hasherId = hasherInitId
-        
-        if let hasherInitNerdName = hasherInitDict["hasherNerdName"] as? String {
-            self._hasherNerdName = hasherInitNerdName
+    var hasherPrimaryKennel: String {
+        if _hasherPrimaryKennel != nil {
+        return _hasherPrimaryKennel
+        } else {
+            return "Has no primary kennel"
         }
     }
     
 
+    
+    
+    init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>) {
+        self._hasherId = hasherInitId
+        
+        
+        
+        DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+            
+            if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
+                print("kenneldict: \(kennelDict)")
+                
+            }
+        })
+        
+        
+                 //combine dict into dict
+        
+       
+        
+        
+        
+        
+        
+        
+        
+        if let hasherInitNerdName = hasherInitDict["hasherNerdName"] as? String {
+            self._hasherNerdName = hasherInitNerdName
+        }
+        
+        if let hasherPrimaryHashName = hasherInitDict["hasherPrimaryHashName"] as? String {
+            self._hasherPrimaryHashName = hasherPrimaryHashName
+        }
+        
+        if let hasherPrimaryKennel = hasherInitDict["hasherPrimaryKennel"] as? String {
+            self._hasherPrimaryKennel = hasherPrimaryKennel
+        }
+        
+     //   print("XXX: \(hasherInitDict)")
+        
+        if let hashNamesAndKennels = hasherInitDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
+            print("printme: \(hashNamesAndKennels)")
+            
+            
+            
+            
+            
+            
+            for (key, value) in hashNamesAndKennels {
+              
+            
+
+                
+//                print("key: \(key)")
+//                print("value: \(value)")
+            }
+            
+            
+            
+
+
+        }
+        
+    }
     
 }
