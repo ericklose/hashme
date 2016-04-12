@@ -79,7 +79,6 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         } else {
             return TrailCell()
         }
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

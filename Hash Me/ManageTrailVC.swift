@@ -38,12 +38,16 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var newHasherCurrentPayLbl: UILabel!
     @IBOutlet weak var newHasherReducedPayReason: UITextField!
     
+    @IBOutlet weak var topContentBlock: UIView!
+    
+    
     var trails: TrailData!
     var attendees = [Attendee]()
     var filteredHashers = [Attendee]()
     var potentialAttendees = [Attendee]()
     var trailRoster = [Attendee]()
     var hashCash: Int!
+    var isHidden: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +58,8 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         updateTrailDetails()
         
+        newHasherPaidToggle.on = false
+        newHasherAttendingToggle.on = false
         newHasherPaySlider.maximumValue = Float(((hashCash/20)+1)*20)
         newHasherPaySlider.setValue(Float(hashCash), animated: true)
         newHasherMinPayLbl.text = "$0"
@@ -157,10 +163,15 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let specificAttendee: Attendee!
-        specificAttendee = trailRoster[indexPath.row]
-        performSegueWithIdentifier("attendeeDetails", sender: specificAttendee)
+        var specificAttendee: Attendee!
         
+        if inSearchMode {
+            specificAttendee = filteredHashers[indexPath.row]
+        } else {
+            specificAttendee = trailRoster[indexPath.row]
+        }
+        print("hi: \(specificAttendee.hasherPrimaryHashName)")
+        performSegueWithIdentifier("attendeeDetails", sender: specificAttendee)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -180,38 +191,92 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == nil || searchBar.text == "" {
             inSearchMode = false
+            topContentBlock.hidden = false
+            topContentBlock.frame.size.height = 440
             view.endEditing(true)
             self.trailAttendeeTableView.reloadData()
         } else {
             inSearchMode = true
+            topContentBlock.hidden = true
+            topContentBlock.frame.size.height = 0
             let lower = searchBar.text!.lowercaseString
             filteredHashers = trailRoster.filter({$0.attendeeRelevantHashName.lowercaseString.rangeOfString(lower) != nil || $0.hasherNerdName.lowercaseString.rangeOfString(lower) != nil})
             self.trailAttendeeTableView.reloadData()
         }
     }
     
+    @IBAction func sliderValueChanged(sender: UISlider) {
+        let selectedValue = Int(sender.value)
+        
+        newHasherCurrentPayLbl.text = "$" + String(stringInterpolationSegment: selectedValue)
+        
+    }
+    
+    @IBAction func newHasherPaidToggled(sender: UISwitch) {
+        if newHasherPaidToggle.on == true {
+            newHasherAttendingToggle.on = true
+            newHasherCurrentPayLbl.text = "$\(hashCash)"
+            newHasherPaySlider.setValue(Float(hashCash), animated: true)
+        }
+    }
+    
     @IBAction func addNewHasher(sender: UIButton) {
         
-        let newHasher: Dictionary<String, AnyObject> = [
-            "hasherPrimaryHashName": newHasherHashName.text!,
-            "hasherPrimaryKennel": newHasherVisitorFrom.text!,
-            "trailsAttended": trails.trailKey,
-            "hasherNerdName": newHasherNerdName.text!,
-        ]
-        
-        let firebasePost = DataService.ds.REF_HASHERS.childByAutoId()
-        firebasePost.setValue(newHasher)
-        
-        newHasherHashName.text = ""
-        newHasherNerdName.text = ""
-        newHasherAttendingToggle.on = false
-        newHasherPaidToggle.on = false
-        newHasherVisitorFrom.text = ""
-        newHasherVirginSponsorIs.text = ""
-        newHasherCurrentPayLbl.text = "$\(hashCash)"
-        newHasherPaySlider.setValue(Float(hashCash), animated: true)
-        //self.navigationController?.popViewControllerAnimated(true)
-        
+        if newHasherHashName.text == nil || newHasherHashName.text == "" {
+            
+            newHasherHashName.placeholder = "Hash Name Required"
+            newHasherHashName.backgroundColor = UIColor.redColor()
+            
+        } else {
+            
+            var newHasher: Dictionary<String, AnyObject> = ["hasherPrimaryHashName": newHasherHashName.text!]
+            
+            if newHasherNerdName.text != nil && newHasherNerdName.text != "" {
+                newHasher["hasherNerdName"] = newHasherNerdName.text
+            }
+            
+            if newHasherVisitorFrom.text == nil || newHasherVisitorFrom.text == "" {
+                newHasher["hasherPrimaryKennel"] = trails.trailKennel
+                let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [trails.trailKennel: "primary"]
+                newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
+            } else {
+                newHasher["hasherPrimaryKennel"] = newHasherVisitorFrom.text
+                let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [newHasherVisitorFrom.text!: "primary"]
+                newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
+            }
+            
+            if newHasherVirginSponsorIs.text != nil && newHasherVirginSponsorIs.text != "" {
+                newHasher["hasherVirginSponser"] = newHasherVirginSponsorIs.text
+            }
+            
+            if newHasherAttendingToggle.on == true {
+                var newHasherTrails: Dictionary<String, AnyObject> = ["hasherAttendedTrail": true]
+                if newHasherPaidToggle.on == true {
+                    newHasherTrails["hasherPaidTrailAmt"] = Int(newHasherPaySlider.value)
+                }
+                if newHasherReducedPayReason.text != nil && newHasherReducedPayReason.text != "" {
+                    newHasherTrails["hasherPaidReducedReason"] = newHasherReducedPayReason.text
+                }
+                newHasher["trailsAttended"] = newHasherTrails
+            }
+            
+            let firebasePost = DataService.ds.REF_HASHERS.childByAutoId()
+            firebasePost.setValue(newHasher)
+            
+            newHasherHashName.text = ""
+            newHasherHashName.placeholder = "Hash Name"
+            newHasherHashName.backgroundColor = nil
+            newHasherNerdName.text = ""
+            newHasherAttendingToggle.on = false
+            newHasherPaidToggle.on = false
+            newHasherVisitorFrom.text = ""
+            newHasherVirginSponsorIs.text = ""
+            newHasherCurrentPayLbl.text = "$\(hashCash)"
+            newHasherPaySlider.setValue(Float(hashCash), animated: true)
+            newHasherReducedPayReason.text = ""
+            //self.navigationController?.popViewControllerAnimated(true)
+            
+        }
     }
     
 }

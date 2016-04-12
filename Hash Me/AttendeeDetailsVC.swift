@@ -31,7 +31,7 @@ class AttendeeDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        specificAttendeeRelevantHashName.text = specificAttendee.attendeeRelevantHashName
+        specificAttendeeRelevantHashName.text = specificAttendee.hasherPrimaryHashName
         specificAttendeeNerdName.text = specificAttendee.hasherNerdName
         
         specificAttendeeVirginSponsorIs.text = specificAttendee.attendeeVirginSponsor

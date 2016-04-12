@@ -18,7 +18,7 @@ class AttendeeCell: UITableViewCell {
     @IBOutlet weak var hasherNerdNameLbl: UILabel!
     @IBOutlet weak var hasherAttendingTrailToggle: UISwitch!
     @IBOutlet weak var hasherPaid: UISwitch!
-
+    
     var attendee: Attendee!
     var trailAttendencePath: Firebase!
     var trailsAttendedPath: Firebase!
@@ -43,8 +43,15 @@ class AttendeeCell: UITableViewCell {
         trailAttendencePath = DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(attendee.hasherId)
         trailsAttendedPath = DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).childByAppendingPath("trailsAttended").childByAppendingPath(attendee.attendeeRelevantTrailId)
         
-        
-        self.hasherNerdNameLbl.text = attendee.hasherNerdName
+        if attendee.hasherNerdName == "" {
+            self.hasherNerdNameLbl.hidden = true
+            self.hasherNerdName.hidden = false
+            self.hasherNerdName.text = ""
+        } else {
+            self.hasherNerdNameLbl.text = attendee.hasherNerdName
+            self.hasherNerdNameLbl.hidden = false
+            self.hasherNerdName.hidden = true
+        }
         
         if attendee.attendeeAttending == true {
             self.hasherAttendingTrailToggle.on = true
@@ -52,12 +59,12 @@ class AttendeeCell: UITableViewCell {
             self.hasherAttendingTrailToggle.on = false
         }
         
-        if Int(attendee.attendeePaidAmount) == Int(self.hashCash) {
+        if Int(attendee.attendeePaidAmount) > 0 {
             self.hasherPaid.on = true
+            self.hasherAttendingTrailToggle.on = true
         } else {
             self.hasherPaid.on = false
         }
-       
         
         if attendee.attendeeRelevantHashName == "" {
             self.hasherRelevantHashNameLbl.hidden = true
@@ -69,7 +76,6 @@ class AttendeeCell: UITableViewCell {
             self.hasherRelevantHashName.text = ""
             self.hasherRelevantHashNameLbl.text = attendee.attendeeRelevantHashName
         }
-        
     }
     
     @IBAction func toggleAttendingToggle(sender: UISwitch) {
@@ -84,6 +90,8 @@ class AttendeeCell: UITableViewCell {
     
     @IBAction func hasherPaidToggleToggled(sender: UISwitch) {
         if hasherPaid.on == true {
+            hasherAttendingTrailToggle.on = true
+            toggleAttendingToggle(hasherAttendingTrailToggle)
             trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : hashCash])
             trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : hashCash])
         } else if hasherPaid.on == false {
@@ -91,24 +99,11 @@ class AttendeeCell: UITableViewCell {
             trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : 0])
         }
     }
-
-
     
-
     
     @IBAction func hasherNerdNameAdded(sender: UITextField) {
         print("nerd name: \(self.hasherNerdName.text)")
     }
     
-    @IBAction func hasherHashNameAdded(sender: UITextField) {
-        let hasherNewEntry = DataService.ds.REF_HASHERS.childByAutoId()
-        let hasherNewKey = hasherNewEntry.key
-        DataService.ds.REF_HASHERS.childByAppendingPath(hasherNewKey).childByAppendingPath("hasherHashNames").updateChildValues([hasherRelevantHashName.text!: "Primary"])
-    }
     
-    @IBAction func goToAttendeeDetails(sender: UIButton) {
-        
-    }
-
-
 }
