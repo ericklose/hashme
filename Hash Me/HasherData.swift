@@ -74,17 +74,6 @@ class Hasher {
     init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>) {
         self._hasherId = hasherInitId
         
-        
-        
-               
-       
-        
-        
-        
-        
-        
-        
-        
         if let hasherInitNerdName = hasherInitDict["hasherNerdName"] as? String {
             self._hasherNerdName = hasherInitNerdName
         }
@@ -99,28 +88,7 @@ class Hasher {
         
      //   print("XXX: \(hasherInitDict)")
         
-        if let hashNamesAndKennels = hasherInitDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
-            print("printme: \(hashNamesAndKennels)")
-            
-            
-            
-            
-            
-            
-            for (key, value) in hashNamesAndKennels {
-              
-            
-
-                
-//                print("key: \(key)")
-//                print("value: \(value)")
-            }
-            
-            
-            
-
-
-        }
+       
         
     }
     
