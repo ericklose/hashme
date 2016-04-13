@@ -1282,9 +1282,6 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="188" height="32"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <textInputTraits key="textInputTraits"/>
-                                                                            <connections>
-                                                                                <action selector="hasherHashNameAdded:" destination="0wr-hr-0L3" eventType="editingDidEnd" id="f0g-Jx-SBa"/>
-                                                                            </connections>
                                                                         </textField>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hashy McHasher the Hashiest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df0-P1-b7r">
                                                                             <rect key="frame" x="188" y="0.0" width="232" height="32"/>
@@ -1302,7 +1299,7 @@
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <textInputTraits key="textInputTraits"/>
                                                                             <connections>
-                                                                                <action selector="hasherNerdNameAdded:" destination="0wr-hr-0L3" eventType="editingDidEnd" id="cGH-nz-yJz"/>
+                                                                                <action selector="hasherNerdNameAdded:" destination="0wr-hr-0L3" eventType="editingDidEnd" id="YvC-uO-D26"/>
                                                                             </connections>
                                                                         </textField>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nerdy McNerder the Nerdiest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ir-8G-N61">
@@ -1351,7 +1348,7 @@
                                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GVJ-Td-Sbv">
                                                                             <rect key="frame" x="50" y="0.0" width="51" height="31"/>
                                                                             <connections>
-                                                                                <action selector="hasherPaidToggleToggled:" destination="0wr-hr-0L3" eventType="touchUpInside" id="Tsd-jj-RNR"/>
+                                                                                <action selector="hasherPaidToggleToggled:" destination="0wr-hr-0L3" eventType="touchUpInside" id="J8L-Cq-LnL"/>
                                                                             </connections>
                                                                         </switch>
                                                                     </subviews>
@@ -1367,9 +1364,6 @@
                                                                 <constraint firstAttribute="width" constant="25" id="mi9-rW-VkT"/>
                                                             </constraints>
                                                             <state key="normal" title="&gt;"/>
-                                                            <connections>
-                                                                <action selector="goToAttendeeDetails:" destination="0wr-hr-0L3" eventType="touchUpInside" id="C94-Ds-Vgw"/>
-                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
@@ -1392,7 +1386,7 @@
                                             <outlet property="hasherAttendingTrailToggle" destination="QBc-QW-fR3" id="GBB-8X-AYD"/>
                                             <outlet property="hasherNerdName" destination="Kva-eG-dVD" id="xbu-bb-S6m"/>
                                             <outlet property="hasherNerdNameLbl" destination="5Ir-8G-N61" id="DoW-Gh-iDP"/>
-                                            <outlet property="hasherPaid" destination="T0y-FA-4Xq" id="1lO-Cw-2aE"/>
+                                            <outlet property="hasherPaid" destination="GVJ-Td-Sbv" id="Hic-Zn-Mke"/>
                                             <outlet property="hasherRelevantHashName" destination="hPH-YD-8zq" id="Xte-Qu-2pD"/>
                                             <outlet property="hasherRelevantHashNameLbl" destination="df0-P1-b7r" id="l3R-MB-9eA"/>
                                             <segue destination="AjH-AH-Dyu" kind="show" identifier="attendeeDetails" id="ILT-5f-44F"/>
@@ -1513,6 +1507,9 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="5MF-4n-Oh6"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <action selector="sliderValueChanged:" destination="AjH-AH-Dyu" eventType="valueChanged" id="Tsj-dX-dNa"/>
+                                                        </connections>
                                                     </slider>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hso-y9-ib3" userLabel="$20">
                                                         <rect key="frame" x="115" y="0.0" width="30" height="30"/>

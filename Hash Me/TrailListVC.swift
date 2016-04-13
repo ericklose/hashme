@@ -29,21 +29,16 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             self.trails = []
             
             if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                
                 for snap in snapshots {
-                    
                     if let trailDict = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key
                         let trail = TrailData(trailKey: key, dictionary: trailDict)
                         self.trails.append(trail)
                     }
                 }
-                
             }
-            
             self.trailTableView.reloadData()
         })
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,7 +59,6 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         let trail: TrailData!
         trail = trails[indexPath.row]
         performSegueWithIdentifier("manageTrail", sender: trail)
-        
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

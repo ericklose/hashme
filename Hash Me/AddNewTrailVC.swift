@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class AddNewTrailVC: UIViewController {
     
     @IBOutlet weak var newTrailDate: UILabel!
