@@ -91,8 +91,8 @@ class Hasher {
      //   print("XXX: \(hasherInitDict)")
         
     }
-    
-    func downloadHasherDetails (completed: DownloadComplete) {
+
+    func downloadHasherDetails(completed: DownloadComplete) {
         DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
             //  print("snapshotY: \(snapshot)")
             
