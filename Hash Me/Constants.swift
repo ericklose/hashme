@@ -25,5 +25,3 @@ extension Dictionary where Value : Equatable {
         return self.filter { $1 == val }.map { $0.0 }
     }
 }
-
-typealias DownloadComplete = () -> ()

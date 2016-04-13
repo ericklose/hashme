@@ -40,46 +40,43 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         self.kennelListTableView.dataSource = self
         self.kennelListTableView.delegate = self
         
-        hasher.downloadHasherDetails { () -> () in
-            //this will be called after download is done
-            print("yeehaw")
-            
-        }
+   
         
-//        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
-//            //  print("snapshotY: \(snapshot)")
-//            
-//            if var hasherDict = snapshot.value as? Dictionary<String, AnyObject>{
-//                DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
-//                    if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
-//                        if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-//                            
-//                            for snap in snapshots {
-//                                
-//                                if let kennelDict2 = snap.value as? Dictionary<String, AnyObject> {
-//                                    let key = snap.key
-//                                    let name = kennelDict2["name"]!
-//                                    self.kennelAndNameDict[key] = (name as! String)
-//                                }
-//                            }
-//                            //                                print("kennelandnamedict: \(self.kennelAndNameDict)")
-//                        }
-//                    }
-//                    
-//                    hasherDict["addedKennelDict"] = self.kennelAndNameDict
-//                    //      print("hasherDictNew: \(hasherDict)")
-//                })
-//                
-//                self.hasher = Hasher(hasherInitId: KEY_UID, hasherInitDict: hasherDict)
-//                print("1:\(self.hasher.hasherPrimaryHashName)")
-//                
-//            }
-//            print("2:\(self.hasher.hasherPrimaryHashName)")
-//        
-//        })
+        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
+            //  print("snapshotY: \(snapshot)")
+
+            if var hasherDict = snapshot.value as? Dictionary<String, AnyObject>{
+                DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+                    if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
+                        if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+                            
+                            for snap in snapshots {
+                                
+                                if let kennelDict2 = snap.value as? Dictionary<String, AnyObject> {
+                                    let key = snap.key
+                                    let name = kennelDict2["name"]!
+                                    self.kennelAndNameDict[key] = (name as! String)
+                                }
+                            }
+                            //                                print("kennelandnamedict: \(self.kennelAndNameDict)")
+                        }
+                    }
+                    
+                    hasherDict["addedKennelDict"] = self.kennelAndNameDict
+                    //      print("hasherDictNew: \(hasherDict)")
+                })
+                
+              
+                self.hasher = Hasher(hasherInitId: KEY_UID, hasherInitDict: hasherDict)
+                print("1:\(self.hasher.hasherPrimaryHashName)")
+                
+            }
+            print("2:\(self.hasher.hasherPrimaryHashName)")
+        
+        })
         
         
-        //  print("3:\(self.hasher.hasherPrimaryHashName)")
+          print("3:\(hasher.hasherId)")
         
         //    print("hej hej!: \(hasherDict)")
         //   print("super test: \(hasher)")
@@ -112,9 +109,6 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-        testFunction()
-    }
     
     func addNewHashNameToFirebase(hashName: String!) {
         
@@ -139,9 +133,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         
     }
     
-    func testFunction () {
-        print("4: \(hasher.hasherNerdName)")
-    }
+ 
     
     func editNerdNameInFirebase(nerdName: String!) {
         
