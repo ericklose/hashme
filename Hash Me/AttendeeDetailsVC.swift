@@ -26,7 +26,7 @@ class AttendeeDetailsVC: UIViewController {
     @IBOutlet weak var specificAttendeeReducedPayReason: UITextField!
     
     var specificAttendee: Attendee!
-    var hashCash: Int { specificAttendee.hashCash}
+    var hashCash: Int = 15
     
     override func viewDidLoad() {
         super.viewDidLoad()
