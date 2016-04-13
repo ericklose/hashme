@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class AttendeeDetailsVC: UIViewController {
     
@@ -25,12 +26,12 @@ class AttendeeDetailsVC: UIViewController {
     @IBOutlet weak var specificAttendeeReducedPayReason: UITextField!
     
     var specificAttendee: Attendee!
-    var hashCash: Int = 15
+    var hashCash: Int { specificAttendee.hashCash}
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("catch: \(specificAttendee.hasherPrimaryHashName)")
+        
         specificAttendeeRelevantHashName.text = specificAttendee.hasherPrimaryHashName
         specificAttendeeNerdName.text = specificAttendee.hasherNerdName
         
@@ -61,6 +62,7 @@ class AttendeeDetailsVC: UIViewController {
         //self.trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : selectedValue])
         //self.trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : selectedValue])
     }
+    
     @IBAction func savespecificAttendeeDetails(sender: UIButton) {
         self.navigationController?.popViewControllerAnimated(true)
     }

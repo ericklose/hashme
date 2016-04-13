@@ -27,7 +27,7 @@ class Attendee: Hasher {
         if _attendeeRelevantHashName != nil {
             return _attendeeRelevantHashName
         } else {
-            return "No F'ing Name"
+            return ""
         }
     }
     
@@ -95,30 +95,22 @@ class Attendee: Hasher {
         
         self._attendeeRelevantTrailId = attendeeInitTrailId
         self.attendeeAttending = attendeeAttendingInit
-        // print("fulldict: \(attendeeInitDict)")
         
-        //ALL OF THE NAME STUFF NEEDS REVIEW ONCE WE MIGRATE MORE PEOPLE TO HOLLY S NEW STRUCTURE
         if let attendeeInitHashNamesDict = attendeeInitDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
             if let attendeeNameForThisKennel = attendeeInitHashNamesDict[attendeeInitKennelId] {
                 if attendeeNameForThisKennel as! NSObject == true {
-                    print("name source 1")
                     self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
                 } else if attendeeNameForThisKennel as! String == "primary" {
-                    print("name source 2")
                     self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
                 } else {
-                    print("name source 3")
                     self._attendeeRelevantHashName = attendeeNameForThisKennel as! String
                 }
             } else {
-                print("name source 4")
                 self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
             }
         } else {
-            print("name source 5")
             self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
         }
-        print("relevant name: \(self._attendeeRelevantHashName)")
         
         if let attendeeTrailsInfoDict = attendeeInitDict["trailsAttended"] as? Dictionary<String, AnyObject> {
             if let attendeeCurrentTrailInfo = attendeeTrailsInfoDict[attendeeRelevantTrailId] as? Dictionary<String, AnyObject> {

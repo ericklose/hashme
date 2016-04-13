@@ -163,7 +163,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        var specificAttendee: Attendee!
+        let specificAttendee: Attendee!
         
         if inSearchMode {
             specificAttendee = filteredHashers[indexPath.row]
@@ -179,6 +179,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             if let attendeeDetailsVC = segue.destinationViewController as? AttendeeDetailsVC {
                 if let attendeeInCell = sender as? Attendee {
                     attendeeDetailsVC.specificAttendee = attendeeInCell
+                    print("inside prep segue: \(attendeeInCell.hasherNerdName)")
                 }
             }
         }

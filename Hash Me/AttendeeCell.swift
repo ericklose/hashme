@@ -43,7 +43,7 @@ class AttendeeCell: UITableViewCell {
         trailAttendencePath = DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(attendee.hasherId)
         trailsAttendedPath = DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).childByAppendingPath("trailsAttended").childByAppendingPath(attendee.attendeeRelevantTrailId)
         
-        if attendee.hasherNerdName == "" {
+        if attendee.hasherNerdName == "" || attendee.hasherNerdName == "Incognito" {
             self.hasherNerdNameLbl.hidden = true
             self.hasherNerdName.hidden = false
             self.hasherNerdName.text = ""
@@ -83,6 +83,7 @@ class AttendeeCell: UITableViewCell {
             trailAttendencePath.updateChildValues(["trailAttendeePresent" : "true"])
             trailsAttendedPath.updateChildValues(["hasherAttendedTrail" : "true"])
         } else if hasherAttendingTrailToggle.on  == false {
+            hasherPaid.setOn(false, animated: true)
             trailAttendencePath.removeValue()
             trailsAttendedPath.removeValue()
         }
@@ -90,19 +91,21 @@ class AttendeeCell: UITableViewCell {
     
     @IBAction func hasherPaidToggleToggled(sender: UISwitch) {
         if hasherPaid.on == true {
-            hasherAttendingTrailToggle.on = true
-            toggleAttendingToggle(hasherAttendingTrailToggle)
+            hasherAttendingTrailToggle.setOn(true, animated: true)
+            toggleAttendingToggle(hasherPaid)
             trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : hashCash])
             trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : hashCash])
         } else if hasherPaid.on == false {
-            trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : 0])
-            trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : 0])
+            trailAttendencePath.childByAppendingPath("trailAttendeePaidAmt").removeValue()
+            trailsAttendedPath.childByAppendingPath("hasherPaidTrailAmt").removeValue()
         }
     }
     
     
     @IBAction func hasherNerdNameAdded(sender: UITextField) {
-        print("nerd name: \(self.hasherNerdName.text)")
+        if hasherNerdName.text != nil && hasherNerdName.text != "" {
+            DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).updateChildValues(["hasherNerdName" : hasherNerdName.text!])
+        }
     }
     
     
