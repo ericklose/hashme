@@ -30,7 +30,7 @@ class AttendeeDetailsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("catch: \(specificAttendee.hasherPrimaryHashName)")
+        print("catch: \(specificAttendee)")
         
         specificAttendeeRelevantHashName.text = specificAttendee.hasherPrimaryHashName
         specificAttendeeNerdName.text = specificAttendee.hasherNerdName
