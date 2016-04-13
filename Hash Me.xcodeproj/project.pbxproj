@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		47A685478A602CA8B763154C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5100A58A6D9E427296C7F2 /* Pods.framework */; };
+		A60007AB1CBEE3620040F15A /* KennelPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60007AA1CBEE3620040F15A /* KennelPickerVC.swift */; };
+		A60007AC1CBEE3620040F15A /* KennelPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60007AA1CBEE3620040F15A /* KennelPickerVC.swift */; };
+		A60007AD1CBEE3620040F15A /* KennelPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60007AA1CBEE3620040F15A /* KennelPickerVC.swift */; };
 		A6188D601C9A174600BAE354 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61929081C94912A00D8C945 /* AppDelegate.swift */; };
 		A6188D611C9A174700BAE354 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61929081C94912A00D8C945 /* AppDelegate.swift */; };
 		A6188D621C9A175300BAE354 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A61929111C94912A00D8C945 /* Assets.xcassets */; };
@@ -108,6 +111,7 @@
 /* Begin PBXFileReference section */
 		52927BA7EB0468E45C3E7B38 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		95A7A265369CD9D77AD603C0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A60007AA1CBEE3620040F15A /* KennelPickerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelPickerVC.swift; sourceTree = "<group>"; };
 		A61929051C94912A00D8C945 /* Hash Me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hash Me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A61929081C94912A00D8C945 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A619290A1C94912A00D8C945 /* TrailListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailListVC.swift; sourceTree = "<group>"; };
@@ -267,6 +271,7 @@
 				A619290A1C94912A00D8C945 /* TrailListVC.swift */,
 				A6CB71361C96210600F27D12 /* ManageTrailVC.swift */,
 				A6BA76641CBBF32A00D29C66 /* AttendeeDetailsVC.swift */,
+				A60007AA1CBEE3620040F15A /* KennelPickerVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -500,6 +505,7 @@
 				A6BA76611CBBE58600D29C66 /* AttendeeCell.swift in Sources */,
 				A6C7AEE61CA33D5E0080814C /* AttendeeData.swift in Sources */,
 				A6FB47591C9A0D2B00B370CD /* KennelListVC.swift in Sources */,
+				A60007AB1CBEE3620040F15A /* KennelPickerVC.swift in Sources */,
 				DAD2CF9F1C95F9960048C2C8 /* HasherData.swift in Sources */,
 				A6CB71371C96210600F27D12 /* ManageTrailVC.swift in Sources */,
 				A6BBA7AF1C9524690030DB53 /* TrailCell.swift in Sources */,
@@ -542,6 +548,7 @@
 				A6FB475E1C9A0D5700B370CD /* KennelData.swift in Sources */,
 				A6A0E3EF1C94AAB40003EE0E /* Constants.swift in Sources */,
 				A6FB475A1C9A0D2B00B370CD /* KennelListVC.swift in Sources */,
+				A60007AC1CBEE3620040F15A /* KennelPickerVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,6 +575,7 @@
 				A6FB475F1C9A0D5700B370CD /* KennelData.swift in Sources */,
 				A6A0E3F01C94AAB40003EE0E /* Constants.swift in Sources */,
 				A6FB475B1C9A0D2B00B370CD /* KennelListVC.swift in Sources */,
+				A60007AD1CBEE3620040F15A /* KennelPickerVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

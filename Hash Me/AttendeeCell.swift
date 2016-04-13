@@ -80,8 +80,8 @@ class AttendeeCell: UITableViewCell {
     
     @IBAction func toggleAttendingToggle(sender: UISwitch) {
         if hasherAttendingTrailToggle.on == true {
-            trailAttendencePath.updateChildValues(["trailAttendeePresent" : "true"])
-            trailsAttendedPath.updateChildValues(["hasherAttendedTrail" : "true"])
+            trailAttendencePath.updateChildValues(["trailAttendeePresent" : true])
+            trailsAttendedPath.updateChildValues(["hasherAttendedTrail" : true])
         } else if hasherAttendingTrailToggle.on  == false {
             hasherPaid.setOn(false, animated: true)
             trailAttendencePath.removeValue()

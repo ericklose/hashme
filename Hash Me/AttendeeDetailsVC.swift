@@ -26,11 +26,10 @@ class AttendeeDetailsVC: UIViewController {
     @IBOutlet weak var specificAttendeeReducedPayReason: UITextField!
     
     var specificAttendee: Attendee!
-    var hashCash: Int = 15
+    //var hashCash: Int = specificAttendee.hashCash
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("catch: \(specificAttendee)")
         
         specificAttendeeRelevantHashName.text = specificAttendee.hasherPrimaryHashName
         specificAttendeeNerdName.text = specificAttendee.hasherNerdName
@@ -39,10 +38,10 @@ class AttendeeDetailsVC: UIViewController {
         specificAttendeeVisitingFrom.text = specificAttendee.attendeeVisitingFrom
         
         
-        specificAttendeePaySlider.maximumValue = Float(((hashCash/20)+1)*20)
+//        specificAttendeePaySlider.maximumValue = Float(((specificAttendee.hashCash/20)+1)*20)
         specificAttendeePaySlider.setValue(Float(specificAttendee.attendeePaidAmount), animated: true)
         specificAttendeeMinPayLbl.text = "$0"
-        specificAttendeeMaxPayLbl.text = "$\((Int(hashCash/20)+1)*20)"
+//        specificAttendeeMaxPayLbl.text = "$\((Int(specificAttendee.hashCash/20)+1)*20)"
         specificAttendeeCurrentPayLbl.text = "$\(specificAttendee.attendeePaidAmount)"
         specificAttendeeReducedPayReason.text = specificAttendee.attendeePaidNotes
  

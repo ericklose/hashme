@@ -91,7 +91,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                             
                             if let thisTrailDict = atThisTrail[thisTrail] as? Dictionary<String, AnyObject> {
                                 
-                                if (thisTrailDict["hasherAttendedTrail"] as? String) != nil {
+                                if (thisTrailDict["hasherAttendedTrail"] as? Bool) == true {
                                     let hasherKey = hasherSnap.key
                                     let attendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: true)
                                     self.attendees.append(attendee)
@@ -231,7 +231,9 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         } else {
             
             var newHasher: Dictionary<String, AnyObject> = ["hasherPrimaryHashName": newHasherHashName.text!]
-            
+            var trailInfo: Dictionary<String, AnyObject> = ["trailAttendeePresent" : true]
+            var newHasherTrails: Dictionary<String, AnyObject> = ["hasherAttendedTrail": true]
+
             if newHasherNerdName.text != nil && newHasherNerdName.text != "" {
                 newHasher["hasherNerdName"] = newHasherNerdName.text
             }
@@ -251,19 +253,28 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             }
             
             if newHasherAttendingToggle.on == true {
-                var newHasherTrails: Dictionary<String, AnyObject> = ["hasherAttendedTrail": true]
                 if newHasherPaidToggle.on == true {
                     newHasherTrails["hasherPaidTrailAmt"] = Int(newHasherPaySlider.value)
+                    trailInfo["trailAttendeePaidAmt"] = Int(newHasherPaySlider.value)
                 }
                 if newHasherReducedPayReason.text != nil && newHasherReducedPayReason.text != "" {
                     newHasherTrails["hasherPaidReducedReason"] = newHasherReducedPayReason.text
+                    trailInfo["trailAttendeePaidReducedReason"] = newHasherReducedPayReason.text
                 }
-                newHasher["trailsAttended"] = newHasherTrails
+                //newHasherTrails[trails.trailKey] = newHasherTrails
+                //newHasher["trailsAttended"] = newHasherTrails
             }
             
             let firebasePost = DataService.ds.REF_HASHERS.childByAutoId()
             firebasePost.setValue(newHasher)
+            let newHasherId = firebasePost.key
             
+            let firebasePost2 = DataService.ds.REF_HASHERS.childByAppendingPath(newHasherId).childByAppendingPath("trailsAttended").childByAppendingPath(trails.trailKey)
+            firebasePost2.setValue(newHasherTrails)
+            
+            let firebaseTrailPost = DataService.ds.REF_TRAILS.childByAppendingPath(trails.trailKey).childByAppendingPath("trailAttendees").childByAppendingPath(newHasherId)
+            firebaseTrailPost.setValue(trailInfo)
+                
             newHasherHashName.text = ""
             newHasherHashName.placeholder = "Hash Name"
             newHasherHashName.backgroundColor = nil
