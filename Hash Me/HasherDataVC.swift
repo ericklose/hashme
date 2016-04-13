@@ -27,9 +27,9 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     var kennelChoice: String!
     var kennelChoiceId: String!
     var kennels = [KennelData]()
+    var hasherDict: Dictionary<String, AnyObject>!
     var hasher: Hasher!
     var kennelAndNameDict: [String: String] = [:]
-    var hasherDict: Dictionary<String, AnyObject>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
