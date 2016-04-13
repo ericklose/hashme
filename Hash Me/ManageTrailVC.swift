@@ -179,7 +179,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             if let attendeeDetailsVC = segue.destinationViewController as? AttendeeDetailsVC {
                 if let attendeeInCell = sender as? Attendee {
                     attendeeDetailsVC.specificAttendee = attendeeInCell
-                    print("inside prep segue: \(attendeeInCell.hasherNerdName)")
+                    print("inside prep segue: \(attendeeDetailsVC.specificAttendee.hasherNerdName)")
                 }
             }
         }
