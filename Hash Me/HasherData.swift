@@ -21,7 +21,6 @@ class Hasher {
     private var _hasherPrimaryHashName: String!
     private var _hasherPrimaryKennel: String!
     
-    var kennelAndNameDict: Dictionary<String, String>!
     
     var hasherId: String {
         return _hasherId
@@ -87,45 +86,7 @@ class Hasher {
         if let hasherPrimaryKennel = hasherInitDict["hasherPrimaryKennel"] as? String {
             self._hasherPrimaryKennel = hasherPrimaryKennel
         }
-        
-     //   print("XXX: \(hasherInitDict)")
-        
     }
-
-    func downloadHasherDetails(completed: DownloadComplete) {
-        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
-            //  print("snapshotY: \(snapshot)")
-            
-            if var hasherDict = snapshot.value as? Dictionary<String, AnyObject>{
-                DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
-                    if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
-                        if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                            
-                            for snap in snapshots {
-                                
-                                if let kennelDict2 = snap.value as? Dictionary<String, AnyObject> {
-                                    let key = snap.key
-                                    let name = kennelDict2["name"]!
-                                    
-                                    self.kennelAndNameDict[key] = (name as! String)
-                                }
-                            }
-                            //                                print("kennelandnamedict: \(self.kennelAndNameDict)")
-                        }
-                    }
-                    
-                    hasherDict["addedKennelDict"] = self.kennelAndNameDict
-                    //      print("hasherDictNew: \(hasherDict)")
-                })
-                
-                let hasher = Hasher(hasherInitId: KEY_UID, hasherInitDict: hasherDict)
-                print("1:\(hasher.hasherPrimaryHashName)")
-                
-            }
-         //   print("2:\(hasher.hasherPrimaryHashName)")
-            completed()
-            
-        })
-    }
+    
     
 }
