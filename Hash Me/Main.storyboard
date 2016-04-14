@@ -1494,6 +1494,7 @@
                     </view>
                     <connections>
                         <outlet property="kennelPicker" destination="vrh-oD-cQN" id="wJd-bp-bap"/>
+                        <outlet property="kennelSavedBtn" destination="Pw2-tj-Xvc" id="wU0-7O-SXW"/>
                         <outlet property="kennelSelected" destination="Qsz-ok-1Pz" id="a9b-gt-D7p"/>
                     </connections>
                 </viewController>
