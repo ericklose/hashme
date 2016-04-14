@@ -16,7 +16,6 @@ let KEY_UID = "uid"
 //Segues
 let SEGUE_LOGGED_IN = "loggedIn"
 
-
 //Status Codes
 let STATUS_ACCOUNT_NONEXIST = -8
 
@@ -25,3 +24,5 @@ extension Dictionary where Value : Equatable {
         return self.filter { $1 == val }.map { $0.0 }
     }
 }
+
+typealias DownloadComplete = () -> ()
