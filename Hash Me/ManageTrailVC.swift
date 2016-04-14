@@ -93,7 +93,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                                 
                                 if (thisTrailDict["hasherAttendedTrail"] as? Bool) == true {
                                     let hasherKey = hasherSnap.key
-                                    let attendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: true)
+                                    let attendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: true, attendeeInitTrailHashCash: self.trails.trailHashCash)
                                     self.attendees.append(attendee)
                                 } else {
                                     self.addPotential(hasherSnap.key, attendeeDataDict: attendeeDataDict)
@@ -113,7 +113,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func addPotential(hasherKey: String, attendeeDataDict: Dictionary <String, AnyObject>) {
-        let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false)
+        let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false, attendeeInitTrailHashCash: self.trails.trailHashCash)
         self.potentialAttendees.append(potentialAttendee)
     }
     
@@ -261,8 +261,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                     newHasherTrails["hasherPaidReducedReason"] = newHasherReducedPayReason.text
                     trailInfo["trailAttendeePaidReducedReason"] = newHasherReducedPayReason.text
                 }
-                //newHasherTrails[trails.trailKey] = newHasherTrails
-                //newHasher["trailsAttended"] = newHasherTrails
             }
             
             let firebasePost = DataService.ds.REF_HASHERS.childByAutoId()
@@ -286,7 +284,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             newHasherCurrentPayLbl.text = "$\(hashCash)"
             newHasherPaySlider.setValue(Float(hashCash), animated: true)
             newHasherReducedPayReason.text = ""
-            //self.navigationController?.popViewControllerAnimated(true)
             
         }
     }

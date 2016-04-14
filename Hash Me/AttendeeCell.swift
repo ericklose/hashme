@@ -98,6 +98,8 @@ class AttendeeCell: UITableViewCell {
         } else if hasherPaid.on == false {
             trailAttendencePath.childByAppendingPath("trailAttendeePaidAmt").removeValue()
             trailsAttendedPath.childByAppendingPath("hasherPaidTrailAmt").removeValue()
+            trailAttendencePath.childByAppendingPath("trailAttendeePaidReducedReason").removeValue()
+            trailsAttendedPath.childByAppendingPath("hasherPaidReducedReason").removeValue()
         }
     }
     
