@@ -71,10 +71,6 @@ class Hasher {
         }
     }
     
-    init (hasherInitId: String) {
-        self._hasherId = hasherInitId
-    }
-    
     
     init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>) {
         self._hasherId = hasherInitId
