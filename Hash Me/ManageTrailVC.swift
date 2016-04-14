@@ -215,7 +215,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     @IBAction func newHasherPaidToggled(sender: UISwitch) {
         if newHasherPaidToggle.on == true {
-            newHasherAttendingToggle.on = true
+            newHasherAttendingToggle.setOn(true, animated: true)
             newHasherCurrentPayLbl.text = "$\(hashCash)"
             newHasherPaySlider.setValue(Float(hashCash), animated: true)
         }

@@ -21,6 +21,8 @@ class Hasher {
     private var _hasherPrimaryHashName: String!
     private var _hasherPrimaryKennel: String!
     
+    var kennelAndNameDict: [String: String] = [:]
+    var hasher: Hasher!
     
     var hasherId: String {
         return _hasherId
@@ -69,7 +71,9 @@ class Hasher {
         }
     }
     
-
+    init (hasherInitId: String) {
+        self._hasherId = hasherInitId
+    }
     
     
     init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>) {
@@ -87,6 +91,5 @@ class Hasher {
             self._hasherPrimaryKennel = hasherPrimaryKennel
         }
     }
-    
     
 }
