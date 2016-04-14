@@ -13,6 +13,7 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet weak var kennelPicker: UIPickerView!
     @IBOutlet weak var kennelSelected: UILabel!
+    @IBOutlet weak var kennelSavedBtn: UIButton!
     
     var kennelPickerDict: Dictionary<String, String>!
     var kennelPickerNames = [String]()
@@ -75,9 +76,24 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         if self.kennelChoiceName == nil {
             kennelChoiceName = kennelPickerNames[0]
         }
-        
         selectKennel(kennelChoiceName)
+        let kennelIdToAdd = kennelChoiceId
+        let kennelNameToAdd = kennelChoiceName
+        //print("A ",kennelIdToAdd)
+        print("B ",kennelNameToAdd)
+        navigationController?.popViewControllerAnimated(true)
+
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if kennelSavedBtn === sender {
+            print("test17")
+        
+            selectKennel(kennelChoiceName)
+            let kennelIdToAdd = kennelChoiceId
+            let kennelNameToAdd = kennelChoiceName
+    }
     }
     
     func selectKennel (kennelChoice: String) {
@@ -114,7 +130,5 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         })
         
     }
-    
-
     
 }
