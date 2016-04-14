@@ -20,6 +20,7 @@ class Attendee: Hasher {
     private var _attendeeVirginSponsor: String!
     private var _attendeeVisitingTrail: Bool!
     private var _attendeeVisitingFrom: String!
+    private var _attendeeTrailHashCash: Int!
     
     var attendeeAttending: Bool!
     
@@ -28,6 +29,14 @@ class Attendee: Hasher {
             return _attendeeRelevantHashName
         } else {
             return ""
+        }
+    }
+    
+    var attendeeTrailHashCash: Int {
+        if _attendeeTrailHashCash != nil {
+            return _attendeeTrailHashCash
+        } else {
+            return 0
         }
     }
     
@@ -90,11 +99,12 @@ class Attendee: Hasher {
      */
     
     
-    convenience init(attendeeInitId: String, attendeeInitDict: Dictionary<String, AnyObject>, attendeeInitTrailId: String, attendeeInitKennelId: String, attendeeAttendingInit: Bool) {
+    convenience init(attendeeInitId: String, attendeeInitDict: Dictionary<String, AnyObject>, attendeeInitTrailId: String, attendeeInitKennelId: String, attendeeAttendingInit: Bool, attendeeInitTrailHashCash: Int) {
         self.init(hasherInitId: attendeeInitId, hasherInitDict: attendeeInitDict)
         
         self._attendeeRelevantTrailId = attendeeInitTrailId
         self.attendeeAttending = attendeeAttendingInit
+        self._attendeeTrailHashCash = attendeeInitTrailHashCash
         
         if let attendeeInitHashNamesDict = attendeeInitDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
             if let attendeeNameForThisKennel = attendeeInitHashNamesDict[attendeeInitKennelId] {

@@ -11,7 +11,7 @@ import Firebase
 
 class AttendeeDetailsVC: UIViewController {
     
-    @IBOutlet weak var specificAttendeeRelevantHashName: UITextField!
+    @IBOutlet weak var specificAttendeeRelevantHashName: UILabel!
     @IBOutlet weak var specificAttendeeNerdName: UITextField!
     @IBOutlet weak var specificAttendeeAttendingToggle: UISwitch!
     @IBOutlet weak var specificAttendeePaidToggle: UISwitch!
@@ -24,12 +24,16 @@ class AttendeeDetailsVC: UIViewController {
     @IBOutlet weak var specificAttendeeReducedPayReason: UITextField!
     
     var specificAttendee: Attendee!
-    var hashCash: Int = 99 //specificAttendee.hashCash
+    
+    var hashCash: Int = 0
     var trailAttendencePath = DataService.ds.REF_TRAILS
     var trailsAttendedPath = DataService.ds.REF_HASHERS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       // let randomVariable = DataService.ds.REF_TRAILS.childByAppendingPath(specificAttendee.attendeeRelevantTrailId).childByAppendingPath("trailHashCash")
+        hashCash = specificAttendee.attendeeTrailHashCash
         
         specificAttendeeRelevantHashName.text = specificAttendee.hasherPrimaryHashName
         specificAttendeeNerdName.text = specificAttendee.hasherNerdName
@@ -88,11 +92,20 @@ class AttendeeDetailsVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func updateNerdName(sender: UITextField) {
+        if specificAttendeeNerdName.text == "" || specificAttendeeNerdName.text == nil {
+            DataService.ds.REF_HASHERS.childByAppendingPath(specificAttendee.hasherId).childByAppendingPath("hasherNerdName").removeValue()
+        } else {
+            DataService.ds.REF_HASHERS.childByAppendingPath(specificAttendee.hasherId).updateChildValues(["hasherNerdName" : specificAttendeeNerdName.text!])
+        }
+    }
+    
     @IBAction func toggleAttendingToggle(sender: UISwitch) {
         if specificAttendeeAttendingToggle.on == true {
-            trailAttendencePath.updateChildValues(["trailAttendeePresent" : "true"])
-            trailsAttendedPath.updateChildValues(["hasherAttendedTrail" : "true"])
+            trailAttendencePath.updateChildValues(["trailAttendeePresent" : true])
+            trailsAttendedPath.updateChildValues(["hasherAttendedTrail" : true])
         } else if specificAttendeeAttendingToggle.on  == false {
+            specificAttendeePaidToggle.setOn(false, animated: true)
             trailAttendencePath.removeValue()
             trailsAttendedPath.removeValue()
         }
@@ -100,6 +113,8 @@ class AttendeeDetailsVC: UIViewController {
     
     @IBAction func hasherPaidFullToggleToggled(sender: UISwitch) {
         if specificAttendeePaidToggle.on == true {
+            specificAttendeeAttendingToggle.setOn(true, animated: true)
+            toggleAttendingToggle(specificAttendeePaidToggle)
             trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : hashCash])
             trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : hashCash])
             specificAttendeeCurrentPayLbl.text = "$\(hashCash)"
@@ -107,22 +122,23 @@ class AttendeeDetailsVC: UIViewController {
         } else if specificAttendeePaidToggle.on == false {
             trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : 0])
             trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : 0])
+            trailAttendencePath.childByAppendingPath("trailAttendeePaidReducedReason").removeValue()
+            trailsAttendedPath.childByAppendingPath("hasherPaidReducedReason").removeValue()
+            specificAttendeeReducedPayReason.text = ""
         }
     }
     
     @IBAction func sliderValueChanged(sender: UISlider) {
         let selectedValue = Int(sender.value)
         
-        if Int(selectedValue) > Int(hashCash) {
+        if Int(selectedValue) > 0 {
             specificAttendeePaidToggle.setOn(true, animated: true)
         }
         
         specificAttendeeCurrentPayLbl.text = "$" + String(stringInterpolationSegment: selectedValue)
-        
         trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : selectedValue])
         trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : selectedValue])
     }
-    
     
     @IBAction func hasherPaidDiscountReason(sender: UITextField) {
         if specificAttendeeReducedPayReason.text == "" {
@@ -134,7 +150,6 @@ class AttendeeDetailsVC: UIViewController {
         }
     }
     
-    
     @IBAction func hasherVirginSponsorIs(sender: UITextField) {
         if specificAttendeeVirginSponsorIs.text == "" {
             trailAttendencePath.childByAppendingPath("trailAttendeeVirginSponsor").removeValue()
@@ -145,7 +160,6 @@ class AttendeeDetailsVC: UIViewController {
         }
     }
     
-    
     @IBAction func hasherIsVisitingFrom(sender: UITextField) {
         if specificAttendeeVisitingFrom.text == "" {
             trailAttendencePath.childByAppendingPath("trailAttendeeVisitingFrom").removeValue()
@@ -155,8 +169,6 @@ class AttendeeDetailsVC: UIViewController {
             trailsAttendedPath.updateChildValues(["hasherVisitingFrom" : specificAttendeeVisitingFrom.text!])
         }
     }
-    
-    
     
     @IBAction func savespecificAttendeeDetails(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)
