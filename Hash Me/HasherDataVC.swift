@@ -31,6 +31,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     var hasher: Hasher!
     var kennelAndNameDict: [String: String] = [:]
     var kennelAndHashNameDecodeDict: [String: String] = [:]
+    var kennelMembershipIds = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,10 +52,12 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     
     
     func updateHasherDisplay() {
-
-        print("DL: \(self.hasher.hasherNerdName)")
         self.nerdNameLbl.text = self.hasher.hasherNerdName
         
+//        print("TEST5: \(kennelMembershipIds)")
+//        print("KD: \(kennelAndNameDict)")
+//        print("decode: \(kennelAndHashNameDecodeDict)")
+        kennelListTableView.reloadData()
     }
     
     
@@ -83,7 +86,36 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                     
                     self.hasher = Hasher(hasherInitId: KEY_UID, hasherInitDict: hasherDict)
                     print("1:\(self.hasher.hasherPrimaryHashName)")
-                    self.createKennelsAndNamesDisplay(hasherDict, kennelAndHashNameDecodeDict: self.kennelAndHashNameDecodeDict)
+                    
+                    
+                    
+                    if let hashNamesAndKennels = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
+                        print("printme: \(hashNamesAndKennels)")
+                        
+                        for (key, value) in hashNamesAndKennels {
+                            
+                            if value as? String == "primary" {
+                                
+                                self.kennelAndHashNameDecodeDict[key] = self.hasher.hasherPrimaryHashName
+                                
+                            } else if value as! NSObject == true {
+                                self.kennelAndHashNameDecodeDict[key] = ""
+                                
+                            }else {
+                                self.kennelAndHashNameDecodeDict[key] = (value as! String)
+                            }
+                            
+                        }
+                        print("kennelAndNameDecodeDict: \(self.kennelAndHashNameDecodeDict)")
+                        
+                    }
+                    self.kennelMembershipIds = [String](self.kennelAndHashNameDecodeDict.keys)
+                    print("TEST: \(self.kennelMembershipIds)")
+                    
+                    
+                    
+                    
+//                    self.createKennelsAndNamesDisplay(hasherDict, kennelAndHashNameDecodeDict: self.kennelAndHashNameDecodeDict)
                     completed()
                 })
             }
@@ -93,28 +125,32 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     }
     
 // TRY SENDING CONFIGURE CELL BOTH THE NEW DICTIONARY AND KENNEL DICT TO INCLUDE KENNELID
-    func createKennelsAndNamesDisplay (hasherDict: Dictionary<String, AnyObject>, var kennelAndHashNameDecodeDict: Dictionary<String, String>) {
-
-            if let hashNamesAndKennels = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
-                print("printme: \(hashNamesAndKennels)")
-
-                for (key, value) in hashNamesAndKennels {
-
-                    if value as? String == "primary" {
-
-                        kennelAndHashNameDecodeDict[key] = hasher.hasherPrimaryHashName
-                        
-                    } else if value as! NSObject == true {
-                        kennelAndHashNameDecodeDict[key] = ""
-                        
-                    }else {
-                        kennelAndHashNameDecodeDict[key] = (value as! String)
-                    }
-                    
-                }
-                print("kennelAndNameDecodeDict: \(kennelAndHashNameDecodeDict)")
-            }
-    }
+//    func createKennelsAndNamesDisplay (hasherDict: Dictionary<String, AnyObject>, var kennelAndHashNameDecodeDict: Dictionary<String, String>) {
+//
+//            if let hashNamesAndKennels = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
+//                print("printme: \(hashNamesAndKennels)")
+//
+//                for (key, value) in hashNamesAndKennels {
+//
+//                    if value as? String == "primary" {
+//
+//                        kennelAndHashNameDecodeDict[key] = hasher.hasherPrimaryHashName
+//                        
+//                    } else if value as! NSObject == true {
+//                        kennelAndHashNameDecodeDict[key] = ""
+//                        
+//                    }else {
+//                        kennelAndHashNameDecodeDict[key] = (value as! String)
+//                    }
+//                    
+//                }
+//                print("kennelAndNameDecodeDict: \(kennelAndHashNameDecodeDict)")
+//                
+//            }
+//        kennelMembershipIds = [String](kennelAndHashNameDecodeDict.keys)
+//        print("TEST: \(kennelMembershipIds)")
+//
+//    }
     
     
     
@@ -283,7 +319,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return kennelMembershipIds.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -291,11 +327,11 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let kennelMembershipId = [String](kennelAndHashNameDecodeDict.keys)[indexPath.row]
-        //)trails[indexPath.row]
+//        print("TESTTWOkennelandhashnamedecodedict: \(kennelAndHashNameDecodeDict)")
+//        print("TESTkennelandnamedict: \(kennelAndNameDict)")
+        let kennelMembershipId = kennelMembershipIds[indexPath.row]
         if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? HasherCell {
-            cell.configureCell(kennelMembershipId)
+            cell.configureCell(kennelMembershipId, kennelAndHashNameDecodeDict: kennelAndHashNameDecodeDict, kennelAndNameDict: kennelAndNameDict)
             return cell
         } else {
             return HasherCell()
