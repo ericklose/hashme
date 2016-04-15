@@ -40,6 +40,10 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     @IBOutlet weak var topContentBlock: UIView!
     
+    var newHasher: Dictionary<String, AnyObject> = [:]
+    var trailInfo: Dictionary<String, AnyObject> = ["trailAttendeePresent" : true]
+    var newHasherTrails: Dictionary<String, AnyObject> = ["hasherAttendedTrail": true]
+    
     
     var trails: TrailData!
     var attendees = [Attendee]()
@@ -143,7 +147,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        //let thisAttendee = trailRoster[indexPath.row]
         if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
             
             let hasherResult: Attendee!
@@ -224,11 +227,17 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
             if sourceViewController.kennelChoiceId == nil {
-                //WHAT HAPPENS IF NIL??
+                newHasher["hasherPrimaryKennel"] = trails.trailKennel
+                let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [trails.trailKennel: "primary"]
+                newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
             } else {
                 newHasherVisitorFrom.text = sourceViewController.kennelChoiceName
-//                trailAttendencePath.updateChildValues(["trailAttendeeVisitingFrom" : sourceViewController.kennelChoiceId])
-//                trailsAttendedPath.updateChildValues(["hasherVisitingFrom" : sourceViewController.kennelChoiceId])
+                newHasher["hasherPrimaryKennel"] = newHasherVisitorFrom.text
+                let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [sourceViewController.kennelChoiceId: "primary"]
+                newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
+                newHasherTrails["hasherVisitingFrom"] = sourceViewController.kennelChoiceId
+                trailInfo["trailAttendeeVisitingFrom"] = sourceViewController.kennelChoiceId
+                newHasherTrails["hasherVisitedKennel"] = trails.trailKennel
             }
         }
     }
@@ -241,23 +250,10 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             newHasherHashName.backgroundColor = UIColor.redColor()
             
         } else {
-            
-            var newHasher: Dictionary<String, AnyObject> = ["hasherPrimaryHashName": newHasherHashName.text!]
-            var trailInfo: Dictionary<String, AnyObject> = ["trailAttendeePresent" : true]
-            var newHasherTrails: Dictionary<String, AnyObject> = ["hasherAttendedTrail": true]
+            newHasher["hasherPrimaryHashName"] = newHasherHashName.text!
 
             if newHasherNerdName.text != nil && newHasherNerdName.text != "" {
                 newHasher["hasherNerdName"] = newHasherNerdName.text
-            }
-            
-            if newHasherVisitorFrom.text == nil || newHasherVisitorFrom.text == "" {
-                newHasher["hasherPrimaryKennel"] = trails.trailKennel
-                let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [trails.trailKennel: "primary"]
-                newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
-            } else {
-                newHasher["hasherPrimaryKennel"] = newHasherVisitorFrom.text
-                let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [newHasherVisitorFrom.text!: "primary"]
-                newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
             }
             
             if newHasherVirginSponsorIs.text != nil && newHasherVirginSponsorIs.text != "" {
@@ -284,7 +280,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             let firebaseTrailPost = DataService.ds.REF_TRAILS.childByAppendingPath(trails.trailKey).childByAppendingPath("trailAttendees").childByAppendingPath(newHasherId)
             firebaseTrailPost.setValue(trailInfo)
-                
+            
             newHasherHashName.text = ""
             newHasherHashName.placeholder = "Hash Name"
             newHasherHashName.backgroundColor = nil

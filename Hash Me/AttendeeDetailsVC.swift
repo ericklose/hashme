@@ -32,7 +32,7 @@ class AttendeeDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       // let randomVariable = DataService.ds.REF_TRAILS.childByAppendingPath(specificAttendee.attendeeRelevantTrailId).childByAppendingPath("trailHashCash")
+        // let randomVariable = DataService.ds.REF_TRAILS.childByAppendingPath(specificAttendee.attendeeRelevantTrailId).childByAppendingPath("trailHashCash")
         hashCash = specificAttendee.attendeeTrailHashCash
         
         specificAttendeeRelevantHashName.text = specificAttendee.hasherPrimaryHashName
@@ -165,7 +165,7 @@ class AttendeeDetailsVC: UIViewController {
             trailAttendencePath.childByAppendingPath("trailAttendeeVisitingFrom").removeValue()
             trailsAttendedPath.childByAppendingPath("hasherVisitingFrom").removeValue()
         } else {
-
+            
         }
     }
     
@@ -180,10 +180,10 @@ class AttendeeDetailsVC: UIViewController {
                 trailAttendencePath.childByAppendingPath("trailAttendeeVisitingFrom").removeValue()
                 trailsAttendedPath.childByAppendingPath("hasherVisitingFrom").removeValue()
             } else {
-            specificAttendeeVisitingFrom.text = sourceViewController.kennelChoiceName
-            trailAttendencePath.updateChildValues(["trailAttendeeVisitingFrom" : sourceViewController.kennelChoiceId])
-            trailsAttendedPath.updateChildValues(["hasherVisitingFrom" : sourceViewController.kennelChoiceId])
-        }
+                specificAttendeeVisitingFrom.text = sourceViewController.kennelChoiceName
+                trailAttendencePath.updateChildValues(["trailAttendeeVisitingFrom" : sourceViewController.kennelChoiceId])
+                trailsAttendedPath.updateChildValues(["hasherVisitingFrom" : sourceViewController.kennelChoiceId])
+            }
         }
     }
 }
