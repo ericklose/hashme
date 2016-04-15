@@ -25,10 +25,11 @@ class HasherCell: UITableViewCell {
     }
     
 
-    func configureCell(kennelId: String, hashName: String) {
+    func configureCell(kennelAndNamePair: String) {
     
         print("hello")
-        print("hashName: \(hashName)")
+        print("kennelandnamepair: \(kennelAndNamePair)")
+        kennelNameLbl.text = kennelAndNamePair
         
     
 }
