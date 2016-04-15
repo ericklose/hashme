@@ -16,7 +16,7 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var kennelSavedBtn: UIButton!
     
     var kennelPickerDict: Dictionary<String, String>!
-    var kennelPickerNames = [String]()
+    var kennelPickerNames = ["-Select Kennel-"]
     var kennelChoiceName: String!
     var kennelChoiceId: String!
     var kennelDecoderDict: [String: String] = [:]
@@ -82,7 +82,7 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         //        if self.kennelChoiceName == nil {
         //            kennelChoiceName = kennelPickerNames[0]
         //        }
-        if self.kennelChoiceName != nil {
+        if self.kennelChoiceName != nil && self.kennelChoiceName != "-Select Kennel-" {
             kennelChoiceId = kennelDecoderDict[kennelChoiceName]!
         } else {
             kennelChoiceId = nil
@@ -97,7 +97,6 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 
                 for snapshot in kennelSnapshots {
                     if let kennelNames = snapshot.value as? Dictionary<String, AnyObject> {
-                        //print("2: \(kennelNames)")
                         let kennelName = kennelNames["name"]!
                         self.kennelChoiceId = self.kennelDecoderDict[kennelName as! String]
                     }

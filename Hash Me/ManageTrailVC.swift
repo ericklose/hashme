@@ -173,7 +173,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         } else {
             specificAttendee = trailRoster[indexPath.row]
         }
-        print("hi: \(specificAttendee.hasherPrimaryHashName)")
         performSegueWithIdentifier("attendeeDetails", sender: specificAttendee)
     }
     
@@ -182,7 +181,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             if let attendeeDetailsVC = segue.destinationViewController as? AttendeeDetailsVC {
                 if let attendeeInCell = sender as? Attendee {
                     attendeeDetailsVC.specificAttendee = attendeeInCell
-                    print("inside prep segue: \(attendeeDetailsVC.specificAttendee.hasherNerdName)")
                 }
             }
         }
@@ -211,9 +209,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     @IBAction func sliderValueChanged(sender: UISlider) {
         let selectedValue = Int(sender.value)
-        
         newHasherCurrentPayLbl.text = "$" + String(stringInterpolationSegment: selectedValue)
-        
     }
     
     @IBAction func newHasherPaidToggled(sender: UISwitch) {
@@ -227,6 +223,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
             if sourceViewController.kennelChoiceId == nil {
+                newHasherVisitorFrom.text = ""
                 newHasher["hasherPrimaryKennel"] = trails.trailKennel
                 let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [trails.trailKennel: "primary"]
                 newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
