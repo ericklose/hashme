@@ -91,7 +91,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 
     }
     
-
+// TRY SENDING CONFIGURE CELL BOTH THE NEW DICTIONARY AND KENNEL DICT TO INCLUDE KENNELID
     func createKennelsAndNamesDisplay (hasherDict: Dictionary<String, AnyObject>) {
         print("hasherDict: \(hasherDict)")
       //  print("primaryhashname: \(hasher.hasherPrimaryHashName)")
