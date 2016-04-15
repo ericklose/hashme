@@ -236,8 +236,8 @@
 				A6CB713A1C9644FF00F27D12 /* Main.storyboard */,
 				A61929111C94912A00D8C945 /* Assets.xcassets */,
 				A61929131C94912A00D8C945 /* LaunchScreen.storyboard */,
-				A61929081C94912A00D8C945 /* AppDelegate.swift */,
 				A61929161C94912A00D8C945 /* Info.plist */,
+				A61929081C94912A00D8C945 /* AppDelegate.swift */,
 			);
 			path = "Hash Me";
 			sourceTree = "<group>";

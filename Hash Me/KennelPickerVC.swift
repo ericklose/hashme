@@ -19,6 +19,7 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     var kennelPickerNames = [String]()
     var kennelChoiceName: String!
     var kennelChoiceId: String!
+    var kennelDecoderDict: [String: String] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,20 +39,26 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func loadKennelData(completed: DownloadComplete) {
         DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
-            
-            if let kennelSnapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+            if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
                 
-                for snapshot in kennelSnapshots {
+                if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
                     
-                    if let kennelNames = snapshot.value as? Dictionary<String, AnyObject> {
-                        let kennelName = kennelNames["name"]!
-                        self.kennelPickerNames.append(kennelName as! String)
+                    for snap in snapshots {
+                        if let kennelDict2 = snap.value as? Dictionary<String, AnyObject> {
+                            let kennelKey = snap.key
+                            let kennelName = kennelDict2["name"]!
+                            self.kennelPickerNames.append(kennelName as! String)
+                            self.kennelDecoderDict[kennelName as! String] = (kennelKey)
+                        }
                     }
                 }
             }
+            print(self.kennelDecoderDict)
             completed()
         })
     }
+    
+    
     
     func numberOfComponentsInPickerView(kennelPicker: UIPickerView) -> Int {
         return 1
@@ -68,33 +75,21 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func pickerView(kennelPicker: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         kennelSelected.text = kennelPickerNames[row]
         self.kennelChoiceName = kennelPickerNames[row]
-        //print(kennelChoice)
     }
     
     
     @IBAction func kennelPickerSaved(sender: UIButton) {
-        if self.kennelChoiceName == nil {
-            kennelChoiceName = kennelPickerNames[0]
+        //        if self.kennelChoiceName == nil {
+        //            kennelChoiceName = kennelPickerNames[0]
+        //        }
+        if self.kennelChoiceName != nil {
+            kennelChoiceId = kennelDecoderDict[kennelChoiceName]!
+        } else {
+            kennelChoiceId = nil
         }
-        selectKennel(kennelChoiceName)
-        let kennelIdToAdd = kennelChoiceId
-        let kennelNameToAdd = kennelChoiceName
-        //print("A ",kennelIdToAdd)
-        print("B ",kennelNameToAdd)
-        //navigationController?.popViewControllerAnimated(true)
-
-        
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-            print("test17")
-        
-            selectKennel(kennelChoiceName)
-            let kennelIdToAdd = kennelChoiceId
-            let kennelNameToAdd = kennelChoiceName
-    }
-    
-    func selectKennel (kennelChoice: String) {
+    func selectKennel(kennelChoice: String) {
         
         DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
             
@@ -102,31 +97,12 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 
                 for snapshot in kennelSnapshots {
                     if let kennelNames = snapshot.value as? Dictionary<String, AnyObject> {
+                        //print("2: \(kennelNames)")
                         let kennelName = kennelNames["name"]!
-                        if kennelName as! String == kennelChoice {
-                            self.kennelChoiceId = snapshot.key
-                        }
+                        self.kennelChoiceId = self.kennelDecoderDict[kennelName as! String]
                     }
                 }
             }
         })
-        
-        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
-            
-            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
-                if let kennelDict = hasherDict["hasherKennelMemberships"] as? Dictionary<String, AnyObject> {
-                    if (kennelDict[self.kennelChoiceId] != nil) {
-                        // checking to make sure hasher isn't already a member of given kennel
-                        
-                    } else {
-                        let addKennel = ["\(self.kennelChoiceId)": "true"]
-                        let kennelPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)/hasherKennelMemberships")
-                        kennelPath.updateChildValues(addKennel)
-                    }
-                }
-            }
-        })
-        
     }
-    
 }
