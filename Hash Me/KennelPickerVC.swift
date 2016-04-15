@@ -81,19 +81,17 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let kennelNameToAdd = kennelChoiceName
         //print("A ",kennelIdToAdd)
         print("B ",kennelNameToAdd)
-        navigationController?.popViewControllerAnimated(true)
+        //navigationController?.popViewControllerAnimated(true)
 
         
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if kennelSavedBtn === sender {
             print("test17")
         
             selectKennel(kennelChoiceName)
             let kennelIdToAdd = kennelChoiceId
             let kennelNameToAdd = kennelChoiceName
-    }
     }
     
     func selectKennel (kennelChoice: String) {

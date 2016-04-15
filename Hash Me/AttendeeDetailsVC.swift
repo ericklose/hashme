@@ -174,7 +174,7 @@ class AttendeeDetailsVC: UIViewController {
         navigationController?.popViewControllerAnimated(true)
     }
     
-    @IBAction func unwindFromKennelPickerVC(sender: UIStoryboardSegue) {
+    @IBAction func getAttendeeDetailsVCFromKennelPickerVC(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? KennelPickerVC/*, kennelIdToAdd = sourceViewController.kennelChoiceId, kennelNameToAdd = sourceViewController.kennelChoiceName */{
             print("are we here?")
             specificAttendeeVisitingFrom.text = sourceViewController.kennelChoiceName
