@@ -283,7 +283,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return kennelAndHashNameDecodeDict.count
+        return 1
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -292,28 +292,16 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        for (key, value) in kennelAndHashNameDecodeDict {
+        let kennelMembershipId = [String](kennelAndHashNameDecodeDict.keys)[indexPath.row]
+        //)trails[indexPath.row]
         if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? HasherCell {
-            
-            
-                let kennelId = key
-                let hashName = value
-            
-            
-            cell.configureCell(kennelId, hashName: hashName)
+            cell.configureCell(kennelMembershipId)
             return cell
-           
-            }
-        else {
+        } else {
             return HasherCell()
-            }
         }
-
-//        return cell
-    return HasherCell()
+        
     }
-    
-
     
     
 }
