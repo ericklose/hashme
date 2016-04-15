@@ -15,8 +15,8 @@ class AttendeeDetailsVC: UIViewController {
     @IBOutlet weak var specificAttendeeNerdName: UITextField!
     @IBOutlet weak var specificAttendeeAttendingToggle: UISwitch!
     @IBOutlet weak var specificAttendeePaidToggle: UISwitch!
-    @IBOutlet weak var specificAttendeeVisitingFrom: UITextField!
-    @IBOutlet weak var specificAttendeeVirginSponsorIs: UITextField!
+    @IBOutlet weak var specificAttendeeVisitingFrom: UILabel!
+    @IBOutlet weak var specificAttendeeVirginSponsorIs: UILabel!
     @IBOutlet weak var specificAttendeeMinPayLbl: UILabel!
     @IBOutlet weak var specificAttendeeMaxPayLbl: UILabel!
     @IBOutlet weak var specificAttendeeCurrentPayLbl: UILabel!
@@ -32,14 +32,13 @@ class AttendeeDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // let randomVariable = DataService.ds.REF_TRAILS.childByAppendingPath(specificAttendee.attendeeRelevantTrailId).childByAppendingPath("trailHashCash")
         hashCash = specificAttendee.attendeeTrailHashCash
         
         specificAttendeeRelevantHashName.text = specificAttendee.hasherPrimaryHashName
         specificAttendeeNerdName.text = specificAttendee.hasherNerdName
         
-        specificAttendeeVirginSponsorIs.text = specificAttendee.attendeeVirginSponsor
         specificAttendeeVisitingFrom.text = specificAttendee.attendeeVisitingFrom
+        specificAttendeeVirginSponsorIs.text = specificAttendee.attendeeVirginSponsor
         
         
         specificAttendeePaySlider.maximumValue = Float(((hashCash/20)+1)*20)
@@ -48,10 +47,6 @@ class AttendeeDetailsVC: UIViewController {
         specificAttendeeMaxPayLbl.text = "$\((Int(hashCash/20)+1)*20)"
         specificAttendeeCurrentPayLbl.text = "$\(specificAttendee.attendeePaidAmount)"
         specificAttendeeReducedPayReason.text = specificAttendee.attendeePaidNotes
-        
-        
-        
-        //hashCash = hashCash
         
         trailAttendencePath = DataService.ds.REF_TRAILS.childByAppendingPath(specificAttendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(specificAttendee.hasherId)
         trailsAttendedPath = DataService.ds.REF_HASHERS.childByAppendingPath(specificAttendee.hasherId).childByAppendingPath("trailsAttended").childByAppendingPath(specificAttendee.attendeeRelevantTrailId)
@@ -160,14 +155,14 @@ class AttendeeDetailsVC: UIViewController {
         }
     }
     
-    @IBAction func hasherIsVisitingFrom(sender: UITextField) {
-        if specificAttendeeVisitingFrom.text == "" {
-            trailAttendencePath.childByAppendingPath("trailAttendeeVisitingFrom").removeValue()
-            trailsAttendedPath.childByAppendingPath("hasherVisitingFrom").removeValue()
-        } else {
-            
-        }
-    }
+//    @IBAction func hasherIsVisitingFrom(sender: UIGestureRecognizer) {
+//        if specificAttendeeVisitingFrom.text == "" {
+//            trailAttendencePath.childByAppendingPath("trailAttendeeVisitingFrom").removeValue()
+//            trailsAttendedPath.childByAppendingPath("hasherVisitingFrom").removeValue()
+//        } else {
+//            
+//        }
+//    }
     
     @IBAction func savespecificAttendeeDetails(sender: UIButton) {
         
@@ -177,6 +172,7 @@ class AttendeeDetailsVC: UIViewController {
     @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
             if sourceViewController.kennelChoiceId == nil {
+                specificAttendeeVisitingFrom.text = ""
                 trailAttendencePath.childByAppendingPath("trailAttendeeVisitingFrom").removeValue()
                 trailsAttendedPath.childByAppendingPath("hasherVisitingFrom").removeValue()
             } else {

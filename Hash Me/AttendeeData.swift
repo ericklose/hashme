@@ -16,9 +16,7 @@ class Attendee: Hasher {
     private var _attendeePaidAmount: Int!
     private var _attendeePaidNotes: String!
     private var _attendeeHomeKennel: String!
-    private var _attendeeVirginTrail: Bool!
     private var _attendeeVirginSponsor: String!
-    private var _attendeeVisitingTrail: Bool!
     private var _attendeeVisitingFrom: String!
     private var _attendeeTrailHashCash: Int!
     
@@ -60,27 +58,11 @@ class Attendee: Hasher {
         }
     }
     
-    var attendeeVirginTrail: Bool {
-        if _attendeeVirginTrail != nil {
-            return _attendeeVirginTrail
-        } else {
-            return false
-        }
-    }
-    
     var attendeeVirginSponsor: String {
         if _attendeeVirginSponsor != nil {
             return _attendeeVirginSponsor
         } else {
             return ""
-        }
-    }
-    
-    var attendeeVisitingTrail: Bool {
-        if _attendeeVisitingTrail != nil {
-            return _attendeeVisitingTrail
-        } else {
-            return false
         }
     }
     
@@ -133,19 +115,11 @@ class Attendee: Hasher {
                     self._attendeePaidNotes = initPaidReducedReason
                 }
                 
-                if let initIsVirgin = attendeeCurrentTrailInfo["hasherVirginTrail"] as? Bool {
-                    self._attendeeVirginTrail = initIsVirgin
-                }
-                
                 if let initVirginSponsor = attendeeCurrentTrailInfo["hasherVirginSponsor"] as? String {
                     self._attendeeVirginSponsor = initVirginSponsor
                 }
                 
-                if let initVisitor = attendeeCurrentTrailInfo["hasherVisiting"] as? Bool {
-                    self._attendeeVisitingTrail = initVisitor
-                }
-                
-                if let initVisitingFrom = attendeeCurrentTrailInfo["hasherVistingFrom"] as? String {
+                if let initVisitingFrom = attendeeCurrentTrailInfo["hasherVisitingFrom"] as? String {
                     self._attendeeVisitingFrom = initVisitingFrom
                 }
             }
