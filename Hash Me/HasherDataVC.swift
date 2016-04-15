@@ -30,6 +30,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     var hasherDict: Dictionary<String, AnyObject>!
     var hasher: Hasher!
     var kennelAndNameDict: [String: String] = [:]
+    var kennelAndHashNameDecodeDict: [String: String] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +83,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                     
                     self.hasher = Hasher(hasherInitId: KEY_UID, hasherInitDict: hasherDict)
                     print("1:\(self.hasher.hasherPrimaryHashName)")
-                    self.createKennelsAndNamesDisplay(hasherDict)
+                    self.createKennelsAndNamesDisplay(hasherDict, kennelAndHashNameDecodeDict: self.kennelAndHashNameDecodeDict)
                     completed()
                 })
             }
@@ -92,27 +93,26 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     }
     
 // TRY SENDING CONFIGURE CELL BOTH THE NEW DICTIONARY AND KENNEL DICT TO INCLUDE KENNELID
-    func createKennelsAndNamesDisplay (hasherDict: Dictionary<String, AnyObject>) {
-        print("hasherDict: \(hasherDict)")
-      //  print("primaryhashname: \(hasher.hasherPrimaryHashName)")
+    func createKennelsAndNamesDisplay (hasherDict: Dictionary<String, AnyObject>, var kennelAndHashNameDecodeDict: Dictionary<String, String>) {
+
             if let hashNamesAndKennels = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
                 print("printme: \(hashNamesAndKennels)")
-    
+
                 for (key, value) in hashNamesAndKennels {
-                    
+
                     if value as? String == "primary" {
+
+                        kennelAndHashNameDecodeDict[key] = hasher.hasherPrimaryHashName
                         
-                        print("primarykey: \(key)")
                     } else if value as! NSObject == true {
-                        
-                    print("otherkey: \(key)")
+                        kennelAndHashNameDecodeDict[key] = ""
                         
                     }else {
-                        print("notprimarykey: \(key)")
+                        kennelAndHashNameDecodeDict[key] = (value as! String)
                     }
-                                 //   print("key: \(key)")
-                                  //  print("value: \(value)")
+                    
                 }
+                print("kennelAndNameDecodeDict: \(kennelAndHashNameDecodeDict)")
             }
     }
     
@@ -283,7 +283,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return kennels.count
+        return kennelAndHashNameDecodeDict.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -291,16 +291,29 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let thisKennel = kennels[indexPath.row]
-        if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? KennelCell {
-            //  cell.configureCell(thisKennel)
-            //cell.configureCell()
+        
+        for (key, value) in kennelAndHashNameDecodeDict {
+        if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? HasherCell {
+            
+            
+                let kennelId = key
+                let hashName = value
+            
+            
+            cell.configureCell(kennelId, hashName: hashName)
             return cell
-        } else {
-            return KennelCell()
+           
+            }
+        else {
+            return HasherCell()
+            }
         }
+
+//        return cell
+    return HasherCell()
     }
     
+
     
     
 }
