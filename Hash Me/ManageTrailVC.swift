@@ -221,6 +221,18 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
+    @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
+            if sourceViewController.kennelChoiceId == nil {
+                //WHAT HAPPENS IF NIL??
+            } else {
+                newHasherVisitorFrom.text = sourceViewController.kennelChoiceName
+//                trailAttendencePath.updateChildValues(["trailAttendeeVisitingFrom" : sourceViewController.kennelChoiceId])
+//                trailsAttendedPath.updateChildValues(["hasherVisitingFrom" : sourceViewController.kennelChoiceId])
+            }
+        }
+    }
+    
     @IBAction func addNewHasher(sender: UIButton) {
         
         if newHasherHashName.text == nil || newHasherHashName.text == "" {

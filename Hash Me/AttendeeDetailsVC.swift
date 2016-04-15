@@ -174,41 +174,17 @@ class AttendeeDetailsVC: UIViewController {
         navigationController?.popViewControllerAnimated(true)
     }
     
-    @IBAction func getAttendeeDetailsVCFromKennelPickerVC(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as? KennelPickerVC/*, kennelIdToAdd = sourceViewController.kennelChoiceId, kennelNameToAdd = sourceViewController.kennelChoiceName */{
-            print("are we here?")
+    @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
+            if sourceViewController.kennelChoiceId == nil {
+                trailAttendencePath.childByAppendingPath("trailAttendeeVisitingFrom").removeValue()
+                trailsAttendedPath.childByAppendingPath("hasherVisitingFrom").removeValue()
+            } else {
             specificAttendeeVisitingFrom.text = sourceViewController.kennelChoiceName
-            //trailAttendencePath.updateChildValues(["trailAttendeeVisitingFrom" : kennelIdToAdd])
-            //trailsAttendedPath.updateChildValues(["hasherVisitingFrom" : kennelIdToAdd])
+            trailAttendencePath.updateChildValues(["trailAttendeeVisitingFrom" : sourceViewController.kennelChoiceId])
+            trailsAttendedPath.updateChildValues(["hasherVisitingFrom" : sourceViewController.kennelChoiceId])
+        }
         }
     }
-    
-    //    @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
-    //        if let sourceViewController = sender.sourceViewController as? MealViewController, meal = sourceViewController.meal {
-    //            if let selectedIndexPath = tableView.indexPathForSelectedRow {
-    //                // Update an existing meal.
-    //                meals[selectedIndexPath.row] = meal
-    //                tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
-    //            } else {
-    //                // Add a new meal.
-    //                let newIndexPath = NSIndexPath(forRow: meals.count, inSection: 0)
-    //                meals.append(meal)
-    //                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
-    //            }
-    //            // Save the meals.
-    //            saveMeals()
-    //        }
-    //    }
-    //
-    //    // MARK: NSCoding
-    //
-    //    func saveMeals() {
-    //        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(meals, toFile: Meal.ArchiveURL.path!)
-    //        if !isSuccessfulSave {
-    //            print("Failed to save meals...")
-    //        }
-    //    }
-    
-    
 }
 
