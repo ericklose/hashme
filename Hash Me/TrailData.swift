@@ -12,7 +12,8 @@ import Firebase
 class TrailData {
     
     private var _trailDate: String!
-    private var _trailKennel: String!
+    private var _trailKennelName: String!
+    private var _trailKennelId: String!
     private var _trailHares: String!
     private var _trailTitle: String!
     private var _trailStartLocation: String!
@@ -25,8 +26,20 @@ class TrailData {
         return _trailDate
     }
     
-    var trailKennel: String {
-        return _trailKennel
+    var trailKennelName: String {
+        if _trailKennelName == nil {
+            return "No Name H3??"
+        } else {
+            return _trailKennelName
+        }
+    }
+    
+    var trailKennelId: String {
+        if _trailKennelId == nil {
+            return "xxx123"
+        } else {
+            return _trailKennelId
+        }
     }
     
     var trailTitle: String {
@@ -46,7 +59,7 @@ class TrailData {
         }
         return _trailHares
     }
-
+    
     var trailStartLocation: String {
         if _trailStartLocation == nil {
             return "TBD"
@@ -65,9 +78,10 @@ class TrailData {
         return _trailKey
     }
     
-    init(trailDate: String, trailKennel: String, trailTitle: String) {
+    init(trailDate: String, trailKennelName: String, trailKennelId: String, trailTitle: String) {
         self._trailDate = trailDate
-        self._trailKennel = trailKennel
+        self._trailKennelId = trailKennelId
+        self._trailKennelName = trailKennelName
         self._trailTitle = trailTitle
         
     }
@@ -80,8 +94,12 @@ class TrailData {
             self._trailDate = trailDate
         }
         
-        if let trailKennel = dictionary["trailKennel"] as? String {
-            self._trailKennel = trailKennel
+        if let trailKennelName = dictionary["trailKennelName"] as? String {
+            self._trailKennelName = trailKennelName
+        }
+        
+        if let trailKennelId = dictionary["trailKennelId"] as? String {
+            self._trailKennelId = trailKennelId
         }
         
         if let trailTitle = dictionary["trailTitle"] as? String {

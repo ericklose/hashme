@@ -14,12 +14,13 @@ class TrailCell: UITableViewCell {
     
     
     @IBOutlet weak var trailDate: UILabel!
-    @IBOutlet weak var trailKennel: UILabel!
+    @IBOutlet weak var trailKennelName: UILabel!
     @IBOutlet weak var trailHares: UILabel!
     @IBOutlet weak var trailStartLocation: UILabel!
     @IBOutlet weak var trailDescription: UILabel!
     
     var trail: TrailData!
+    var trailKennelId: String!
     
     
     
@@ -38,7 +39,8 @@ class TrailCell: UITableViewCell {
         self.trail = trail
         
         self.trailDate.text = trail.trailDate
-        self.trailKennel.text = trail.trailKennel
+        self.trailKennelName.text = trail.trailKennelName
+        self.trailKennelId = trail.trailKennelId
         self.trailHares.text = trail.trailHares
         self.trailStartLocation.text = trail.trailStartLocation
         self.trailDescription.text = trail.trailDescription
