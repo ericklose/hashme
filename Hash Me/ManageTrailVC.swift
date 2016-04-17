@@ -97,7 +97,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                                 
                                 if (thisTrailDict["hasherAttendedTrail"] as? Bool) == true {
                                     let hasherKey = hasherSnap.key
-                                    let attendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: true, attendeeInitTrailHashCash: self.trails.trailHashCash)
+                                    let attendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennelId, attendeeAttendingInit: true, attendeeInitTrailHashCash: self.trails.trailHashCash)
                                     self.attendees.append(attendee)
                                 } else {
                                     self.addPotential(hasherSnap.key, attendeeDataDict: attendeeDataDict)
@@ -117,7 +117,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func addPotential(hasherKey: String, attendeeDataDict: Dictionary <String, AnyObject>) {
-        let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennel, attendeeAttendingInit: false, attendeeInitTrailHashCash: self.trails.trailHashCash)
+        let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennelId, attendeeAttendingInit: false, attendeeInitTrailHashCash: self.trails.trailHashCash)
         self.potentialAttendees.append(potentialAttendee)
     }
     
@@ -224,8 +224,8 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
             if sourceViewController.kennelChoiceId == nil {
                 newHasherVisitorFrom.text = ""
-                newHasher["hasherPrimaryKennel"] = trails.trailKennel
-                let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [trails.trailKennel: "primary"]
+                newHasher["hasherPrimaryKennel"] = trails.trailKennelId
+                let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [trails.trailKennelId: "primary"]
                 newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
             } else {
                 newHasherVisitorFrom.text = sourceViewController.kennelChoiceName
@@ -234,7 +234,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
                 newHasherTrails["hasherVisitingFrom"] = sourceViewController.kennelChoiceId
                 trailInfo["trailAttendeeVisitingFrom"] = sourceViewController.kennelChoiceId
-                newHasherTrails["hasherVisitedKennel"] = trails.trailKennel
+                newHasherTrails["hasherVisitedKennel"] = trails.trailKennelId
             }
         }
     }
