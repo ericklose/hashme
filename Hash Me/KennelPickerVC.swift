@@ -29,8 +29,9 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         loadKennelData { () -> () in
             self.kennelPicker.reloadAllComponents()
         }
-        
     }
+
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -42,11 +43,13 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
                 
                 if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                    
+                    self.kennelPickerNames = []
                     for snap in snapshots {
                         if let kennelDict2 = snap.value as? Dictionary<String, AnyObject> {
                             let kennelKey = snap.key
                             let kennelName = kennelDict2["name"]!
+
+                            print("picker: \(self.kennelPickerNames)")
                             self.kennelPickerNames.append(kennelName as! String)
                             self.kennelDecoderDict[kennelName as! String] = (kennelKey)
                         }
@@ -57,8 +60,6 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             completed()
         })
     }
-    
-    
     
     func numberOfComponentsInPickerView(kennelPicker: UIPickerView) -> Int {
         return 1
@@ -79,9 +80,6 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     
     @IBAction func kennelPickerSaved(sender: UIButton) {
-        //        if self.kennelChoiceName == nil {
-        //            kennelChoiceName = kennelPickerNames[0]
-        //        }
         if self.kennelChoiceName != nil && self.kennelChoiceName != "-Select Kennel-" {
             kennelChoiceId = kennelDecoderDict[kennelChoiceName]!
         } else {
