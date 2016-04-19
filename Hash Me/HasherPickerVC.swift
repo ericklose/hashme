@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UISearchBarDelegate {
-
+    
     @IBOutlet weak var hasherSelected: UILabel!
     @IBOutlet weak var hasherPicker: UIPickerView!
     @IBOutlet weak var saveHasherBtn: UIButton!
@@ -39,7 +39,7 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -54,16 +54,14 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     for snap in snapshots {
                         if let hasherDict2 = snap.value as? Dictionary<String, AnyObject> {
                             let hasherKey = snap.key
-                            let hasherName = hasherDict2["hasherHashName"]!
+                            let hasherName = hasherDict2["hasherPrimaryHashName"]!
                             
-                            print("hasherpicker: \(self.hasherPickerNames)")
                             self.hasherPickerNames.append(hasherName as! String)
                             self.hasherDecoderDict[hasherName as! String] = (hasherKey)
                         }
                     }
                 }
             }
-            print("Final H Picker: \(self.hasherDecoderDict)")
             completed()
         })
         
@@ -99,6 +97,23 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == "" {
+            inSearchMode = false
+            view.endEditing(true)
+            self.hasherPicker.reloadAllComponents()
+        } else {
+            inSearchMode = true
+            let lower = searchBar.text!.lowercaseString
+            filteredHasherPickerNames = hasherPickerNames.filter({$0.lowercaseString.rangeOfString(lower) != nil})
+            self.hasherPicker.reloadAllComponents()
+        }
+    }
+    
     func selectHasher(hasherChoice: String) {
         
         DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot in
@@ -110,11 +125,11 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                         let hasherName = hasherNames["hasherPrimaryHashName"]!
                         self.hasherChoiceId = self.hasherDecoderDict[hasherName as! String]
                     }
-            }
+                }
             }
         })
     }
-
+    
     @IBAction func saveHasherBtnPressed(sender: UIButton) {
         if self.hasherChoiceName != nil && self.hasherChoiceName != "-Select Hasher-" {
             hasherChoiceId = hasherDecoderDict[hasherChoiceName]!
@@ -127,5 +142,5 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //WILL QUICKLY NEED TO CHANGE UI OF ADD TRAIL TO ALLOW MULTIPLE HARES
     //OBVIOUSLY ALSO NEED TO CHANGE TRAIL DATA STRUCTURE & TRAIL SAVING
     
-
+    
 }

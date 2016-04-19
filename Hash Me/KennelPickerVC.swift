@@ -48,15 +48,12 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                         if let kennelDict2 = snap.value as? Dictionary<String, AnyObject> {
                             let kennelKey = snap.key
                             let kennelName = kennelDict2["name"]!
-
-                            print("picker: \(self.kennelPickerNames)")
                             self.kennelPickerNames.append(kennelName as! String)
                             self.kennelDecoderDict[kennelName as! String] = (kennelKey)
                         }
                     }
                 }
             }
-            print(self.kennelDecoderDict)
             completed()
         })
     }
