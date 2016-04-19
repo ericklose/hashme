@@ -44,14 +44,12 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     var trailInfo: Dictionary<String, AnyObject> = ["trailAttendeePresent" : true]
     var newHasherTrails: Dictionary<String, AnyObject> = ["hasherAttendedTrail": true]
     
-    
     var trails: TrailData!
     var attendees = [Attendee]()
     var filteredHashers = [Attendee]()
     var potentialAttendees = [Attendee]()
     var trailRoster = [Attendee]()
     var hashCash: Int!
-    var isHidden: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()

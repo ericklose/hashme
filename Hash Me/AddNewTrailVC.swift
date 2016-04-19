@@ -113,5 +113,21 @@ class AddNewTrailVC: UIViewController {
         }
     }
     
+    //THIS IS TOTALLY FUCKED
+//    @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
+//        if let sourceViewController = sender.sourceViewController as? HasherPickerVC {
+//            if sourceViewController.hasherChoiceId == nil {
+//                specificAttendeeVirginSponsorIs.text = ""
+//                trailAttendencePath.childByAppendingPath("trailAttendeeVirginSponsorIs").removeValue()
+//                trailsAttendedPath.childByAppendingPath("hasherVirginSponsor").removeValue()
+//                DataService.ds.REF_HASHERS.childByAppendingPath(specificAttendee.hasherId).childByAppendingPath("hasherOriginalSponsor").removeValue()
+//            } else {
+//                specificAttendeeVirginSponsorIs.text = sourceViewController.hasherChoiceName
+//                trailAttendencePath.updateChildValues(["trailAttendeeVirginSponsorIs" : sourceViewController.hasherChoiceId])
+//                trailsAttendedPath.updateChildValues(["hasherVirginSponsor" : sourceViewController.hasherChoiceId])
+//                DataService.ds.REF_HASHERS.childByAppendingPath(specificAttendee.hasherId).updateChildValues(["hasherOriginalSponsor" : sourceViewController.hasherChoiceId])
+//            }
+//        }
+//    }
     
 }
