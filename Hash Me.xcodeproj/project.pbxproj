@@ -272,9 +272,9 @@
 				A64554E21C975BC60016373E /* AddNewTrailVC.swift */,
 				A6FB47581C9A0D2B00B370CD /* KennelListVC.swift */,
 				A6A3494F1CB92E5900B919D8 /* ManageKennelVC.swift */,
-				A619290A1C94912A00D8C945 /* TrailListVC.swift */,
 				A6CB71361C96210600F27D12 /* ManageTrailVC.swift */,
 				A6BA76641CBBF32A00D29C66 /* AttendeeDetailsVC.swift */,
+				A619290A1C94912A00D8C945 /* TrailListVC.swift */,
 				A60007AA1CBEE3620040F15A /* KennelPickerVC.swift */,
 				A6B22DE81CC6CDDB00A4F389 /* HasherPickerVC.swift */,
 			);
