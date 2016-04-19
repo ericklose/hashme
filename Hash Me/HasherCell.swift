@@ -27,7 +27,6 @@ class HasherCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-
     func configureCell(kennelMembershipId: String, kennelAndHashNameDecodeDict: Dictionary<String, String>, kennelAndNameDict: Dictionary<String, String>) {
         
         self.kennelMembershipId = kennelMembershipId
