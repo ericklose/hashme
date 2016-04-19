@@ -304,12 +304,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="157" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1db-uw-d3G">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="157" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1db-uw-d3G">
                                 <rect key="frame" x="0.0" y="93" width="600" height="458"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="kennelCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="kennelCell" rowHeight="157" id="IJ7-j2-7lP" customClass="KennelCell" customModule="Hash_Me" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="157"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="157"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IJ7-j2-7lP" id="EA6-ov-JFG">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="156"/>
@@ -480,7 +480,7 @@
                                 <rect key="frame" x="0.0" y="25" width="600" height="518"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <stackView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="top" id="6yu-TS-em4">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="170"/>
+                                    <rect key="frame" x="0.0" y="64" width="600" height="170"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XPo-2h-Yj6">
@@ -678,7 +678,7 @@
                                 </stackView>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="165" id="mfF-aR-URW">
-                                        <rect key="frame" x="0.0" y="198" width="600" height="165"/>
+                                        <rect key="frame" x="0.0" y="262" width="600" height="165"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mfF-aR-URW" id="OD7-Ub-oUm">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="164"/>
@@ -694,7 +694,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="67" id="tcP-ac-sDQ">
-                                        <rect key="frame" x="0.0" y="363" width="600" height="67"/>
+                                        <rect key="frame" x="0.0" y="427" width="600" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tcP-ac-sDQ" id="Mdc-lH-mjH">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="66"/>
@@ -710,7 +710,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="74" id="tc7-uo-30o">
-                                        <rect key="frame" x="0.0" y="430" width="600" height="74"/>
+                                        <rect key="frame" x="0.0" y="494" width="600" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tc7-uo-30o" id="BFD-AZ-f16">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="73"/>
@@ -1635,7 +1635,7 @@
                                                         <rect key="frame" x="0.0" y="72" width="115" height="30"/>
                                                         <state key="normal" title="Change Sponsor"/>
                                                         <connections>
-                                                            <action selector="hasherVirginSponsorIs:" destination="AjH-AH-Dyu" eventType="touchUpInside" id="gmd-Os-3Tv"/>
+                                                            <segue destination="5Pc-VA-nwg" kind="show" id="lfV-yk-mlm"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1839,8 +1839,15 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hare 1, Hare 2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jrc-gg-z2V">
-                                                <rect key="frame" x="87" y="0.0" width="473" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AfE-dO-i8R">
+                                                <rect key="frame" x="87" y="0.0" width="360" height="30"/>
+                                                <state key="normal" title="Add Hare"/>
+                                                <connections>
+                                                    <segue destination="5Pc-VA-nwg" kind="show" id="xc3-jy-2Ds"/>
+                                                </connections>
+                                            </button>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hare 1, Hare 2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jrc-gg-z2V">
+                                                <rect key="frame" x="447" y="0.0" width="113" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -2074,6 +2081,106 @@
             </objects>
             <point key="canvasLocation" x="1155" y="-237"/>
         </scene>
+        <!--Hasher PickerVC-->
+        <scene sceneID="Jyz-hO-ro2">
+            <objects>
+                <viewController id="5Pc-VA-nwg" customClass="HasherPickerVC" customModule="Hash_Me" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="klp-3g-zsx"/>
+                        <viewControllerLayoutGuide type="bottom" id="GV8-Li-eWd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Am1-eE-9oq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUN-2t-vzn">
+                                <rect key="frame" x="20" y="192" width="560" height="216"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="EjI-Mk-d5e"/>
+                                </constraints>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="51J-PJ-uwY">
+                                <rect key="frame" x="270" y="433" width="60" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Scq-QG-ipy"/>
+                                    <constraint firstAttribute="width" constant="60" id="Ynd-o7-rDZ"/>
+                                </constraints>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="kennelPickerSaved:" destination="5Pc-VA-nwg" eventType="touchUpInside" id="DNJ-qJ-LkL"/>
+                                    <action selector="saveHasherBtnPressed:" destination="5Pc-VA-nwg" eventType="touchUpInside" id="QEA-OA-EqY"/>
+                                    <segue destination="Sss-Fm-i8v" kind="unwind" unwindAction="getKennelFromKennelPickerVC:" id="PsL-i3-Vsz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGg-cb-kjU">
+                                <rect key="frame" x="243" y="471" width="116" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="CvG-lK-ZWi"/>
+                                    <constraint firstAttribute="width" constant="60" id="u50-Ub-2qK"/>
+                                </constraints>
+                                <state key="normal" title="Add New Hasher">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hasher Selected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIg-h8-XeI">
+                                <rect key="frame" x="20" y="117" width="560" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="1dj-Y7-t9A"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Z1K-6s-rp0">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="tXy-z6-rSa"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="51J-PJ-uwY" firstAttribute="centerX" secondItem="Am1-eE-9oq" secondAttribute="centerX" id="2vf-my-jwE"/>
+                            <constraint firstItem="Z1K-6s-rp0" firstAttribute="top" secondItem="klp-3g-zsx" secondAttribute="bottom" id="9Ca-E9-wjc"/>
+                            <constraint firstItem="KUN-2t-vzn" firstAttribute="centerX" secondItem="Am1-eE-9oq" secondAttribute="centerX" id="AEp-6E-q8S"/>
+                            <constraint firstItem="KUN-2t-vzn" firstAttribute="centerY" secondItem="Am1-eE-9oq" secondAttribute="centerY" id="DpT-Y1-5pg"/>
+                            <constraint firstItem="fIg-h8-XeI" firstAttribute="top" secondItem="Z1K-6s-rp0" secondAttribute="bottom" constant="15" id="Eqi-iY-7Tf"/>
+                            <constraint firstItem="fIg-h8-XeI" firstAttribute="trailing" secondItem="Am1-eE-9oq" secondAttribute="trailingMargin" id="Fda-al-zCt"/>
+                            <constraint firstItem="Z1K-6s-rp0" firstAttribute="leading" secondItem="Am1-eE-9oq" secondAttribute="leading" id="HuN-sb-5R9"/>
+                            <constraint firstItem="KUN-2t-vzn" firstAttribute="leading" secondItem="Am1-eE-9oq" secondAttribute="leadingMargin" id="WUJ-4v-Sti"/>
+                            <constraint firstItem="51J-PJ-uwY" firstAttribute="top" secondItem="KUN-2t-vzn" secondAttribute="bottom" constant="25" id="f7q-IJ-bcZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KUN-2t-vzn" secondAttribute="trailing" id="hQM-GB-Ncu"/>
+                            <constraint firstAttribute="trailing" secondItem="Z1K-6s-rp0" secondAttribute="trailing" id="ixM-bl-aEk"/>
+                            <constraint firstItem="fIg-h8-XeI" firstAttribute="leading" secondItem="Am1-eE-9oq" secondAttribute="leadingMargin" id="j9E-NJ-8N9"/>
+                            <constraint firstItem="fIg-h8-XeI" firstAttribute="top" secondItem="klp-3g-zsx" secondAttribute="bottom" constant="15" id="s41-1Y-J8d"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="s41-1Y-J8d"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="addNewHasherBtn" destination="bGg-cb-kjU" id="4kQ-fS-MFq"/>
+                        <outlet property="hasherPicker" destination="KUN-2t-vzn" id="5KK-Wb-sc1"/>
+                        <outlet property="hasherSearchBar" destination="Z1K-6s-rp0" id="yuG-jZ-uOI"/>
+                        <outlet property="hasherSelected" destination="fIg-h8-XeI" id="vrT-5X-DaX"/>
+                        <outlet property="kennelPicker" destination="KUN-2t-vzn" id="ZFX-0v-7HA"/>
+                        <outlet property="kennelSavedBtn" destination="51J-PJ-uwY" id="aCh-Id-KKG"/>
+                        <outlet property="kennelSelected" destination="fIg-h8-XeI" id="WIu-pK-3JL"/>
+                        <outlet property="saveHasherBtn" destination="51J-PJ-uwY" id="ZyD-Hx-0AE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zkf-W1-4gw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Sss-Fm-i8v" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2743" y="872"/>
+        </scene>
     </scenes>
     <resources>
         <image name="edit-icon" width="256" height="256"/>
@@ -2081,7 +2188,8 @@
         <image name="x-delete" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fZo-17-JjG"/>
-        <segue reference="xun-RT-BHu"/>
+        <segue reference="fwr-65-eJf"/>
+        <segue reference="60U-fW-KxS"/>
+        <segue reference="lfV-yk-mlm"/>
     </inferredMetricsTieBreakers>
 </document>
