@@ -145,22 +145,14 @@ class AttendeeDetailsVC: UIViewController {
         }
     }
     
-    @IBAction func hasherVirginSponsorIs(sender: UITextField) {
-        if specificAttendeeVirginSponsorIs.text == "" {
-            trailAttendencePath.childByAppendingPath("trailAttendeeVirginSponsor").removeValue()
-            trailsAttendedPath.childByAppendingPath("hasherVirginSponsor").removeValue()
-        } else {
-            trailAttendencePath.updateChildValues(["trailAttendeeVirginSponsor" : specificAttendeeVirginSponsorIs.text!])
-            trailsAttendedPath.updateChildValues(["hasherVirginSponsor" : specificAttendeeVirginSponsorIs.text!])
-        }
-    }
-    
-//    @IBAction func hasherIsVisitingFrom(sender: UIGestureRecognizer) {
-//        if specificAttendeeVisitingFrom.text == "" {
-//            trailAttendencePath.childByAppendingPath("trailAttendeeVisitingFrom").removeValue()
-//            trailsAttendedPath.childByAppendingPath("hasherVisitingFrom").removeValue()
+//  I ASSUME UNWIND SEGUE REPLACES THIS
+//    @IBAction func hasherVirginSponsorIs(sender: UITextField) {
+//        if specificAttendeeVirginSponsorIs.text == "" {
+//            trailAttendencePath.childByAppendingPath("trailAttendeeVirginSponsor").removeValue()
+//            trailsAttendedPath.childByAppendingPath("hasherVirginSponsor").removeValue()
 //        } else {
-//            
+//            trailAttendencePath.updateChildValues(["trailAttendeeVirginSponsor" : specificAttendeeVirginSponsorIs.text!])
+//            trailsAttendedPath.updateChildValues(["hasherVirginSponsor" : specificAttendeeVirginSponsorIs.text!])
 //        }
 //    }
     
