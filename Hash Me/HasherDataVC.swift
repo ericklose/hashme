@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate {
+class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var nerdNameLbl: UILabel!
     @IBOutlet weak var hashNamesLbl: UILabel!
@@ -23,7 +23,7 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     @IBOutlet weak var kennelPencil: UIButton!
     @IBOutlet weak var kennelListTableView: UITableView!
     
-    var kennelPickerDataSource = [String]()
+   // var kennelPickerDataSource = [String]()
     var kennelChoice: String!
     var kennelChoiceId: String!
     var kennels = [KennelData]()
@@ -36,8 +36,8 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.kennelPickerView.dataSource = self
-        self.kennelPickerView.delegate = self
+//        self.kennelPickerView.dataSource = self
+//        self.kennelPickerView.delegate = self
         
         self.kennelListTableView.dataSource = self
         self.kennelListTableView.delegate = self
@@ -53,17 +53,12 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     
     func updateHasherDisplay() {
         self.nerdNameLbl.text = self.hasher.hasherNerdName
-        
-//        print("TEST5: \(kennelMembershipIds)")
-//        print("KD: \(kennelAndNameDict)")
-//        print("decode: \(kennelAndHashNameDecodeDict)")
         kennelListTableView.reloadData()
     }
     
     
     func downloadHasherDetails(completed: DownloadComplete) {
         DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
-            //  print("snapshotY: \(snapshot)")
             
             if var hasherDict = snapshot.value as? Dictionary<String, AnyObject>{
                 DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
@@ -82,15 +77,10 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                     }
                     
                     hasherDict["addedKennelDict"] = self.kennelAndNameDict
-               //     print("hasherDictNew: \(hasherDict)")
                     
                     self.hasher = Hasher(hasherInitId: KEY_UID, hasherInitDict: hasherDict)
-                    print("1:\(self.hasher.hasherPrimaryHashName)")
-                    
-                    
-                    
+
                     if let hashNamesAndKennels = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
-                        print("printme: \(hashNamesAndKennels)")
                         
                         for (key, value) in hashNamesAndKennels {
                             
@@ -106,16 +96,10 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
                             }
                             
                         }
-                        print("kennelAndNameDecodeDict: \(self.kennelAndHashNameDecodeDict)")
                         
                     }
                     self.kennelMembershipIds = [String](self.kennelAndHashNameDecodeDict.keys)
-                    print("TEST: \(self.kennelMembershipIds)")
                     
-                    
-                    
-                    
-//                    self.createKennelsAndNamesDisplay(hasherDict, kennelAndHashNameDecodeDict: self.kennelAndHashNameDecodeDict)
                     completed()
                 })
             }
@@ -123,37 +107,8 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         })
 
     }
-    
-// TRY SENDING CONFIGURE CELL BOTH THE NEW DICTIONARY AND KENNEL DICT TO INCLUDE KENNELID
-//    func createKennelsAndNamesDisplay (hasherDict: Dictionary<String, AnyObject>, var kennelAndHashNameDecodeDict: Dictionary<String, String>) {
-//
-//            if let hashNamesAndKennels = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
-//                print("printme: \(hashNamesAndKennels)")
-//
-//                for (key, value) in hashNamesAndKennels {
-//
-//                    if value as? String == "primary" {
-//
-//                        kennelAndHashNameDecodeDict[key] = hasher.hasherPrimaryHashName
-//                        
-//                    } else if value as! NSObject == true {
-//                        kennelAndHashNameDecodeDict[key] = ""
-//                        
-//                    }else {
-//                        kennelAndHashNameDecodeDict[key] = (value as! String)
-//                    }
-//                    
-//                }
-//                print("kennelAndNameDecodeDict: \(kennelAndHashNameDecodeDict)")
-//                
-//            }
-//        kennelMembershipIds = [String](kennelAndHashNameDecodeDict.keys)
-//        print("TEST: \(kennelMembershipIds)")
-//
-//    }
-    
-    
-    
+
+
     //
     //        DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
     //
@@ -168,9 +123,6 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     //                }
     //            }
     //        })
-    
-    
-    
     
     
     func addNewHashNameToFirebase(hashName: String!) {
@@ -239,22 +191,22 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return kennelPickerDataSource.count
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return kennelPickerDataSource[row]
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.kennelChoice = kennelPickerDataSource[row]
-        //print(kennelChoice)
-    }
+//    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+//        return 1
+//    }
+//    
+//    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        return kennelPickerDataSource.count
+//    }
+//    
+//    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        return kennelPickerDataSource[row]
+//    }
+//    
+//    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        self.kennelChoice = kennelPickerDataSource[row]
+//        //print(kennelChoice)
+//    }
     
     func addNewKennel (kennelChoice: String) {
         
@@ -300,11 +252,11 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         //        addNewKennelMembershipToFirebase(kennelMembershipsTxtFld.text)
         editNerdNameInFirebase(nerdNameTxtFld.text)
         
-        if self.kennelChoice == nil {
-            kennelChoice = kennelPickerDataSource[0]
-        }
-        
-        addNewKennel(kennelChoice)
+//        if self.kennelChoice == nil {
+//            kennelChoice = kennelPickerDataSource[0]
+//        }
+//        
+//        addNewKennel(kennelChoice)
         
         nerdNameTxtFld.hidden = true
         //        hashNamesTxtFld.hidden = true
@@ -327,8 +279,6 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        print("TESTTWOkennelandhashnamedecodedict: \(kennelAndHashNameDecodeDict)")
-//        print("TESTkennelandnamedict: \(kennelAndNameDict)")
         let kennelMembershipId = kennelMembershipIds[indexPath.row]
         if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? HasherCell {
             cell.configureCell(kennelMembershipId, kennelAndHashNameDecodeDict: kennelAndHashNameDecodeDict, kennelAndNameDict: kennelAndNameDict)
@@ -338,6 +288,10 @@ class HasherDataVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
         }
         
     }
+    
+    @IBAction func kennelAndHashNameBtnPressed(sender: AnyObject) {
+    }
+    
     
     
 }

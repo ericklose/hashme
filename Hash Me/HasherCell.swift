@@ -11,7 +11,10 @@ import UIKit
 class HasherCell: UITableViewCell {
     
     @IBOutlet weak var kennelNameLbl: UILabel!
-    @IBOutlet weak var deleteXButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var hashNameLbl: UILabel!
+    
+    var kennelMembershipId: String!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,13 +29,10 @@ class HasherCell: UITableViewCell {
     
 
     func configureCell(kennelMembershipId: String, kennelAndHashNameDecodeDict: Dictionary<String, String>, kennelAndNameDict: Dictionary<String, String>) {
-    
-        kennelNameLbl.text = kennelMembershipId
-//        print("cell: \(kennelMembershipId)")
-//        print("decode2: \(kennelAndHashNameDecodeDict)")
-//        print("kennelandname: \(kennelAndNameDict)")
         
-    
+        self.kennelMembershipId = kennelMembershipId
+        kennelNameLbl.text = kennelAndNameDict[kennelMembershipId]
+        hashNameLbl.text = kennelAndHashNameDecodeDict[kennelMembershipId]
 }
 
 }
