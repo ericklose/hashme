@@ -36,7 +36,6 @@ class DataService {
     }
     
     var REF_HASHER_CURRENT: Firebase {
-        print(KEY_UID)
         let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
         let hasher = Firebase(url: "\(URL_BASE)").childByAppendingPath("hashers").childByAppendingPath(uid)
         return hasher!

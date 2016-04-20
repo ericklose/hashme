@@ -160,17 +160,15 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
-            print("id: \(kennelAndNameDict[sourceViewController.kennelChoiceId])")
-            //UNWRAP
             
-            if sourceViewController.kennelChoiceId == nil || kennelAndNameDict[sourceViewController.kennelChoiceId] != nil {
-                //               nerdNameLbl.text = sourceViewController.kennelChoiceName
-                //                trailAttendencePath.childByAppendingPath("trailAttendeeVisitingFrom").removeValue()
-                //                trailsAttendedPath.childByAppendingPath("hasherVisitingFrom").removeValue()
+            let hasherKennelsArray = kennelAndHashNameDecodeDict.keys
+            
+            let hasherTrailsAndNames = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+            
+            if sourceViewController.kennelChoiceId == nil || hasherKennelsArray.contains(sourceViewController.kennelChoiceId) {
+        
             } else {
-                //                specificAttendeeVisitingFrom.text = sourceViewController.kennelChoiceName
-                //                trailAttendencePath.updateChildValues(["trailAttendeeVisitingFrom" : sourceViewController.kennelChoiceId])
-                //                trailsAttendedPath.updateChildValues(["hasherVisitingFrom" : sourceViewController.kennelChoiceId])
+                    hasherTrailsAndNames.updateChildValues([sourceViewController.kennelChoiceId! : true])
             }
         }
     }
