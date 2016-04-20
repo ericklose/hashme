@@ -1394,49 +1394,32 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T4z-Hw-zd8">
-                                <rect key="frame" x="546" y="6" width="34" height="34"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LnF-gp-sC2">
+                                <rect key="frame" x="542" y="20" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="2Tg-5n-zWR"/>
-                                    <constraint firstAttribute="height" constant="34" id="U0f-JR-KTx"/>
-                                    <constraint firstAttribute="width" constant="60" id="nZ9-gD-weL"/>
-                                    <constraint firstAttribute="width" constant="34" id="r29-Yd-lvu"/>
+                                    <constraint firstAttribute="width" constant="30" id="Yd7-dT-pEp"/>
+                                    <constraint firstAttribute="height" constant="30" id="guB-yb-F17"/>
                                 </constraints>
-                                <state key="normal" title="+">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="2Tg-5n-zWR"/>
-                                        <exclude reference="nZ9-gD-weL"/>
-                                    </mask>
-                                </variation>
+                                <state key="normal" title="+"/>
                                 <connections>
-                                    <segue destination="ldO-fm-tJE" kind="show" id="fwr-65-eJf"/>
+                                    <segue destination="ldO-fm-tJE" kind="show" id="RlB-Cm-zMd"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Pw2-tj-Xvc" firstAttribute="centerX" secondItem="zBn-X7-uSo" secondAttribute="centerX" id="1Oj-bN-JKR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LnF-gp-sC2" secondAttribute="trailing" constant="8" id="8Ik-QN-HRb"/>
                             <constraint firstItem="vrh-oD-cQN" firstAttribute="centerY" secondItem="zBn-X7-uSo" secondAttribute="centerY" id="E38-jh-wa6"/>
                             <constraint firstItem="Qsz-ok-1Pz" firstAttribute="top" secondItem="r3m-6c-47i" secondAttribute="bottom" constant="15" id="I2d-Lj-nyG"/>
-                            <constraint firstItem="T4z-Hw-zd8" firstAttribute="trailing" secondItem="zBn-X7-uSo" secondAttribute="trailingMargin" id="KJb-HB-A1L"/>
                             <constraint firstItem="vrh-oD-cQN" firstAttribute="centerX" secondItem="zBn-X7-uSo" secondAttribute="centerX" id="MmS-0u-m6X"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vrh-oD-cQN" secondAttribute="trailing" id="UO6-nE-bEY"/>
-                            <constraint firstItem="T4z-Hw-zd8" firstAttribute="top" secondItem="r3m-6c-47i" secondAttribute="bottom" constant="8" id="fNq-eQ-lqN"/>
+                            <constraint firstItem="LnF-gp-sC2" firstAttribute="top" secondItem="zBn-X7-uSo" secondAttribute="topMargin" constant="20" id="WJ9-wB-1od"/>
                             <constraint firstItem="Qsz-ok-1Pz" firstAttribute="leading" secondItem="zBn-X7-uSo" secondAttribute="leadingMargin" id="gBI-UP-NEj"/>
-                            <constraint firstItem="T4z-Hw-zd8" firstAttribute="top" secondItem="zBn-X7-uSo" secondAttribute="topMargin" constant="5" id="gLP-j6-ZFk"/>
                             <constraint firstItem="Qsz-ok-1Pz" firstAttribute="trailing" secondItem="zBn-X7-uSo" secondAttribute="trailingMargin" id="q2H-AY-oap"/>
                             <constraint firstItem="vrh-oD-cQN" firstAttribute="leading" secondItem="zBn-X7-uSo" secondAttribute="leadingMargin" id="upB-uC-lWO"/>
                             <constraint firstItem="Pw2-tj-Xvc" firstAttribute="top" secondItem="vrh-oD-cQN" secondAttribute="bottom" constant="25" id="vP3-5e-yhR"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="fNq-eQ-lqN"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="kennelPicker" destination="vrh-oD-cQN" id="wJd-bp-bap"/>
@@ -2086,6 +2069,10 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVv-XW-HGR">
+                                <rect key="frame" x="542" y="20" width="30" height="30"/>
+                                <state key="normal" title="+"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -2168,6 +2155,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="60U-fW-KxS"/>
         <segue reference="lfV-yk-mlm"/>
-        <segue reference="fwr-65-eJf"/>
+        <segue reference="RlB-Cm-zMd"/>
     </inferredMetricsTieBreakers>
 </document>
