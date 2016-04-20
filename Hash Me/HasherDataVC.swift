@@ -69,8 +69,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                         for (key, value) in hashNamesAndKennels {
                             
                             if value as? String == "primary" {
-                                
-                                self.kennelAndHashNameDecodeDict[key] = self.hasher.hasherPrimaryHashName
+                                //take primary kennel and hashname out of table
                                 
                             } else if value as! NSObject == true {
                                 self.kennelAndHashNameDecodeDict[key] = ""
