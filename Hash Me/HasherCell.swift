@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HasherCell: UITableViewCell {
     
@@ -63,5 +64,12 @@ class HasherCell: UITableViewCell {
                 })
         
             }
+    
+    @IBAction func deleteKennelButtonPressed(sender: AnyObject) {
+        let kennelsAndNamesPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+        print("kennelMembershipId: \(kennelMembershipId)")
+                kennelsAndNamesPath.childByAppendingPath(kennelMembershipId as String).removeValue()
+//        HasherDataVC.kennelListTableView.reloadData()
+    }
     
 }
