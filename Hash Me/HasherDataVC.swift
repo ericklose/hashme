@@ -22,6 +22,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var kennelAndNameDict: [String: String] = [:]
     var kennelAndHashNameDecodeDict: [String: String] = [:]
     var kennelMembershipIds = [String]()
+    var kennelMembershipId = String.self
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +92,19 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func editNerdNamePressed(sender: AnyObject) {
+        nerdNameTxtFld.hidden = false
+        nerdNameLbl.hidden = true
+        nerdNamePencil.hidden = true
+        updateInfoBtn.hidden = false
+        
+    }
+    
     func editNerdNameInFirebase(nerdName: String!) {
         
         DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
@@ -107,27 +121,39 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         })
     }
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func editNerdNamePressed(sender: AnyObject) {
-        nerdNameTxtFld.hidden = false
-        nerdNameLbl.hidden = true
-        nerdNamePencil.hidden = true
-        updateInfoBtn.hidden = false
+    func editPrimaryHashNameInFirebase(primaryName: String!) {
         
+        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
+            
+            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
+                let existingPrimaryName = hasherDict["hasherPrimaryHashName"] as! String
+//                let existingPrimaryKennel = hasherDict["hasherPrimaryKennel"] as! String
+                
+                if primaryName != existingPrimaryName && primaryName != "" {
+                    let namePath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)")
+                    namePath.updateChildValues(["hasherPrimaryHashName" : primaryName])
+                    
+//                    let kennelsAndNamesPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+//                    kennelsAndNamesPath.updateChildValues([existingPrimaryKennel : "primary"])
+                    
+                }
+            }
+        })
     }
     
     @IBAction func updateInfoPressed(sender: AnyObject) {
         editNerdNameInFirebase(nerdNameTxtFld.text)
+//        editPrimaryHashNameInFirebase(primaryHashNameTxtFld.text)
         
         nerdNameTxtFld.hidden = true
         updateInfoBtn.hidden = true
         nerdNamePencil.hidden = false
         nerdNameLbl.hidden = false
+//        primaryHashNameTxtFld.hidden = true
+//        primaryHashNameLbl.hidden = false
+//        primaryHashNamePencil.hidden = false
+        
+        updateInfoBtn.hidden = true
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -153,6 +179,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         
     }
     
+    // ???????????? DELETE? BUT CHECK NO OUTLETS/ACTIONS ARE CONNECTED FIRST
     @IBAction func kennelAndHashNameBtnPressed(sender: AnyObject) {
     }
     
@@ -177,10 +204,24 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     
     @IBAction func editPrimaryHashNamePressed(sender: AnyObject) {
+//        primaryHashNameTxtFld.hidden = false
+//        primaryHashNameLbl.hidden = true
+//        primaryHashNamePencil.hidden = true
+        updateInfoBtn.hidden = false
     }
     
     
     @IBAction func deleteHashKennelBtnPressed(sender: AnyObject) {
+        let kennelsAndNamesPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+        kennelsAndNamesPath.childByAppendingPath(kennelMembershipId as! String).removeValue()
+    
+//        kennelsAndNamesPath.observeEventType(.Value, withBlock: { snapshot in
+//            
+//            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
+//                trailAttendencePath.childByAppendingPath("trailAttendeeVirginSponsorIs").removeValue()
+//
+//            }
+//        })
     }
     
 }

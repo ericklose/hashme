@@ -35,6 +35,33 @@ class HasherCell: UITableViewCell {
         hashNameLbl.text = kennelAndHashNameDecodeDict[kennelMembershipId]
 }
 
-    @IBAction func altHashNameEditPencilPressed(sender: AnyObject) {
-    }
+//    @IBAction func altHashNameEditPencilPressed(sender: AnyObject) {
+//        //CALL IN UPDATE BUTTON
+//        
+//        altHashNameTxtFld.hidden = false
+//        altHashNameLbl.hidden = true
+//        editButton.hidden = true
+//        updateInfoBtn.hidden = false
+        
+//
+//    }
+    
+    func editAltHashNameInFirebase(altName: String!, altId: String!) {
+        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
+            
+                    if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
+                        let existingHashNamesDict = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, String>
+                        let existingHashNamesArray = existingHashNamesDict!.values
+                        if existingHashNamesArray.contains(altName) || altName == nil {
+                            //do nothing
+                        } else {
+//                            let kennelsAndNamesPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+//                            kennelsAndNamesPath.updateChildValues([altId : altName])
+                        }
+            
+                    }
+                })
+        
+            }
+    
 }
