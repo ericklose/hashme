@@ -171,5 +171,17 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             }
         }
     }
+    
+    @IBAction func editPrimaryKennelNamePressed(sender: AnyObject) {
+    }
+    
+    
+    @IBAction func editPrimaryHashNamePressed(sender: AnyObject) {
+    }
+    
+    
+    @IBAction func deleteHashKennelBtnPressed(sender: AnyObject) {
+    }
+    
 }
 

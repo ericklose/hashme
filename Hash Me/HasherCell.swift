@@ -11,6 +11,7 @@ import UIKit
 class HasherCell: UITableViewCell {
     
     @IBOutlet weak var kennelNameLbl: UILabel!
+    //DELETE EDIT BUTTN OUTLET? DON't DELETE...NEED TO HIDE WHEN EDITING/ADDING ALT HASH NAME
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var hashNameLbl: UILabel!
     
@@ -34,4 +35,6 @@ class HasherCell: UITableViewCell {
         hashNameLbl.text = kennelAndHashNameDecodeDict[kennelMembershipId]
 }
 
+    @IBAction func altHashNameEditPencilPressed(sender: AnyObject) {
+    }
 }
