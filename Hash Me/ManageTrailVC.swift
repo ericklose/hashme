@@ -237,6 +237,27 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
+    @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
+        if let sourceViewController2 = sender.sourceViewController as? HasherPickerVC {
+            print("sponsor B \(sourceViewController2.hasherChoiceName)")
+            print("sponsor B ID \(sourceViewController2.hasherChoiceId)")
+            if sourceViewController2.hasherChoiceId == nil {
+                print("failed w nil")
+                newHasherVirginSponsorIs.text = ""
+                newHasher["hasherVirginSponsor"] = nil
+                newHasherTrails["hasherVirginSponsor"] = nil
+                trailInfo["trailAttendeeVirginSponsorIs"] = nil
+            } else {
+                print("sponsor BB \(sourceViewController2.hasherChoiceName)")
+                print("sponsor BB ID \(sourceViewController2.hasherChoiceId)")
+                newHasherVirginSponsorIs.text = sourceViewController2.hasherChoiceName
+                newHasher["hasherVirginSponsor"] = sourceViewController2.hasherChoiceId
+                newHasherTrails["hasherVirginSponsor"] = sourceViewController2.hasherChoiceId
+                trailInfo["trailAttendeeVirginSponsorIs"] = sourceViewController2.hasherChoiceId
+            }
+        }
+    }
+    
     @IBAction func addNewHasher(sender: UIButton) {
         
         if newHasherHashName.text == nil || newHasherHashName.text == "" {
