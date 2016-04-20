@@ -158,8 +158,12 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
+        
         if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
-            if sourceViewController.kennelChoiceId == nil {
+            print("id: \(kennelAndNameDict[sourceViewController.kennelChoiceId])")
+            //UNWRAP
+            
+            if sourceViewController.kennelChoiceId == nil || kennelAndNameDict[sourceViewController.kennelChoiceId] != nil {
                 //               nerdNameLbl.text = sourceViewController.kennelChoiceName
                 //                trailAttendencePath.childByAppendingPath("trailAttendeeVisitingFrom").removeValue()
                 //                trailsAttendedPath.childByAppendingPath("hasherVisitingFrom").removeValue()
