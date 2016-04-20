@@ -93,7 +93,6 @@ class LoginScreenVC: UIViewController {
                         self.showErrorAlert("Could Not Login", msg: "Please check your username or password")
                     }
                 } else {
-                    //Test next line
                     NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
                     self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                 }
