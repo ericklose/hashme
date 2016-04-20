@@ -41,7 +41,7 @@ class TrailCell: UITableViewCell {
         self.trailDate.text = trail.trailDate
         self.trailKennelName.text = trail.trailKennelName
         self.trailKennelId = trail.trailKennelId
-        self.trailHares.text = trail.trailHares
+        //self.trailHares.text = trail.trailHares
         self.trailStartLocation.text = trail.trailStartLocation
         self.trailDescription.text = trail.trailDescription
         

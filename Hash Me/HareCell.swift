@@ -24,10 +24,11 @@ class HareCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func configureCell(hareId: String, hareName: String, roleName: String) {
-        self.hareName.text = hareName
-        self.roleTitle.text = roleName + ": "
+    func configureCell(hareId: String, hares: Dictionary<String, String>, hareNameDict: Dictionary<String, String>) {
+        //print("c'mon", hares, hareNameDict)
         self.hareId = hareId
+        self.roleTitle.text = hares[hareId]! + ": "
+        self.hareName.text = hareNameDict[hareId]
     }
     
     

@@ -14,13 +14,14 @@ class TrailData {
     private var _trailDate: String!
     private var _trailKennelName: String!
     private var _trailKennelId: String!
-    private var _trailHares: String!
+    //private var _trailHares: String!
     private var _trailTitle: String!
     private var _trailStartLocation: String!
     private var _trailDescription: String!
     private var _trailKey: String!
     private var _trailHashCash: Int!
     private var _trailRef: Firebase!
+    private var _trailHares: Dictionary<String, String>!
     
     var trailDate: String {
         return _trailDate
@@ -49,15 +50,18 @@ class TrailData {
     var trailHashCash: Int {
         if _trailHashCash == nil {
             return 25
-        }
+        } else {
         return _trailHashCash
     }
-    
-    var trailHares: String {
+    }
+        
+    var trailHares: Dictionary<String, String> {
         if _trailHares == nil {
-            return "TBD"
-        }
+            _trailHares["Hare"] = "TBD"
+            return _trailHares
+        } else {
         return _trailHares
+    }
     }
     
     var trailStartLocation: String {
@@ -106,7 +110,7 @@ class TrailData {
             self._trailTitle = trailTitle
         }
         
-        if let trailHares = dictionary["trailHares"] as? String {
+        if let trailHares = dictionary["trailHares"] as? Dictionary<String, String> {
             self._trailHares = trailHares
         }
         

@@ -12,6 +12,7 @@ import Firebase
 class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var trailAttendeeTableView: UITableView!
+    @IBOutlet weak var trailHaresTableView: UITableView!
     
     @IBOutlet weak var attendeeSearchBar: UISearchBar!
     var inSearchMode = false
@@ -49,12 +50,15 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     var filteredHashers = [Attendee]()
     var potentialAttendees = [Attendee]()
     var trailRoster = [Attendee]()
+    var trailHareNamesDict: Dictionary<String, String> = [:]
     var hashCash: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         trailAttendeeTableView.delegate = self
         trailAttendeeTableView.dataSource = self
+        trailHaresTableView.delegate = self
+        trailHaresTableView.dataSource = self
         attendeeSearchBar.delegate = self
         attendeeSearchBar.returnKeyType = UIReturnKeyType.Done
         
@@ -80,6 +84,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FDataSnapshot] {
                 
+                self.trailHareNamesDict = [:]
                 self.attendees = []
                 self.potentialAttendees = []
                 self.trailRoster = []
@@ -87,6 +92,12 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 for hasherSnap in hasherSnapshots {
                     
                     if let attendeeDataDict = hasherSnap.value as? Dictionary<String, AnyObject> {
+                        
+                        if self.trails.trailHares[hasherSnap.key] != nil {
+                            let hareHashName = attendeeDataDict["hasherPrimaryHashName"] as! String
+                            self.trailHareNamesDict[hasherSnap.key] = hareHashName
+                        }
+                        
                         
                         if let atThisTrail = attendeeDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
                             let thisTrail = self.trails.trailKey
@@ -111,6 +122,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             }
             self.trailRoster = self.attendees + self.potentialAttendees
             self.trailAttendeeTableView.reloadData()
+            self.trailHaresTableView.reloadData()
         })
     }
     
@@ -122,9 +134,9 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     func updateTrailDetails() {
         hashCash = trails.trailHashCash
         specificTrailDate.text = trails.trailDate
-        specificTrailKennel.text = trails.trailHares
+        specificTrailKennel.text = trails.trailKennelName
         specificTrailStartLocation.text = trails.trailStartLocation
-        specificTrailHares.text = trails.trailHares
+        //specificTrailHares.text = trails.trailHares
         specificTrailDescription.text = trails.trailDescription
     }
     
@@ -133,45 +145,64 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 60
+        if(tableView == self.trailHaresTableView) {
+            return 23
+        } else {
+            return 60
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if inSearchMode {
-            return filteredHashers.count
+        if(tableView == self.trailHaresTableView) {
+            return trails.trailHares.count
         } else {
-            return trailRoster.count
+            if inSearchMode {
+                return filteredHashers.count
+            } else {
+                return trailRoster.count
+            }
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
-            
-            let hasherResult: Attendee!
-            
-            if inSearchMode {
-                hasherResult = filteredHashers[indexPath.row]
+        if tableView == trailHaresTableView {
+            let hares = [String](trails.trailHares.keys)
+            let hare = hares[indexPath.row]
+            if let hareCell = tableView.dequeueReusableCellWithIdentifier("hareCell") as? HareCell {
+                hareCell.configureCell(hare, hares: trails.trailHares, hareNameDict: trailHareNamesDict)
+                return hareCell
             } else {
-                hasherResult = trailRoster[indexPath.row]
+                return HareCell()
             }
-            
-            cell.configureCell(hasherResult, hashCash: self.trails.trailHashCash)
-            return cell
         } else {
-            return AttendeeCell()
+            if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
+                let hasherResult: Attendee!
+                if inSearchMode {
+                    hasherResult = filteredHashers[indexPath.row]
+                } else {
+                    hasherResult = trailRoster[indexPath.row]
+                }
+                cell.configureCell(hasherResult, hashCash: self.trails.trailHashCash)
+                return cell
+            } else {
+                return AttendeeCell()
+            }
         }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let specificAttendee: Attendee!
-        
-        if inSearchMode {
-            specificAttendee = filteredHashers[indexPath.row]
+        if(tableView == self.trailHaresTableView) {
+            
         } else {
-            specificAttendee = trailRoster[indexPath.row]
+            let specificAttendee: Attendee!
+            
+            if inSearchMode {
+                specificAttendee = filteredHashers[indexPath.row]
+            } else {
+                specificAttendee = trailRoster[indexPath.row]
+            }
+            performSegueWithIdentifier("attendeeDetails", sender: specificAttendee)
         }
-        performSegueWithIdentifier("attendeeDetails", sender: specificAttendee)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -263,7 +294,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             
         } else {
             newHasher["hasherPrimaryHashName"] = newHasherHashName.text!
-
+            
             if newHasherNerdName.text != nil && newHasherNerdName.text != "" {
                 newHasher["hasherNerdName"] = newHasherNerdName.text
             }
