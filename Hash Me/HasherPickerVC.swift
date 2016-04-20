@@ -47,7 +47,6 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func loadHasherData(completed: DownloadComplete) {
         DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot in
-            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
                 
                 if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
                     self.hasherPickerNames = []
@@ -61,7 +60,6 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                         }
                     }
                 }
-            }
             completed()
         })
         
@@ -114,33 +112,12 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
-    func selectHasher(hasherChoice: String) {
-        
-        DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot in
-            
-            if let hasherSnapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                
-                for snapshot in hasherSnapshots {
-                    if let hasherNames = snapshot.value as? Dictionary<String, AnyObject> {
-                        let hasherName = hasherNames["hasherPrimaryHashName"]!
-                        self.hasherChoiceId = self.hasherDecoderDict[hasherName as! String]
-                    }
-                }
-            }
-        })
-    }
-    
     @IBAction func saveHasherBtnPressed(sender: UIButton) {
         if self.hasherChoiceName != nil && self.hasherChoiceName != "-Select Hasher-" {
             hasherChoiceId = hasherDecoderDict[hasherChoiceName]!
+            print("outbound: ", hasherChoiceId)
         } else {
             hasherChoiceId = nil
         }
     }
-    
-    //UNWIND FROM ADD TRAIL & FROM ATTENDEE DETAILS
-    //WILL QUICKLY NEED TO CHANGE UI OF ADD TRAIL TO ALLOW MULTIPLE HARES
-    //OBVIOUSLY ALSO NEED TO CHANGE TRAIL DATA STRUCTURE & TRAIL SAVING
-    
-    
 }
