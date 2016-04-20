@@ -119,5 +119,7 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         } else {
             hasherChoiceId = nil
         }
+        print("outbound2: \(hasherChoiceId)")
     }
+
 }
