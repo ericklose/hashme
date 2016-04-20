@@ -42,7 +42,7 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
                 
                 if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                    self.kennelPickerNames = []
+                    self.kennelPickerNames = ["-Select Kennel-"]
                     for snap in snapshots {
                         if let kennelDict2 = snap.value as? Dictionary<String, AnyObject> {
                             let kennelKey = snap.key

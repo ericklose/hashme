@@ -331,7 +331,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             newHasherCurrentPayLbl.text = "$\(hashCash)"
             newHasherPaySlider.setValue(Float(hashCash), animated: true)
             newHasherReducedPayReason.text = ""
-            
         }
     }
     
