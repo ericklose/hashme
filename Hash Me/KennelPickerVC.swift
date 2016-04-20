@@ -40,7 +40,6 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func loadKennelData(completed: DownloadComplete) {
         DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
-        //if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
                 
                 if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
                     self.kennelPickerNames = []
@@ -53,7 +52,6 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                         }
                     }
                 }
-            //}
             completed()
         })
     }
