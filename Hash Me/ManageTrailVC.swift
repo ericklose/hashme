@@ -238,22 +238,18 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
-        if let sourceViewController2 = sender.sourceViewController as? HasherPickerVC {
-            print("sponsor B \(sourceViewController2.hasherChoiceName)")
-            print("sponsor B ID \(sourceViewController2.hasherChoiceId)")
-            if sourceViewController2.hasherChoiceId == nil {
-                print("failed w nil")
+        if let sourceViewController = sender.sourceViewController as? HasherPickerVC {
+            sourceViewController.hasherChoiceId = sourceViewController.hasherDecoderDict[sourceViewController.hasherChoiceName]!
+            if sourceViewController.hasherChoiceId == nil {
                 newHasherVirginSponsorIs.text = ""
                 newHasher["hasherVirginSponsor"] = nil
                 newHasherTrails["hasherVirginSponsor"] = nil
                 trailInfo["trailAttendeeVirginSponsorIs"] = nil
             } else {
-                print("sponsor BB \(sourceViewController2.hasherChoiceName)")
-                print("sponsor BB ID \(sourceViewController2.hasherChoiceId)")
-                newHasherVirginSponsorIs.text = sourceViewController2.hasherChoiceName
-                newHasher["hasherVirginSponsor"] = sourceViewController2.hasherChoiceId
-                newHasherTrails["hasherVirginSponsor"] = sourceViewController2.hasherChoiceId
-                trailInfo["trailAttendeeVirginSponsorIs"] = sourceViewController2.hasherChoiceId
+                newHasherVirginSponsorIs.text = sourceViewController.hasherChoiceName
+                newHasher["hasherVirginSponsor"] = sourceViewController.hasherChoiceId
+                newHasherTrails["hasherVirginSponsor"] = sourceViewController.hasherChoiceId
+                trailInfo["trailAttendeeVirginSponsorIs"] = sourceViewController.hasherChoiceId
             }
         }
     }
@@ -270,10 +266,6 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
 
             if newHasherNerdName.text != nil && newHasherNerdName.text != "" {
                 newHasher["hasherNerdName"] = newHasherNerdName.text
-            }
-            
-            if newHasherVirginSponsorIs.text != nil && newHasherVirginSponsorIs.text != "" {
-                newHasher["hasherVirginSponser"] = newHasherVirginSponsorIs.text
             }
             
             if newHasherAttendingToggle.on == true {

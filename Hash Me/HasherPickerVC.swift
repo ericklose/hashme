@@ -49,12 +49,11 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot in
                 
                 if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                    self.hasherPickerNames = []
+                    self.hasherPickerNames = ["-Select Hasher-"]
                     for snap in snapshots {
                         if let hasherDict2 = snap.value as? Dictionary<String, AnyObject> {
                             let hasherKey = snap.key
                             let hasherName = hasherDict2["hasherPrimaryHashName"]!
-                            
                             self.hasherPickerNames.append(hasherName as! String)
                             self.hasherDecoderDict[hasherName as! String] = (hasherKey)
                         }
@@ -119,7 +118,6 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         } else {
             hasherChoiceId = nil
         }
-        print("outbound2: \(hasherChoiceId)")
     }
 
 }
