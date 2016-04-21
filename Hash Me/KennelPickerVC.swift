@@ -9,14 +9,18 @@
 import UIKit
 import Firebase
 
-class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var kennelPicker: UIPickerView!
     @IBOutlet weak var kennelSelected: UILabel!
     @IBOutlet weak var kennelSavedBtn: UIButton!
     
+    @IBOutlet weak var kennelSearchBar: UISearchBar!
+    var inSearchMode: Bool = false
+    
     var kennelPickerDict: Dictionary<String, String>!
     var kennelPickerNames = ["-Select Kennel-"]
+    var filteredKennelPickerNames = ["-Select Kennel-"]
     var kennelChoiceName: String!
     var kennelChoiceId: String!
     var kennelDecoderDict: [String: String] = [:]
@@ -25,13 +29,13 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         super.viewDidLoad()
         kennelPicker.delegate = self
         kennelPicker.dataSource = self
+        kennelSearchBar.delegate = self
+        kennelSearchBar.returnKeyType = UIReturnKeyType.Done
         
         loadKennelData { () -> () in
             self.kennelPicker.reloadAllComponents()
         }
     }
-
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -61,18 +65,47 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(kennelPicker: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return kennelPickerNames.count
+        if inSearchMode {
+            return filteredKennelPickerNames.count
+        } else {
+            return kennelPickerNames.count
+        }
     }
     
     func pickerView(kennelPicker: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return kennelPickerNames[row]
+        if inSearchMode {
+            return filteredKennelPickerNames[row]
+        } else {
+            return kennelPickerNames[row]
+        }
     }
     
     func pickerView(kennelPicker: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        kennelSelected.text = kennelPickerNames[row]
-        self.kennelChoiceName = kennelPickerNames[row]
+        if inSearchMode {
+            kennelSelected.text = filteredKennelPickerNames[row]
+            self.kennelChoiceName = filteredKennelPickerNames[row]
+        } else {
+            kennelSelected.text = kennelPickerNames[row]
+            self.kennelChoiceName = kennelPickerNames[row]
+        }
     }
     
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == "" {
+            inSearchMode = false
+            view.endEditing(true)
+            self.kennelPicker.reloadAllComponents()
+        } else {
+            inSearchMode = true
+            let lower = searchBar.text!.lowercaseString
+            filteredKennelPickerNames = kennelPickerNames.filter({$0.lowercaseString.rangeOfString(lower) != nil})
+            self.kennelPicker.reloadAllComponents()
+        }
+    }
     
     @IBAction func kennelPickerSaved(sender: UIButton) {
         if self.kennelChoiceName != nil && self.kennelChoiceName != "-Select Kennel-" {

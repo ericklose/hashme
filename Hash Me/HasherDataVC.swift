@@ -136,14 +136,14 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             
             if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
                 let existingPrimaryName = hasherDict["hasherPrimaryHashName"] as! String
-//                let existingPrimaryKennel = hasherDict["hasherPrimaryKennel"] as! String
+                //                let existingPrimaryKennel = hasherDict["hasherPrimaryKennel"] as! String
                 
                 if primaryName != existingPrimaryName && primaryName != "" {
                     let namePath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)")
                     namePath.updateChildValues(["hasherPrimaryHashName" : primaryName])
                     
-//                    let kennelsAndNamesPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
-//                    kennelsAndNamesPath.updateChildValues([existingPrimaryKennel : "primary"])
+                    //                    let kennelsAndNamesPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+                    //                    kennelsAndNamesPath.updateChildValues([existingPrimaryKennel : "primary"])
                     
                 }
             }
@@ -190,6 +190,23 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
         
+        if let sourceViewController = sender.sourceViewController as? KennelPickerTableVC {
+            if sourceViewController.kennelChoiceId == nil {
+            } else {
+                let kName = sourceViewController.kennelChoiceName
+                let kId = sourceViewController.kennelChoiceId
+            }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //IF SEGUE == SELECT YOUR HOME KENNEL (NEEDS IDENTIFIER)
+        //SEND OVER THE CURRENT KENNEL LIST (DO YOU GRAB IT FROM THE OTHER SEGUE AS A SOURCE VIEW CONTROLLER OR SHIP IT AS THE PREPARE FOR SEGUE?)
+        //THIS SHOULD USE THE PICKER NOT THE TABLE SINCE IT'S COOLER TO HAVE VARIETY AND KEEPS IT EASY ON WHICH VC IS SENDING DATA BACK
+    }
+    
+    @IBAction func getKennelFromOriginalKennelPicker(sender: UIStoryboardSegue) {
+        
         if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
             
             let hasherKennelsArray = kennelAndHashNameDecodeDict.keys
@@ -197,9 +214,9 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             let hasherTrailsAndNames = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
             
             if sourceViewController.kennelChoiceId == nil || hasherKennelsArray.contains(sourceViewController.kennelChoiceId) {
-        
+                
             } else {
-                    hasherTrailsAndNames.updateChildValues([sourceViewController.kennelChoiceId! : true])
+                hasherTrailsAndNames.updateChildValues([sourceViewController.kennelChoiceId! : true])
             }
         }
     }

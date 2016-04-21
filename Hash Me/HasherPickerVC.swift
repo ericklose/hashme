@@ -114,7 +114,6 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBAction func saveHasherBtnPressed(sender: UIButton) {
         if self.hasherChoiceName != nil && self.hasherChoiceName != "-Select Hasher-" {
             hasherChoiceId = hasherDecoderDict[hasherChoiceName]!
-            print("outbound: ", hasherChoiceId)
         } else {
             hasherChoiceId = nil
         }

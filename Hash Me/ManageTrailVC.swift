@@ -250,7 +250,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
+        if let sourceViewController = sender.sourceViewController as? KennelPickerTableVC {
             if sourceViewController.kennelChoiceId == nil {
                 newHasherVisitorFrom.text = ""
                 newHasher["hasherPrimaryKennel"] = trails.trailKennelId
