@@ -113,9 +113,9 @@ class AddNewTrailVC: UIViewController {
         }
     }
     
-    //THIS IS TOTALLY FUCKED
+    //THIS SHOULD BE FINE SOON
 //    @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
-//        if let sourceViewController = sender.sourceViewController as? HasherPickerVC {
+//        if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {
 //            if sourceViewController.hasherChoiceId == nil {
 //                specificAttendeeVirginSponsorIs.text = ""
 //                trailAttendencePath.childByAppendingPath("trailAttendeeVirginSponsorIs").removeValue()
