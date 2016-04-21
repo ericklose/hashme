@@ -1056,7 +1056,7 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                             <connections>
-                                                                <segue destination="03P-Fx-V2b" kind="show" identifier="newHasherKennelPickerVC" id="IGY-hJ-DP1"/>
+                                                                <segue destination="1YO-bv-Rc7" kind="show" id="Elj-Qh-yzO"/>
                                                             </connections>
                                                         </textField>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Virgin -- Sponsor?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e86-sH-GhY">
@@ -1569,7 +1569,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9KR-du-qYk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="CPc-sO-JAr" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2660" y="1179"/>
+            <point key="canvasLocation" x="2198" y="1142"/>
         </scene>
         <!--Hasher Picker TableVC-->
         <scene sceneID="1M1-YB-2Zs">
@@ -1776,7 +1776,7 @@
                                                         <rect key="frame" x="0.0" y="24" width="115" height="30"/>
                                                         <state key="normal" title="Change Kennel"/>
                                                         <connections>
-                                                            <segue destination="03P-Fx-V2b" kind="show" id="60U-fW-KxS"/>
+                                                            <segue destination="1YO-bv-Rc7" kind="show" id="kSA-zE-bGP"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Not Virgin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aak-JW-oyo">
@@ -1977,7 +1977,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
-                                                    <segue destination="03P-Fx-V2b" kind="show" id="xun-RT-BHu"/>
+                                                    <segue destination="1YO-bv-Rc7" kind="show" id="yyd-IH-WfA"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
@@ -2387,6 +2387,107 @@
             </objects>
             <point key="canvasLocation" x="449" y="911"/>
         </scene>
+        <!--Kennel Picker TableVC-->
+        <scene sceneID="41P-eh-tBo">
+            <objects>
+                <viewController id="1YO-bv-Rc7" customClass="KennelPickerTableVC" customModule="Hash_Me" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VSa-a3-fwh"/>
+                        <viewControllerLayoutGuide type="bottom" id="xNP-Zd-hB9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lBs-C4-KBu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="cZp-56-p7M">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="LAK-C7-t2p"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PCo-kX-J7f">
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kennelPickerCell" rowHeight="57" id="1cX-7L-qy1" customClass="KennelPickerTableCell" customModule="Hash_Me" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="57"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="1cX-7L-qy1" id="NCp-Ua-hc7">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Kennel Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fL-x2-tNb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="u8n-4c-c7T"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="pwU-Wo-ttU">
+                                                    <rect key="frame" x="8" y="27" width="584" height="21"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Kennel US State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKn-u0-3Ih">
+                                                            <rect key="frame" x="0.0" y="0.0" width="299" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Kennel Country" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8y-Q1-9XD">
+                                                            <rect key="frame" x="299" y="0.0" width="285" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="IOZ-yN-spJ"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pwU-Wo-ttU" firstAttribute="bottom" secondItem="NCp-Ua-hc7" secondAttribute="bottomMargin" id="NV9-zo-60N"/>
+                                                <constraint firstItem="pwU-Wo-ttU" firstAttribute="top" secondItem="0fL-x2-tNb" secondAttribute="bottom" constant="3" id="app-GJ-dlg"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="0fL-x2-tNb" secondAttribute="trailing" id="gPE-3Z-5ir"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="pwU-Wo-ttU" secondAttribute="trailing" id="gg3-lt-gDW"/>
+                                                <constraint firstItem="0fL-x2-tNb" firstAttribute="leading" secondItem="NCp-Ua-hc7" secondAttribute="leadingMargin" id="l2C-bl-P5l"/>
+                                                <constraint firstItem="0fL-x2-tNb" firstAttribute="top" secondItem="NCp-Ua-hc7" secondAttribute="topMargin" id="l6H-u2-qiG"/>
+                                                <constraint firstItem="pwU-Wo-ttU" firstAttribute="leading" secondItem="NCp-Ua-hc7" secondAttribute="leadingMargin" id="nOP-tw-2Gl"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="kennelCountryKennel" destination="y8y-Q1-9XD" id="qhx-V4-zTq"/>
+                                            <outlet property="kennelName" destination="0fL-x2-tNb" id="svs-pc-GLe"/>
+                                            <outlet property="kennelUsStateName" destination="QKn-u0-3Ih" id="afq-8c-MqO"/>
+                                            <segue destination="UzG-JT-voY" kind="unwind" identifier="getKennelFromTable" unwindAction="getKennelFromKennelPickerVC:" id="NdA-u3-Mqf"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xNP-Zd-hB9" firstAttribute="top" secondItem="PCo-kX-J7f" secondAttribute="bottom" constant="-44" id="7H9-cS-GDy"/>
+                            <constraint firstItem="cZp-56-p7M" firstAttribute="top" secondItem="lBs-C4-KBu" secondAttribute="topMargin" constant="64" id="bJH-nE-Bz7"/>
+                            <constraint firstAttribute="trailing" secondItem="PCo-kX-J7f" secondAttribute="trailing" id="fOY-Jj-zNG"/>
+                            <constraint firstItem="PCo-kX-J7f" firstAttribute="leading" secondItem="lBs-C4-KBu" secondAttribute="leading" id="fVX-2v-JOA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cZp-56-p7M" secondAttribute="trailing" constant="-20" id="g6W-pN-Dic"/>
+                            <constraint firstItem="cZp-56-p7M" firstAttribute="leading" secondItem="lBs-C4-KBu" secondAttribute="leadingMargin" constant="-20" id="sep-Oe-gQO"/>
+                            <constraint firstItem="PCo-kX-J7f" firstAttribute="top" secondItem="cZp-56-p7M" secondAttribute="bottom" id="zD4-6I-jEu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="kennelPickerTableSearchBar" destination="cZp-56-p7M" id="e4J-sK-f1I"/>
+                        <outlet property="kennelPickerTableView" destination="PCo-kX-J7f" id="ijg-83-aJr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jEP-P3-X6r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="UzG-JT-voY" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2846" y="1142"/>
+        </scene>
     </scenes>
     <resources>
         <image name="edit-icon" width="256" height="256"/>
@@ -2394,6 +2495,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Vtn-6v-9hU"/>
-        <segue reference="xun-RT-BHu"/>
+        <segue reference="yyd-IH-WfA"/>
     </inferredMetricsTieBreakers>
 </document>
