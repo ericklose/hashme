@@ -102,7 +102,7 @@ class AddNewTrailVC: UIViewController {
     }
     
     @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
+        if let sourceViewController = sender.sourceViewController as? KennelPickerTableVC {
             if sourceViewController.kennelChoiceId == nil {
                 newTrailKennelName.text = ""
                 newTrailKennelId = nil

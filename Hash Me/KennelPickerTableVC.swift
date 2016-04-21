@@ -7,89 +7,110 @@
 //
 
 import UIKit
+import Firebase
 
-class KennelPickerTableVC: UITableViewController, UISearchBarDelegate {
-
+class KennelPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+    
+    
+    @IBOutlet weak var kennelPickerTableView: UITableView!
+    
+    @IBOutlet weak var kennelPickerTableSearchBar: UISearchBar!
+    var inSearchMode: Bool = false
+    
+    var kennels: [KennelData]!
+    var filteredKennels: [KennelData]!
+    var kennelChoice: KennelData!
+    var kennelChoiceName: String!
+    var kennelChoiceId: String!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        kennelPickerTableView.delegate = self
+        kennelPickerTableView.dataSource = self
+        kennelPickerTableSearchBar.delegate = self
+        kennelPickerTableSearchBar.returnKeyType = UIReturnKeyType.Done
+        
+        
+        DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+            
+            self.kennels = []
+            
+            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+                for snap in snapshots {
+                    if let kennelDict = snap.value as? Dictionary<String, AnyObject> {
+                        let key = snap.key
+                        let kennelName = kennelDict["kennelName"] as! String
+                        let kennel = KennelData(kennelInitId: key, kennelInitDict: kennelDict, kennelInitName: kennelName)
+                        self.kennels.append(kennel)
+                    }
+                }
+            }
+            self.kennelPickerTableView.reloadData()
+        })
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if kennels == nil {
+            return 0
+        } else if inSearchMode {
+            return filteredKennels.count
+        } else {
+            return kennels.count
+        }
     }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCellWithIdentifier("kennelPickerCell") as? KennelPickerTableCell {
+            let kennelResult: KennelData!
+            if inSearchMode {
+                kennelResult = filteredKennels[indexPath.row]
+            } else {
+                kennelResult = kennels[indexPath.row]
+            }
+            cell.configureCell(kennelResult)
+            return cell
+        } else {
+            return KennelPickerTableCell()
+        }
     }
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("getKennelFromTable", sender: indexPath)
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "getKennelFromTable" {
+            let selectedIndex = kennelPickerTableView.indexPathForSelectedRow
+            if inSearchMode {
+                kennelChoice = filteredKennels[selectedIndex!.row]
+            } else {
+                kennelChoice = kennels[selectedIndex!.row]
+            }
+            kennelChoiceId = kennelChoice.kennelId
+            kennelChoiceName = kennelChoice.kennelName
+        }
     }
-    */
-
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == "" {
+            inSearchMode = false
+            view.endEditing(true)
+            self.kennelPickerTableView.reloadData()
+        } else {
+            inSearchMode = true
+            let lower = searchBar.text!.lowercaseString
+            filteredKennels = kennels.filter({$0.kennelName.lowercaseString.rangeOfString(lower) != nil})
+            self.kennelPickerTableView.reloadData()
+        }
+    }
 }

@@ -14,7 +14,6 @@ class TrailData {
     private var _trailDate: String!
     private var _trailKennelName: String!
     private var _trailKennelId: String!
-    //private var _trailHares: String!
     private var _trailTitle: String!
     private var _trailStartLocation: String!
     private var _trailDescription: String!

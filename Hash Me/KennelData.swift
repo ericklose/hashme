@@ -67,7 +67,7 @@ class KennelData {
         self._kennelId = kennelInitId
         self._kennelDict = kennelInitDict
         
-        if let kennelInitName = kennelInitDict["name"] as? String {
+        if let kennelInitName = kennelInitDict["kennelName"] as? String {
             self._kennelName = kennelInitName
         }
         
@@ -81,6 +81,10 @@ class KennelData {
         
         if let kennelInitCountry = kennelInitDict["kennelCountry"] as? String {
             self._kennelCountry = kennelInitCountry
+        }
+        
+        if let kennelInitSchedule = kennelInitDict["kennelSchedule"] as? String {
+            self._kennelSchedule = kennelInitSchedule
         }
         
         if self._kennelCountry == "USA" {

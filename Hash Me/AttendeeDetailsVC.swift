@@ -161,7 +161,7 @@ class AttendeeDetailsVC: UIViewController {
     }
     
     @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
+        if let sourceViewController = sender.sourceViewController as? KennelPickerTableVC {
             if sourceViewController.kennelChoiceId == nil {
                 specificAttendeeVisitingFrom.text = ""
                 trailAttendencePath.childByAppendingPath("trailAttendeeVisitingFrom").removeValue()

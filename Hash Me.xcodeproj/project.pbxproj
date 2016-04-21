@@ -291,9 +291,9 @@
 				A6CB71361C96210600F27D12 /* ManageTrailVC.swift */,
 				A6BA76641CBBF32A00D29C66 /* AttendeeDetailsVC.swift */,
 				A619290A1C94912A00D8C945 /* TrailListVC.swift */,
+				A6B22DE81CC6CDDB00A4F389 /* HasherPickerVC.swift */,
 				A60007AA1CBEE3620040F15A /* KennelPickerVC.swift */,
 				A6B22DF01CC9016A00A4F389 /* KennelPickerTableVC.swift */,
-				A6B22DE81CC6CDDB00A4F389 /* HasherPickerVC.swift */,
 				A6B22DFC1CC901B400A4F389 /* HasherPickerTableVC.swift */,
 			);
 			name = Controller;
