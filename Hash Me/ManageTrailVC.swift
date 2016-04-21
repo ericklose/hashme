@@ -269,8 +269,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as? HasherPickerVC {
-            sourceViewController.hasherChoiceId = sourceViewController.hasherDecoderDict[sourceViewController.hasherChoiceName]!
+        if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {
             if sourceViewController.hasherChoiceId == nil {
                 newHasherVirginSponsorIs.text = ""
                 newHasher["hasherVirginSponsor"] = nil

@@ -12,7 +12,6 @@ import Firebase
 
 class TrailCell: UITableViewCell {
     
-    
     @IBOutlet weak var trailDate: UILabel!
     @IBOutlet weak var trailKennelName: UILabel!
     @IBOutlet weak var trailHares: UILabel!
