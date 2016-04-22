@@ -32,6 +32,9 @@
 		A6764AC41CCA5DEE00E376F0 /* KennelTrailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6764AC31CCA5DEE00E376F0 /* KennelTrailsCell.swift */; };
 		A6764AC51CCA5DEE00E376F0 /* KennelTrailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6764AC31CCA5DEE00E376F0 /* KennelTrailsCell.swift */; };
 		A6764AC61CCA5DEE00E376F0 /* KennelTrailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6764AC31CCA5DEE00E376F0 /* KennelTrailsCell.swift */; };
+		A6764AC81CCAB28900E376F0 /* MapAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6764AC71CCAB28900E376F0 /* MapAddressVC.swift */; };
+		A6764AC91CCAB28900E376F0 /* MapAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6764AC71CCAB28900E376F0 /* MapAddressVC.swift */; };
+		A6764ACA1CCAB28900E376F0 /* MapAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6764AC71CCAB28900E376F0 /* MapAddressVC.swift */; };
 		A6A0E3D61C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
 		A6A0E3D71C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
 		A6A0E3D81C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
@@ -145,6 +148,7 @@
 		A619292C1C94912A00D8C945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A64554E21C975BC60016373E /* AddNewTrailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewTrailVC.swift; sourceTree = "<group>"; };
 		A6764AC31CCA5DEE00E376F0 /* KennelTrailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelTrailsCell.swift; sourceTree = "<group>"; };
+		A6764AC71CCAB28900E376F0 /* MapAddressVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAddressVC.swift; sourceTree = "<group>"; };
 		A6A0E3D51C9496A00003EE0E /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		A6A0E3DD1C94A08D0003EE0E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		A6A0E3DE1C94A08D0003EE0E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -299,6 +303,7 @@
 				A60007AA1CBEE3620040F15A /* KennelPickerVC.swift */,
 				A6B22DF01CC9016A00A4F389 /* KennelPickerTableVC.swift */,
 				A6B22DFC1CC901B400A4F389 /* HasherPickerTableVC.swift */,
+				A6764AC71CCAB28900E376F0 /* MapAddressVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -545,6 +550,7 @@
 				A6A0E3EA1C94A4650003EE0E /* LoginScreenVC.swift in Sources */,
 				A619290D1C94912A00D8C945 /* HasherDataVC.swift in Sources */,
 				A61929091C94912A00D8C945 /* AppDelegate.swift in Sources */,
+				A6764AC81CCAB28900E376F0 /* MapAddressVC.swift in Sources */,
 				A6FB47611C9A0E0A00B370CD /* KennelCell.swift in Sources */,
 				A619290B1C94912A00D8C945 /* TrailListVC.swift in Sources */,
 				A6A349501CB92E5900B919D8 /* ManageKennelVC.swift in Sources */,
@@ -566,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6B22DFE1CC901B400A4F389 /* HasherPickerTableVC.swift in Sources */,
+				A6764AC91CCAB28900E376F0 /* MapAddressVC.swift in Sources */,
 				A6FB47621C9A0E0A00B370CD /* KennelCell.swift in Sources */,
 				A6B22DF61CC9018100A4F389 /* KennelPickerTableCell.swift in Sources */,
 				A6C7AEE71CA33D5E0080814C /* AttendeeData.swift in Sources */,
@@ -599,6 +606,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6B22DFF1CC901B400A4F389 /* HasherPickerTableVC.swift in Sources */,
+				A6764ACA1CCAB28900E376F0 /* MapAddressVC.swift in Sources */,
 				A6FB47631C9A0E0A00B370CD /* KennelCell.swift in Sources */,
 				A6B22DF71CC9018100A4F389 /* KennelPickerTableCell.swift in Sources */,
 				A6C7AEE81CA33D5E0080814C /* AttendeeData.swift in Sources */,

@@ -18,9 +18,19 @@ class KennelData {
     private var _kennelSchedule: String!
     private var _kennelCountry: String!
     private var _kennelUsState: String!
+    private var _kennelMismanagement: Dictionary<String, AnyObject>!
+    private var _kennelAdmins: Dictionary<String, AnyObject>!
     
     var kennelId: String {
         return _kennelId
+    }
+    
+    var kennelMismanagement: Dictionary<String, AnyObject> {
+        return _kennelMismanagement
+    }
+    
+    var kennelAdmins: Dictionary<String, AnyObject>! {
+        return _kennelAdmins
     }
     
     var kennelCountry: String {
@@ -85,6 +95,14 @@ class KennelData {
         
         if let kennelInitSchedule = kennelInitDict["kennelSchedule"] as? String {
             self._kennelSchedule = kennelInitSchedule
+        }
+        
+        if let kennelInitMismanagement = kennelInitDict["kennelMismanagement"] as? Dictionary<String, AnyObject> {
+            self._kennelMismanagement = kennelInitMismanagement
+        }
+        
+        if let kennelInitAdmins = kennelInitDict["kennelAdmins"] as? Dictionary<String, AnyObject> {
+            self._kennelAdmins = kennelInitAdmins
         }
         
         if self._kennelCountry == "USA" {
