@@ -55,32 +55,13 @@ class HasherCell: UITableViewCell {
     }
     
     func editAltHashNameInFirebase(altName: String!, altId: String!) {
-        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
-            
-            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
-                if let existingHashNamesDict = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
-                    
-                    var existingHashNamesArray = [String]()
-                    let kennelsAndNamesPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
-                    
-                    for (_, value) in existingHashNamesDict {
-                        if let nextName = value as? String {
-                            existingHashNamesArray.append(nextName)
-                            //print("existinghashnamesarray: \(existingHashNamesArray)")
-                        }
-                    }
-                    
-                    if existingHashNamesArray.contains(altName) || altName == nil {
-                        //do nothing
-                    } else if altName == "" {
-                        kennelsAndNamesPath.updateChildValues([altId: true])
-                        
-                    } else {
-                        kennelsAndNamesPath.updateChildValues([altId : altName])
-                    }
-                }
-            }
-        })
+        let kennelsAndNamesPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+        
+        if altName == "" {
+            kennelsAndNamesPath.updateChildValues([altId: true])
+        } else {
+            kennelsAndNamesPath.updateChildValues([altId : altName])
+        }
     }
     
     @IBAction func deleteKennelButtonPressed(sender: AnyObject) {

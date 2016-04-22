@@ -77,7 +77,6 @@ class Hasher {
         
         if let hasherInitNerdName = hasherInitDict["hasherNerdName"] as? String {
             self._hasherNerdName = hasherInitNerdName
-            print("NN ", _hasherNerdName)
         }
         
         if let hasherPrimaryHashName = hasherInitDict["hasherPrimaryHashName"] as? String {
