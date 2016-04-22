@@ -119,26 +119,13 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func editNerdNameInFirebase(nerdName: String!) {
+        let namePath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)")
         
-//        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
-//            
-//            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
-//                let existingNerdName = hasherDict["hasherNerdName"] as! String
-//                
-//                if nerdName != existingNerdName && nerdName != "" {
-        if nerdName != "" {
-                    let namePath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)")
-        
+       if nerdName != "" {
                     namePath.updateChildValues(["hasherNerdName" : nerdName])
         } else {
-            let namePath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)")
-            
             namePath.childByAppendingPath("hasherNerdName").removeValue()
         }
-        
-            //                }
-//            }
-//        })
     }
     
     func editPrimaryHashNameInFirebase(primaryName: String!) {
