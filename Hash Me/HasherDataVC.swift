@@ -161,10 +161,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print("KMIs ", kennelMembershipIds)
-        print("KMI count ", kennelMembershipIds.count)
         let kennelMembershipId = kennelMembershipIds[indexPath.row]
-        print("KMI ", kennelMembershipId)
         
         if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? HasherCell {
             cell.configureCell(kennelMembershipId, kennelAndHashNameDecodeDict: kennelAndHashNameDecodeDict, kennelAndNameDict: kennelAndNameDict)
@@ -195,15 +192,16 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBAction func getKennelFromOriginalKennelPicker(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
-            
             let hasherKennelsArray = kennelAndHashNameDecodeDict.keys
-            
             let hasherTrailsAndNames = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
             
-            if sourceViewController.kennelChoiceId == nil || hasherKennelsArray.contains(sourceViewController.kennelChoiceId) {
-                
-            } else {
+            if sourceViewController.kennelChoiceId != nil && !hasherKennelsArray.contains(sourceViewController.kennelChoiceId) {
                 hasherTrailsAndNames.updateChildValues([sourceViewController.kennelChoiceId! : true])
+                let kennelMembersPath = Firebase(url: "\(DataService.ds.REF_KENNELS)").childByAppendingPath(sourceViewController.kennelChoiceId)
+                let kennelMembersPath2 = Firebase(url: "\(kennelMembersPath.childByAppendingPath("kennelMembers"))")
+                kennelMembersPath2.updateChildValues([hasher.hasherId : true])
+                print("UID: ", hasher.hasherId)
+                print("NName: ", hasher.hasherNerdName)
             }
         }
     }
