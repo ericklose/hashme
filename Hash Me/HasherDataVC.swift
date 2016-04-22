@@ -199,9 +199,8 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 hasherTrailsAndNames.updateChildValues([sourceViewController.kennelChoiceId! : true])
                 let kennelMembersPath = Firebase(url: "\(DataService.ds.REF_KENNELS)").childByAppendingPath(sourceViewController.kennelChoiceId)
                 let kennelMembersPath2 = Firebase(url: "\(kennelMembersPath.childByAppendingPath("kennelMembers"))")
-                kennelMembersPath2.updateChildValues([hasher.hasherId : true])
-                print("UID: ", hasher.hasherId)
-                print("NName: ", hasher.hasherNerdName)
+                kennelMembersPath2.updateChildValues([NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String : true])
+                print("UID: ", NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String)
             }
         }
     }
