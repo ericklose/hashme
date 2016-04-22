@@ -12,9 +12,11 @@ import Firebase
 class HasherCell: UITableViewCell {
     
     @IBOutlet weak var kennelNameLbl: UILabel!
-    //DELETE EDIT BUTTN OUTLET? DON't DELETE...NEED TO HIDE WHEN EDITING/ADDING ALT HASH NAME
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var hashNameLbl: UILabel!
+    @IBOutlet weak var altHashNameTxtFld: UITextField!
+    @IBOutlet weak var enterBtn: UIButton!
+    
     
     var kennelMembershipId: String!
 
@@ -34,32 +36,45 @@ class HasherCell: UITableViewCell {
         self.kennelMembershipId = kennelMembershipId
         kennelNameLbl.text = kennelAndNameDict[kennelMembershipId]
         hashNameLbl.text = kennelAndHashNameDecodeDict[kennelMembershipId]
+        altHashNameTxtFld.text = kennelAndHashNameDecodeDict[kennelMembershipId]
 }
 
-//    @IBAction func altHashNameEditPencilPressed(sender: AnyObject) {
-//        //CALL IN UPDATE BUTTON
-//        
-//        altHashNameTxtFld.hidden = false
-//        altHashNameLbl.hidden = true
-//        editButton.hidden = true
-//        updateInfoBtn.hidden = false
-        
-//
-//    }
+    @IBAction func altHashNameEditPencilPressed(sender: AnyObject) {
+        altHashNameTxtFld.hidden = false
+        hashNameLbl.hidden = true
+        editButton.hidden = true
+        enterBtn.hidden = false
+    }
+    
+    @IBAction func enterBtnForEditAltHashNamePressed(sender: AnyObject) {
+        editAltHashNameInFirebase(altHashNameTxtFld.text, altId: kennelMembershipId)
+        altHashNameTxtFld.hidden = true
+        hashNameLbl.hidden = false
+        editButton.hidden = false
+        enterBtn.hidden = true
+    }
     
     func editAltHashNameInFirebase(altName: String!, altId: String!) {
         DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
             
                     if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
-                        let existingHashNamesDict = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, String>
-                        let existingHashNamesArray = existingHashNamesDict!.values
-                        if existingHashNamesArray.contains(altName) || altName == nil {
-                            //do nothing
-                        } else {
+                        if let existingHashNamesDict = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
+
+                            var existingHashNamesArray = [String]()
+                            for (key, value) in existingHashNamesDict {
+                                if let nextName = value as? String {
+                                    existingHashNamesArray.append(nextName)
+                                    print("existinghashnamesarray: \(existingHashNamesArray)")
+                                } 
+                            }
+//                        let existingHashNamesArray = existingHashNamesDict.values
+//                        if existingHashNamesArray.contains(altName) || altName == nil {
+//                            //do nothing
+//                        } else {
 //                            let kennelsAndNamesPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
 //                            kennelsAndNamesPath.updateChildValues([altId : altName])
+//                        }
                         }
-            
                     }
                 })
         
