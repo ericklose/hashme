@@ -29,7 +29,7 @@ class Hasher {
     }
     
     var hasherNerdName: String {
-        if _hasherNerdName != nil || _hasherNerdName != "" {
+        if _hasherNerdName != nil && _hasherNerdName != "" {
         return _hasherNerdName
         }
         return "Incognito"
