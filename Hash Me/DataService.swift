@@ -9,7 +9,8 @@
 import Foundation
 import Firebase
 
-let URL_BASE = "https://hashme.firebaseio.com"
+let URL_BASE = "https://hash-me-dev.firebaseio.com/"
+//let URL_BASE = "https://hashme.firebaseio.com"
 
 class DataService {
     static let ds = DataService()
