@@ -54,15 +54,19 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             
             self.kennelMembershipIds = []
             self.kennelAndHashNameDecodeDict = [:]
+            print("confirm blank: ", self.kennelMembershipIds)
             
             if var hasherDict = snapshot.value as? Dictionary<String, AnyObject>{
+                print("1")
                 DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+                   print("1A")
                     //                    if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
                     if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                        
+                     print("2")
                         for snap in snapshots {
-                            
+                         print("3")
                             if let kennelDict2 = snap.value as? Dictionary<String, AnyObject> {
+                                print("4")
                                 let key = snap.key
                                 let name = kennelDict2["name"]!
                                 self.kennelAndNameDict[key] = (name as! String)
@@ -70,32 +74,32 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                         }
                     }
                     //                    }
-                    
+                    print("5")
                     hasherDict["addedKennelDict"] = self.kennelAndNameDict
-                    
                     self.hasher = Hasher(hasherInitId: KEY_UID, hasherInitDict: hasherDict)
-                    
                     if let hashNamesAndKennels = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
-                        
+                        print("6")
                         for (key, value) in hashNamesAndKennels {
-                            
+                            print("7")
                             if value as? String == "primary" {
                                 //take primary kennel and hashname out of table
-                                
                             } else if value as! NSObject == true {
                                 self.kennelAndHashNameDecodeDict[key] = ""
-                                
                             }else {
                                 self.kennelAndHashNameDecodeDict[key] = (value as! String)
                             }
-                            
                         }
-                        
                     }
+                    print("confirm: ", self.kennelAndHashNameDecodeDict.keys)
                     self.kennelMembershipIds = [String](self.kennelAndHashNameDecodeDict.keys)
+                    print("confirm2: ", self.kennelMembershipIds)
+
                     completed()
                 })
             }
+//            print("confirmXXX: ", self.kennelAndHashNameDecodeDict.keys)
+//            self.kennelMembershipIds = [String](self.kennelAndHashNameDecodeDict.keys)
+//            print("confirm2XXX: ", self.kennelMembershipIds)
             
         })
         
@@ -116,18 +120,25 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func editNerdNameInFirebase(nerdName: String!) {
         
-        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
-            
-            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
-                let existingNerdName = hasherDict["hasherNerdName"] as! String
-                
-                if nerdName != existingNerdName && nerdName != "" {
+//        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
+//            
+//            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
+//                let existingNerdName = hasherDict["hasherNerdName"] as! String
+//                
+//                if nerdName != existingNerdName && nerdName != "" {
+        if nerdName != "" {
                     let namePath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)")
-                    
+        
                     namePath.updateChildValues(["hasherNerdName" : nerdName])
-                }
-            }
-        })
+        } else {
+            let namePath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)")
+            
+            namePath.childByAppendingPath("hasherNerdName").removeValue()
+        }
+        
+            //                }
+//            }
+//        })
     }
     
     func editPrimaryHashNameInFirebase(primaryName: String!) {
@@ -178,7 +189,11 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        print("KMIs ", kennelMembershipIds)
+        print("KMI count ", kennelMembershipIds.count)
         let kennelMembershipId = kennelMembershipIds[indexPath.row]
+        print("KMI ", kennelMembershipId)
+
         if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? HasherCell {
             cell.configureCell(kennelMembershipId, kennelAndHashNameDecodeDict: kennelAndHashNameDecodeDict, kennelAndNameDict: kennelAndNameDict)
             return cell

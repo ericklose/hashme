@@ -29,7 +29,7 @@ class Hasher {
     }
     
     var hasherNerdName: String {
-        if _hasherNerdName != nil {
+        if _hasherNerdName != nil || _hasherNerdName != "" {
         return _hasherNerdName
         }
         return "Incognito"
@@ -77,6 +77,7 @@ class Hasher {
         
         if let hasherInitNerdName = hasherInitDict["hasherNerdName"] as? String {
             self._hasherNerdName = hasherInitNerdName
+            print("NN ", _hasherNerdName)
         }
         
         if let hasherPrimaryHashName = hasherInitDict["hasherPrimaryHashName"] as? String {

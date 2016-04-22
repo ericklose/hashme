@@ -19,15 +19,15 @@ class HasherCell: UITableViewCell {
     
     
     var kennelMembershipId: String!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -37,8 +37,8 @@ class HasherCell: UITableViewCell {
         kennelNameLbl.text = kennelAndNameDict[kennelMembershipId]
         hashNameLbl.text = kennelAndHashNameDecodeDict[kennelMembershipId]
         altHashNameTxtFld.text = kennelAndHashNameDecodeDict[kennelMembershipId]
-}
-
+    }
+    
     @IBAction func altHashNameEditPencilPressed(sender: AnyObject) {
         altHashNameTxtFld.hidden = false
         hashNameLbl.hidden = true
@@ -57,34 +57,35 @@ class HasherCell: UITableViewCell {
     func editAltHashNameInFirebase(altName: String!, altId: String!) {
         DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
             
-                    if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
-                        if let existingHashNamesDict = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
-
-                            var existingHashNamesArray = [String]()
-                            for (key, value) in existingHashNamesDict {
-                                if let nextName = value as? String {
-                                    existingHashNamesArray.append(nextName)
-                                    print("existinghashnamesarray: \(existingHashNamesArray)")
-                                } 
-                            }
-//                        let existingHashNamesArray = existingHashNamesDict.values
-//                        if existingHashNamesArray.contains(altName) || altName == nil {
-//                            //do nothing
-//                        } else {
-//                            let kennelsAndNamesPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
-//                            kennelsAndNamesPath.updateChildValues([altId : altName])
-//                        }
+            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
+                if let existingHashNamesDict = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
+                    
+                    var existingHashNamesArray = [String]()
+                    let kennelsAndNamesPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+                    
+                    for (_, value) in existingHashNamesDict {
+                        if let nextName = value as? String {
+                            existingHashNamesArray.append(nextName)
+                            //print("existinghashnamesarray: \(existingHashNamesArray)")
                         }
                     }
-                })
-        
+                    
+                    if existingHashNamesArray.contains(altName) || altName == nil {
+                        //do nothing
+                    } else if altName == "" {
+                        kennelsAndNamesPath.updateChildValues([altId: true])
+                        
+                    } else {
+                        kennelsAndNamesPath.updateChildValues([altId : altName])
+                    }
+                }
             }
+        })
+    }
     
     @IBAction func deleteKennelButtonPressed(sender: AnyObject) {
         let kennelsAndNamesPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
         print("kennelMembershipId: \(kennelMembershipId)")
-                kennelsAndNamesPath.childByAppendingPath(kennelMembershipId as String).removeValue()
-//        HasherDataVC.kennelListTableView.reloadData()
+        kennelsAndNamesPath.childByAppendingPath(kennelMembershipId as String).removeValue()
     }
-    
 }
