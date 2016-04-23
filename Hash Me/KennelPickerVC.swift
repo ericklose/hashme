@@ -18,13 +18,14 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var kennelSearchBar: UISearchBar!
     var inSearchMode: Bool = false
     
-    var kennelPickerDict: Dictionary<String, String>!
+//    var kennelPickerDict: Dictionary<String, String>!
     var kennelPickerNames = ["-Select Kennel-"]
     var filteredKennelPickerNames = ["-Select Kennel-"]
     var kennelChoiceName: String!
     var kennelChoiceId: String!
-    var kennelDecoderDict: [String: String] = [:]
+//    var kennelDecoderDict: [String: String] = [:]
     var hasherKennelIdsAndNamesDict: Dictionary<String, String>!
+    var hasherExistingPrimaryKennel: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,33 +34,38 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         kennelSearchBar.delegate = self
         kennelSearchBar.returnKeyType = UIReturnKeyType.Done
         
-        loadKennelData { () -> () in
-            self.kennelPicker.reloadAllComponents()
+        print("dict:", hasherKennelIdsAndNamesDict)
+        
+        for (key, _) in hasherKennelIdsAndNamesDict {
+            self.kennelPickerNames.append(key)
         }
+        
+        //kennelPickerNames.append(hasherKennelIdsAndNamesDict.values)
+        print("KPN: ", kennelPickerNames)
+//        loadKennelData { () -> () in
+//            self.kennelPicker.reloadAllComponents()
+//        }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-    func loadKennelData(completed: DownloadComplete) {
-        DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
-                
-                if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                    self.kennelPickerNames = ["-Select Kennel-"]
-                    for snap in snapshots {
-                        if let kennelDict2 = snap.value as? Dictionary<String, AnyObject> {
-                            let kennelKey = snap.key
-                            let kennelName = kennelDict2["kennelName"]!
-                            self.kennelPickerNames.append(kennelName as! String)
-                            self.kennelDecoderDict[kennelName as! String] = (kennelKey)
-                        }
-                    }
-                }
-            completed()
-        })
-    }
+    
+//    func loadKennelData(completed: DownloadComplete) {
+//        DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+//                
+//                if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+//                    self.kennelPickerNames = ["-Select Kennel-"]
+//                    for snap in snapshots {
+//                        if let kennelDict2 = snap.value as? Dictionary<String, AnyObject> {
+//                            let kennelKey = snap.key
+//                            let kennelName = kennelDict2["kennelName"]!
+//                            self.kennelPickerNames.append(kennelName as! String)
+//                            self.kennelDecoderDict[kennelName as! String] = (kennelKey)
+//                        }
+//                    }
+//                }
+//            completed()
+//        })
+//    }
     
     func numberOfComponentsInPickerView(kennelPicker: UIPickerView) -> Int {
         return 1
@@ -110,7 +116,7 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBAction func kennelPickerSaved(sender: UIButton) {
         if self.kennelChoiceName != nil && self.kennelChoiceName != "-Select Kennel-" {
-            kennelChoiceId = kennelDecoderDict[kennelChoiceName]!
+            kennelChoiceId = hasherKennelIdsAndNamesDict[kennelChoiceName]!
         } else {
             kennelChoiceId = nil
         }

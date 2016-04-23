@@ -17,9 +17,9 @@ class MapAddressVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        hasher.getLocation()
+//        hasher.getLocation()
         
-        let location = CLLocation()
+//        let location = CLLocation()
         
     }
 

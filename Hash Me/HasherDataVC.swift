@@ -28,6 +28,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var kennelMembershipIds = [String]()
     var kennelMembershipId = String!.self
     var hasherKennelIdsAndNamesDict: [String: String] = [:]
+    var hasherPrimaryKennel: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,8 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         self.primaryHashNameLbl.text = self.hasher.hasherPrimaryHashName
         self.primaryHashNameTxtFld.text = self.hasher.hasherPrimaryHashName
         self.primaryKennelNameLbl.text = kennelAndNameDict[hasher.hasherPrimaryKennel]
+        self.hasherPrimaryKennel = self.hasher.hasherPrimaryKennel
+        
         kennelListTableView.reloadData()
     }
     
@@ -174,35 +177,21 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "pickHasherPrimaryKennel" {
-//            if let KennelPickerVC = segue.destinationViewController as? KennelPickerVC {
-//                
-//                let hasherKennelsArray = kennelAndHashNameDecodeDict.keys
-//                for key in hasherKennelsArray {
-//                    self.hasherKennelIdsAndNamesDict[key] = kennelAndNameDict[key]
-//                }
-//            }
-//        }
-//
-//        
-//        //IF SEGUE == SELECT YOUR HOME KENNEL (NEEDS IDENTIFIER)
-//        //SEND OVER THE CURRENT KENNEL LIST (DO YOU GRAB IT FROM THE OTHER SEGUE AS A SOURCE VIEW CONTROLLER OR SHIP IT AS THE PREPARE FOR SEGUE?)
-//        //THIS SHOULD USE THE PICKER NOT THE TABLE SINCE IT'S COOLER TO HAVE VARIETY AND KEEPS IT EASY ON WHICH VC IS SENDING DATA BACK
-//    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "pickHasherPrimaryKennel" {
+            if let KennelPickerVC = segue.destinationViewController as? KennelPickerVC {
+                
+                let hasherKennelsArray = kennelAndHashNameDecodeDict.keys
+                for key in hasherKennelsArray {
+                    self.hasherKennelIdsAndNamesDict[kennelAndNameDict[key]!] = key
+                }
+                print("dictinhashervc", hasherKennelIdsAndNamesDict)
+                KennelPickerVC.hasherKennelIdsAndNamesDict = hasherKennelIdsAndNamesDict
+            }
+        }
+    }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "manageTrail" {
-//            if let manageTrailVC = segue.destinationViewController as? ManageTrailVC {
-//                if let trailInCell = sender as? TrailData {
-//                    manageTrailVC.trails = trailInCell
-//                }
-//            }
-//        }
-//    }
-    
-    
-    //PICKER to select/change primary kennel-- must also be added/changed in hasherKennelsAndNames
+    //PICKER to select/change primary kennel
     @IBAction func getKennelFromOriginalKennelPicker(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
@@ -210,10 +199,13 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             let hasherKennelsAndNamesUrl = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
             
             if sourceViewController.kennelChoiceId != nil {
+                if hasherPrimaryKennel != nil {
+                    hasherKennelsAndNamesUrl.updateChildValues([hasherPrimaryKennel as! String: true])
+                }
                 primaryKennelUrl.updateChildValues(["hasherPrimaryKennel" : sourceViewController.kennelChoiceId!])
                 hasherKennelsAndNamesUrl.updateChildValues([sourceViewController.kennelChoiceId : "primary"])
-                //NEED TO CHANGE OLD PRIMARY KENNEL IN HASHERKENNELS AND NAMES
             }
+            //MAYBE SIMPLIFY LATER. IS ELSE NECESSARY?
         }
     }
     
@@ -223,5 +215,5 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         primaryHashNamePencil.hidden = true
         updateInfoBtn.hidden = false
     }
-
+    
 }
