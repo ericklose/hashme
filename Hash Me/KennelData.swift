@@ -20,6 +20,7 @@ class KennelData {
     private var _kennelUsState: String!
     private var _kennelMismanagement: Dictionary<String, AnyObject>!
     private var _kennelAdmins: Dictionary<String, AnyObject>!
+    private var _kennelUrl: Firebase!
     
     var kennelId: String {
         return _kennelId
@@ -73,6 +74,40 @@ class KennelData {
         return _kennelDict
     }
     
+    func kennelSetName(kennelId: String, newKennelName: String) {
+        if newKennelName == "" {
+            _kennelUrl.childByAppendingPath("kennelName").removeValue()
+        } else {
+            _kennelUrl.updateChildValues(["kennelName" : newKennelName])
+        }
+    }
+    
+    func kennelSetSchedule(kennelId: String, newKennelSchedule: String) {
+        if newKennelSchedule == "" {
+            _kennelUrl.childByAppendingPath("kennelSchedule").removeValue()
+        } else {
+            _kennelUrl.updateChildValues(["kennelSchedule" : newKennelSchedule])
+        }
+    }
+    
+    func kennelSetCountry(kennelId: String, newKennelCountry: String) {
+        if newKennelCountry == "" {
+            _kennelUrl.childByAppendingPath("kennelCountry").removeValue()
+        } else {
+            _kennelUrl.updateChildValues(["kennelCountry" : newKennelCountry])
+        }
+    }
+    
+    func kennelSetUsState(kennelId: String, newKennelUsState: String) {
+        if newKennelUsState == "" {
+            _kennelUrl.childByAppendingPath("kennelUsState").removeValue()
+        } else {
+            _kennelUrl.updateChildValues(["kennelUsState" : newKennelUsState])
+        }
+    }
+    
+    
+    
     init (kennelInitId: String, kennelInitDict: Dictionary<String, AnyObject>, kennelInitName: String) {
         self._kennelId = kennelInitId
         self._kennelDict = kennelInitDict
@@ -113,6 +148,7 @@ class KennelData {
             self._kennelLocation = "location unknown"
         }
         
+        self._kennelUrl = DataService.ds.REF_KENNELS.childByAppendingPath(_kennelId)
     }
     
     

@@ -71,6 +71,16 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "editKennel" {
+            if let editKennelVC = segue.destinationViewController as? EditKennelVC {
+                if let kennels = kennels as? KennelData {
+                    editKennelVC.kennel = kennels
+                }
+            }
+        }
+    }
+    
     func updateKennelDetails() {
         kennelNameLbl.text = kennels.kennelName
         kennelScheduleLbl.text = kennels.kennelSchedule

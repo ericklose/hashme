@@ -19,6 +19,9 @@ class Attendee: Hasher {
     private var _attendeeVirginSponsor: String!
     private var _attendeeVisitingFrom: String!
     private var _attendeeTrailHashCash: Int!
+    private var _attendeeHasherUrl: Firebase!
+    private var _attendeeTrailUrl: Firebase!
+    private var _attendeeKennelUrl: Firebase!
     
     var attendeeAttending: Bool!
     
@@ -75,9 +78,7 @@ class Attendee: Hasher {
     }
     
     /*
-     
      From Hasher Class you get HasherId, HasherNerdName
-     
      */
     
     
@@ -124,6 +125,10 @@ class Attendee: Hasher {
                 }
             }
         }
+        
+        self._attendeeHasherUrl = DataService.ds.REF_HASHERS.childByAppendingPath(hasher.hasherId)
+        self._attendeeTrailUrl = DataService.ds.REF_TRAILS.childByAppendingPath(_attendeeRelevantTrailId)
+        self._attendeeKennelUrl = DataService.ds.REF_KENNELS.childByAppendingPath("trailAttendees").childByAppendingPath(_attendeeRelevantTrailId)
+
     }
-    
 }

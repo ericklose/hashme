@@ -19,8 +19,9 @@ class TrailData {
     private var _trailDescription: String!
     private var _trailKey: String!
     private var _trailHashCash: Int!
-    private var _trailRef: Firebase!
     private var _trailHares: Dictionary<String, String>!
+    private var _trailUrl: Firebase!
+    private var _kennelTrailUrl: Firebase!
     
     var trailDate: String {
         return _trailDate
@@ -48,19 +49,19 @@ class TrailData {
     
     var trailHashCash: Int {
         if _trailHashCash == nil {
-            return 25
+            return 5
         } else {
-        return _trailHashCash
+            return _trailHashCash
+        }
     }
-    }
-        
+    
     var trailHares: Dictionary<String, String> {
         if _trailHares == nil {
             _trailHares["Hare"] = "TBD"
             return _trailHares
         } else {
-        return _trailHares
-    }
+            return _trailHares
+        }
     }
     
     var trailStartLocation: String {
@@ -69,6 +70,7 @@ class TrailData {
         }
         return _trailStartLocation
     }
+    
     
     var trailDescription: String {
         if _trailDescription == nil {
@@ -81,12 +83,39 @@ class TrailData {
         return _trailKey
     }
     
-    init(trailDate: String, trailKennelName: String, trailKennelId: String, trailTitle: String) {
-        self._trailDate = trailDate
-        self._trailKennelId = trailKennelId
-        self._trailKennelName = trailKennelName
-        self._trailTitle = trailTitle
-        
+    func trailSetDate(trailKey: String, newTrailDate: String) {
+        _trailUrl.updateChildValues(["trailDate" : newTrailDate])
+        _kennelTrailUrl.updateChildValues(["trailDate" : newTrailDate])
+    }
+    
+    func trailSetDescription(trailKey: String, newTrailDescription: String) {
+        _trailUrl.updateChildValues(["trailDescription" : newTrailDescription])
+        _kennelTrailUrl.updateChildValues(["trailDescription" : newTrailDescription])
+    }
+    
+    func trailSetHashCash(trailKey: String, newTrailHashCash: Int) {
+        _trailUrl.updateChildValues(["trailHashCash" : newTrailHashCash])
+        _kennelTrailUrl.updateChildValues(["trailHashCash" : newTrailHashCash])
+    }
+    
+    func trailSetTitle(trailKey: String, newTrailTitle: String) {
+        _trailUrl.updateChildValues(["trailTitle" : newTrailTitle])
+        _kennelTrailUrl.updateChildValues(["trailTitle" : newTrailTitle])
+    }
+    
+    func trailSetStartLocation(trailKey: String, newTrailStartLocation: String) {
+        _trailUrl.updateChildValues(["trailStartLocation" : newTrailStartLocation])
+        _kennelTrailUrl.updateChildValues(["trailStartLocation" : newTrailStartLocation])
+    }
+    
+    func trailAddHare(trailKey: String, newTrailHareHasherId: String, trailRole: String) {
+        _trailUrl.childByAppendingPath("trailHares").updateChildValues([newTrailHareHasherId : trailRole])
+        _kennelTrailUrl.childByAppendingPath("trailHares").updateChildValues([newTrailHareHasherId : trailRole])
+    }
+    
+    func trailRemoveHare(trailKey: String, exTrailHareHasherId: String) {
+        _trailUrl.childByAppendingPath("trailHares").childByAppendingPath(exTrailHareHasherId).removeValue()
+        _kennelTrailUrl.childByAppendingPath("trailHares").childByAppendingPath(exTrailHareHasherId).removeValue()
     }
     
     init(trailKey: String, dictionary: Dictionary<String, AnyObject>) {
@@ -125,7 +154,9 @@ class TrailData {
             self._trailHashCash = trailHashCash
         }
         
-        self._trailRef = DataService.ds.REF_TRAILS.childByAppendingPath(self._trailKey)
+        self._trailUrl = DataService.ds.REF_TRAILS.childByAppendingPath(trailKey)
+        self._kennelTrailUrl = DataService.ds.REF_KENNELS.childByAppendingPath(_trailKennelId).childByAppendingPath("kennelTrails").childByAppendingPath(trailKey)
+        
     }
     
 }
