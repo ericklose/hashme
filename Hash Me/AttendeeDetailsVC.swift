@@ -95,29 +95,22 @@ class AttendeeDetailsVC: UIViewController {
     }
     
     @IBAction func toggleAttendingToggle(sender: UISwitch) {
-        if specificAttendeeAttendingToggle.on == true {
-            trailAttendencePath.updateChildValues(["trailAttendeePresent" : true])
-            trailsAttendedPath.updateChildValues(["hasherAttendedTrail" : true])
-        } else if specificAttendeeAttendingToggle.on  == false {
+        self.specificAttendee.attendeeSetIsPresent(specificAttendee.hasherId, trailId: specificAttendee.attendeeRelevantTrailId, attendeeIsPresent: sender.on)
+        
+        if specificAttendeeAttendingToggle.on == false {
             specificAttendeePaidToggle.setOn(false, animated: true)
-            trailAttendencePath.removeValue()
-            trailsAttendedPath.removeValue()
         }
     }
     
     @IBAction func hasherPaidFullToggleToggled(sender: UISwitch) {
         if specificAttendeePaidToggle.on == true {
+            self.specificAttendee.attendeeSetPaidAmt(specificAttendee.hasherId, trailId: specificAttendee.attendeeRelevantTrailId, attendeePaid: hashCash)
             specificAttendeeAttendingToggle.setOn(true, animated: true)
             toggleAttendingToggle(specificAttendeePaidToggle)
-            trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : hashCash])
-            trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : hashCash])
             specificAttendeeCurrentPayLbl.text = "$\(hashCash)"
             specificAttendeePaySlider.setValue(Float(hashCash), animated: true)
         } else if specificAttendeePaidToggle.on == false {
-            trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : 0])
-            trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : 0])
-            trailAttendencePath.childByAppendingPath("trailAttendeePaidReducedReason").removeValue()
-            trailsAttendedPath.childByAppendingPath("hasherPaidReducedReason").removeValue()
+            self.specificAttendee.attendeeSetNotPaid(specificAttendee.hasherId, trailId: specificAttendee.attendeeRelevantTrailId)
             specificAttendeeReducedPayReason.text = ""
         }
     }
@@ -130,8 +123,7 @@ class AttendeeDetailsVC: UIViewController {
         }
         
         specificAttendeeCurrentPayLbl.text = "$" + String(stringInterpolationSegment: selectedValue)
-        trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : selectedValue])
-        trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : selectedValue])
+            self.specificAttendee.attendeeSetPaidAmt(specificAttendee.hasherId, trailId: specificAttendee.attendeeRelevantTrailId, attendeePaid: selectedValue)
     }
     
     @IBAction func hasherPaidDiscountReason(sender: UITextField) {
@@ -143,20 +135,9 @@ class AttendeeDetailsVC: UIViewController {
             trailsAttendedPath.updateChildValues(["hasherPaidReducedReason" : specificAttendeeReducedPayReason.text!])
         }
     }
-    
-//  I ASSUME UNWIND SEGUE REPLACES THIS
-//    @IBAction func hasherVirginSponsorIs(sender: UITextField) {
-//        if specificAttendeeVirginSponsorIs.text == "" {
-//            trailAttendencePath.childByAppendingPath("trailAttendeeVirginSponsor").removeValue()
-//            trailsAttendedPath.childByAppendingPath("hasherVirginSponsor").removeValue()
-//        } else {
-//            trailAttendencePath.updateChildValues(["trailAttendeeVirginSponsor" : specificAttendeeVirginSponsorIs.text!])
-//            trailsAttendedPath.updateChildValues(["hasherVirginSponsor" : specificAttendeeVirginSponsorIs.text!])
-//        }
-//    }
+
     
     @IBAction func savespecificAttendeeDetails(sender: UIButton) {
-        
         navigationController?.popViewControllerAnimated(true)
     }
     

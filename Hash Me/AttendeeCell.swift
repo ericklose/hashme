@@ -20,8 +20,8 @@ class AttendeeCell: UITableViewCell {
     @IBOutlet weak var hasherPaid: UISwitch!
     
     var attendee: Attendee!
-    var trailAttendencePath: Firebase!
-    var trailsAttendedPath: Firebase!
+//    var trailAttendencePath: Firebase!
+//    var trailsAttendedPath: Firebase!
     var hashCash = 0
     
     override func awakeFromNib() {
@@ -40,8 +40,8 @@ class AttendeeCell: UITableViewCell {
         self.attendee = attendee
         self.hashCash = hashCash
         
-        trailAttendencePath = DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(attendee.hasherId)
-        trailsAttendedPath = DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).childByAppendingPath("trailsAttended").childByAppendingPath(attendee.attendeeRelevantTrailId)
+//        trailAttendencePath = DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(attendee.hasherId)
+//        trailsAttendedPath = DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).childByAppendingPath("trailsAttended").childByAppendingPath(attendee.attendeeRelevantTrailId)
         
         if attendee.hasherNerdName == "" || attendee.hasherNerdName == "Incognito" {
             self.hasherNerdNameLbl.hidden = true
@@ -79,27 +79,20 @@ class AttendeeCell: UITableViewCell {
     }
     
     @IBAction func toggleAttendingToggle(sender: UISwitch) {
-        if hasherAttendingTrailToggle.on == true {
-            trailAttendencePath.updateChildValues(["trailAttendeePresent" : true])
-            trailsAttendedPath.updateChildValues(["hasherAttendedTrail" : true])
-        } else if hasherAttendingTrailToggle.on  == false {
+        self.attendee.attendeeSetIsPresent(attendee.hasherId, trailId: attendee.attendeeRelevantTrailId, attendeeIsPresent: sender.on)
+        
+        if hasherAttendingTrailToggle.on == false {
             hasherPaid.setOn(false, animated: true)
-            trailAttendencePath.removeValue()
-            trailsAttendedPath.removeValue()
         }
     }
     
     @IBAction func hasherPaidToggleToggled(sender: UISwitch) {
         if hasherPaid.on == true {
+            self.attendee.attendeeSetPaidAmt(attendee.hasherId, trailId: attendee.attendeeRelevantTrailId, attendeePaid: hashCash)
             hasherAttendingTrailToggle.setOn(true, animated: true)
             toggleAttendingToggle(hasherPaid)
-            trailAttendencePath.updateChildValues(["trailAttendeePaidAmt" : hashCash])
-            trailsAttendedPath.updateChildValues(["hasherPaidTrailAmt" : hashCash])
         } else if hasherPaid.on == false {
-            trailAttendencePath.childByAppendingPath("trailAttendeePaidAmt").removeValue()
-            trailsAttendedPath.childByAppendingPath("hasherPaidTrailAmt").removeValue()
-            trailAttendencePath.childByAppendingPath("trailAttendeePaidReducedReason").removeValue()
-            trailsAttendedPath.childByAppendingPath("hasherPaidReducedReason").removeValue()
+            self.attendee.attendeeSetNotPaid(attendee.hasherId, trailId: attendee.attendeeRelevantTrailId)
         }
     }
     
