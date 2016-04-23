@@ -57,13 +57,12 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             self.kennelAndNameDict = [:]
             
             if var hasherDict = snapshot.value as? Dictionary<String, AnyObject>{
-                print("hasherdict1", hasherDict)
                 DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
                     if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
                         for snap in snapshots {
                             if let kennelDict2 = snap.value as? Dictionary<String, AnyObject> {
                                 let key = snap.key
-                                let name = kennelDict2["name"]!
+                                let name = kennelDict2["kennelName"]!
                                 self.kennelAndNameDict[key] = (name as! String)
                             }
                         }
