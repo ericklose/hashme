@@ -79,20 +79,20 @@ class Attendee: Hasher {
     
     func attendeeSetIsPresent(attendeeId: String, trailId: String, attendeeIsPresent: Bool) {
         if attendeeIsPresent == true {
-            _attendeeHasherUrl.updateChildValues([trailId : attendeeIsPresent])
-            _attendeeTrailUrl.updateChildValues([attendeeId : attendeeIsPresent])
-            _attendeeKennelUrl.updateChildValues([attendeeId : attendeeIsPresent])
+            _attendeeHasherUrl.updateChildValues(["hasherAttendedTrail" : attendeeIsPresent])
+            _attendeeTrailUrl.updateChildValues(["trailAttendeePresent" : attendeeIsPresent])
+            _attendeeKennelUrl.updateChildValues(["trailAttendeePresent" : attendeeIsPresent])
         } else if attendeeIsPresent == false {
-            _attendeeHasherUrl.childByAppendingPath(trailId).removeValue()
-            _attendeeTrailUrl.childByAppendingPath(attendeeId).removeValue()
-            _attendeeKennelUrl.childByAppendingPath(attendeeId).removeValue()
+            _attendeeHasherUrl.removeValue()
+            _attendeeTrailUrl.removeValue()
+            _attendeeKennelUrl.removeValue()
         }
     }
     
     func attendeeSetPaidAmt(attendeeId: String, trailId: String, attendeePaid: Int) {
         _attendeeHasherUrl.updateChildValues(["hasherPaidTrailAmt" : attendeePaid])
         _attendeeTrailUrl.updateChildValues(["trailAttendeePaidAmt" : attendeePaid])
-        _attendeeKennelUrl.updateChildValues(["attendeePaid" : attendeePaid])
+        _attendeeKennelUrl.updateChildValues(["trailAttendeePaidAmt" : attendeePaid])
     }
     
     func attendeeSetPaidReducedReason(attendeeId: String, trailId: String, attendeePaidReducedReason: String) {
@@ -110,7 +110,7 @@ class Attendee: Hasher {
     func attendeeSetNotPaid(attendeeId: String, trailId: String) {
         _attendeeHasherUrl.childByAppendingPath("hasherPaidTrailAmt").removeValue()
         _attendeeTrailUrl.childByAppendingPath("trailAttendeePaidAmt").removeValue()
-        _attendeeKennelUrl.childByAppendingPath("attendeePaid").removeValue()
+        _attendeeKennelUrl.childByAppendingPath("trailAttendeePaidAmt").removeValue()
         _attendeeHasherUrl.childByAppendingPath("hasherPaidReducedReason").removeValue()
         _attendeeTrailUrl.childByAppendingPath("trailAttendeePaidReducedReason").removeValue()
         _attendeeKennelUrl.childByAppendingPath("trailAttendeePaidReducedReason").removeValue()
@@ -170,7 +170,7 @@ class Attendee: Hasher {
         
         self._attendeeHasherUrl = DataService.ds.REF_HASHERS.childByAppendingPath(self.hasherId).childByAppendingPath("trailsAttended").childByAppendingPath(self._attendeeRelevantTrailId)
         self._attendeeTrailUrl = DataService.ds.REF_TRAILS.childByAppendingPath(self._attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(self.hasherId)
-        self._attendeeKennelUrl = DataService.ds.REF_KENNELS.childByAppendingPath(attendeeInitKennelId).childByAppendingPath("kennelTrails").childByAppendingPath(attendeeInitKennelId).childByAppendingPath("trailAttendees").childByAppendingPath(self._attendeeRelevantTrailId).childByAppendingPath(self.hasherId)
+        self._attendeeKennelUrl = DataService.ds.REF_KENNELS.childByAppendingPath(attendeeInitKennelId).childByAppendingPath("kennelTrails").childByAppendingPath(self._attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(self.hasherId)
         
     }
 }

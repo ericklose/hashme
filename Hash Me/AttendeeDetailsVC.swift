@@ -117,25 +117,17 @@ class AttendeeDetailsVC: UIViewController {
     
     @IBAction func sliderValueChanged(sender: UISlider) {
         let selectedValue = Int(sender.value)
-        
         if Int(selectedValue) > 0 {
             specificAttendeePaidToggle.setOn(true, animated: true)
         }
-        
         specificAttendeeCurrentPayLbl.text = "$" + String(stringInterpolationSegment: selectedValue)
-            self.specificAttendee.attendeeSetPaidAmt(specificAttendee.hasherId, trailId: specificAttendee.attendeeRelevantTrailId, attendeePaid: selectedValue)
+        self.specificAttendee.attendeeSetPaidAmt(specificAttendee.hasherId, trailId: specificAttendee.attendeeRelevantTrailId, attendeePaid: selectedValue)
     }
     
     @IBAction func hasherPaidDiscountReason(sender: UITextField) {
-        if specificAttendeeReducedPayReason.text == "" {
-            trailAttendencePath.childByAppendingPath("trailAttendeePaidReducedReason").removeValue()
-            trailsAttendedPath.childByAppendingPath("hasherPaidReducedReason").removeValue()
-        } else {
-            trailAttendencePath.updateChildValues(["trailAttendeePaidReducedReason" : specificAttendeeReducedPayReason.text!])
-            trailsAttendedPath.updateChildValues(["hasherPaidReducedReason" : specificAttendeeReducedPayReason.text!])
-        }
+        specificAttendee.attendeeSetPaidReducedReason(specificAttendee.hasherId, trailId: specificAttendee.attendeeRelevantTrailId, attendeePaidReducedReason: specificAttendeeReducedPayReason.text!)
     }
-
+    
     
     @IBAction func savespecificAttendeeDetails(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)

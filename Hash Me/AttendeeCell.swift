@@ -20,8 +20,6 @@ class AttendeeCell: UITableViewCell {
     @IBOutlet weak var hasherPaid: UISwitch!
     
     var attendee: Attendee!
-//    var trailAttendencePath: Firebase!
-//    var trailsAttendedPath: Firebase!
     var hashCash = 0
     
     override func awakeFromNib() {
@@ -32,16 +30,11 @@ class AttendeeCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state
     }
-    
     
     func configureCell(attendee: Attendee, hashCash: Int) {
         self.attendee = attendee
         self.hashCash = hashCash
-        
-//        trailAttendencePath = DataService.ds.REF_TRAILS.childByAppendingPath(attendee.attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(attendee.hasherId)
-//        trailsAttendedPath = DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).childByAppendingPath("trailsAttended").childByAppendingPath(attendee.attendeeRelevantTrailId)
         
         if attendee.hasherNerdName == "" || attendee.hasherNerdName == "Incognito" {
             self.hasherNerdNameLbl.hidden = true
