@@ -162,10 +162,13 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.sourceViewController as? KennelPickerTableVC {
-            if sourceViewController.kennelChoiceId == nil {
-            } else {
-                let kName = sourceViewController.kennelChoiceName
-                let kId = sourceViewController.kennelChoiceId
+            let hasherKennelsArray = kennelAndHashNameDecodeDict.keys
+            let hasherTrailsAndNamesUrl = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+            
+            if sourceViewController.kennelChoiceId != nil && !hasherKennelsArray.contains(sourceViewController.kennelChoiceId) {
+                hasherTrailsAndNamesUrl.updateChildValues([sourceViewController.kennelChoiceId! : true])
+                let kennelMembersUrl = Firebase(url: "\(DataService.ds.REF_KENNELS)").childByAppendingPath(sourceViewController.kennelChoiceId).childByAppendingPath("kennelMembers")
+                kennelMembersUrl.updateChildValues([NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String : true])
             }
         }
     }
