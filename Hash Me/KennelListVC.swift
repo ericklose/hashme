@@ -34,7 +34,7 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                     
                     if let kennelDict = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key
-                        let kennelName = kennelDict["name"] as? String
+                        let kennelName = kennelDict["kennelName"] as? String
                         let kennel = KennelData(kennelInitId: key, kennelInitDict: kennelDict, kennelInitName: kennelName!)
                         self.kennels.append(kennel)
                     }
