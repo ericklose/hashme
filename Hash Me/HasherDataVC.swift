@@ -27,6 +27,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var kennelAndHashNameDecodeDict: [String: String] = [:]
     var kennelMembershipIds = [String]()
     var kennelMembershipId = String!.self
+    var hasherKennelIdsAndNamesDict: [String: String] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,7 +159,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
         
     }
-    
+    //TABLE to add new kennels
     @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.sourceViewController as? KennelPickerTableVC {
@@ -173,29 +174,48 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //IF SEGUE == SELECT YOUR HOME KENNEL (NEEDS IDENTIFIER)
-        //SEND OVER THE CURRENT KENNEL LIST (DO YOU GRAB IT FROM THE OTHER SEGUE AS A SOURCE VIEW CONTROLLER OR SHIP IT AS THE PREPARE FOR SEGUE?)
-        //THIS SHOULD USE THE PICKER NOT THE TABLE SINCE IT'S COOLER TO HAVE VARIETY AND KEEPS IT EASY ON WHICH VC IS SENDING DATA BACK
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "pickHasherPrimaryKennel" {
+//            if let KennelPickerVC = segue.destinationViewController as? KennelPickerVC {
+//                
+//                let hasherKennelsArray = kennelAndHashNameDecodeDict.keys
+//                for key in hasherKennelsArray {
+//                    self.hasherKennelIdsAndNamesDict[key] = kennelAndNameDict[key]
+//                }
+//            }
+//        }
+//
+//        
+//        //IF SEGUE == SELECT YOUR HOME KENNEL (NEEDS IDENTIFIER)
+//        //SEND OVER THE CURRENT KENNEL LIST (DO YOU GRAB IT FROM THE OTHER SEGUE AS A SOURCE VIEW CONTROLLER OR SHIP IT AS THE PREPARE FOR SEGUE?)
+//        //THIS SHOULD USE THE PICKER NOT THE TABLE SINCE IT'S COOLER TO HAVE VARIETY AND KEEPS IT EASY ON WHICH VC IS SENDING DATA BACK
+//    }
     
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "manageTrail" {
+//            if let manageTrailVC = segue.destinationViewController as? ManageTrailVC {
+//                if let trailInCell = sender as? TrailData {
+//                    manageTrailVC.trails = trailInCell
+//                }
+//            }
+//        }
+//    }
+    
+    
+    //PICKER to select/change primary kennel-- must also be added/changed in hasherKennelsAndNames
     @IBAction func getKennelFromOriginalKennelPicker(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
-            let hasherKennelsArray = kennelAndHashNameDecodeDict.keys
-            let hasherTrailsAndNamesUrl = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+            let primaryKennelUrl = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)")
+            let hasherKennelsAndNamesUrl = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
             
-            if sourceViewController.kennelChoiceId != nil && !hasherKennelsArray.contains(sourceViewController.kennelChoiceId) {
-                hasherTrailsAndNamesUrl.updateChildValues([sourceViewController.kennelChoiceId! : true])
-                let kennelMembersUrl = Firebase(url: "\(DataService.ds.REF_KENNELS)").childByAppendingPath(sourceViewController.kennelChoiceId).childByAppendingPath("kennelMembers")
-                kennelMembersUrl.updateChildValues([NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String : true])
+            if sourceViewController.kennelChoiceId != nil {
+                primaryKennelUrl.updateChildValues(["hasherPrimaryKennel" : sourceViewController.kennelChoiceId!])
+                hasherKennelsAndNamesUrl.updateChildValues([sourceViewController.kennelChoiceId : "primary"])
+                //NEED TO CHANGE OLD PRIMARY KENNEL IN HASHERKENNELS AND NAMES
             }
         }
     }
-    
-    @IBAction func editPrimaryKennelNamePressed(sender: AnyObject) {
-    }
-    
     
     @IBAction func editPrimaryHashNamePressed(sender: AnyObject) {
         primaryHashNameTxtFld.hidden = false
