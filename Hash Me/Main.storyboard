@@ -544,8 +544,8 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="US State:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3a-7i-594">
-                                                    <rect key="frame" x="0.0" y="123" width="265" height="47"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="US State:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3a-7i-594">
+                                                    <rect key="frame" x="0.0" y="123" width="72" height="47"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -589,7 +589,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                     <state key="normal" title="edit"/>
                                                     <connections>
-                                                        <segue destination="Bj0-WS-k8o" kind="show" identifier="editKennelInfo" id="g7L-Za-fmi"/>
+                                                        <segue destination="Bj0-WS-k8o" kind="show" identifier="editKennel" id="g7L-Za-fmi"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1755,26 +1755,26 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="JUr-d2-PgJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="115" height="100"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Visitor?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5n9-T9-42G">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Visitor?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5n9-T9-42G">
                                                         <rect key="frame" x="0.0" y="0.0" width="115" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adz-GC-xHm">
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adz-GC-xHm">
                                                         <rect key="frame" x="0.0" y="24" width="115" height="30"/>
                                                         <state key="normal" title="Change Kennel"/>
                                                         <connections>
                                                             <segue destination="1YO-bv-Rc7" kind="show" id="kSA-zE-bGP"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Not Virgin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aak-JW-oyo">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Not Virgin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aak-JW-oyo">
                                                         <rect key="frame" x="0.0" y="57" width="115" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEE-Qj-kTJ">
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEE-Qj-kTJ">
                                                         <rect key="frame" x="0.0" y="81" width="115" height="19"/>
                                                         <state key="normal" title="Change Sponsor"/>
                                                         <connections>
@@ -1811,13 +1811,13 @@
                                                         <rect key="frame" x="0.0" y="32" width="200" height="30"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAW-cR-ezS" userLabel="$0">
-                                                                <rect key="frame" x="0.0" y="0.0" width="11" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="7" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <slider opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="adD-d3-eMr">
-                                                                <rect key="frame" x="9" y="0.0" width="170" height="31"/>
+                                                                <rect key="frame" x="5" y="0.0" width="174" height="31"/>
                                                                 <connections>
                                                                     <action selector="sliderValueChanged:" destination="AjH-AH-Dyu" eventType="valueChanged" id="Tsj-dX-dNa"/>
                                                                 </connections>
@@ -2016,14 +2016,14 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AfE-dO-i8R">
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AfE-dO-i8R">
                                                 <rect key="frame" x="87" y="0.0" width="360" height="30"/>
                                                 <state key="normal" title="Add Hare"/>
                                                 <connections>
                                                     <segue destination="OE1-mu-4da" kind="show" id="Vtn-6v-9hU"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hare 1, Hare 2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jrc-gg-z2V">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hare 1, Hare 2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jrc-gg-z2V">
                                                 <rect key="frame" x="447" y="0.0" width="113" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -2497,10 +2497,10 @@
             </objects>
             <point key="canvasLocation" x="2846" y="1142"/>
         </scene>
-        <!--View Controller-->
+        <!--Edit KennelVC-->
         <scene sceneID="1cB-9i-DAx">
             <objects>
-                <viewController id="Bj0-WS-k8o" sceneMemberID="viewController">
+                <viewController id="Bj0-WS-k8o" customClass="EditKennelVC" customModule="Hash_Me" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6un-ye-TbF"/>
                         <viewControllerLayoutGuide type="bottom" id="gio-Ii-CLy"/>
@@ -2583,6 +2583,9 @@
                                     <constraint firstAttribute="height" constant="45" id="oR5-xQ-Wpz"/>
                                 </constraints>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="kennelSaveBtnPressed:" destination="Bj0-WS-k8o" eventType="touchUpInside" id="3QJ-At-3jv"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2599,6 +2602,12 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="kennelCountry" destination="y0k-yn-dlO" id="Ftl-wC-iNy"/>
+                        <outlet property="kennelGeneralSchedule" destination="fn9-Nm-Jvu" id="Vbb-jB-fvi"/>
+                        <outlet property="kennelName" destination="txd-3O-hmh" id="7qU-ha-g1k"/>
+                        <outlet property="kennelUsState" destination="YGI-ID-2e4" id="Jkr-RS-B1R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHC-gh-6gf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2611,7 +2620,7 @@
         <image name="fb-icon" width="65" height="65"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kSA-zE-bGP"/>
         <segue reference="f2U-ap-0io"/>
+        <segue reference="kSA-zE-bGP"/>
     </inferredMetricsTieBreakers>
 </document>
