@@ -24,6 +24,7 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     var kennelChoiceName: String!
     var kennelChoiceId: String!
     var kennelDecoderDict: [String: String] = [:]
+    var hasherKennelIdsAndNamesDict: Dictionary<String, String>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
