@@ -55,18 +55,19 @@ class HasherCell: UITableViewCell {
     }
     
     func editAltHashNameInFirebase(altName: String!, altId: String!) {
-        let kennelsAndNamesPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+        let kennelsAndNamesUrl = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
         
         if altName == "" {
-            kennelsAndNamesPath.updateChildValues([altId: true])
+            kennelsAndNamesUrl.updateChildValues([altId: true])
         } else {
-            kennelsAndNamesPath.updateChildValues([altId : altName])
+            kennelsAndNamesUrl.updateChildValues([altId : altName])
         }
     }
     
     @IBAction func deleteKennelButtonPressed(sender: AnyObject) {
-        let kennelsAndNamesPath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
-        print("kennelMembershipId: \(kennelMembershipId)")
-        kennelsAndNamesPath.childByAppendingPath(kennelMembershipId as String).removeValue()
+        let kennelsAndNamesUrl = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+        kennelsAndNamesUrl.childByAppendingPath(kennelMembershipId as String).removeValue()
+        let kennelMembersUrl = Firebase(url: "\(DataService.ds.REF_KENNELS)").childByAppendingPath(kennelMembershipId).childByAppendingPath("kennelMembers")
+        kennelMembersUrl.childByAppendingPath(NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String).removeValue()
     }
 }

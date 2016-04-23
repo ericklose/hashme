@@ -50,7 +50,7 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     for snap in snapshots {
                         if let kennelDict2 = snap.value as? Dictionary<String, AnyObject> {
                             let kennelKey = snap.key
-                            let kennelName = kennelDict2["name"]!
+                            let kennelName = kennelDict2["kennelName"]!
                             self.kennelPickerNames.append(kennelName as! String)
                             self.kennelDecoderDict[kennelName as! String] = (kennelKey)
                         }
