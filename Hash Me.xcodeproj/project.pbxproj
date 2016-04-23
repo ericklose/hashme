@@ -38,6 +38,7 @@
 		A6764ACC1CCBD72600E376F0 /* EditKennelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6764ACB1CCBD72600E376F0 /* EditKennelVC.swift */; };
 		A6764ACD1CCBD72600E376F0 /* EditKennelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6764ACB1CCBD72600E376F0 /* EditKennelVC.swift */; };
 		A6764ACE1CCBD72600E376F0 /* EditKennelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6764ACB1CCBD72600E376F0 /* EditKennelVC.swift */; };
+		A67F77F91CCC29FF0020554C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A67F77F81CCC29FF0020554C /* MapKit.framework */; };
 		A6A0E3D61C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
 		A6A0E3D71C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
 		A6A0E3D81C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
@@ -153,6 +154,7 @@
 		A6764AC31CCA5DEE00E376F0 /* KennelTrailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelTrailsCell.swift; sourceTree = "<group>"; };
 		A6764AC71CCAB28900E376F0 /* MapAddressVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAddressVC.swift; sourceTree = "<group>"; };
 		A6764ACB1CCBD72600E376F0 /* EditKennelVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditKennelVC.swift; sourceTree = "<group>"; };
+		A67F77F81CCC29FF0020554C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A6A0E3D51C9496A00003EE0E /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		A6A0E3DD1C94A08D0003EE0E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		A6A0E3DE1C94A08D0003EE0E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			files = (
 				A6A0E3E61C94A08D0003EE0E /* FBSDKShareKit.framework in Frameworks */,
 				47A685478A602CA8B763154C /* Pods.framework in Frameworks */,
+				A67F77F91CCC29FF0020554C /* MapKit.framework in Frameworks */,
 				A6A0E3E01C94A08D0003EE0E /* FBSDKCoreKit.framework in Frameworks */,
 				A6A0E3E31C94A08D0003EE0E /* FBSDKLoginKit.framework in Frameworks */,
 			);
@@ -219,6 +222,7 @@
 		1045C5914488D847D37221C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A67F77F81CCC29FF0020554C /* MapKit.framework */,
 				A6A0E3DD1C94A08D0003EE0E /* FBSDKCoreKit.framework */,
 				A6A0E3DE1C94A08D0003EE0E /* FBSDKLoginKit.framework */,
 				A6A0E3DF1C94A08D0003EE0E /* FBSDKShareKit.framework */,
@@ -444,6 +448,11 @@
 					A61929041C94912A00D8C945 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = W7W8PTYZHX;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					A619291A1C94912A00D8C945 = {
 						CreatedOnToolsVersion = 7.2.1;
