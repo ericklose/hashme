@@ -20,6 +20,7 @@ class Hasher {
     private var _kennelInitDict: Dictionary<String, AnyObject>!
     private var _hasherPrimaryHashName: String!
     private var _hasherPrimaryKennel: String!
+    private var _hasherUrl: Firebase!
     
     var kennelAndNameDict: [String: String] = [:]
     var hasher: Hasher!
@@ -71,6 +72,14 @@ class Hasher {
         }
     }
     
+    func editNerdNameInFirebase(hasherId: String, nerdName: String) {
+        
+        if nerdName != "" {
+            _hasherUrl.updateChildValues(["hasherNerdName" : nerdName])
+        } else {
+            _hasherUrl.childByAppendingPath("hasherNerdName").removeValue()
+        }
+    }
     
     init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>) {
         self._hasherId = hasherInitId
@@ -86,6 +95,8 @@ class Hasher {
         if let hasherPrimaryKennel = hasherInitDict["hasherPrimaryKennel"] as? String {
             self._hasherPrimaryKennel = hasherPrimaryKennel
         }
+        
+        self._hasherUrl = DataService.ds.REF_HASHERS.childByAppendingPath(self.hasherId)
     }
     
 }
