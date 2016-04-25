@@ -29,6 +29,9 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var kennelMembershipId = String!.self
     var hasherKennelIdsAndNamesDict: [String: String] = [:]
     var hasherPrimaryKennel: String!
+    var meOrSelectedHasherId: String!
+    var newHasherIsSelected: Bool! = false
+    var hasherChoiceId: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +57,13 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func downloadHasherDetails(completed: DownloadComplete) {
+        
+        if newHasherIsSelected == true {
+             meOrSelectedHasherId = hasherChoiceId //sent from hasher picker VC
+        } else {
+             meOrSelectedHasherId = DataService.ds.REF_HASHER_USERID
+        }
+        
         DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
             
             self.kennelMembershipIds = []
@@ -72,7 +82,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                         }
                     }
                     hasherDict["addedKennelDict"] = self.kennelAndNameDict
-                    self.hasher = Hasher(hasherInitId: KEY_UID, hasherInitDict: hasherDict)
+                    self.hasher = Hasher(hasherInitId: self.meOrSelectedHasherId, hasherInitDict: hasherDict)
                     self.kennelAndHashNameDecodeDict = [:]
                     if let hashNamesAndKennels = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
                         for (key, value) in hashNamesAndKennels {
@@ -100,15 +110,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         updateInfoBtn.hidden = false
     }
     
-    func editNerdNameInFirebase(nerdName: String!) {
-        let namePath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)")
-        
-        if nerdName != "" {
-            namePath.updateChildValues(["hasherNerdName" : nerdName])
-        } else {
-            namePath.childByAppendingPath("hasherNerdName").removeValue()
-        }
-    }
+    
     
     func editPrimaryHashNameInFirebase(primaryName: String!) {
         
@@ -125,7 +127,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     @IBAction func updateInfoPressed(sender: AnyObject) {
-        editNerdNameInFirebase(nerdNameTxtFld.text)
+        hasher.editNerdNameInFirebase(hasher.hasherId, nerdName: nerdNameTxtFld.text!)
         editPrimaryHashNameInFirebase(primaryHashNameTxtFld.text)
         
         nerdNameTxtFld.hidden = true
@@ -205,7 +207,6 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 primaryKennelUrl.updateChildValues(["hasherPrimaryKennel" : sourceViewController.kennelChoiceId!])
                 hasherKennelsAndNamesUrl.updateChildValues([sourceViewController.kennelChoiceId : "primary"])
             }
-            //MAYBE SIMPLIFY LATER. IS ELSE NECESSARY?
         }
     }
     
