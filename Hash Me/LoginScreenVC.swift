@@ -68,21 +68,17 @@ class LoginScreenVC: UIViewController {
     
     @IBAction func attemptLogin(sender: UIButton!) {
         if let email = emailField.text where email != "", let pwd = passwordField.text where pwd != "" {
-            
+            print("negative numbers!!!")
             DataService.ds.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
-                
                 if error != nil {
                     print(error)
                     if error.code == STATUS_ACCOUNT_NONEXIST {
                         DataService.ds.REF_BASE.createUser(email, password: pwd, withValueCompletionBlock: { error, result in
-                            
                             if error != nil {
                                 self.showErrorAlert("Could Not Create Account", msg: "Problem creating account: try something else")
                             } else {
                                 NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
-                                
                                 DataService.ds.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { err, authData in
-                                    
                                     let hasher = ["provider": authData.provider!, "blah": "emailtest"]
                                     DataService.ds.createFirebaseUser(authData.uid, hasher: hasher)
                                 })

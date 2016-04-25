@@ -41,11 +41,6 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         })
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }

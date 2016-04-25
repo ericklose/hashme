@@ -19,7 +19,7 @@ class DataService {
     private var _REF_TRAILS = Firebase(url: "\(URL_BASE)/trails")
     private var _REF_HASHERS = Firebase(url: "\(URL_BASE)/hashers")
     private var _REF_KENNELS = Firebase(url: "\(URL_BASE)/kennels")
-    private var _REF_HASHER_UID = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
+    private var _REF_HASHER_UID = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
     
     var REF_BASE: Firebase {
         return _REF_BASE
@@ -38,7 +38,11 @@ class DataService {
     }
     
     var REF_HASHER_USERID: String {
-        return _REF_HASHER_UID
+//        if _REF_HASHER_UID != nil {
+        return _REF_HASHER_UID!
+//    } else {
+//    return "12345"
+//    }
     }
     
     var REF_HASHER_CURRENT: Firebase {
