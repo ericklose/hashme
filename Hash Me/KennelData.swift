@@ -18,6 +18,7 @@ class KennelData {
     private var _kennelSchedule: String!
     private var _kennelCountry: String!
     private var _kennelUsState: String!
+    private var _kennelMapLocation: String!
     private var _kennelMismanagement: Dictionary<String, AnyObject>!
     private var _kennelAdmins: Dictionary<String, AnyObject>!
     private var _kennelUrl: Firebase!
@@ -55,6 +56,14 @@ class KennelData {
             return "unknown location"
         } else {
             return _kennelUsState + ", " + _kennelCountry
+        }
+    }
+    
+    var kennelMapLocation: String {
+        if _kennelMapLocation == nil {
+            return "map location not set"
+        } else {
+            return _kennelMapLocation
         }
     }
     
@@ -138,6 +147,10 @@ class KennelData {
         
         if let kennelInitAdmins = kennelInitDict["kennelAdmins"] as? Dictionary<String, AnyObject> {
             self._kennelAdmins = kennelInitAdmins
+        }
+        
+        if let kennelInitMapLocation = kennelInitDict["kennelMapLocation"] as? String {
+            self._kennelMapLocation = kennelInitMapLocation
         }
         
         if self._kennelCountry == "USA" {
