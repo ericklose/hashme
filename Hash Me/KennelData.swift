@@ -116,7 +116,6 @@ class KennelData {
     }
     
     
-    
     init (kennelInitId: String, kennelInitDict: Dictionary<String, AnyObject>, kennelInitName: String) {
         self._kennelId = kennelInitId
         self._kennelDict = kennelInitDict

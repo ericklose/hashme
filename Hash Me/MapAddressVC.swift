@@ -43,17 +43,22 @@ class MapAddressVC: UIViewController, MKMapViewDelegate {
                   let key = snap.key
                   let kennelName = kennelDict["kennelName"] as? String
                   let kennel = KennelData(kennelInitId: key, kennelInitDict: kennelDict, kennelInitName: kennelName!)
+                           print("loc: ", kennel.kennelLocation)
                   self.kennels.append(kennel)
                }
             }
          }
+         for add in self.kennels {
+            print("kennels ", self.kennels)
+            self.getPlacemarkFromAddress(add.kennelLocation)
+            print("address: ", add.kennelLocation)
+         }
+
       })
       
       
       
-      for add in kennels {
-         getPlacemarkFromAddress(add.kennelMapLocation)
-      }
+
    }
    
    override func viewDidAppear(animated: Bool) {

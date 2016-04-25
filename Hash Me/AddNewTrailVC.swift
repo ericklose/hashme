@@ -113,6 +113,7 @@ class AddNewTrailVC: UIViewController {
         }
     }
     
+    
     //THIS SHOULD BE FINE SOON
 //    @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
 //        if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {

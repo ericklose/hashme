@@ -24,14 +24,13 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         kennelListTable.dataSource = self
         kennelListTable.estimatedRowHeight = 100
         
+        
         DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
             
             self.kennels = []
             
             if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                
                 for snap in snapshots {
-                    
                     if let kennelDict = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key
                         let kennelName = kennelDict["kennelName"] as? String
@@ -39,17 +38,9 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                         self.kennels.append(kennel)
                     }
                 }
-                
             }
-            
             self.kennelListTable.reloadData()
         })
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
