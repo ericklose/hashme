@@ -13,7 +13,7 @@ import Firebase
 class MapAddressVC: UIViewController, MKMapViewDelegate {
    
    
-   @IBOutlet weak var KennelMapView: MKMapView!
+   @IBOutlet weak var kennelMapView: MKMapView!
    
     var kennels = [KennelData]()
    
@@ -28,7 +28,7 @@ class MapAddressVC: UIViewController, MKMapViewDelegate {
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      KennelMapView.delegate = self
+      kennelMapView.delegate = self
       
       
       DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
@@ -67,7 +67,7 @@ class MapAddressVC: UIViewController, MKMapViewDelegate {
    
    func locationAuthStatus() {
       if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
-         KennelMapView.showsUserLocation = true
+         kennelMapView.showsUserLocation = true
       } else {
          locationManager.requestWhenInUseAuthorization()
       }
@@ -75,7 +75,7 @@ class MapAddressVC: UIViewController, MKMapViewDelegate {
    
    func centerMapOnLocation(location: CLLocation) {
       let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2, regionRadius * 2)
-      KennelMapView.setRegion(coordinateRegion, animated: true)
+      kennelMapView.setRegion(coordinateRegion, animated: true)
    }
    
    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
@@ -103,7 +103,7 @@ class MapAddressVC: UIViewController, MKMapViewDelegate {
    
    func createAnnotationForLocation(location: CLLocation) {
       let bootcamp = BootcampAnnotation(coordinate: location.coordinate)
-      KennelMapView.addAnnotation(bootcamp)
+      kennelMapView.addAnnotation(bootcamp)
    }
    
    func getPlacemarkFromAddress(address: String) {

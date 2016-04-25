@@ -19,6 +19,8 @@ class KennelData {
     private var _kennelCountry: String!
     private var _kennelUsState: String!
     private var _kennelMapLocation: String!
+    private var _kennelCity: String!
+    private var _kennelPostalCode: String!
     private var _kennelMismanagement: Dictionary<String, AnyObject>!
     private var _kennelAdmins: Dictionary<String, AnyObject>!
     private var _kennelUrl: Firebase!
@@ -33,6 +35,22 @@ class KennelData {
     
     var kennelAdmins: Dictionary<String, AnyObject>! {
         return _kennelAdmins
+    }
+    
+    var kennelCity: String {
+        if _kennelCity == nil {
+            return "unknown"
+        } else {
+            return _kennelCity
+        }
+    }
+    
+    var kennelPostalCode: String {
+        if _kennelPostalCode == nil {
+            return "unknown"
+        } else {
+            return _kennelPostalCode
+        }
     }
     
     var kennelCountry: String {
@@ -55,7 +73,7 @@ class KennelData {
         if _kennelLocation == nil {
             return "unknown location"
         } else {
-            return _kennelUsState + ", " + _kennelCountry
+            return _kennelLocation
         }
     }
     
@@ -115,6 +133,21 @@ class KennelData {
         }
     }
     
+    func kennelSetCity(kennelId: String, newKennelCity: String) {
+        if newKennelCity == "" {
+            _kennelUrl.childByAppendingPath("kennelCity").removeValue()
+        } else {
+            _kennelUrl.updateChildValues(["kennelCity" : newKennelCity])
+        }
+    }
+    
+    func kennelSetPostalCode(kennelId: String, newKennelPostalCode: String) {
+        if newKennelPostalCode == "" {
+            _kennelUrl.childByAppendingPath("kennelPostalCode").removeValue()
+        } else {
+            _kennelUrl.updateChildValues(["kennelPostalCode" : newKennelPostalCode])
+        }
+    }
     
     init (kennelInitId: String, kennelInitDict: Dictionary<String, AnyObject>, kennelInitName: String) {
         self._kennelId = kennelInitId
@@ -152,12 +185,27 @@ class KennelData {
             self._kennelMapLocation = kennelInitMapLocation
         }
         
-        if self._kennelCountry == "USA" {
-            self._kennelLocation = _kennelUsState + ", " + _kennelCountry
-        } else if self._kennelUsState == nil {
-            self._kennelLocation = _kennelCountry
-        } else {
-            self._kennelLocation = "location unknown"
+        if let kennelInitCity = kennelInitDict["kennelCity"] as? String {
+            self._kennelCity = kennelInitCity
+        }
+        
+        if let kennelInitPostalCode = kennelInitDict["kennelPostalCode"] as? String {
+            self._kennelPostalCode = kennelInitPostalCode
+        }
+        
+        //if let kennelInitLocation = kennelInitDict["kennelLocation"] as? String {
+        
+        if _kennelCountry != nil {
+            self._kennelLocation = self._kennelCountry
+        }
+        if _kennelPostalCode != nil {
+            self._kennelLocation = self._kennelPostalCode + ", " + _kennelLocation
+        }
+        if _kennelUsState != nil {
+            self._kennelLocation = self._kennelUsState + ", " + _kennelLocation
+        }
+        if _kennelCity != nil {
+            self._kennelLocation = self._kennelCity + ", " + _kennelLocation
         }
         
         self._kennelUrl = DataService.ds.REF_KENNELS.childByAppendingPath(_kennelId)
