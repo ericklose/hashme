@@ -111,12 +111,18 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
-    @IBAction func saveHasherBtnPressed(sender: UIButton) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if self.hasherChoiceName != nil && self.hasherChoiceName != "-Select Hasher-" {
             hasherChoiceId = hasherDecoderDict[hasherChoiceName]!
+            print("ID ", hasherChoiceId)
         } else {
             hasherChoiceId = nil
+            print("hasherchoiceid is nil")
         }
     }
+    
+    @IBAction func saveHasherBtnPressed(sender: UIButton) {
+        performSegueWithIdentifier("pickAnotherHasherToEdit", sender: sender)
+           }
 
 }

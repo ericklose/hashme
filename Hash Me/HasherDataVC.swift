@@ -20,6 +20,8 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBOutlet weak var primaryHashNameLbl: UILabel!
     @IBOutlet weak var primaryHashNamePencil: UIButton!
     @IBOutlet weak var primaryKennelNameLbl: UILabel!
+    @IBOutlet weak var editAnotherHasherBtn: UIButton!
+    @IBOutlet weak var returnToMyDataBtn: UIButton!
     
     var hasherDict: Dictionary<String, AnyObject>!
     var hasher: Hasher!
@@ -40,9 +42,10 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         self.kennelListTableView.delegate = self
         
         
-        downloadHasherDetails { () -> () in
-            self.updateHasherDisplay()
-        }
+//        downloadHasherDetails { () -> () in
+//            self.updateHasherDisplay()
+//    }
+
     }
     
     func updateHasherDisplay() {
@@ -56,15 +59,27 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         kennelListTableView.reloadData()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        print("newhasherisselected", newHasherIsSelected)
+        if newHasherIsSelected == true {
+            print("hashchoice ", hasherChoiceId)
+            meOrSelectedHasherId = hasherChoiceId //sent from hasher picker VC
+            returnToMyDataBtn.hidden = false
+            print("1")
+        } else {
+            meOrSelectedHasherId = DataService.ds.REF_HASHER_USERID
+            print("2")
+        }
+        print("meorselected ", meOrSelectedHasherId)
+        
+        downloadHasherDetails { () -> () in
+            self.updateHasherDisplay()
+    }
+}
+    
     func downloadHasherDetails(completed: DownloadComplete) {
         
-        if newHasherIsSelected == true {
-             meOrSelectedHasherId = hasherChoiceId //sent from hasher picker VC
-        } else {
-             meOrSelectedHasherId = DataService.ds.REF_HASHER_USERID
-        }
-        
-        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_HASHERS.childByAppendingPath(meOrSelectedHasherId).observeEventType(.Value, withBlock: { snapshot in
             
             self.kennelMembershipIds = []
             self.kennelAndHashNameDecodeDict = [:]
@@ -102,6 +117,12 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             }
         })
     }
+    
+    @IBAction func returnToMyDataBtnPressed(sender: AnyObject) {
+        returnToMyDataBtn.hidden = true
+        newHasherIsSelected = false
+    }
+    
     
     @IBAction func editNerdNamePressed(sender: AnyObject) {
         nerdNameTxtFld.hidden = false
@@ -215,6 +236,16 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         primaryHashNameLbl.hidden = true
         primaryHashNamePencil.hidden = true
         updateInfoBtn.hidden = false
+    }
+    
+    @IBAction func getHasherFromHasherPicker(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.sourceViewController as? HasherPickerVC {
+            if sourceViewController.hasherChoiceId != nil {
+               self.hasherChoiceId = sourceViewController.hasherChoiceId
+                newHasherIsSelected = true
+              print("hasherchoiceidhasherVC: ", hasherChoiceId)
+            }
+        }
     }
     
 }

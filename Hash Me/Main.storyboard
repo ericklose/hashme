@@ -141,7 +141,7 @@
                                 </variation>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="IDL-1M-H74">
-                                <rect key="frame" x="40" y="20" width="520" height="145"/>
+                                <rect key="frame" x="40" y="20" width="520" height="180"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WELCOME, YOU WANKER!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEi-u1-fbI">
                                         <rect key="frame" x="152" y="0.0" width="217" height="39"/>
@@ -158,8 +158,37 @@
                                             </mask>
                                         </variation>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nrT-x6-PRr">
+                                        <rect key="frame" x="191" y="44" width="139" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1w3-gJ-96h">
+                                                <rect key="frame" x="0.0" y="0.0" width="139" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="139" id="Mbk-Ys-2BC"/>
+                                                    <constraint firstAttribute="height" constant="30" id="faB-p1-S6L"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <state key="normal" title="Edit Another Hasher"/>
+                                                <connections>
+                                                    <segue destination="5Pc-VA-nwg" kind="show" identifier="pickAnotherHasherToEdit" id="bbh-B6-VxW"/>
+                                                </connections>
+                                            </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Aq-W6-aGO">
+                                                <rect key="frame" x="139" y="0.0" width="0.0" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="135" id="HiN-JG-Mr4"/>
+                                                    <constraint firstAttribute="height" constant="30" id="gdt-WW-2IX"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <state key="normal" title="[Return to My Data]"/>
+                                                <connections>
+                                                    <action selector="returnToMyDataBtnPressed:" destination="yTu-ow-R3c" eventType="touchUpInside" id="ARf-5O-Ecz"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3Z4-i7-ngp">
-                                        <rect key="frame" x="85" y="44" width="351" height="30"/>
+                                        <rect key="frame" x="85" y="79" width="351" height="30"/>
                                         <subviews>
                                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nerd Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="boF-BD-bR6">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
@@ -207,7 +236,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DZ9-QC-sBz">
-                                        <rect key="frame" x="179" y="79" width="162" height="30"/>
+                                        <rect key="frame" x="179" y="114" width="162" height="30"/>
                                         <subviews>
                                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Primary Hash Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MoB-Po-KuO" userLabel="Primary Name Txt Fld">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
@@ -255,7 +284,7 @@
                                         </constraints>
                                     </stackView>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0t-xN-ifq">
-                                        <rect key="frame" x="186" y="112" width="149" height="0.0"/>
+                                        <rect key="frame" x="186" y="147" width="149" height="0.0"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="1a5-Wa-X4r"/>
@@ -278,7 +307,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="H2F-eI-ggH">
-                                        <rect key="frame" x="173" y="115" width="174" height="30"/>
+                                        <rect key="frame" x="173" y="150" width="174" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Primary Kennel Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hr-pf-Cxh" userLabel="Primary Kennel Lbl">
                                                 <rect key="frame" x="0.0" y="0.0" width="149" height="30"/>
@@ -336,6 +365,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="kID-ar-gAD"/>
                     <connections>
+                        <outlet property="editAnotherHasherBtn" destination="1w3-gJ-96h" id="pus-ea-6mK"/>
                         <outlet property="kennelListTableView" destination="9Ez-DL-F1L" id="yZb-RB-OgY"/>
                         <outlet property="nerdNameLbl" destination="mVF-NT-drr" id="iM1-yU-mzg"/>
                         <outlet property="nerdNamePencil" destination="axx-h4-4ew" id="NWG-1X-TuS"/>
@@ -344,6 +374,7 @@
                         <outlet property="primaryHashNamePencil" destination="Res-Uc-nsg" id="5hq-Q3-QnH"/>
                         <outlet property="primaryHashNameTxtFld" destination="MoB-Po-KuO" id="iSs-wk-G29"/>
                         <outlet property="primaryKennelNameLbl" destination="4Hr-pf-Cxh" id="vJQ-th-xXK"/>
+                        <outlet property="returnToMyDataBtn" destination="8Aq-W6-aGO" id="Z8K-1h-rNT"/>
                         <outlet property="updateInfoBtn" destination="g0t-xN-ifq" id="kkb-S6-PqO"/>
                     </connections>
                 </viewController>
@@ -526,7 +557,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XPo-2h-Yj6">
                                             <rect key="frame" x="0.0" y="0.0" width="265" height="170"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7t-cJ-kwm">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7t-cJ-kwm">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1558,7 +1589,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9KR-du-qYk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="CPc-sO-JAr" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2198" y="1142"/>
+            <point key="canvasLocation" x="2428" y="1148"/>
         </scene>
         <!--Hasher Picker TableVC-->
         <scene sceneID="1M1-YB-2Zs">
@@ -1756,26 +1787,26 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="115" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Visitor?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5n9-T9-42G">
-                                                        <rect key="frame" x="0.0" y="0.0" width="115" height="21"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="115" height="10"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adz-GC-xHm">
-                                                        <rect key="frame" x="0.0" y="24" width="115" height="30"/>
+                                                        <rect key="frame" x="0.0" y="13" width="115" height="30"/>
                                                         <state key="normal" title="Change Kennel"/>
                                                         <connections>
                                                             <segue destination="1YO-bv-Rc7" kind="show" id="kSA-zE-bGP"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Not Virgin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aak-JW-oyo">
-                                                        <rect key="frame" x="0.0" y="57" width="115" height="21"/>
+                                                        <rect key="frame" x="0.0" y="46" width="115" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEE-Qj-kTJ">
-                                                        <rect key="frame" x="0.0" y="81" width="115" height="19"/>
+                                                        <rect key="frame" x="0.0" y="70" width="115" height="30"/>
                                                         <state key="normal" title="Change Sponsor"/>
                                                         <connections>
                                                             <segue destination="OE1-mu-4da" kind="show" id="f2U-ap-0io"/>
@@ -1817,13 +1848,13 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <slider opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="adD-d3-eMr">
-                                                                <rect key="frame" x="-2" y="0.0" width="190" height="31"/>
+                                                                <rect key="frame" x="-2" y="0.0" width="194" height="31"/>
                                                                 <connections>
                                                                     <action selector="sliderValueChanged:" destination="AjH-AH-Dyu" eventType="valueChanged" id="Tsj-dX-dNa"/>
                                                                 </connections>
                                                             </slider>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hso-y9-ib3" userLabel="$20">
-                                                                <rect key="frame" x="186" y="0.0" width="14" height="30"/>
+                                                                <rect key="frame" x="190" y="0.0" width="10" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -2289,7 +2320,7 @@
                                 </state>
                                 <connections>
                                     <action selector="saveHasherBtnPressed:" destination="5Pc-VA-nwg" eventType="touchUpInside" id="QEA-OA-EqY"/>
-                                    <segue destination="Sss-Fm-i8v" kind="unwind" unwindAction="getHasherFromHasherPickerVC:" id="val-3E-HF7"/>
+                                    <segue destination="Sss-Fm-i8v" kind="unwind" identifier="pickAnotherHasherToEdit" unwindAction="getHasherFromHasherPicker:" id="i95-PQ-UQi"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGg-cb-kjU">
@@ -2357,7 +2388,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zkf-W1-4gw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Sss-Fm-i8v" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3517" y="1179"/>
+            <point key="canvasLocation" x="1783" y="1179"/>
         </scene>
         <!--Hashers-->
         <scene sceneID="1H4-TU-7y1">
@@ -2529,7 +2560,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jEP-P3-X6r" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="UzG-JT-voY" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2846" y="1142"/>
+            <point key="canvasLocation" x="3182" y="1179"/>
         </scene>
         <!--Edit KennelVC-->
         <scene sceneID="1cB-9i-DAx">
@@ -2654,7 +2685,7 @@
         <image name="fb-icon" width="65" height="65"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="w7w-3z-scg"/>
+        <segue reference="Elj-Qh-yzO"/>
         <segue reference="f2U-ap-0io"/>
     </inferredMetricsTieBreakers>
 </document>
