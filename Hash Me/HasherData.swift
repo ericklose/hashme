@@ -81,6 +81,12 @@ class Hasher {
         }
     }
     
+    func editPrimaryHashNameInFirebase(hasherId: String, primaryName: String!) {
+                if primaryName != "" {
+                _hasherUrl.updateChildValues(["hasherPrimaryHashName" : primaryName])
+                }
+    }
+    
     init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>) {
         self._hasherId = hasherInitId
         
