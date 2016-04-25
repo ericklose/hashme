@@ -17,8 +17,8 @@ class HasherCell: UITableViewCell {
     @IBOutlet weak var altHashNameTxtFld: UITextField!
     @IBOutlet weak var enterBtn: UIButton!
     
-    
     var kennelMembershipId: String!
+    var hasherId: String!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,8 +31,8 @@ class HasherCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(kennelMembershipId: String, kennelAndHashNameDecodeDict: Dictionary<String, String>, kennelAndNameDict: Dictionary<String, String>) {
-        
+    func configureCell(hasherId: String, kennelMembershipId: String, kennelAndHashNameDecodeDict: Dictionary<String, String>, kennelAndNameDict: Dictionary<String, String>) {
+        self.hasherId = hasherId
         self.kennelMembershipId = kennelMembershipId
         kennelNameLbl.text = kennelAndNameDict[kennelMembershipId]
         hashNameLbl.text = kennelAndHashNameDecodeDict[kennelMembershipId]
@@ -47,15 +47,15 @@ class HasherCell: UITableViewCell {
     }
     
     @IBAction func enterBtnForEditAltHashNamePressed(sender: AnyObject) {
-        editAltHashNameInFirebase(altHashNameTxtFld.text, altId: kennelMembershipId)
+        editAltHashNameInFirebase(hasherId, altName: altHashNameTxtFld.text, altId: kennelMembershipId)
         altHashNameTxtFld.hidden = true
         hashNameLbl.hidden = false
         editButton.hidden = false
         enterBtn.hidden = true
     }
     
-    func editAltHashNameInFirebase(altName: String!, altId: String!) {
-        let kennelsAndNamesUrl = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+    func editAltHashNameInFirebase(hasherId: String!, altName: String!, altId: String!) {
+        let kennelsAndNamesUrl = DataService.ds.REF_HASHERS.childByAppendingPath(hasherId).childByAppendingPath("hasherKennelsAndNames")
         
         if altName == "" {
             kennelsAndNamesUrl.updateChildValues([altId: true])
@@ -65,9 +65,9 @@ class HasherCell: UITableViewCell {
     }
     
     @IBAction func deleteKennelButtonPressed(sender: AnyObject) {
-        let kennelsAndNamesUrl = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+        let kennelsAndNamesUrl = DataService.ds.REF_HASHERS.childByAppendingPath(hasherId).childByAppendingPath("hasherKennelsAndNames")
         kennelsAndNamesUrl.childByAppendingPath(kennelMembershipId as String).removeValue()
-        let kennelMembersUrl = Firebase(url: "\(DataService.ds.REF_KENNELS)").childByAppendingPath(kennelMembershipId).childByAppendingPath("kennelMembers")
-        kennelMembersUrl.childByAppendingPath(NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String).removeValue()
+        let kennelMembersUrl = DataService.ds.REF_KENNELS.childByAppendingPath(kennelMembershipId).childByAppendingPath("kennelMembers")
+        kennelMembersUrl.childByAppendingPath(hasherId).removeValue()
     }
 }

@@ -121,6 +121,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBAction func returnToMyDataBtnPressed(sender: AnyObject) {
         returnToMyDataBtn.hidden = true
         newHasherIsSelected = false
+        viewDidAppear(true)
     }
     
     
@@ -131,25 +132,9 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         updateInfoBtn.hidden = false
     }
     
-    
-    
-    func editPrimaryHashNameInFirebase(primaryName: String!) {
-        
-        DataService.ds.REF_HASHER_CURRENT.observeEventType(.Value, withBlock: { snapshot in
-            
-            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
-                let existingPrimaryName = hasherDict["hasherPrimaryHashName"] as! String
-                if primaryName != existingPrimaryName && primaryName != "" {
-                    let namePath = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)")
-                    namePath.updateChildValues(["hasherPrimaryHashName" : primaryName])
-                }
-            }
-        })
-    }
-    
     @IBAction func updateInfoPressed(sender: AnyObject) {
         hasher.editNerdNameInFirebase(hasher.hasherId, nerdName: nerdNameTxtFld.text!)
-        editPrimaryHashNameInFirebase(primaryHashNameTxtFld.text)
+        hasher.editPrimaryHashNameInFirebase(hasher.hasherId, primaryName: primaryHashNameTxtFld.text)
         
         nerdNameTxtFld.hidden = true
         updateInfoBtn.hidden = true
@@ -178,7 +163,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         let kennelMembershipId = kennelMembershipIds[indexPath.row]
         
         if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? HasherCell {
-            cell.configureCell(kennelMembershipId, kennelAndHashNameDecodeDict: kennelAndHashNameDecodeDict, kennelAndNameDict: kennelAndNameDict)
+            cell.configureCell(hasher.hasherId, kennelMembershipId: kennelMembershipId, kennelAndHashNameDecodeDict: kennelAndHashNameDecodeDict, kennelAndNameDict: kennelAndNameDict)
             return cell
         } else {
             return HasherCell()
@@ -190,12 +175,12 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         
         if let sourceViewController = sender.sourceViewController as? KennelPickerTableVC {
             let hasherKennelsArray = kennelAndHashNameDecodeDict.keys
-            let hasherTrailsAndNamesUrl = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+            let hasherTrailsAndNamesUrl = DataService.ds.REF_HASHERS.childByAppendingPath(hasher.hasherId).childByAppendingPath("hasherKennelsAndNames")
             
             if sourceViewController.kennelChoiceId != nil && !hasherKennelsArray.contains(sourceViewController.kennelChoiceId) {
                 hasherTrailsAndNamesUrl.updateChildValues([sourceViewController.kennelChoiceId! : true])
-                let kennelMembersUrl = Firebase(url: "\(DataService.ds.REF_KENNELS)").childByAppendingPath(sourceViewController.kennelChoiceId).childByAppendingPath("kennelMembers")
-                kennelMembersUrl.updateChildValues([NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String : true])
+                let kennelMembersUrl = DataService.ds.REF_KENNELS.childByAppendingPath(sourceViewController.kennelChoiceId).childByAppendingPath("kennelMembers")
+                kennelMembersUrl.updateChildValues([hasher.hasherId: true])
             }
         }
     }
@@ -218,14 +203,16 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBAction func getKennelFromOriginalKennelPicker(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
-            let primaryKennelUrl = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)")
-            let hasherKennelsAndNamesUrl = Firebase(url: "\(DataService.ds.REF_HASHER_CURRENT)").childByAppendingPath("hasherKennelsAndNames")
+            let primaryKennelUrl = DataService.ds.REF_HASHERS.childByAppendingPath(hasher.hasherId)
+            let hasherKennelsAndNamesUrl = DataService.ds.REF_HASHERS.childByAppendingPath(hasher.hasherId).childByAppendingPath("hasherKennelsAndNames")
             
             if sourceViewController.kennelChoiceId != nil {
                 if hasherPrimaryKennel != nil {
                     hasherKennelsAndNamesUrl.updateChildValues([hasherPrimaryKennel as! String: true])
+                    primaryKennelUrl.updateChildValues(["hasherPrimaryKennel" : sourceViewController.kennelChoiceId!])
+                } else {
+                    primaryKennelUrl.updateChildValues(["hasherPrimaryKennel" : sourceViewController.kennelChoiceId!])
                 }
-                primaryKennelUrl.updateChildValues(["hasherPrimaryKennel" : sourceViewController.kennelChoiceId!])
                 hasherKennelsAndNamesUrl.updateChildValues([sourceViewController.kennelChoiceId : "primary"])
             }
         }
