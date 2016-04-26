@@ -60,17 +60,12 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     override func viewDidAppear(animated: Bool) {
-        print("newhasherisselected", newHasherIsSelected)
         if newHasherIsSelected == true {
-            print("hashchoice ", hasherChoiceId)
             meOrSelectedHasherId = hasherChoiceId //sent from hasher picker VC
             returnToMyDataBtn.hidden = false
-            print("1")
         } else {
             meOrSelectedHasherId = DataService.ds.REF_HASHER_USERID
-            print("2")
         }
-        print("meorselected ", meOrSelectedHasherId)
         
         downloadHasherDetails { () -> () in
             self.updateHasherDisplay()
@@ -193,7 +188,6 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 for key in hasherKennelsArray {
                     self.hasherKennelIdsAndNamesDict[kennelAndNameDict[key]!] = key
                 }
-                print("dictinhashervc", hasherKennelIdsAndNamesDict)
                 KennelPickerVC.hasherKennelIdsAndNamesDict = hasherKennelIdsAndNamesDict
             }
         }
@@ -230,7 +224,6 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             if sourceViewController.hasherChoiceId != nil {
                self.hasherChoiceId = sourceViewController.hasherChoiceId
                 newHasherIsSelected = true
-              print("hasherchoiceidhasherVC: ", hasherChoiceId)
             }
         }
     }
