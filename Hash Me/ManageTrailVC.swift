@@ -319,6 +319,9 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             let firebaseTrailPost = DataService.ds.REF_TRAILS.childByAppendingPath(trails.trailKey).childByAppendingPath("trailAttendees").childByAppendingPath(newHasherId)
             firebaseTrailPost.setValue(trailInfo)
             
+            let firebaseKennelTrailPost = DataService.ds.REF_KENNELS.childByAppendingPath(trails.trailKennelId).childByAppendingPath("kennelTrails").childByAppendingPath(trails.trailKey).childByAppendingPath("trailAttendees").childByAppendingPath(newHasherId)
+            firebaseTrailPost.setValue(trailInfo)
+            
             newHasherHashName.text = ""
             newHasherHashName.placeholder = "Hash Name"
             newHasherHashName.backgroundColor = nil
