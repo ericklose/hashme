@@ -29,6 +29,10 @@
 		A61929151C94912A00D8C945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61929131C94912A00D8C945 /* LaunchScreen.storyboard */; };
 		A61929201C94912A00D8C945 /* Hash_MeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619291F1C94912A00D8C945 /* Hash_MeTests.swift */; };
 		A619292B1C94912A00D8C945 /* Hash_MeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619292A1C94912A00D8C945 /* Hash_MeUITests.swift */; };
+		A6271D3C1CCFE5980060E8DB /* KennelMembersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6271D3B1CCFE5980060E8DB /* KennelMembersVC.swift */; };
+		A6271D3E1CCFE7680060E8DB /* KennelMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6271D3D1CCFE7680060E8DB /* KennelMemberCell.swift */; };
+		A6271D3F1CCFE7680060E8DB /* KennelMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6271D3D1CCFE7680060E8DB /* KennelMemberCell.swift */; };
+		A6271D401CCFE7680060E8DB /* KennelMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6271D3D1CCFE7680060E8DB /* KennelMemberCell.swift */; };
 		A64554E31C975BC60016373E /* AddNewTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64554E21C975BC60016373E /* AddNewTrailVC.swift */; };
 		A64554E41C975BC60016373E /* AddNewTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64554E21C975BC60016373E /* AddNewTrailVC.swift */; };
 		A64554E51C975BC60016373E /* AddNewTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64554E21C975BC60016373E /* AddNewTrailVC.swift */; };
@@ -157,6 +161,8 @@
 		A61929261C94912A00D8C945 /* Hash MeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hash MeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A619292A1C94912A00D8C945 /* Hash_MeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hash_MeUITests.swift; sourceTree = "<group>"; };
 		A619292C1C94912A00D8C945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6271D3B1CCFE5980060E8DB /* KennelMembersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelMembersVC.swift; sourceTree = "<group>"; };
+		A6271D3D1CCFE7680060E8DB /* KennelMemberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelMemberCell.swift; sourceTree = "<group>"; };
 		A64554E21C975BC60016373E /* AddNewTrailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewTrailVC.swift; sourceTree = "<group>"; };
 		A6764AC31CCA5DEE00E376F0 /* KennelTrailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelTrailsCell.swift; sourceTree = "<group>"; };
 		A6764AC71CCAB28900E376F0 /* MapAddressVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = MapAddressVC.swift; sourceTree = "<group>"; };
@@ -329,6 +335,7 @@
 				A6B22DF81CC9019C00A4F389 /* HasherPickerTableCell.swift */,
 				A6764AC31CCA5DEE00E376F0 /* KennelTrailsCell.swift */,
 				A60B17831CCEDF970041E9E2 /* MismanagementCell.swift */,
+				A6271D3D1CCFE7680060E8DB /* KennelMemberCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -371,6 +378,7 @@
 				A6FB47581C9A0D2B00B370CD /* KennelListVC.swift */,
 				A6A3494F1CB92E5900B919D8 /* ManageKennelVC.swift */,
 				A6764ACB1CCBD72600E376F0 /* EditKennelVC.swift */,
+				A6271D3B1CCFE5980060E8DB /* KennelMembersVC.swift */,
 			);
 			name = Kennels;
 			sourceTree = "<group>";
@@ -601,11 +609,13 @@
 				A61929091C94912A00D8C945 /* AppDelegate.swift in Sources */,
 				A6764AC81CCAB28900E376F0 /* MapAddressVC.swift in Sources */,
 				A6FB47611C9A0E0A00B370CD /* KennelCell.swift in Sources */,
+				A6271D3C1CCFE5980060E8DB /* KennelMembersVC.swift in Sources */,
 				A619290B1C94912A00D8C945 /* TrailListVC.swift in Sources */,
 				A6A349501CB92E5900B919D8 /* ManageKennelVC.swift in Sources */,
 				A6B22DED1CC7FFC000A4F389 /* HareCell.swift in Sources */,
 				A6A0E3D61C9496A00003EE0E /* DataService.swift in Sources */,
 				A64554E31C975BC60016373E /* AddNewTrailVC.swift in Sources */,
+				A6271D3E1CCFE7680060E8DB /* KennelMemberCell.swift in Sources */,
 				A6764AC41CCA5DEE00E376F0 /* KennelTrailsCell.swift in Sources */,
 				A6E50A8B1CCE6F450040A2B1 /* BootcampAnnotation.swift in Sources */,
 				A6A0E3EE1C94AAB40003EE0E /* Constants.swift in Sources */,
@@ -638,6 +648,7 @@
 				A6BA76661CBBF32A00D29C66 /* AttendeeDetailsVC.swift in Sources */,
 				A61929201C94912A00D8C945 /* Hash_MeTests.swift in Sources */,
 				A6BBA7B41C9525560030DB53 /* TrailData.swift in Sources */,
+				A6271D3F1CCFE7680060E8DB /* KennelMemberCell.swift in Sources */,
 				A6B22DFA1CC9019C00A4F389 /* HasherPickerTableCell.swift in Sources */,
 				A6B22DF21CC9016A00A4F389 /* KennelPickerTableVC.swift in Sources */,
 				A6CB71381C96210600F27D12 /* ManageTrailVC.swift in Sources */,
@@ -675,6 +686,7 @@
 				A6BA76671CBBF32A00D29C66 /* AttendeeDetailsVC.swift in Sources */,
 				A619292B1C94912A00D8C945 /* Hash_MeUITests.swift in Sources */,
 				A6BBA7B51C9525560030DB53 /* TrailData.swift in Sources */,
+				A6271D401CCFE7680060E8DB /* KennelMemberCell.swift in Sources */,
 				A6B22DFB1CC9019C00A4F389 /* HasherPickerTableCell.swift in Sources */,
 				A6B22DF31CC9016A00A4F389 /* KennelPickerTableVC.swift in Sources */,
 				A6CB71391C96210600F27D12 /* ManageTrailVC.swift in Sources */,
