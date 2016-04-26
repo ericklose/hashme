@@ -34,14 +34,13 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         kennelSearchBar.delegate = self
         kennelSearchBar.returnKeyType = UIReturnKeyType.Done
         
-        print("dict:", hasherKennelIdsAndNamesDict)
         
         for (key, _) in hasherKennelIdsAndNamesDict {
             self.kennelPickerNames.append(key)
         }
         
         //kennelPickerNames.append(hasherKennelIdsAndNamesDict.values)
-        print("KPN: ", kennelPickerNames)
+//        print("KPN: ", kennelPickerNames)
 //        loadKennelData { () -> () in
 //            self.kennelPicker.reloadAllComponents()
 //        }
@@ -117,7 +116,11 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBAction func kennelPickerSaved(sender: UIButton) {
         if self.kennelChoiceName != nil && self.kennelChoiceName != "-Select Kennel-" {
             kennelChoiceId = hasherKennelIdsAndNamesDict[kennelChoiceName]!
-        } else {
+        } else if inSearchMode && self.kennelChoiceName == nil {
+           self.kennelChoiceName = filteredKennelPickerNames[0]
+            kennelChoiceId = hasherKennelIdsAndNamesDict[kennelChoiceName]!
+        }
+        else {
             kennelChoiceId = nil
         }
     }
