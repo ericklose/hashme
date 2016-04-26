@@ -20,8 +20,9 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var kennels: KennelData!
     var trails = [TrailData]()
-    var mismanagementDict: Dictionary<String, AnyObject>!
+    var mismanagementDict: Dictionary<String, String>!
     var kennelMemberDict: Dictionary<String, AnyObject>!
+    var mismanagementArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,20 +35,21 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         DataService.ds.REF_KENNELS.childByAppendingPath(kennels.kennelId).observeEventType(.Value, withBlock: { snapshot in
             
             self.trails = []
-
+            
             if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
                 if var trailDict = kennelDict["kennelTrails"] as? Dictionary<String, AnyObject> {
                     for trail in trailDict {
                         trailDict["trailKennelId"] = self.kennels.kennelId
                         let key = trail.0
                         if let finalTrailDict = trailDict[key] as? Dictionary<String, AnyObject> {
-                         let trail = TrailData(trailKey: key, dictionary: finalTrailDict)
-                           self.trails.append(trail)
-                    }
+                            let trail = TrailData(trailKey: key, dictionary: finalTrailDict)
+                            self.trails.append(trail)
+                        }
                     }
                 }
-                if let misManDict = kennelDict["kennelMismanagement"] as? Dictionary<String, AnyObject> {
+                if let misManDict = kennelDict["kennelMismanagement"] as? Dictionary<String, String> {
                     self.mismanagementDict = misManDict
+                    self.mismanagementArray = [String](self.mismanagementDict.keys)
                 }
                 if let kMembersDict = kennelDict["kennelMembers"] as? Dictionary<String, AnyObject> {
                     self.kennelMemberDict = kMembersDict
@@ -62,24 +64,42 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         updateKennelDetails()
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row < trails.count {
+            let trail: TrailData!
+            trail = trails[indexPath.row]
+            performSegueWithIdentifier("manageTrail", sender: trail)
+        }
+    }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return trails.count
+        return trails.count + mismanagementArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let trail = trails[indexPath.row]
-        if let cell = tableView.dequeueReusableCellWithIdentifier("kennelTrailsCell") as? TrailCell {
-            cell.configureCell(trail)
-            return cell
-//        } else {
-//            return TrailCell()
-        } else if let cell = tableView.dequeueReusableCellWithIdentifier("kennelMismanagementCell") as? MismanagementCell {
-            cell.configureCell(mismanagementDict)
-            return cell
+        var trueRow = indexPath.row
+        if trueRow < trails.count {
+            if let cell = tableView.dequeueReusableCellWithIdentifier("kennelTrailsCell") as? TrailCell {
+                let trail = trails[indexPath.row]
+                cell.configureCell(trail)
+                return cell
+            } else {
+                return TrailCell()
+            }
+        }
+        
+        if trueRow >= trails.count && trueRow < (trails.count+mismanagementArray.count) {
+            if let cell2 = tableView.dequeueReusableCellWithIdentifier("kennelMismanagementCell") as? MismanagementCell {
+                let mismanagementId = mismanagementArray[(trueRow-trails.count)]
+                cell2.configureCell(mismanagementId, misManDict: mismanagementDict)
+                return cell2
+            } else {
+                return MismanagementCell()
+            }
         }
         return TrailCell()
     }
@@ -89,6 +109,13 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             if let editKennelVC = segue.destinationViewController as? EditKennelVC {
                 if let kennels = kennels as? KennelData {
                     editKennelVC.kennel = kennels
+                }
+            }
+        }
+        if segue.identifier == "manageTrail" {
+            if let manageTrailVC = segue.destinationViewController as? ManageTrailVC {
+                if let trailInCell = sender as? TrailData {
+                    manageTrailVC.trails = trailInCell
                 }
             }
         }

@@ -733,7 +733,7 @@
                                             <outlet property="trailStartLocation" destination="lrQ-8v-hYc" id="4lm-pr-lrJ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="67" id="tcP-ac-sDQ" customClass="MismanagementCell" customModule="Hash_Me" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kennelMismanagementCell" rowHeight="67" id="tcP-ac-sDQ" customClass="MismanagementCell" customModule="Hash_Me" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="427" width="600" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="tcP-ac-sDQ" id="Mdc-lH-mjH">
@@ -812,6 +812,7 @@
                         <outlet property="kennelLocationLbl" destination="EsM-87-ee6" id="vsY-Bh-MqZ"/>
                         <outlet property="kennelNameLbl" destination="xgn-qo-UIz" id="wEK-7N-giR"/>
                         <outlet property="kennelScheduleLbl" destination="wJ6-F4-uBj" id="5IP-Dx-g20"/>
+                        <segue destination="DFk-tR-U37" kind="show" identifier="manageTrail" id="Sfb-EZ-yna"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cex-bL-X4S" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2750,7 +2751,8 @@
         <image name="fb-icon" width="65" height="65"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="w7w-3z-scg"/>
+        <segue reference="Sfb-EZ-yna"/>
         <segue reference="f2U-ap-0io"/>
+        <segue reference="w7w-3z-scg"/>
     </inferredMetricsTieBreakers>
 </document>
