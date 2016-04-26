@@ -118,6 +118,13 @@ class TrailData {
         _kennelTrailUrl.childByAppendingPath("trailHares").childByAppendingPath(exTrailHareHasherId).removeValue()
     }
     
+    func trailAddTrail(trailDict: Dictionary<String, AnyObject>) {
+        let firstAdd = DataService.ds.REF_TRAILS.childByAutoId()
+        let trailRef = firstAdd.key
+        _trailUrl.setValue(trailDict)
+        DataService.ds.REF_KENNELS.childByAppendingPath(_trailKennelId).childByAppendingPath("kennelTrails").childByAppendingPath(trailRef).setValue(trailDict)
+    }
+    
     init(trailKey: String, dictionary: Dictionary<String, AnyObject>) {
         
         self._trailKey = trailKey
@@ -154,8 +161,8 @@ class TrailData {
             self._trailHashCash = trailHashCash
         }
         
-        self._trailUrl = DataService.ds.REF_TRAILS.childByAppendingPath(trailKey)
-        self._kennelTrailUrl = DataService.ds.REF_KENNELS.childByAppendingPath(_trailKennelId).childByAppendingPath("kennelTrails").childByAppendingPath(trailKey)
+        self._trailUrl = DataService.ds.REF_TRAILS.childByAppendingPath(_trailKey)
+        self._kennelTrailUrl = DataService.ds.REF_KENNELS.childByAppendingPath(_trailKennelId).childByAppendingPath("kennelTrails").childByAppendingPath(_trailKey)
         
     }
     

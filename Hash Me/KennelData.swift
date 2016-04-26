@@ -15,10 +15,11 @@ class KennelData {
     private var _kennelName: String!
     private var _kennelDict: Dictionary<String, AnyObject>!
     private var _kennelLocation: String!
+    private var _kennelMapLocation: String!
+    private var _kennelCityAndRegion: String!
     private var _kennelSchedule: String!
     private var _kennelCountry: String!
-    private var _kennelUsState: String!
-    private var _kennelMapLocation: String!
+    private var _kennelState: String!
     private var _kennelCity: String!
     private var _kennelPostalCode: String!
     private var _kennelMismanagement: Dictionary<String, AnyObject>!
@@ -45,6 +46,14 @@ class KennelData {
         }
     }
     
+    var kennelCityAndRegion: String {
+        if _kennelCityAndRegion == nil {
+            return ""
+        } else {
+            return _kennelCityAndRegion
+        }
+    }
+    
     var kennelPostalCode: String {
         if _kennelPostalCode == nil {
             return "unknown"
@@ -61,11 +70,11 @@ class KennelData {
         }
     }
     
-    var kennelUsState: String {
-        if _kennelUsState == nil {
+    var kennelState: String {
+        if _kennelState == nil {
             return ""
         } else {
-            return _kennelUsState
+            return _kennelState
         }
     }
     
@@ -161,8 +170,8 @@ class KennelData {
             self._kennelSchedule = kennelInitSchedule
         }
         
-        if let kennelInitUsState = kennelInitDict["kennelUsState"] as? String {
-            self._kennelUsState = kennelInitUsState
+        if let kennelInitState = kennelInitDict["kennelState"] as? String {
+            self._kennelState = kennelInitState
         }
         
         if let kennelInitCountry = kennelInitDict["kennelCountry"] as? String {
@@ -193,19 +202,24 @@ class KennelData {
             self._kennelPostalCode = kennelInitPostalCode
         }
         
-        //if let kennelInitLocation = kennelInitDict["kennelLocation"] as? String {
-        
         if _kennelCountry != nil {
             self._kennelLocation = self._kennelCountry
+            if self._kennelCountry != "USA" {
+                self._kennelCityAndRegion = self._kennelCountry
+            }
         }
         if _kennelPostalCode != nil {
-            self._kennelLocation = self._kennelPostalCode + ", " + _kennelLocation
+            self._kennelLocation = self._kennelPostalCode + ", " + self._kennelLocation
         }
-        if _kennelUsState != nil {
-            self._kennelLocation = self._kennelUsState + ", " + _kennelLocation
+        if _kennelState != nil {
+            self._kennelLocation = self._kennelState + ", " + self._kennelLocation
+            if self._kennelCountry == "USA" {
+                self._kennelCityAndRegion = self._kennelState
+            }
         }
         if _kennelCity != nil {
-            self._kennelLocation = self._kennelCity + ", " + _kennelLocation
+            self._kennelLocation = self._kennelCity + ", " + self._kennelLocation
+            self._kennelCityAndRegion = self._kennelCity + ", " + self._kennelCityAndRegion
         }
         
         self._kennelUrl = DataService.ds.REF_KENNELS.childByAppendingPath(_kennelId)

@@ -31,7 +31,7 @@ class Hasher {
     
     var hasherNerdName: String {
         if _hasherNerdName != nil && _hasherNerdName != "" {
-        return _hasherNerdName
+            return _hasherNerdName
         }
         return "Incognito"
     }
@@ -43,10 +43,10 @@ class Hasher {
     var hasherKennelMemberships: Dictionary<String, AnyObject> {
         return _hasherKennelMemberships
     }
-  
+    
     var hasherTrailsAttended: Array<String>? {
         return _hasherTrailsAttended
-        }
+    }
     
     var hasherTrailsHared: Array<String>? {
         return _hasherTrailsHared
@@ -66,7 +66,7 @@ class Hasher {
     
     var hasherPrimaryKennel: String {
         if _hasherPrimaryKennel != nil {
-        return _hasherPrimaryKennel
+            return _hasherPrimaryKennel
         } else {
             return "Has no primary kennel"
         }
@@ -82,9 +82,9 @@ class Hasher {
     }
     
     func editPrimaryHashNameInFirebase(hasherId: String, primaryName: String!) {
-                if primaryName != "" {
-                _hasherUrl.updateChildValues(["hasherPrimaryHashName" : primaryName])
-                }
+        if primaryName != "" {
+            _hasherUrl.updateChildValues(["hasherPrimaryHashName" : primaryName])
+        }
     }
     
     init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>) {
