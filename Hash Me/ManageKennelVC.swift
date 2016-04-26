@@ -75,9 +75,13 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let cell = tableView.dequeueReusableCellWithIdentifier("kennelTrailsCell") as? TrailCell {
             cell.configureCell(trail)
             return cell
-        } else {
-            return TrailCell()
+//        } else {
+//            return TrailCell()
+        } else if let cell = tableView.dequeueReusableCellWithIdentifier("kennelMismanagementCell") as? MismanagementCell {
+            cell.configureCell(mismanagementDict)
+            return cell
         }
+        return TrailCell()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
