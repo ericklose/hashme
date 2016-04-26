@@ -11,6 +11,9 @@
 		A60007AB1CBEE3620040F15A /* KennelPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60007AA1CBEE3620040F15A /* KennelPickerVC.swift */; };
 		A60007AC1CBEE3620040F15A /* KennelPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60007AA1CBEE3620040F15A /* KennelPickerVC.swift */; };
 		A60007AD1CBEE3620040F15A /* KennelPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60007AA1CBEE3620040F15A /* KennelPickerVC.swift */; };
+		A60B17841CCEDF970041E9E2 /* MismanagementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60B17831CCEDF970041E9E2 /* MismanagementCell.swift */; };
+		A60B17851CCEDF970041E9E2 /* MismanagementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60B17831CCEDF970041E9E2 /* MismanagementCell.swift */; };
+		A60B17861CCEDF970041E9E2 /* MismanagementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60B17831CCEDF970041E9E2 /* MismanagementCell.swift */; };
 		A6188D601C9A174600BAE354 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61929081C94912A00D8C945 /* AppDelegate.swift */; };
 		A6188D611C9A174700BAE354 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61929081C94912A00D8C945 /* AppDelegate.swift */; };
 		A6188D621C9A175300BAE354 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A61929111C94912A00D8C945 /* Assets.xcassets */; };
@@ -140,6 +143,7 @@
 		52927BA7EB0468E45C3E7B38 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		95A7A265369CD9D77AD603C0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A60007AA1CBEE3620040F15A /* KennelPickerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelPickerVC.swift; sourceTree = "<group>"; };
+		A60B17831CCEDF970041E9E2 /* MismanagementCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MismanagementCell.swift; sourceTree = "<group>"; };
 		A61929051C94912A00D8C945 /* Hash Me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hash Me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A61929081C94912A00D8C945 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A619290A1C94912A00D8C945 /* TrailListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailListVC.swift; sourceTree = "<group>"; };
@@ -324,6 +328,7 @@
 				A6B22DF41CC9018100A4F389 /* KennelPickerTableCell.swift */,
 				A6B22DF81CC9019C00A4F389 /* HasherPickerTableCell.swift */,
 				A6764AC31CCA5DEE00E376F0 /* KennelTrailsCell.swift */,
+				A60B17831CCEDF970041E9E2 /* MismanagementCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -607,6 +612,7 @@
 				DAAE71591CB2FD2F00E2FBDC /* HasherCell.swift in Sources */,
 				A6FB475D1C9A0D5700B370CD /* KennelData.swift in Sources */,
 				A6B22DFD1CC901B400A4F389 /* HasherPickerTableVC.swift in Sources */,
+				A60B17841CCEDF970041E9E2 /* MismanagementCell.swift in Sources */,
 				A6BA76651CBBF32A00D29C66 /* AttendeeDetailsVC.swift in Sources */,
 				A6B22DF91CC9019C00A4F389 /* HasherPickerTableCell.swift in Sources */,
 			);
@@ -638,6 +644,7 @@
 				A6BBA7B01C9524690030DB53 /* TrailCell.swift in Sources */,
 				DA5E78191C975A2A003A0E01 /* HasherDataVC.swift in Sources */,
 				A6A0E3D71C9496A00003EE0E /* DataService.swift in Sources */,
+				A60B17851CCEDF970041E9E2 /* MismanagementCell.swift in Sources */,
 				A6B22DEA1CC6CDDB00A4F389 /* HasherPickerVC.swift in Sources */,
 				A64554E41C975BC60016373E /* AddNewTrailVC.swift in Sources */,
 				A6FB475E1C9A0D5700B370CD /* KennelData.swift in Sources */,
@@ -674,6 +681,7 @@
 				A6BBA7B11C9524690030DB53 /* TrailCell.swift in Sources */,
 				DA5E781A1C975A2B003A0E01 /* HasherDataVC.swift in Sources */,
 				A6A0E3D81C9496A00003EE0E /* DataService.swift in Sources */,
+				A60B17861CCEDF970041E9E2 /* MismanagementCell.swift in Sources */,
 				A6B22DEB1CC6CDDB00A4F389 /* HasherPickerVC.swift in Sources */,
 				A64554E51C975BC60016373E /* AddNewTrailVC.swift in Sources */,
 				A6FB475F1C9A0D5700B370CD /* KennelData.swift in Sources */,

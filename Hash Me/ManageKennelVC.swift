@@ -15,41 +15,50 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var kennelNameLbl: UILabel!
     @IBOutlet weak var kennelScheduleLbl: UILabel!
-    @IBOutlet weak var kennelCountryLbl: UILabel!
-    @IBOutlet weak var kennelUsStateLbl: UILabel!
+    @IBOutlet weak var kennelLocationLbl: UILabel!
     @IBOutlet weak var kennelEditBtn: UIButton!
     
     var kennels: KennelData!
     var trails = [TrailData]()
+    var mismanagementDict: Dictionary<String, AnyObject>!
+    var kennelMemberDict: Dictionary<String, AnyObject>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         kennelDetailsTableView.delegate = self
         kennelDetailsTableView.dataSource = self
-        //trailTableView.estimatedRowHeight = 200
         
+        print("kennelID : ", kennels.kennelId)
         
-        DataService.ds.REF_TRAILS.observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_KENNELS.childByAppendingPath(kennels.kennelId).observeEventType(.Value, withBlock: { snapshot in
             
             self.trails = []
-            
-            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                for snap in snapshots {
-                    if let trailDict = snap.value as? Dictionary<String, AnyObject> {
-                        let key = snap.key
-                        let trail = TrailData(trailKey: key, dictionary: trailDict)
-                        self.trails.append(trail)
+
+            if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
+                if var trailDict = kennelDict["kennelTrails"] as? Dictionary<String, AnyObject> {
+                    for trail in trailDict {
+                        trailDict["trailKennelId"] = self.kennels.kennelId
+                        let key = trail.0
+                        if let finalTrailDict = trailDict[key] as? Dictionary<String, AnyObject> {
+                         let trail = TrailData(trailKey: key, dictionary: finalTrailDict)
+                           self.trails.append(trail)
                     }
+                    }
+                }
+                if let misManDict = kennelDict["kennelMismanagement"] as? Dictionary<String, AnyObject> {
+                    self.mismanagementDict = misManDict
+                }
+                if let kMembersDict = kennelDict["kennelMembers"] as? Dictionary<String, AnyObject> {
+                    self.kennelMemberDict = kMembersDict
                 }
             }
             self.kennelDetailsTableView.reloadData()
         })
-        
     }
     
     override func viewDidAppear(animated: Bool) {
-    
+        
         updateKennelDetails()
     }
     
@@ -84,8 +93,7 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func updateKennelDetails() {
         kennelNameLbl.text = kennels.kennelName
         kennelScheduleLbl.text = kennels.kennelSchedule
-        kennelCountryLbl.text = kennels.kennelCountry
-        kennelUsStateLbl.text = kennels.kennelUsState
+        kennelLocationLbl.text = kennels.kennelLocation
     }
     
 }

@@ -33,7 +33,7 @@ class EditKennelVC: UIViewController, MKMapViewDelegate {
         kennelName.text = kennel.kennelName
         kennelGeneralSchedule.text = kennel.kennelSchedule
         kennelCountry.text = kennel.kennelCountry
-        kennelUsState.text = kennel.kennelUsState
+        kennelUsState.text = kennel.kennelState
         kennelCity.text = kennel.kennelCity
         kennelPostalCode.text = kennel.kennelPostalCode
         
@@ -82,7 +82,7 @@ class EditKennelVC: UIViewController, MKMapViewDelegate {
         if kennelGeneralSchedule.text != kennel.kennelSchedule {
             kennel.kennelSetSchedule(kennel.kennelId, newKennelSchedule: kennelGeneralSchedule.text!)
         }
-        if kennelUsState.text != kennel.kennelUsState {
+        if kennelUsState.text != kennel.kennelState {
             kennel.kennelSetUsState(kennel.kennelId, newKennelUsState: kennelUsState.text!)
         }
         if kennelCountry.text != kennel.kennelCountry {

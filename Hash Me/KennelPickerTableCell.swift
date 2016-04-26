@@ -11,7 +11,7 @@ import UIKit
 class KennelPickerTableCell: UITableViewCell {
 
     @IBOutlet weak var kennelName: UILabel!
-    @IBOutlet weak var kennelUsStateName: UILabel!
+    @IBOutlet weak var kennelCityAndRegion: UILabel!
     @IBOutlet weak var kennelCountryKennel: UILabel!
     
     override func awakeFromNib() {
@@ -27,7 +27,7 @@ class KennelPickerTableCell: UITableViewCell {
     
     func configureCell(kennel: KennelData) {
         self.kennelName.text = kennel.kennelName
-        self.kennelUsStateName.text = "US State: " + kennel.kennelUsState
+        self.kennelCityAndRegion.text = kennel.kennelCityAndRegion
         self.kennelCountryKennel.text = "Country: " + kennel.kennelCountry
         
     }

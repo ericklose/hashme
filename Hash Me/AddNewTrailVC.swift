@@ -21,7 +21,6 @@ class AddNewTrailVC: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     var newTrailKennelId: String!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,45 +53,47 @@ class AddNewTrailVC: UIViewController {
             self.newTrailKennelName.backgroundColor = UIColor.redColor()
             
         } else {
-        
-        postTrailToFirebase()
-    }
+            
+            postTrailToFirebase()
+        }
         
     }
     
     func postTrailToFirebase() {
-            
-            var trail: Dictionary<String, AnyObject> = [
-                "trailDate": newTrailDate.text!,
-                "trailKennelName": newTrailKennelName.text!,
-                "trailKennelId": newTrailKennelId,
-                "trailTitle": newTrailTitle.text!,
-                "trailHares": newTrailHares.text!,
-                "trailStartLocation": newTrailStartLocation.text!,
-                "trailDescription": newTrailDescription.text!
-            ]
-            
-            if newTrailHashCash.text == "" {
-                trail["trailHashCash"] = 0
-            } else {
-                trail["trailHashCash"] = Int(newTrailHashCash.text!)
-            }
-            
-            let firebasePost = DataService.ds.REF_TRAILS.childByAutoId()
-            firebasePost.setValue(trail)
-            
-            newTrailDate.text = ""
-            newTrailKennelName.text = ""
-            newTrailTitle.text = ""
-            newTrailHares.text = ""
-            newTrailStartLocation.text = ""
-            newTrailHashCash.text = ""
-            newTrailDescription.text = ""
-            newTrailKennelId = ""
-            
-            self.navigationController?.popViewControllerAnimated(true)
-            
+        
+        var trail: Dictionary<String, AnyObject> = [
+            "trailDate": newTrailDate.text!,
+            "trailKennelName": newTrailKennelName.text!,
+            "trailKennelId": newTrailKennelId,
+            "trailTitle": newTrailTitle.text!,
+            "trailHares": newTrailHares.text!,
+            "trailStartLocation": newTrailStartLocation.text!,
+            "trailDescription": newTrailDescription.text!
+        ]
+        
+        if newTrailHashCash.text == "" {
+            trail["trailHashCash"] = 0
+        } else {
+            trail["trailHashCash"] = Int(newTrailHashCash.text!)
         }
+        
+        let firebasePost = DataService.ds.REF_TRAILS.childByAutoId()
+        let trailRef = firebasePost.key
+        firebasePost.setValue(trail)
+        DataService.ds.REF_KENNELS.childByAppendingPath(newTrailKennelId).childByAppendingPath("kennelTrails").childByAppendingPath(trailRef).setValue(trail)
+        
+        newTrailDate.text = ""
+        newTrailKennelName.text = ""
+        newTrailTitle.text = ""
+        newTrailHares.text = ""
+        newTrailStartLocation.text = ""
+        newTrailHashCash.text = ""
+        newTrailDescription.text = ""
+        newTrailKennelId = ""
+        
+        self.navigationController?.popViewControllerAnimated(true)
+        
+    }
     
     
     @IBAction func trailDatePicker(sender: UIButton) {
@@ -115,20 +116,20 @@ class AddNewTrailVC: UIViewController {
     
     
     //THIS SHOULD BE FINE SOON
-//    @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
-//        if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {
-//            if sourceViewController.hasherChoiceId == nil {
-//                specificAttendeeVirginSponsorIs.text = ""
-//                trailAttendencePath.childByAppendingPath("trailAttendeeVirginSponsorIs").removeValue()
-//                trailsAttendedPath.childByAppendingPath("hasherVirginSponsor").removeValue()
-//                DataService.ds.REF_HASHERS.childByAppendingPath(specificAttendee.hasherId).childByAppendingPath("hasherOriginalSponsor").removeValue()
-//            } else {
-//                specificAttendeeVirginSponsorIs.text = sourceViewController.hasherChoiceName
-//                trailAttendencePath.updateChildValues(["trailAttendeeVirginSponsorIs" : sourceViewController.hasherChoiceId])
-//                trailsAttendedPath.updateChildValues(["hasherVirginSponsor" : sourceViewController.hasherChoiceId])
-//                DataService.ds.REF_HASHERS.childByAppendingPath(specificAttendee.hasherId).updateChildValues(["hasherOriginalSponsor" : sourceViewController.hasherChoiceId])
-//            }
-//        }
-//    }
+    //    @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
+    //        if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {
+    //            if sourceViewController.hasherChoiceId == nil {
+    //                specificAttendeeVirginSponsorIs.text = ""
+    //                trailAttendencePath.childByAppendingPath("trailAttendeeVirginSponsorIs").removeValue()
+    //                trailsAttendedPath.childByAppendingPath("hasherVirginSponsor").removeValue()
+    //                DataService.ds.REF_HASHERS.childByAppendingPath(specificAttendee.hasherId).childByAppendingPath("hasherOriginalSponsor").removeValue()
+    //            } else {
+    //                specificAttendeeVirginSponsorIs.text = sourceViewController.hasherChoiceName
+    //                trailAttendencePath.updateChildValues(["trailAttendeeVirginSponsorIs" : sourceViewController.hasherChoiceId])
+    //                trailsAttendedPath.updateChildValues(["hasherVirginSponsor" : sourceViewController.hasherChoiceId])
+    //                DataService.ds.REF_HASHERS.childByAppendingPath(specificAttendee.hasherId).updateChildValues(["hasherOriginalSponsor" : sourceViewController.hasherChoiceId])
+    //            }
+    //        }
+    //    }
     
 }
