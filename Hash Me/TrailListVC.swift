@@ -21,7 +21,8 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         super.viewDidLoad()
         trailTableView.delegate = self
         trailTableView.dataSource = self
-        trailTableView.estimatedRowHeight = 200
+        trailTableView.estimatedRowHeight = 150
+
         
         
         DataService.ds.REF_TRAILS.observeEventType(.Value, withBlock: { snapshot in
