@@ -24,10 +24,12 @@ class MismanagementCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func configureCell(misManDict: Dictionary<String, AnyObject>) {
-//        self.MismanagementHasherId = misManDict.key
-//        self.MismanagementRole.text = hares[hareId]! + ": "
-//        self.MismanagementHasher.text = hareNameDict[hareId]
+    func configureCell(misManHasherId: String, misManDict: Dictionary<String, String>) {
+        print("tester: ", misManHasherId)
+        print("tester2: ", misManDict)
+        self.MismanagementHasherId = misManHasherId
+        self.MismanagementRole.text = misManDict[misManHasherId]!
+        self.MismanagementHasher.text = misManHasherId
     }
     
     

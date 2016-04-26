@@ -57,7 +57,7 @@ class TrailData {
     
     var trailHares: Dictionary<String, String> {
         if _trailHares == nil {
-            _trailHares["Hare"] = "TBD"
+            _trailHares = ["Hare" : "TBD"]
             return _trailHares
         } else {
             return _trailHares

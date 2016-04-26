@@ -9,16 +9,20 @@
 import UIKit
 
 class KennelTrailsCell: UITableViewCell {
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
+    
+    //THIS ISN"T BEING USED - INSTEAD NORMAL TRAIL CELL IS BEING RECYCLED (AND WORKING OK SO FAR)
+    
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
 }
