@@ -39,6 +39,7 @@ class EditKennelVC: UIViewController, MKMapViewDelegate, UIScrollViewDelegate {
         kennelUsState.text = kennel.kennelState
         kennelCity.text = kennel.kennelCity
         kennelPostalCode.text = kennel.kennelPostalCode
+        kennelDescription.text = kennel.kennelDescription
         
     }
     
