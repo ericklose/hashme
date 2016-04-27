@@ -93,42 +93,47 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                     
                     if let attendeeDataDict = hasherSnap.value as? Dictionary<String, AnyObject> {
                         
-                        if self.trails.trailHares[hasherSnap.key] != nil {
-                            let hareHashName = attendeeDataDict["hasherPrimaryHashName"] as! String
-                            self.trailHareNamesDict[hasherSnap.key] = hareHashName
-                        }
-                        
-                        
-                        if let atThisTrail = attendeeDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
-                            let thisTrail = self.trails.trailKey
-                            
-                            if let thisTrailDict = atThisTrail[thisTrail] as? Dictionary<String, AnyObject> {
-                                
-                                if (thisTrailDict["hasherAttendedTrail"] as? Bool) == true {
-                                    let hasherKey = hasherSnap.key
-                                    let attendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennelId, attendeeAttendingInit: true, attendeeInitTrailHashCash: self.trails.trailHashCash)
-                                    self.attendees.append(attendee)
-                                } else {
-                                    self.addPotential(hasherSnap.key, attendeeDataDict: attendeeDataDict)
-                                }
-                            } else {
-                                self.addPotential(hasherSnap.key, attendeeDataDict: attendeeDataDict)
+                            if self.trails.trailHares[hasherSnap.key] != nil {
+                                let hareHashName = attendeeDataDict["hasherPrimaryHashName"] as! String
+                                self.trailHareNamesDict[hasherSnap.key] = hareHashName
                             }
-                        } else {
-                            self.addPotential(hasherSnap.key, attendeeDataDict: attendeeDataDict)
+                        
+                            if let atThisTrail = attendeeDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
+                                let thisTrail = self.trails.trailKey
+                                if let thisTrailDict = atThisTrail[thisTrail] as? Dictionary<String, AnyObject> {
+                                    if (thisTrailDict["hasherAttendedTrail"] as? Bool) == true {
+                                        let hasherKey = hasherSnap.key
+                                        self.addPotential(hasherKey, attendeeDataDict: attendeeDataDict, attendeeAttending: true)
+                                    }
+                                }
+                                //IF SOME TRAILS ATTENDED, BUT NOT THIS ONE
+                                else {
+                                    self.addPotential(hasherSnap.key, attendeeDataDict: attendeeDataDict, attendeeAttending: false)
+                                }
+                            }
+                            //IF ZERO TRAILS ATTENDED IN HASHER DATA
+                            else {
+                              self.addPotential(hasherSnap.key, attendeeDataDict: attendeeDataDict, attendeeAttending: false)
                         }
                     }
                 }
             }
+            
             self.trailRoster = self.attendees + self.potentialAttendees
             self.trailAttendeeTableView.reloadData()
             self.trailHaresTableView.reloadData()
         })
     }
     
-    func addPotential(hasherKey: String, attendeeDataDict: Dictionary <String, AnyObject>) {
-        let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennelId, attendeeAttendingInit: false, attendeeInitTrailHashCash: self.trails.trailHashCash)
-        self.potentialAttendees.append(potentialAttendee)
+    func addPotential(hasherKey: String, attendeeDataDict: Dictionary <String, AnyObject>, attendeeAttending: Bool) {
+        let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennelId, attendeeAttendingInit: attendeeAttending, attendeeInitTrailHashCash: self.trails.trailHashCash)
+        if hasherKey == DataService.ds.REF_HASHER_USERID {
+            self.attendees.insert(potentialAttendee, atIndex: 0)
+        } else if attendeeAttending == true {
+            self.attendees.append(potentialAttendee)
+        } else {
+            self.potentialAttendees.append(potentialAttendee)
+        }
     }
     
     func updateTrailDetails() {
