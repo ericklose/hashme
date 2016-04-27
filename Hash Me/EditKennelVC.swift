@@ -9,14 +9,16 @@
 import UIKit
 import MapKit
 
-class EditKennelVC: UIViewController, MKMapViewDelegate {
+class EditKennelVC: UIViewController, MKMapViewDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var kennelName: UITextField!
+    @IBOutlet weak var kennelDescription: UITextView!
     @IBOutlet weak var kennelGeneralSchedule: UITextField!
     @IBOutlet weak var kennelCountry: UITextField!
     @IBOutlet weak var kennelUsState: UITextField!
     @IBOutlet weak var kennelCity: UITextField!
     @IBOutlet weak var kennelPostalCode: UITextField!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var kennelMapView: MKMapView!
     
@@ -24,11 +26,12 @@ class EditKennelVC: UIViewController, MKMapViewDelegate {
     
     let regionRadius: CLLocationDistance = 50000
     let locationManager = CLLocationManager()
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         kennelMapView.delegate = self
+        scrollView.delegate = self
         
         kennelName.text = kennel.kennelName
         kennelGeneralSchedule.text = kennel.kennelSchedule
@@ -78,6 +81,9 @@ class EditKennelVC: UIViewController, MKMapViewDelegate {
         
         if kennelName.text != kennel.kennelName && kennelName.text != "" {
             kennel.kennelSetName(kennel.kennelId, newKennelName: kennelName.text!)
+        }
+        if kennelDescription.text != kennel.kennelDescription {
+            kennel.kennelSetDescription(kennel.kennelId, newKennelDescription: kennelDescription.text!)
         }
         if kennelGeneralSchedule.text != kennel.kennelSchedule {
             kennel.kennelSetSchedule(kennel.kennelId, newKennelSchedule: kennelGeneralSchedule.text!)

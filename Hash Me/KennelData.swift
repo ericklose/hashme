@@ -14,6 +14,7 @@ class KennelData {
     private var _kennelId: String!
     private var _kennelName: String!
     private var _kennelDict: Dictionary<String, AnyObject>!
+    private var _kennelDescription: String!
     private var _kennelLocation: String!
     private var _kennelMapLocation: String!
     private var _kennelCityAndRegion: String!
@@ -43,6 +44,14 @@ class KennelData {
             return "unknown"
         } else {
             return _kennelCity
+        }
+    }
+    
+    var kennelDescription: String {
+        if _kennelDescription == nil {
+            return ""
+        } else {
+            return _kennelDescription
         }
     }
     
@@ -118,6 +127,14 @@ class KennelData {
         }
     }
     
+    func kennelSetDescription(kennelId: String, newKennelDescription: String) {
+        if newKennelDescription == "" {
+            _kennelUrl.childByAppendingPath("kennelDescription").removeValue()
+        } else {
+            _kennelUrl.updateChildValues(["kennelDescription" : newKennelDescription])
+        }
+    }
+    
     func kennelSetSchedule(kennelId: String, newKennelSchedule: String) {
         if newKennelSchedule == "" {
             _kennelUrl.childByAppendingPath("kennelSchedule").removeValue()
@@ -164,6 +181,10 @@ class KennelData {
         
         if let kennelInitName = kennelInitDict["kennelName"] as? String {
             self._kennelName = kennelInitName
+        }
+        
+        if let kennelInitDescription = kennelInitDict["kennelDescription"] as? String {
+            self._kennelDescription = kennelInitDescription
         }
         
         if let kennelInitSchedule = kennelInitDict["kennelSchedule"] as? String {

@@ -99,6 +99,10 @@ class LoginScreenVC: UIViewController {
         }
     }
     
+    @IBAction func pressedForgotPassword(sender: UIButton) {
+        
+    }
+    
     func showErrorAlert(title: String, msg: String) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .Alert)
         let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
