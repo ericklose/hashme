@@ -49,7 +49,7 @@ class KennelData {
     
     var kennelDescription: String {
         if _kennelDescription == nil {
-            return ""
+            return " "
         } else {
             return _kennelDescription
         }

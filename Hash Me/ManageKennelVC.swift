@@ -70,6 +70,11 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             trail = trails[indexPath.row]
             performSegueWithIdentifier("manageTrail", sender: trail)
         }
+        if indexPath.row >= trails.count && indexPath.row < (trails.count+mismanagementArray.count) {
+//            let kennel: KennelData!
+//            kennel = kennels[indexPath.row]
+            performSegueWithIdentifier("kennelMembers", sender: kennels)
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -93,12 +98,13 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         if trueRow >= trails.count && trueRow < (trails.count+mismanagementArray.count) {
-            if let cell2 = tableView.dequeueReusableCellWithIdentifier("kennelMismanagementCell") as? MismanagementCell {
+            if let cell2 = tableView.dequeueReusableCellWithIdentifier("kennelMemberCell") as? KennelMemberCell {
                 let mismanagementId = mismanagementArray[(trueRow-trails.count)]
-                cell2.configureCell(mismanagementId, misManDict: mismanagementDict)
+                cell2.configureCell(mismanagementId, memberRoleDict: mismanagementDict, memberNameDict: mismanagementDict)
+                //cell2.configureCell(mismanagementId, misManDict: mismanagementDict)
                 return cell2
             } else {
-                return MismanagementCell()
+                return KennelMemberCell()
             }
         }
         return TrailCell()
@@ -116,6 +122,13 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             if let manageTrailVC = segue.destinationViewController as? ManageTrailVC {
                 if let trailInCell = sender as? TrailData {
                     manageTrailVC.trails = trailInCell
+                }
+            }
+        }
+        if segue.identifier == "kennelMembers" {
+            if let kennelMembersVC = segue.destinationViewController as? KennelMembersVC {
+                if let kennelPicked = kennels as? KennelData {
+                    kennelMembersVC.kennels = kennelPicked
                 }
             }
         }

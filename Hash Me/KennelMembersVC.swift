@@ -22,7 +22,8 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var mismanagementDict: Dictionary<String, String>!
     var kennelMemberDict: Dictionary<String, AnyObject>!
     var mismanagementArray = [String]()
-    var relevantNameList: Dictionary<String, String>!
+    var kennelMemberArray = [String]()
+    var relevantNameList: Dictionary<String, String> = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +31,6 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         kennelMembersTableView.delegate = self
         kennelMembersTableView.dataSource = self
         
-        
- //I REALLY REALLY REALLY DOUBT THIS WORKS ... NEEDS ALL THE PRINT SHIT TO SEE
-// BUT NEEDS A STORYBOARD FIRST
         DataService.ds.REF_KENNELS.childByAppendingPath(kennels.kennelId).observeEventType(.Value, withBlock: { snapshot in
             
             if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
@@ -40,9 +38,10 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     self.mismanagementDict = misManDict
                     self.mismanagementArray = [String](self.mismanagementDict.keys)
                 }
-//                if let kMembersDict = kennelDict["kennelMembers"] as? Dictionary<String, AnyObject> {
-//                    self.kennelMemberDict = kMembersDict
-//                }
+                if let kMembersDict = kennelDict["kennelMembers"] as? Dictionary<String, AnyObject> {
+                    self.kennelMemberDict = kMembersDict
+                    self.kennelMemberArray = [String](self.kennelMemberDict.keys)
+                }
             }
             DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot2 in
                 if let snapshots2 = snapshot2.children.allObjects as? [FDataSnapshot] {
@@ -51,9 +50,7 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             let key = snap2.key
                             if let hasherHashNamesDict = hasherNameDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
                                 if let memberNameForThisKennel = hasherHashNamesDict[self.kennels.kennelId] {
-                                    if memberNameForThisKennel as! NSObject == true {
-                                        self.relevantNameList[key] = hasherNameDict["hasherPrimaryHashName"] as! String
-                                    } else if memberNameForThisKennel as! String == "primary" {
+                                    if memberNameForThisKennel as! NSObject == true || memberNameForThisKennel as! String == "primary" {
                                         self.relevantNameList[key] = hasherNameDict["hasherPrimaryHashName"] as! String
                                     } else {
                                         self.relevantNameList[key] = memberNameForThisKennel as! String
@@ -67,8 +64,8 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                     }
                 }
+                self.kennelMembersTableView.reloadData()
             })
-            self.kennelMembersTableView.reloadData()
         })
     }
     
@@ -82,17 +79,20 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return kennelMemberDict.count
+        print("CELLCOUNT: ", kennelMemberArray.count)
+        return kennelMemberArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        if let cell = tableView.dequeueReusableCellWithIdentifier("kennelMismanagementCell") as? MismanagementCell {
-            let mismanagementId = mismanagementArray[indexPath.row]
-            cell.configureCell(mismanagementId, misManDict: relevantNameList)
+        print("KMA: ", kennelMemberDict)
+        print("MMCELL: ",mismanagementArray)
+                print("RNL: ", relevantNameList)
+        if let cell = tableView.dequeueReusableCellWithIdentifier("kennelMemberCell") as? KennelMemberCell {
+            let mismanagementId = kennelMemberArray[indexPath.row]
+            cell.configureCell(mismanagementId, memberRoleDict: mismanagementDict, memberNameDict: relevantNameList)
             return cell
         } else {
-            return MismanagementCell()
+            return KennelMemberCell()
         }
     }
     
