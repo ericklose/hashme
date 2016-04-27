@@ -563,7 +563,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="General Schedule:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="432-5b-HMf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="General Schedule:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="432-5b-HMf">
                                                     <rect key="frame" x="0.0" y="37" width="119" height="26"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1895,26 +1895,26 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="115" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Visitor?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5n9-T9-42G">
-                                                        <rect key="frame" x="0.0" y="0.0" width="115" height="21"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="115" height="10"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adz-GC-xHm">
-                                                        <rect key="frame" x="0.0" y="24" width="115" height="30"/>
+                                                        <rect key="frame" x="0.0" y="13" width="115" height="30"/>
                                                         <state key="normal" title="Change Kennel"/>
                                                         <connections>
                                                             <segue destination="1YO-bv-Rc7" kind="show" id="kSA-zE-bGP"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Not Virgin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aak-JW-oyo">
-                                                        <rect key="frame" x="0.0" y="57" width="115" height="21"/>
+                                                        <rect key="frame" x="0.0" y="46" width="115" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEE-Qj-kTJ">
-                                                        <rect key="frame" x="0.0" y="81" width="115" height="19"/>
+                                                        <rect key="frame" x="0.0" y="70" width="115" height="30"/>
                                                         <state key="normal" title="Change Sponsor"/>
                                                         <connections>
                                                             <segue destination="OE1-mu-4da" kind="show" id="f2U-ap-0io"/>
