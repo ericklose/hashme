@@ -20,7 +20,8 @@ class DataService {
     private var _REF_HASHERS = Firebase(url: "\(URL_BASE)/hashers")
     private var _REF_KENNELS = Firebase(url: "\(URL_BASE)/kennels")
     private var _REF_HASHER_UID = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
-    
+//    private var _REF_HASHERID_OF_USER =
+
     var REF_BASE: Firebase {
         return _REF_BASE
     }
@@ -38,20 +39,25 @@ class DataService {
     }
     
     var REF_HASHER_USERID: String {
-//        if _REF_HASHER_UID != nil {
         return _REF_HASHER_UID!
-//    } else {
-//    return "12345"
-//    }
     }
+    
+    //THIS GETS LOOKED UP AT LOGIN, NOT HERE (PROBABLY) (BUT IT'S STILL SET HERE FOR FUTURE NEEDS)
+    
+//    var REF_HASHERID_FOR_USER: Firebase {
+//      _REF_BASE.childByAppendingPath("UidToHasherId").childByAppendingPath(KEY_UID).observeSingleEventOfType(.Value) { snapshot in
+//        return_
+//        }
+//    }
     
     var REF_HASHER_CURRENT: Firebase {
         let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
         let hasher = Firebase(url: "\(URL_BASE)").childByAppendingPath("hashers").childByAppendingPath(uid)
         return hasher!
     }
-        
+    
     func createFirebaseUser(uid: String, hasher: Dictionary<String, String>) {
         REF_HASHERS.childByAppendingPath(uid).setValue(hasher)
+        //ADD TO THE HASHER-UID DECODER TABLE??? OR DO A "NIL" LOOKUP TO ID WHO'S MISSING FROM TABLE?
     }
 }
