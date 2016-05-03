@@ -24,6 +24,7 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var mismanagementArray = [String]()
     var kennelMemberArray = [String]()
     var relevantNameList: Dictionary<String, String> = [:]
+    var userIsKennelAdmin: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,16 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 if let kMembersDict = kennelDict["kennelMembers"] as? Dictionary<String, AnyObject> {
                     self.kennelMemberDict = kMembersDict
                     self.kennelMemberArray = [String](self.kennelMemberDict.keys)
+                }
+                if let kAdminDict = kennelDict["kennelAdmins"] as? Dictionary<String, AnyObject> {
+                    let userHasherId = DataService.ds.REF_HASHER_USERID
+                    if let adminCheck = kAdminDict[userHasherId] as? String {
+                        print("ADMIN: ", adminCheck)
+                        if adminCheck == "full" {
+                            print("Woo!")
+                            self.userIsKennelAdmin = true
+                        }
+                    }
                 }
             }
             DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot2 in
@@ -86,13 +97,53 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         print("KMA: ", kennelMemberDict)
         print("MMCELL: ",mismanagementArray)
-                print("RNL: ", relevantNameList)
+        print("RNL: ", relevantNameList)
         if let cell = tableView.dequeueReusableCellWithIdentifier("kennelMemberCell") as? KennelMemberCell {
             let mismanagementId = kennelMemberArray[indexPath.row]
             cell.configureCell(mismanagementId, memberRoleDict: mismanagementDict, memberNameDict: relevantNameList)
             return cell
         } else {
             return KennelMemberCell()
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if userIsKennelAdmin == false {
+            let alertController = UIAlertController(title: "Future Link to Profile", message: "but just a tease for now", preferredStyle: .Alert)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
+                print("you have pressed the Cancel button");
+            }
+            alertController.addAction(cancelAction)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                print("you have pressed OK button");
+            }
+            alertController.addAction(OKAction)
+            
+            self.presentViewController(alertController, animated: true, completion:nil)
+            
+        } else if userIsKennelAdmin == true {
+            let alertController = UIAlertController(title: "What Do You Want to Do", message: "because you're an admin", preferredStyle: .ActionSheet)
+            let profile = UIAlertAction(title: "View Member Profile", style: .Default, handler: { (action) -> Void in
+                print("Profile Button Pressed")
+            })
+            let mmRole = UIAlertAction(title: "Add/Edit Mismanagement Role", style: .Default, handler: { (action) -> Void in
+                print("Misman Button Pressed")
+            })
+            //            let kick = UIAlertAction(title: "Kick From Kennel", style: .Destructive) { (action) -> Void in
+            //                print("Delete Button Pressed")
+            //            }
+            let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
+                print("Cancel Button Pressed")
+            }
+            //            alertController.addAction(kick)
+            alertController.addAction(mmRole)
+            alertController.addAction(profile)
+            alertController.addAction(cancel)
+            
+            presentViewController(alertController, animated: true, completion: nil)
+            
         }
     }
     
