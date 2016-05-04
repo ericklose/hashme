@@ -46,9 +46,7 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 if let kAdminDict = kennelDict["kennelAdmins"] as? Dictionary<String, AnyObject> {
                     let userHasherId = DataService.ds.REF_HASHER_USERID
                     if let adminCheck = kAdminDict[userHasherId] as? String {
-                        print("ADMIN: ", adminCheck)
                         if adminCheck == "full" {
-                            print("Woo!")
                             self.userIsKennelAdmin = true
                         }
                     }
@@ -108,6 +106,11 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+        let selectedMemberId = kennelMemberArray[indexPath.row]
+        let selectedMemberName = relevantNameList[selectedMemberId]
+        let selectedMemberDict: Dictionary<String, String> = [selectedMemberId : selectedMemberName!]
+        
         if userIsKennelAdmin == false {
             let alertController = UIAlertController(title: "Future Link to Profile", message: "but just a tease for now", preferredStyle: .Alert)
             
@@ -130,6 +133,8 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             })
             let mmRole = UIAlertAction(title: "Add/Edit Mismanagement Role", style: .Default, handler: { (action) -> Void in
                 print("Misman Button Pressed")
+                
+                self.performSegueWithIdentifier("editMismanagementRole", sender: selectedMemberDict)
             })
             //            let kick = UIAlertAction(title: "Kick From Kennel", style: .Destructive) { (action) -> Void in
             //                print("Delete Button Pressed")
@@ -162,6 +167,13 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
         }
+        if segue.identifier == "editMismanagementRole" {
+            if let editMismanVC = segue.destinationViewController as? EditMismanVC {
+                if let selectedMemberDict = sender {
+                    editMismanVC.selectedMemberDict = selectedMemberDict as! Dictionary<String, String>
+            }
+        }
+    }
     }
     
     func updateKennelDetails() {
@@ -170,3 +182,4 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
 }
+

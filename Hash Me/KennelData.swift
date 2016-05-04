@@ -175,6 +175,23 @@ class KennelData {
         }
     }
     
+    func kennelSetAdminStatus(kennelId: String, hasherId: String, newKennelAdminStatus: String) {
+        if newKennelAdminStatus == "" {
+            _kennelUrl.childByAppendingPath("kennelAdmins").childByAppendingPath(hasherId).removeValue()
+        } else if newKennelAdminStatus == "full" || newKennelAdminStatus == "trail" {
+            _kennelUrl.childByAppendingPath("kennelAdmins").updateChildValues([hasherId : newKennelAdminStatus])
+        }
+    }
+    
+    func kennelSetMismanagementStatus(kennelId: String, hasherId: String, newKennelMismanStatus: String) {
+        if newKennelMismanStatus == "" {
+            _kennelUrl.childByAppendingPath("kennelMismanagement").childByAppendingPath(hasherId).removeValue()
+        } else {
+            _kennelUrl.childByAppendingPath("kennelMismanagement").updateChildValues([hasherId : newKennelMismanStatus])
+        }
+    }
+    
+    
     init (kennelInitId: String, kennelInitDict: Dictionary<String, AnyObject>, kennelInitName: String) {
         self._kennelId = kennelInitId
         self._kennelDict = kennelInitDict

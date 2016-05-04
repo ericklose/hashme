@@ -8,12 +8,15 @@
 
 import UIKit
 
-class EditMismanagement: UIViewController {
+class EditMismanVC: UIViewController {
     
-    @IBOutlet weak var hasherHashName: UILabel!
+    @IBOutlet weak var hasherHashNameLbl: UILabel!
     @IBOutlet weak var mismanagementRoleTitle: UITextField!
     @IBOutlet weak var mismanagementAdminLevel: UIButton!
     @IBOutlet weak var mismanagementRoleRemove: UIButton!
+    var hasherId: String!
+    var hasherHashName: String!
+    var selectedMemberDict: Dictionary<String, String>!
     
     //NEDS TO INHERIT HASHER INFO FROM PRIOR VC
     
