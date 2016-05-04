@@ -12,6 +12,7 @@ class EditMismanVC: UIViewController {
     
     @IBOutlet weak var hasherHashNameLbl: UILabel!
     @IBOutlet weak var mismanagementRoleTitle: UITextField!
+    @IBOutlet weak var mismanagementRoleAdminLbl: UILabel!
     @IBOutlet weak var mismanagementAdminLevel: UIButton!
     @IBOutlet weak var mismanagementRoleRemove: UIButton!
     var hasherId: String!
