@@ -15,6 +15,8 @@ class EditMismanVC: UIViewController {
     @IBOutlet weak var mismanagementRoleAdminLbl: UILabel!
     @IBOutlet weak var mismanagementAdminLevel: UIButton!
     @IBOutlet weak var mismanagementRoleRemove: UIButton!
+    @IBOutlet weak var mismanagementKennelName: UILabel!
+
     var hasherId: String!
     var hasherHashName: String!
     var selectedMemberDict: Dictionary<String, String>!
@@ -68,5 +70,9 @@ class EditMismanVC: UIViewController {
         alertController.addAction(cancel)
         
         presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func doneMismanagement(sender: UIButton!) {
+        
     }
 }

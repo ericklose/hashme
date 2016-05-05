@@ -9,8 +9,8 @@
 import Foundation
 import Firebase
 
-//let URL_BASE = "https://hash-me-dev.firebaseio.com/"
-let URL_BASE = "https://hashme.firebaseio.com"
+let URL_BASE = "https://hash-me-dev.firebaseio.com/"
+//let URL_BASE = "https://hashme.firebaseio.com"
 
 class DataService {
     static let ds = DataService()
@@ -59,5 +59,6 @@ class DataService {
     func createFirebaseUser(uid: String, hasher: Dictionary<String, String>) {
         REF_HASHERS.childByAppendingPath(uid).setValue(hasher)
         //ADD TO THE HASHER-UID DECODER TABLE??? OR DO A "NIL" LOOKUP TO ID WHO'S MISSING FROM TABLE?
+        //I'M 90% CERTAIN EVERYONE GOES IN THE TABLE, IN PART AS A "CLAIM A PROFILE" DETECTOR
     }
 }
