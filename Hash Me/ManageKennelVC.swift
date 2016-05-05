@@ -89,6 +89,7 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         var trueRow = indexPath.row
         if trueRow < trails.count {
             if let cell = tableView.dequeueReusableCellWithIdentifier("kennelTrailsCell") as? TrailCell {
+                trails.sortInPlace { $0.trailDate > $1.trailDate }
                 let trail = trails[indexPath.row]
                 cell.configureCell(trail)
                 return cell
