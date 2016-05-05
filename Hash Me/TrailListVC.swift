@@ -62,6 +62,7 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        trails.sortInPlace { $0.trailDate > $1.trailDate }
         let trail = trails[indexPath.row]
         if let cell = tableView.dequeueReusableCellWithIdentifier("trailCell") as? TrailCell {
             cell.configureCell(trail)
