@@ -57,7 +57,20 @@ class Hasher {
     }
     
     var hasherPrimaryHashName: String {
-        if _hasherPrimaryHashName != nil {
+        if _hasherId == "-KFpS2L7kSm6oaUsC8Ss" {
+            let wikiNameArray = [
+                "Wikipediphilia",
+                "Wikkipedaphilia",
+                "Weekeepediphillia",
+                "Wikipedifeelia",
+                "Wikiipeedafelia",
+                "Wikipedifilia",
+                "Wickiepedddaphilia",
+                "Wikipedipheliya"
+            ]
+            let randomIndex = Int(arc4random_uniform(UInt32(wikiNameArray.count)))
+            return wikiNameArray[randomIndex]
+        } else if _hasherPrimaryHashName != nil {
             return _hasherPrimaryHashName
         } else {
             return "Has no primary hash name"
