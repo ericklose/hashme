@@ -1017,14 +1017,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ssx-q1-oLc">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ssx-q1-oLc">
+                                <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3hL-lK-CQZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="233482"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date and Time of Trail" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th2-l0-Co0">
-                                                <rect key="frame" x="0.0" y="0.0" width="178" height="55"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="178" height="25938"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="aJQ-bB-VSr"/>
                                                 </constraints>
@@ -1038,19 +1038,19 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Kennel Name H3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7g-cm-vbs">
-                                                <rect key="frame" x="0.0" y="60" width="115" height="55"/>
+                                                <rect key="frame" x="0.0" y="25943" width="115" height="25938"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Trail Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtW-JW-f6W">
-                                                <rect key="frame" x="0.0" y="120" width="69" height="55"/>
+                                                <rect key="frame" x="0.0" y="51886" width="69" height="25938"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Kdw-KO-wcU">
-                                                <rect key="frame" x="0.0" y="180" width="600" height="55"/>
+                                                <rect key="frame" x="0.0" y="77829" width="600" height="25938"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hares:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xKN-RQ-zbh">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="18"/>
@@ -1070,10 +1070,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="uVM-1O-WJE">
-                                                <rect key="frame" x="0.0" y="240" width="163" height="56"/>
+                                                <rect key="frame" x="0.0" y="103772" width="163" height="25938"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bag Car:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIn-1J-kt7">
-                                                        <rect key="frame" x="0.0" y="0.0" width="62" height="56"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="62" height="25938"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="62" id="zJG-ff-okF"/>
                                                         </constraints>
@@ -1082,7 +1082,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Vounteer Car" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAr-Ph-PPO">
-                                                        <rect key="frame" x="67" y="0.0" width="96" height="56"/>
+                                                        <rect key="frame" x="67" y="0.0" width="96" height="25938"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1090,7 +1090,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="k1j-04-Vwg">
-                                                <rect key="frame" x="0.0" y="301" width="600" height="55"/>
+                                                <rect key="frame" x="0.0" y="129715" width="600" height="25938"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcX-PK-ftM">
                                                         <rect key="frame" x="0.0" y="0.0" width="66" height="18"/>
@@ -1110,17 +1110,17 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdm-vW-TLZ">
-                                                <rect key="frame" x="0.0" y="361" width="0.0" height="55"/>
+                                                <rect key="frame" x="0.0" y="155658" width="0.0" height="25938"/>
                                                 <string key="text">Sometimes hares like me write a ton of stuff which probably isn't necessary and probably nobody reads.  But it all seems like a really good enthusiastic thing to do at the time.  And maybe we hares enjoy writing it...ever think of that? So maybe you should read it and be happy about it.  Although a long trail description might be a problem because I don't think a VC with just labels will scroll.  Hmph.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="a0l-NW-Bik">
-                                                <rect key="frame" x="0.0" y="421" width="182" height="55"/>
+                                                <rect key="frame" x="0.0" y="181601" width="182" height="25938"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hash Cash:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1iD-zf-bi6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="82" height="55"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="82" height="25938"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="82" id="hfX-7J-wZc"/>
                                                         </constraints>
@@ -1129,7 +1129,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Vounteer Car" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGG-RA-bdr">
-                                                        <rect key="frame" x="87" y="0.0" width="95" height="55"/>
+                                                        <rect key="frame" x="87" y="0.0" width="95" height="25938"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1137,7 +1137,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1Z-sX-sYh">
-                                                <rect key="frame" x="0.0" y="481" width="60" height="55"/>
+                                                <rect key="frame" x="0.0" y="207544" width="60" height="25938"/>
                                                 <state key="normal" title="Edit Trail"/>
                                             </button>
                                         </subviews>
@@ -1161,13 +1161,17 @@
                                     <constraint firstItem="3hL-lK-CQZ" firstAttribute="height" secondItem="Ssx-q1-oLc" secondAttribute="height" id="4GZ-Cz-3UA"/>
                                     <constraint firstItem="3hL-lK-CQZ" firstAttribute="leading" secondItem="Ssx-q1-oLc" secondAttribute="leading" id="8eP-91-aB2"/>
                                     <constraint firstItem="3hL-lK-CQZ" firstAttribute="width" secondItem="Ssx-q1-oLc" secondAttribute="width" id="8oB-Io-azP"/>
+                                    <constraint firstAttribute="bottom" secondItem="3hL-lK-CQZ" secondAttribute="bottom" id="IyD-ul-Atc"/>
                                     <constraint firstItem="3hL-lK-CQZ" firstAttribute="width" secondItem="Ssx-q1-oLc" secondAttribute="width" id="NPp-Wq-AmI"/>
                                     <constraint firstItem="3hL-lK-CQZ" firstAttribute="height" secondItem="Ssx-q1-oLc" secondAttribute="height" id="OGr-U3-Jhp"/>
                                     <constraint firstItem="3hL-lK-CQZ" firstAttribute="top" secondItem="Ssx-q1-oLc" secondAttribute="top" id="VNB-BT-XzY"/>
+                                    <constraint firstAttribute="trailing" secondItem="3hL-lK-CQZ" secondAttribute="trailing" id="Vzl-d1-gMK"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="4GZ-Cz-3UA"/>
                                         <exclude reference="8oB-Io-azP"/>
+                                        <exclude reference="NPp-Wq-AmI"/>
                                         <exclude reference="OGr-U3-Jhp"/>
                                     </mask>
                                 </variation>
@@ -1176,6 +1180,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ssx-q1-oLc" firstAttribute="leading" secondItem="pYg-90-Tsc" secondAttribute="leading" id="35D-G6-NA2"/>
+                            <constraint firstItem="Ssx-q1-oLc" firstAttribute="width" secondItem="pYg-90-Tsc" secondAttribute="width" id="7l4-hl-g6y"/>
+                            <constraint firstItem="3hL-lK-CQZ" firstAttribute="width" secondItem="pYg-90-Tsc" secondAttribute="width" id="HMg-ab-1uu"/>
+                            <constraint firstItem="Ssx-q1-oLc" firstAttribute="height" secondItem="pYg-90-Tsc" secondAttribute="height" id="Kdt-jt-Wr2"/>
                             <constraint firstItem="Ssx-q1-oLc" firstAttribute="width" secondItem="pYg-90-Tsc" secondAttribute="width" id="Lvw-s7-Cmw"/>
                             <constraint firstItem="3hL-lK-CQZ" firstAttribute="height" secondItem="pYg-90-Tsc" secondAttribute="height" id="MfK-0s-xJK"/>
                             <constraint firstItem="Dus-PC-fQo" firstAttribute="top" secondItem="Ssx-q1-oLc" secondAttribute="bottom" id="Mie-1Y-w4K"/>
@@ -1211,6 +1218,8 @@
                                 <exclude reference="UL4-Ib-EZk"/>
                                 <exclude reference="UW9-MO-b8m"/>
                                 <exclude reference="XPM-G5-xkK"/>
+                                <exclude reference="XVd-de-p1e"/>
+                                <exclude reference="Xhl-bb-7ke"/>
                                 <exclude reference="ZOP-is-tzD"/>
                                 <exclude reference="gF2-QY-wqP"/>
                                 <exclude reference="iCe-ED-1Bc"/>
