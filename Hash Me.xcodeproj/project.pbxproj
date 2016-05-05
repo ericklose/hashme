@@ -122,6 +122,7 @@
 		DA15804D1C974C790042614A /* HasherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD2CF9E1C95F9960048C2C8 /* HasherData.swift */; };
 		DA5E78191C975A2A003A0E01 /* HasherDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619290C1C94912A00D8C945 /* HasherDataVC.swift */; };
 		DA5E781A1C975A2B003A0E01 /* HasherDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619290C1C94912A00D8C945 /* HasherDataVC.swift */; };
+		DAA24C931CDBC91E006AA0B9 /* TrailDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA24C921CDBC91E006AA0B9 /* TrailDetailsVC.swift */; };
 		DAAE71591CB2FD2F00E2FBDC /* HasherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAE71581CB2FD2F00E2FBDC /* HasherCell.swift */; };
 		DAD2CF9F1C95F9960048C2C8 /* HasherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD2CF9E1C95F9960048C2C8 /* HasherData.swift */; };
 /* End PBXBuildFile section */
@@ -193,6 +194,7 @@
 		A6FB475C1C9A0D5700B370CD /* KennelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelData.swift; sourceTree = "<group>"; };
 		A6FB47601C9A0E0A00B370CD /* KennelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelCell.swift; sourceTree = "<group>"; };
 		BF5100A58A6D9E427296C7F2 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAA24C921CDBC91E006AA0B9 /* TrailDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailDetailsVC.swift; sourceTree = "<group>"; };
 		DAAE71581CB2FD2F00E2FBDC /* HasherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasherCell.swift; sourceTree = "<group>"; };
 		DAD2CF9E1C95F9960048C2C8 /* HasherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasherData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -366,6 +368,7 @@
 				A619290A1C94912A00D8C945 /* TrailListVC.swift */,
 				A64554E21C975BC60016373E /* AddNewTrailVC.swift */,
 				A6CB71361C96210600F27D12 /* ManageTrailVC.swift */,
+				DAA24C921CDBC91E006AA0B9 /* TrailDetailsVC.swift */,
 				A6BA76641CBBF32A00D29C66 /* AttendeeDetailsVC.swift */,
 			);
 			name = Trails;
@@ -613,6 +616,7 @@
 				A619290B1C94912A00D8C945 /* TrailListVC.swift in Sources */,
 				A6A349501CB92E5900B919D8 /* ManageKennelVC.swift in Sources */,
 				A6B22DED1CC7FFC000A4F389 /* HareCell.swift in Sources */,
+				DAA24C931CDBC91E006AA0B9 /* TrailDetailsVC.swift in Sources */,
 				A6A0E3D61C9496A00003EE0E /* DataService.swift in Sources */,
 				A64554E31C975BC60016373E /* AddNewTrailVC.swift in Sources */,
 				A6271D3E1CCFE7680060E8DB /* KennelMemberCell.swift in Sources */,
