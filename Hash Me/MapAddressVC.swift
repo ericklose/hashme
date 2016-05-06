@@ -55,9 +55,6 @@ class MapAddressVC: UIViewController, MKMapViewDelegate {
          }
 
       })
-      
-      
-      
 
    }
    
@@ -87,23 +84,20 @@ class MapAddressVC: UIViewController, MKMapViewDelegate {
    
    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
       
-      if annotation.isKindOfClass(BootcampAnnotation) {
+      if annotation.isKindOfClass(KennelMapAnno) {
          let annoView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Default")
          annoView.pinTintColor = UIColor.blackColor()
          annoView.animatesDrop = true
          return annoView
-         
       } else if annotation.isKindOfClass(MKUserLocation) {
          return nil
       }
-      
       return nil
-      
    }
    
    func createAnnotationForLocation(location: CLLocation) {
-      let bootcamp = BootcampAnnotation(coordinate: location.coordinate)
-      kennelMapView.addAnnotation(bootcamp)
+      let kennelMap = KennelMapAnno(coordinate: location.coordinate)
+      kennelMapView.addAnnotation(kennelMap)
    }
    
    func getPlacemarkFromAddress(address: String) {

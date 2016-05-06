@@ -50,7 +50,7 @@ class EditKennelVC: UIViewController, MKMapViewDelegate, UIScrollViewDelegate {
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
-        if annotation.isKindOfClass(BootcampAnnotation) {
+        if annotation.isKindOfClass(KennelMapAnno) {
             let annoView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Default")
             annoView.pinTintColor = UIColor.redColor()
             annoView.animatesDrop = true
@@ -62,8 +62,8 @@ class EditKennelVC: UIViewController, MKMapViewDelegate, UIScrollViewDelegate {
     }
     
     func createAnnotationForLocation(location: CLLocation) {
-        let bootcamp = BootcampAnnotation(coordinate: location.coordinate)
-        kennelMapView.addAnnotation(bootcamp)
+        let kennelMap = KennelMapAnno(coordinate: location.coordinate)
+        kennelMapView.addAnnotation(kennelMap)
     }
     
     func getPlacemarkFromAddress(address: String) {

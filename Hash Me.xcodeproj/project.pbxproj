@@ -36,6 +36,12 @@
 		A64554E31C975BC60016373E /* AddNewTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64554E21C975BC60016373E /* AddNewTrailVC.swift */; };
 		A64554E41C975BC60016373E /* AddNewTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64554E21C975BC60016373E /* AddNewTrailVC.swift */; };
 		A64554E51C975BC60016373E /* AddNewTrailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64554E21C975BC60016373E /* AddNewTrailVC.swift */; };
+		A6477B291CDCD33C00194752 /* TrailMapAnno.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6477B281CDCD33C00194752 /* TrailMapAnno.swift */; };
+		A6477B2A1CDCD33C00194752 /* TrailMapAnno.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6477B281CDCD33C00194752 /* TrailMapAnno.swift */; };
+		A6477B2B1CDCD33C00194752 /* TrailMapAnno.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6477B281CDCD33C00194752 /* TrailMapAnno.swift */; };
+		A6477B2D1CDCD36300194752 /* KennelMapAnno.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6477B2C1CDCD36300194752 /* KennelMapAnno.swift */; };
+		A6477B2E1CDCD36300194752 /* KennelMapAnno.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6477B2C1CDCD36300194752 /* KennelMapAnno.swift */; };
+		A6477B2F1CDCD36300194752 /* KennelMapAnno.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6477B2C1CDCD36300194752 /* KennelMapAnno.swift */; };
 		A6764AC41CCA5DEE00E376F0 /* KennelTrailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6764AC31CCA5DEE00E376F0 /* KennelTrailsCell.swift */; };
 		A6764AC51CCA5DEE00E376F0 /* KennelTrailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6764AC31CCA5DEE00E376F0 /* KennelTrailsCell.swift */; };
 		A6764AC61CCA5DEE00E376F0 /* KennelTrailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6764AC31CCA5DEE00E376F0 /* KennelTrailsCell.swift */; };
@@ -106,9 +112,6 @@
 		A6CB713B1C9644FF00F27D12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CB713A1C9644FF00F27D12 /* Main.storyboard */; };
 		A6CB713C1C9644FF00F27D12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CB713A1C9644FF00F27D12 /* Main.storyboard */; };
 		A6CB713D1C9644FF00F27D12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CB713A1C9644FF00F27D12 /* Main.storyboard */; };
-		A6E50A8B1CCE6F450040A2B1 /* BootcampAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E50A8A1CCE6F450040A2B1 /* BootcampAnnotation.swift */; };
-		A6E50A8C1CCE6F450040A2B1 /* BootcampAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E50A8A1CCE6F450040A2B1 /* BootcampAnnotation.swift */; };
-		A6E50A8D1CCE6F450040A2B1 /* BootcampAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E50A8A1CCE6F450040A2B1 /* BootcampAnnotation.swift */; };
 		A6FB47591C9A0D2B00B370CD /* KennelListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB47581C9A0D2B00B370CD /* KennelListVC.swift */; };
 		A6FB475A1C9A0D2B00B370CD /* KennelListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB47581C9A0D2B00B370CD /* KennelListVC.swift */; };
 		A6FB475B1C9A0D2B00B370CD /* KennelListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB47581C9A0D2B00B370CD /* KennelListVC.swift */; };
@@ -165,6 +168,8 @@
 		A6271D3D1CCFE7680060E8DB /* KennelMemberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelMemberCell.swift; sourceTree = "<group>"; };
 		A63CA2C41CD93F360081F9E5 /* EditMismanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMismanVC.swift; sourceTree = "<group>"; };
 		A64554E21C975BC60016373E /* AddNewTrailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewTrailVC.swift; sourceTree = "<group>"; };
+		A6477B281CDCD33C00194752 /* TrailMapAnno.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailMapAnno.swift; sourceTree = "<group>"; };
+		A6477B2C1CDCD36300194752 /* KennelMapAnno.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelMapAnno.swift; sourceTree = "<group>"; };
 		A6764AC31CCA5DEE00E376F0 /* KennelTrailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelTrailsCell.swift; sourceTree = "<group>"; };
 		A6764AC71CCAB28900E376F0 /* MapAddressVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = MapAddressVC.swift; sourceTree = "<group>"; };
 		A6764ACB1CCBD72600E376F0 /* EditKennelVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditKennelVC.swift; sourceTree = "<group>"; };
@@ -189,7 +194,6 @@
 		A6C7AEE51CA33D5E0080814C /* AttendeeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendeeData.swift; sourceTree = "<group>"; };
 		A6CB71361C96210600F27D12 /* ManageTrailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageTrailVC.swift; sourceTree = "<group>"; };
 		A6CB713A1C9644FF00F27D12 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		A6E50A8A1CCE6F450040A2B1 /* BootcampAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BootcampAnnotation.swift; sourceTree = "<group>"; };
 		A6FB47581C9A0D2B00B370CD /* KennelListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelListVC.swift; sourceTree = "<group>"; };
 		A6FB475C1C9A0D5700B370CD /* KennelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelData.swift; sourceTree = "<group>"; };
 		A6FB47601C9A0E0A00B370CD /* KennelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelCell.swift; sourceTree = "<group>"; };
@@ -356,8 +360,9 @@
 			isa = PBXGroup;
 			children = (
 				A6A0E3D51C9496A00003EE0E /* DataService.swift */,
-				A6E50A8A1CCE6F450040A2B1 /* BootcampAnnotation.swift */,
 				A6A0E3ED1C94AAB40003EE0E /* Constants.swift */,
+				A6477B281CDCD33C00194752 /* TrailMapAnno.swift */,
+				A6477B2C1CDCD36300194752 /* KennelMapAnno.swift */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -600,6 +605,7 @@
 				A6C7AEE61CA33D5E0080814C /* AttendeeData.swift in Sources */,
 				A6FB47591C9A0D2B00B370CD /* KennelListVC.swift in Sources */,
 				A60007AB1CBEE3620040F15A /* KennelPickerVC.swift in Sources */,
+				A6477B2D1CDCD36300194752 /* KennelMapAnno.swift in Sources */,
 				A6B22DF51CC9018100A4F389 /* KennelPickerTableCell.swift in Sources */,
 				A6B22DE91CC6CDDB00A4F389 /* HasherPickerVC.swift in Sources */,
 				DAD2CF9F1C95F9960048C2C8 /* HasherData.swift in Sources */,
@@ -621,11 +627,11 @@
 				A64554E31C975BC60016373E /* AddNewTrailVC.swift in Sources */,
 				A6271D3E1CCFE7680060E8DB /* KennelMemberCell.swift in Sources */,
 				A6764AC41CCA5DEE00E376F0 /* KennelTrailsCell.swift in Sources */,
-				A6E50A8B1CCE6F450040A2B1 /* BootcampAnnotation.swift in Sources */,
 				A6A0E3EE1C94AAB40003EE0E /* Constants.swift in Sources */,
 				DAAE71591CB2FD2F00E2FBDC /* HasherCell.swift in Sources */,
 				A63CA2C51CD93F360081F9E5 /* EditMismanVC.swift in Sources */,
 				A6FB475D1C9A0D5700B370CD /* KennelData.swift in Sources */,
+				A6477B291CDCD33C00194752 /* TrailMapAnno.swift in Sources */,
 				A6B22DFD1CC901B400A4F389 /* HasherPickerTableVC.swift in Sources */,
 				A6BA76651CBBF32A00D29C66 /* AttendeeDetailsVC.swift in Sources */,
 				A6B22DF91CC9019C00A4F389 /* HasherPickerTableCell.swift in Sources */,
@@ -638,7 +644,7 @@
 			files = (
 				A6B22DFE1CC901B400A4F389 /* HasherPickerTableVC.swift in Sources */,
 				A6764AC91CCAB28900E376F0 /* MapAddressVC.swift in Sources */,
-				A6E50A8C1CCE6F450040A2B1 /* BootcampAnnotation.swift in Sources */,
+				A6477B2E1CDCD36300194752 /* KennelMapAnno.swift in Sources */,
 				A6FB47621C9A0E0A00B370CD /* KennelCell.swift in Sources */,
 				A63CA2C61CD93F360081F9E5 /* EditMismanVC.swift in Sources */,
 				A6B22DF61CC9018100A4F389 /* KennelPickerTableCell.swift in Sources */,
@@ -655,6 +661,7 @@
 				A6BBA7B41C9525560030DB53 /* TrailData.swift in Sources */,
 				A6271D3F1CCFE7680060E8DB /* KennelMemberCell.swift in Sources */,
 				A6B22DFA1CC9019C00A4F389 /* HasherPickerTableCell.swift in Sources */,
+				A6477B2A1CDCD33C00194752 /* TrailMapAnno.swift in Sources */,
 				A6B22DF21CC9016A00A4F389 /* KennelPickerTableVC.swift in Sources */,
 				A6CB71381C96210600F27D12 /* ManageTrailVC.swift in Sources */,
 				A6BBA7B01C9524690030DB53 /* TrailCell.swift in Sources */,
@@ -676,7 +683,7 @@
 			files = (
 				A6B22DFF1CC901B400A4F389 /* HasherPickerTableVC.swift in Sources */,
 				A6764ACA1CCAB28900E376F0 /* MapAddressVC.swift in Sources */,
-				A6E50A8D1CCE6F450040A2B1 /* BootcampAnnotation.swift in Sources */,
+				A6477B2F1CDCD36300194752 /* KennelMapAnno.swift in Sources */,
 				A6FB47631C9A0E0A00B370CD /* KennelCell.swift in Sources */,
 				A63CA2C71CD93F360081F9E5 /* EditMismanVC.swift in Sources */,
 				A6B22DF71CC9018100A4F389 /* KennelPickerTableCell.swift in Sources */,
@@ -693,6 +700,7 @@
 				A6BBA7B51C9525560030DB53 /* TrailData.swift in Sources */,
 				A6271D401CCFE7680060E8DB /* KennelMemberCell.swift in Sources */,
 				A6B22DFB1CC9019C00A4F389 /* HasherPickerTableCell.swift in Sources */,
+				A6477B2B1CDCD33C00194752 /* TrailMapAnno.swift in Sources */,
 				A6B22DF31CC9016A00A4F389 /* KennelPickerTableVC.swift in Sources */,
 				A6CB71391C96210600F27D12 /* ManageTrailVC.swift in Sources */,
 				A6BBA7B11C9524690030DB53 /* TrailCell.swift in Sources */,
