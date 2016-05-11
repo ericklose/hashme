@@ -54,7 +54,13 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         let trail: TrailData!
         trail = trails[indexPath.row]
-        performSegueWithIdentifier("trailDetails", sender: trail)
+        
+        //HOLLY'S NEW VERSION
+        //performSegueWithIdentifier("trailDetails", sender: trail)
+        
+        //ERIC'S LEGACY VERSION
+        performSegueWithIdentifier("manageTrail", sender: trail)
+        
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -77,6 +83,12 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             if let TrailDetailsVC = segue.destinationViewController as? TrailDetailsVC {
                 if let trailInCell = sender as? TrailData {
                     TrailDetailsVC.trails = trailInCell
+                }
+            }
+        } else if segue.identifier == "manageTrail" {
+            if let ManageTrailVC = segue.destinationViewController as? ManageTrailVC {
+                if let trailInCell = sender as? TrailData {
+                    ManageTrailVC.trails = trailInCell
                 }
             }
         }
