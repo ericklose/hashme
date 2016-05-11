@@ -37,6 +37,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround() 
         
         self.kennelListTableView.dataSource = self
         self.kennelListTableView.delegate = self

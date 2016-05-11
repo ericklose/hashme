@@ -55,6 +55,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         trailAttendeeTableView.delegate = self
         trailAttendeeTableView.dataSource = self
         trailHaresTableView.delegate = self

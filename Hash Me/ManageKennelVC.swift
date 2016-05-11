@@ -26,6 +26,7 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround() 
         
         kennelDetailsTableView.delegate = self
         kennelDetailsTableView.dataSource = self

@@ -30,6 +30,7 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround() 
         
         kennelMembersTableView.delegate = self
         kennelMembersTableView.dataSource = self
