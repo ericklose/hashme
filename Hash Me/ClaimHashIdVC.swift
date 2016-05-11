@@ -24,7 +24,7 @@ class ClaimHashIdVC: UIViewController {
         super.viewDidLoad()
         
         addSelfAsNewHasherBtn.userInteractionEnabled = false
-        confirmSelection.userInteractionEnabled = false
+        confirmSelectionBtn.userInteractionEnabled = false
         
         DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
             if let userList = snapshot.value as? Dictionary<String, String> {
@@ -56,7 +56,7 @@ class ClaimHashIdVC: UIViewController {
             if sourceViewController.hasherChoiceId != nil {
 //                self.hasherChoiceId = sourceViewController.hasherChoiceId
 //                newHasherIsSelected = true
-                confirmSelection.userInteractionEnabled = true
+                confirmSelectionBtn.userInteractionEnabled = true
             } else if sourceViewController.hasherChoiceId == nil {
                 addSelfAsNewHasherBtn.userInteractionEnabled = true
             }

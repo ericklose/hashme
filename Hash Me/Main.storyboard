@@ -2681,7 +2681,7 @@
                     </view>
                     <connections>
                         <outlet property="addSelfAsNewHasherBtn" destination="uxq-76-JD6" id="yIf-m1-43K"/>
-                        <outlet property="confirmSelection" destination="QPZ-9t-0eq" id="RR0-b9-dfj"/>
+                        <outlet property="confirmSelectionBtn" destination="QPZ-9t-0eq" id="4Ii-rK-wYs"/>
                         <outlet property="hasherPrimaryKennel" destination="Mp7-fY-OF4" id="NlD-cE-ybL"/>
                         <outlet property="hasherPrimaryName" destination="zlk-C2-Tiw" id="kxx-K0-9Tr"/>
                         <outlet property="lookForAHasherBtn" destination="T0p-rl-SaU" id="Rdu-Te-4bK"/>
