@@ -23,6 +23,7 @@ class AddNewTrailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround() 
         
         newTrailDate.text = ""
         newTrailKennelName.text = ""

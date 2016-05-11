@@ -29,6 +29,7 @@ class EditMismanVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround() 
         
         mismanagementRoleTitle.text = selectedMemberDict["currentRole"]
         mismanagementRoleAdminLbl.text = selectedMemberDict["currentAdminLevel"]?.capitalizedString
