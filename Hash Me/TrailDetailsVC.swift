@@ -22,37 +22,57 @@ class TrailDetailsVC: UIViewController {
     @IBOutlet weak var specificHashCash: UILabel!
     
     var trails: TrailData!
-
+    
     var trailHareNamesDict: Dictionary<String, String> = [:]
+    var relevantHashName: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        downloadHasherDetails { () -> () in
+//            print("trailHareNamesDict", self.trailHareNamesDict)
+            self.updateTrailDetails()
+        }
+    }
+    
+    func downloadHasherDetails(completed: DownloadComplete) {
+        
+        
         DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot in
             self.trailHareNamesDict = [:]
-            
-            if let hasherDict = snapshot.value as? Dictionary<String, String> {
-                
-                if let hashNamesAndKennels = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
-                    for hasher in hasherDict {
-                        if hashNamesAndKennels[self.trails.trailKennelId] as? String == "primary" || hashNamesAndKennels[self.trails.trailKennelId] as? NSObject == true {
-                            let relevantHashName = hasherDict["hasherPrimaryHashName"]
-                        } else {
-                            let relevantHashName = hashNamesAndKennels[snapshot.key]
-                        }
+            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
+ 
+                if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+                    for snap in snapshots {
                         
+                        if let hasherDict2 = snap.value as? Dictionary<String, AnyObject> {
+                        
+                        if let hashIdsAndKennelHashNames = hasherDict2["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
+                            for _ in hasherDict2 {
+                                if hashIdsAndKennelHashNames[self.trails.trailKennelId] as? String == "primary" || hashIdsAndKennelHashNames[self.trails.trailKennelId] as? NSObject == true {
+                                    self.relevantHashName = String(hasherDict2["hasherPrimaryHashName"]!)
+                                    self.trailHareNamesDict[snap.key] = self.relevantHashName
+                                } else {
+                                    if hashIdsAndKennelHashNames[self.trails.trailKennelId] != nil {
+                                    self.relevantHashName = String(hashIdsAndKennelHashNames[self.trails.trailKennelId]!)
+                                    self.trailHareNamesDict[snap.key] = self.relevantHashName
+                                    } else {
+                                        self.relevantHashName = "Not a member of this kennel"
+                                        self.trailHareNamesDict[snap.key] = self.relevantHashName
+                                    }
+                                }
+                            }
+                            
+                            }
+                           
                     }
                     
-                  //  self.kennelMembershipIds = [String](self.kennelAndHashNameDecodeDict.keys)
-                    
                 }
-                
             }
-            
+            }
+            completed()
             })
-
         
-        updateTrailDetails()
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,10 +89,16 @@ class TrailDetailsVC: UIViewController {
         specificTrailTitle.text = trails.trailTitle
         specificHashCash.text = "$\(trails.trailHashCash)"
         
-        
-        
-        //specificTrailHares.text = trails.trailHares
-        //bag car
+        specificTrailHares.text = ""
+        specificTrailBagCar.text = ""
+        for (key, value) in trails.trailHares {
+            if value == "Hare" {
+                specificTrailHares.text! += "\(trailHareNamesDict[key]!). "
+            } else if value == "Bag Car" {
+                specificTrailBagCar.text! += "\(trailHareNamesDict[key]!). "
+            }
+        }
+
     }
     
 }
