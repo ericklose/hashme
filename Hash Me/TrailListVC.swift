@@ -23,7 +23,7 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         trailTableView.dataSource = self
         trailTableView.estimatedRowHeight = 150
 
-        
+        //CREATE HASHER ID TO HASHER DICT AND PASS TO TRAIL CELL (VIA CONFIGURE CELL)
         
         DataService.ds.REF_TRAILS.observeEventType(.Value, withBlock: { snapshot in
             
