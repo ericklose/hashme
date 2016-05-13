@@ -23,8 +23,8 @@ class ClaimHashIdVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addSelfAsNewHasherBtn.userInteractionEnabled = false
-        confirmSelectionBtn.userInteractionEnabled = false
+        addSelfAsNewHasherBtn.enabled = false
+        confirmSelectionBtn.enabled = false
         
         DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
             if let userList = snapshot.value as? Dictionary<String, String> {
@@ -32,74 +32,45 @@ class ClaimHashIdVC: UIViewController {
                     self.hasherId = thisUsersHasherId
                     self.performSegueWithIdentifier("fullLogIn", sender: nil)
                 } else {
-                    //POP UP: This login is not associated with a hash identity -- see if you're in the system and if not, add yourself
-                    //Execute getHasherFromHasherPicker
+                    let alertController = UIAlertController(title: "Welcome!", message: "Check to see if you're in the system", preferredStyle: .Alert)
                     
-                        let alertController = UIAlertController(title: "Welcome!", message: "Check to see if you're in the system", preferredStyle: .Alert)
-                        
-                        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
-                            print("you have pressed the Cancel button");
-                        }
-                        alertController.addAction(cancelAction)
-                        
-                        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-                            print("you have pressed OK button");
-                            self.performSegueWithIdentifier("lookUpHasher", sender: nil)
-                        }
-                        alertController.addAction(OKAction)
-                        
-                        self.presentViewController(alertController, animated: true, completion:nil)
-                        
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
+                        print("you have pressed the Cancel button");
+                    }
+                    alertController.addAction(cancelAction)
                     
+                    let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                        self.performSegueWithIdentifier("getHasherFromTable", sender: nil)
+                    }
+                    alertController.addAction(OKAction)
                     
+                    self.presentViewController(alertController, animated: true, completion:nil)
                 }
             }
         })
     }
     
-    @IBAction func lookForAHasher(sender: UIButton) {
-    }
-    
     @IBAction func confirmSelectionAsSelf(sender: UIButton) {
-        //Check to see if that hasher is already claimed
-        
-    }
-    
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "lookUpHasher" {
-//            if let editKennelVC = segue.destinationViewController as? EditKennelVC {
-//                if let kennels = kennels as? KennelData {
-//                    editKennelVC.kennel = kennels
-//                }
-//            }
-//        }
-//        if segue.identifier == "manageTrail" {
-//            if let manageTrailVC = segue.destinationViewController as? ManageTrailVC {
-//                if let trailInCell = sender as? TrailData {
-//                    manageTrailVC.trails = trailInCell
-//                }
-//            }
-//        }
-//    }
-    
-    @IBAction func getHasherFromHasherPicker(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as? HasherPickerVC {
-            if sourceViewController.hasherChoiceId != nil {
-//                self.hasherChoiceId = sourceViewController.hasherChoiceId
-//                newHasherIsSelected = true
-                confirmSelectionBtn.userInteractionEnabled = true
-            } else if sourceViewController.hasherChoiceId == nil {
-                addSelfAsNewHasherBtn.userInteractionEnabled = true
-            }
-        }
-    }
-    
-    
-    func claimHasher() {
         //make the person search for what might be them
         //confirm this is you
         //connect the Ids OR
         //pop an alert that someone claimed it
+        
     }
+    
+    
+    @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {
+            if sourceViewController.hasherChoiceId != nil {
+                self.hasherPrimaryName.text = sourceViewController.hasherChoiceName
+                self.hasherPrimaryKennel.text = "working on it"
+                self.hasherId = sourceViewController.hasherChoiceId
+                confirmSelectionBtn.enabled = true
+            } else if sourceViewController.hasherChoiceId == nil {
+                addSelfAsNewHasherBtn.enabled = true
+            }
+        }
+    }
+    
     
 }
