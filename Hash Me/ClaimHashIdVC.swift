@@ -32,7 +32,7 @@ class ClaimHashIdVC: UIViewController {
                     self.hasherId = thisUsersHasherId
                     self.performSegueWithIdentifier("fullLogIn", sender: nil)
                 } else {
-                    let alertController = UIAlertController(title: "Welcome!", message: "Check to see if you're in the system", preferredStyle: .Alert)
+                    let alertController = UIAlertController(title: "Welcome!", message: "Get Eric or Holly to set you up", preferredStyle: .Alert)
                     
                     let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
                         print("you have pressed the Cancel button");
@@ -58,7 +58,6 @@ class ClaimHashIdVC: UIViewController {
         
     }
     
-    
     @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {
             if sourceViewController.hasherChoiceId != nil {
@@ -71,6 +70,4 @@ class ClaimHashIdVC: UIViewController {
             }
         }
     }
-    
-    
 }
