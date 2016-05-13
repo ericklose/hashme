@@ -2635,7 +2635,7 @@
                                 <connections>
                                     <action selector="confirmSelectionAsSelf:" destination="EtL-jk-plH" eventType="touchUpInside" id="Xs1-OK-LMh"/>
                                     <action selector="lookForAHasher:" destination="EtL-jk-plH" eventType="touchUpInside" id="1HW-K1-Zog"/>
-                                    <segue destination="OE1-mu-4da" kind="show" id="SVN-f4-uCb"/>
+                                    <segue destination="OE1-mu-4da" kind="show" identifier="lookUpHasher" id="SVN-f4-uCb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxq-76-JD6" customClass="HashMeButton" customModule="Hash_Me" customModuleProvider="target">
@@ -2655,7 +2655,6 @@
                                 <state key="normal" title="That's Me!"/>
                                 <connections>
                                     <action selector="confirmSelectionAsSelf:" destination="EtL-jk-plH" eventType="touchUpInside" id="LCi-Ej-Qve"/>
-                                    <segue destination="IFe-ZI-2g4" kind="show" id="Xti-Ws-db2"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -2687,11 +2686,12 @@
                         <outlet property="hasherPrimaryKennel" destination="Mp7-fY-OF4" id="NlD-cE-ybL"/>
                         <outlet property="hasherPrimaryName" destination="zlk-C2-Tiw" id="kxx-K0-9Tr"/>
                         <outlet property="lookForAHasherBtn" destination="T0p-rl-SaU" id="Rdu-Te-4bK"/>
+                        <segue destination="IFe-ZI-2g4" kind="show" identifier="fullLogIn" id="oPS-8X-BX6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rtg-22-Dh8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-375" y="94"/>
+            <point key="canvasLocation" x="-298" y="120"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ihd-UZ-4U1">

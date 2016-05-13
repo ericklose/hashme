@@ -30,27 +30,57 @@ class ClaimHashIdVC: UIViewController {
             if let userList = snapshot.value as? Dictionary<String, String> {
                 if let thisUsersHasherId = userList[DataService.ds.REF_HASHER_USERID] {
                     self.hasherId = thisUsersHasherId
-                    print("ID IS ", self.hasherId)
-                    //do segue to the next screen
+                    self.performSegueWithIdentifier("fullLogIn", sender: nil)
                 } else {
                     //POP UP: This login is not associated with a hash identity -- see if you're in the system and if not, add yourself
                     //Execute getHasherFromHasherPicker
+                    
+                        let alertController = UIAlertController(title: "Welcome!", message: "Check to see if you're in the system", preferredStyle: .Alert)
+                        
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
+                            print("you have pressed the Cancel button");
+                        }
+                        alertController.addAction(cancelAction)
+                        
+                        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                            print("you have pressed OK button");
+                            self.performSegueWithIdentifier("lookUpHasher", sender: nil)
+                        }
+                        alertController.addAction(OKAction)
+                        
+                        self.presentViewController(alertController, animated: true, completion:nil)
+                        
+                    
+                    
                 }
             }
         })
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //prepare to hand off to hasher picker
-    }
-    
-    
     @IBAction func lookForAHasher(sender: UIButton) {
     }
     
     @IBAction func confirmSelectionAsSelf(sender: UIButton) {
+        //Check to see if that hasher is already claimed
         
     }
+    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "lookUpHasher" {
+//            if let editKennelVC = segue.destinationViewController as? EditKennelVC {
+//                if let kennels = kennels as? KennelData {
+//                    editKennelVC.kennel = kennels
+//                }
+//            }
+//        }
+//        if segue.identifier == "manageTrail" {
+//            if let manageTrailVC = segue.destinationViewController as? ManageTrailVC {
+//                if let trailInCell = sender as? TrailData {
+//                    manageTrailVC.trails = trailInCell
+//                }
+//            }
+//        }
+//    }
     
     @IBAction func getHasherFromHasherPicker(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? HasherPickerVC {
