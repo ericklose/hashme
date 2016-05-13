@@ -558,7 +558,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="232" height="100"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7t-cJ-kwm">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="32"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="232" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -2383,15 +2383,15 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AfE-dO-i8R">
-                                                <rect key="frame" x="87" y="0.0" width="64" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AfE-dO-i8R">
+                                                <rect key="frame" x="87" y="0.0" width="360" height="30"/>
                                                 <state key="normal" title="Add Hare"/>
                                                 <connections>
                                                     <segue destination="OE1-mu-4da" kind="show" id="Vtn-6v-9hU"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hare 1, Hare 2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jrc-gg-z2V">
-                                                <rect key="frame" x="151" y="0.0" width="409" height="30"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hare 1, Hare 2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jrc-gg-z2V">
+                                                <rect key="frame" x="447" y="0.0" width="113" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -2531,7 +2531,6 @@
                                 <state key="normal" image="fb-icon"/>
                                 <connections>
                                     <action selector="fbbtnPressed:" destination="Mp2-v8-DQK" eventType="touchUpInside" id="0ua-tH-Ig2"/>
-                                    <segue destination="IFe-ZI-2g4" kind="show" identifier="loggedIn" id="kQX-Ut-t8l"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fd2-mn-fOq">
@@ -2595,11 +2594,12 @@
                     <connections>
                         <outlet property="emailField" destination="fd2-mn-fOq" id="yZH-lm-wl3"/>
                         <outlet property="passwordField" destination="Il9-Vc-0OY" id="dVV-b1-GJU"/>
+                        <segue destination="EtL-jk-plH" kind="show" identifier="loggedIn" id="sct-6X-EXM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nn7-IJ-94M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-823" y="110"/>
+            <point key="canvasLocation" x="-1101" y="94"/>
         </scene>
         <!--Claim Hash IdVC-->
         <scene sceneID="4sT-8W-9f0">
@@ -2616,13 +2616,13 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hash Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlk-C2-Tiw">
                                 <rect key="frame" x="20" y="28" width="560" height="25"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Primary Kennel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mp7-fY-OF4">
                                 <rect key="frame" x="20" y="61" width="560" height="25"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0p-rl-SaU" customClass="HashMeButton" customModule="Hash_Me" customModuleProvider="target">
@@ -2635,6 +2635,7 @@
                                 <connections>
                                     <action selector="confirmSelectionAsSelf:" destination="EtL-jk-plH" eventType="touchUpInside" id="Xs1-OK-LMh"/>
                                     <action selector="lookForAHasher:" destination="EtL-jk-plH" eventType="touchUpInside" id="1HW-K1-Zog"/>
+                                    <segue destination="OE1-mu-4da" kind="show" id="SVN-f4-uCb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxq-76-JD6" customClass="HashMeButton" customModule="Hash_Me" customModuleProvider="target">
@@ -2654,6 +2655,7 @@
                                 <state key="normal" title="That's Me!"/>
                                 <connections>
                                     <action selector="confirmSelectionAsSelf:" destination="EtL-jk-plH" eventType="touchUpInside" id="LCi-Ej-Qve"/>
+                                    <segue destination="IFe-ZI-2g4" kind="show" id="Xti-Ws-db2"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -2689,7 +2691,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rtg-22-Dh8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-219" y="-534"/>
+            <point key="canvasLocation" x="-375" y="94"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ihd-UZ-4U1">
@@ -2874,7 +2876,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="SMJ-Mz-YJ1"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Fellowship of the Cockring &amp; Po-Po Peepshow Learn to Code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMM-bc-svG">
@@ -2883,14 +2885,14 @@
                                                     <constraint firstAttribute="height" constant="80" id="nil-sm-Fhr"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="150" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhd-Lr-c1v">
                                                 <rect key="frame" x="12" y="430" width="5421" height="97"/>
-                                                <mutableString key="text">Someday we'll rewrite all this to be way funnier. We're learning programming and decided to make an app to help Fellowship track Boston's hash cash. To do that requires attendence and visitors and virgins and maps an dtrail history and upcoming trails and holy crap was this a billion times more than we expected. First of all IF YOU ARE NOT A HASHER DELETE THIS APP ... otherwise it'll just make no sense. Second: IF YOU DON'T KNOW FELLOWSHIP OR PEEPSHOW seriously consider ditching the app until the UI is better Third: IF THERE ARE BUGS ... hahahahaha ... yeah, we got a lot of work to do</mutableString>
+                                                <string key="text">Someday we'll rewrite all this to be way funnier. We're learning programming and decided to make an app to help Fellowship track Boston's hash cash. To do that requires attendence and visitors and virgins and maps an dtrail history and upcoming trails and holy crap was this a billion times more than we expected. First of all IF YOU ARE NOT A HASHER DELETE THIS APP ... otherwise it'll just make no sense. Second: IF YOU DON'T KNOW FELLOWSHIP OR PEEPSHOW seriously consider ditching the app until the UI is better Third: IF THERE ARE BUGS ... hahahahaha ... yeah, we got a lot of work to do</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="FellowPeep" translatesAutoresizingMaskIntoConstraints="NO" id="H02-Cx-NWn">
@@ -3618,9 +3620,9 @@
         <image name="fb-icon" width="65" height="65"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EcN-h1-abd"/>
+        <segue reference="SVN-f4-uCb"/>
         <segue reference="TiQ-XU-zsY"/>
-        <segue reference="GBg-ec-EjV"/>
         <segue reference="Elj-Qh-yzO"/>
+        <segue reference="EcN-h1-abd"/>
     </inferredMetricsTieBreakers>
 </document>
