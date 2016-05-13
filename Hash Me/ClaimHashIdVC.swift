@@ -30,6 +30,7 @@ class ClaimHashIdVC: UIViewController {
             if let userList = snapshot.value as? Dictionary<String, String> {
                 if let thisUsersHasherId = userList[DataService.ds.REF_HASHER_USERID] {
                     self.hasherId = thisUsersHasherId
+                    print("ID IS ", self.hasherId)
                     //do segue to the next screen
                 } else {
                     //POP UP: This login is not associated with a hash identity -- see if you're in the system and if not, add yourself
