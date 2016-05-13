@@ -29,6 +29,7 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         kennelPicker.delegate = self
         kennelPicker.dataSource = self
         kennelSearchBar.delegate = self
