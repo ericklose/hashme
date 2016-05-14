@@ -28,7 +28,8 @@ class ClaimHashIdVC: UIViewController {
         
         DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
             if let userList = snapshot.value as? Dictionary<String, String> {
-                if let thisUsersHasherId = userList[DataService.ds.REF_HASHER_USERID] {
+                if let thisUsersHasherId = userList[DataService.ds.REF_UID] {
+                    DataService.ds.updateRefHasherUserId(thisUsersHasherId)
                     self.hasherId = thisUsersHasherId
                     self.performSegueWithIdentifier("fullLogIn", sender: nil)
                 } else {

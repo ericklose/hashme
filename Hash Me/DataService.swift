@@ -19,9 +19,14 @@ class DataService {
     private var _REF_TRAILS = Firebase(url: "\(URL_BASE)/trails")
     private var _REF_HASHERS = Firebase(url: "\(URL_BASE)/hashers")
     private var _REF_KENNELS = Firebase(url: "\(URL_BASE)/kennels")
-    private var _REF_HASHER_UID = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
-//    private var _REF_HASHERID_OF_USER =
-
+    //ORIGINAL
+    //private var _REF_HASHER_UID = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
+    //note that the ClaimHasherIdVC now uses REF_UID instead of originally using REF_HASHER_UID so that's a change to undo too if needed
+    //NEW
+    private var _REF_HASHER_UID: String!
+    private var _REF_UID = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
+    
+    
     var REF_BASE: Firebase {
         return _REF_BASE
     }
@@ -38,17 +43,24 @@ class DataService {
         return _REF_KENNELS
     }
     
-    var REF_HASHER_USERID: String {
-        return _REF_HASHER_UID!
+    var REF_UID: String! {
+        return _REF_UID
     }
     
-    //THIS GETS LOOKED UP AT LOGIN, NOT HERE (PROBABLY) (BUT IT'S STILL SET HERE FOR FUTURE NEEDS)
+    //ORIGINAL TO REVERT TO
+    //    var REF_HASHER_USERID: String {
+    //        return _REF_HASHER_UID!
+    //    }
     
-//    var REF_HASHERID_FOR_USER: Firebase {
-//      _REF_BASE.childByAppendingPath("UidToHasherId").childByAppendingPath(KEY_UID).observeSingleEventOfType(.Value) { snapshot in
-//        return_
-//        }
-//    }
+    //MIGRATE TO THIS
+    func updateRefHasherUserId(hasherId: String) {
+        _REF_HASHER_UID = hasherId
+    }
+    
+    var REF_HASHER_USERID: String {
+            return _REF_HASHER_UID
+    }
+    //END MIGRATION CHANGES
     
     var REF_HASHER_CURRENT: Firebase {
         let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
