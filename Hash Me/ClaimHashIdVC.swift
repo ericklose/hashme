@@ -59,6 +59,8 @@ class ClaimHashIdVC: UIViewController {
         
     }
     
+    //No way out of the hasher picker so you're screwed if you don't exist
+    
     @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {
             if sourceViewController.hasherChoiceId != nil {
@@ -66,7 +68,9 @@ class ClaimHashIdVC: UIViewController {
                 self.hasherPrimaryKennel.text = "working on it"
                 self.hasherId = sourceViewController.hasherChoiceId
                 confirmSelectionBtn.enabled = true
+                print("RIGHT ", self.hasherId, " + ", sourceViewController.hasherChoiceId)
             } else if sourceViewController.hasherChoiceId == nil {
+                print("WRONG")
                 addSelfAsNewHasherBtn.enabled = true
             }
         }
