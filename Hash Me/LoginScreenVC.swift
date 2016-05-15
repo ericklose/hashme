@@ -51,7 +51,7 @@ class LoginScreenVC: UIViewController {
                     } else {
                         print("logged in! \(authData)")
                         
-                        let hasher = ["provider": authData.provider!, "blah": "test"]
+                        let hasher = ["provider": authData.provider!]
                         DataService.ds.createFirebaseUser(authData.uid, hasher: hasher)
                         
                         NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
@@ -75,7 +75,7 @@ class LoginScreenVC: UIViewController {
                             } else {
                                 NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
                                 DataService.ds.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { err, authData in
-                                    let hasher = ["provider": authData.provider!, "blah": "emailtest"]
+                                    let hasher = ["provider": authData.provider!]
                                     DataService.ds.createFirebaseUser(authData.uid, hasher: hasher)
                                 })
                                 self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)

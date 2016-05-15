@@ -31,6 +31,7 @@ class KennelPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
         kennelPickerTableView.dataSource = self
         kennelPickerTableSearchBar.delegate = self
         kennelPickerTableSearchBar.returnKeyType = UIReturnKeyType.Done
+        kennelPickerTableView.tableFooterView = UIView()
         
         
         DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in

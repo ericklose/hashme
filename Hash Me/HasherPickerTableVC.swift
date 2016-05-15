@@ -32,6 +32,7 @@ class HasherPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
         hasherPickerTableView.dataSource = self
         hasherPickerTableSearchBar.delegate = self
         hasherPickerTableSearchBar.returnKeyType = UIReturnKeyType.Done
+        hasherPickerTableView.tableFooterView = UIView()
         
         
         DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
