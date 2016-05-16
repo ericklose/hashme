@@ -27,7 +27,7 @@ class HasherPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround()
+//        self.hideKeyboardWhenTappedAround()
         hasherPickerTableView.delegate = self
         hasherPickerTableView.dataSource = self
         hasherPickerTableSearchBar.delegate = self
