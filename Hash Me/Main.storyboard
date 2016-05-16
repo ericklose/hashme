@@ -380,7 +380,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3oC-14-Xhd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1837" y="418"/>
+            <point key="canvasLocation" x="2649" y="418"/>
         </scene>
         <!--Kennel ListVC-->
         <scene sceneID="zHH-VY-bYj">
@@ -1003,7 +1003,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PEu-zr-Etx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1829" y="-325"/>
+            <point key="canvasLocation" x="2641" y="-325"/>
         </scene>
         <!--Trail DetailsVC-->
         <scene sceneID="Aes-NN-glh">
@@ -1260,7 +1260,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qt-nX-sJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2637" y="-270"/>
+            <point key="canvasLocation" x="3449" y="-270"/>
         </scene>
         <!--ManageTrailVC-->
         <scene sceneID="a9V-cJ-DNx">
@@ -2008,7 +2008,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ChS-Pr-78o" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="4v3-Vq-Rzw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2577" y="448"/>
+            <point key="canvasLocation" x="3389" y="448"/>
         </scene>
         <!--Attendee DetailsVC-->
         <scene sceneID="o5X-yO-Ve4">
@@ -2301,7 +2301,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DPT-RQ-Plb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3469" y="-3"/>
+            <point key="canvasLocation" x="4281" y="-3"/>
         </scene>
         <!--Add New TrailVC-->
         <scene sceneID="dsI-z6-h4i">
@@ -2594,12 +2594,13 @@
                     <connections>
                         <outlet property="emailField" destination="fd2-mn-fOq" id="yZH-lm-wl3"/>
                         <outlet property="passwordField" destination="Il9-Vc-0OY" id="dVV-b1-GJU"/>
-                        <segue destination="EtL-jk-plH" kind="show" identifier="loggedIn" id="ict-nC-493"/>
+                        <segue destination="s7r-vI-Gji" kind="show" identifier="loggedIn" id="ict-nC-493"/>
+                        <segue destination="IFe-ZI-2g4" kind="show" identifier="fullLogIn" id="g4v-bQ-t0c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nn7-IJ-94M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1051" y="120"/>
+            <point key="canvasLocation" x="-919" y="30"/>
         </scene>
         <!--Claim Hash IdVC-->
         <scene sceneID="4sT-8W-9f0">
@@ -2613,20 +2614,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hash Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlk-C2-Tiw">
-                                <rect key="frame" x="20" y="28" width="560" height="25"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hash Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlk-C2-Tiw">
+                                <rect key="frame" x="20" y="72" width="560" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Primary Kennel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mp7-fY-OF4">
-                                <rect key="frame" x="20" y="61" width="560" height="25"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Primary Kennel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mp7-fY-OF4">
+                                <rect key="frame" x="20" y="101" width="560" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0p-rl-SaU" customClass="HashMeButton" customModule="Hash_Me" customModuleProvider="target">
-                                <rect key="frame" x="240" y="94" width="120" height="45"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0p-rl-SaU" customClass="HashMeButton" customModule="Hash_Me" customModuleProvider="target">
+                                <rect key="frame" x="240" y="130" width="120" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="0NV-z6-FhU"/>
                                     <constraint firstAttribute="width" constant="120" id="wdZ-sf-flw"/>
@@ -2636,16 +2637,19 @@
                                     <segue destination="OE1-mu-4da" kind="show" identifier="getHasherFromTable" id="SVN-f4-uCb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxq-76-JD6" customClass="HashMeButton" customModule="Hash_Me" customModuleProvider="target">
-                                <rect key="frame" x="162" y="277" width="277" height="45"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxq-76-JD6" customClass="HashMeButton" customModule="Hash_Me" customModuleProvider="target">
+                                <rect key="frame" x="150" y="353" width="300" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="4q8-aA-2jx"/>
                                     <constraint firstAttribute="height" constant="45" id="odE-hm-fql"/>
                                 </constraints>
                                 <state key="normal" title="I Don't Exist -- Add Me As a New Hasher"/>
+                                <connections>
+                                    <action selector="addNewHasher:" destination="EtL-jk-plH" eventType="touchUpInside" id="G6R-8P-djZ"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPZ-9t-0eq" customClass="HashMeButton" customModule="Hash_Me" customModuleProvider="target">
-                                <rect key="frame" x="240" y="147" width="120" height="45"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPZ-9t-0eq" customClass="HashMeButton" customModule="Hash_Me" customModuleProvider="target">
+                                <rect key="frame" x="240" y="183" width="120" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="Giw-Iq-Ey6"/>
                                     <constraint firstAttribute="width" constant="120" id="uLR-cy-r0G"/>
@@ -2678,19 +2682,19 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="gwe-Bp-c6Z"/>
                     <connections>
                         <outlet property="addSelfAsNewHasherBtn" destination="uxq-76-JD6" id="yIf-m1-43K"/>
                         <outlet property="confirmSelectionBtn" destination="QPZ-9t-0eq" id="4Ii-rK-wYs"/>
                         <outlet property="hasherPrimaryKennel" destination="Mp7-fY-OF4" id="NlD-cE-ybL"/>
                         <outlet property="hasherPrimaryName" destination="zlk-C2-Tiw" id="kxx-K0-9Tr"/>
                         <outlet property="lookForAHasherBtn" destination="T0p-rl-SaU" id="Rdu-Te-4bK"/>
-                        <segue destination="IFe-ZI-2g4" kind="show" identifier="fullLogIn" id="oPS-8X-BX6"/>
-                        <segue destination="yTu-ow-R3c" kind="show" identifier="goToHasherPage" id="SW8-h5-NCZ"/>
+                        <segue destination="IFe-ZI-2g4" kind="show" identifier="fullLogIn" id="zKp-Fa-4fS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rtg-22-Dh8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-298" y="120"/>
+            <point key="canvasLocation" x="484" y="142"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ihd-UZ-4U1">
@@ -2712,7 +2716,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kFd-qG-1aM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="386" y="94"/>
+            <point key="canvasLocation" x="1198" y="94"/>
         </scene>
         <!--Trails-->
         <scene sceneID="oCS-q5-jyb">
@@ -2731,7 +2735,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tPx-Aw-MQV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1155" y="-325"/>
+            <point key="canvasLocation" x="1967" y="-325"/>
         </scene>
         <!--Hasher PickerVC-->
         <scene sceneID="Jyz-hO-ro2">
@@ -2850,7 +2854,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x7Q-8S-BKz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1113" y="410"/>
+            <point key="canvasLocation" x="1925" y="410"/>
         </scene>
         <!--Data-->
         <scene sceneID="b34-P8-hlE">
@@ -3724,6 +3728,24 @@
             </objects>
             <point key="canvasLocation" x="1879" y="2502"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xMo-xk-AoC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="s7r-vI-Gji" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EId-DR-kL9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="EtL-jk-plH" kind="relationship" relationship="rootViewController" id="Ya7-C9-1aT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W6h-Fo-cCk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-188" y="120"/>
+        </scene>
     </scenes>
     <resources>
         <image name="FellowPeep" width="1280" height="960"/>
@@ -3732,7 +3754,7 @@
         <image name="fb-icon" width="65" height="65"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SW8-h5-NCZ"/>
+        <segue reference="g4v-bQ-t0c"/>
         <segue reference="SVN-f4-uCb"/>
         <segue reference="EcN-h1-abd"/>
         <segue reference="TiQ-XU-zsY"/>

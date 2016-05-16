@@ -23,8 +23,7 @@ class ClaimHashIdVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        addSelfAsNewHasherBtn.enabled = false
+        //confirmSelectionBtn.lab = "Select A Hasher"
         confirmSelectionBtn.enabled = false
         
         DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
@@ -35,18 +34,11 @@ class ClaimHashIdVC: UIViewController {
                     self.hasherId = thisUsersHasherId
                     self.performSegueWithIdentifier("fullLogIn", sender: nil)
                 } else {
-                    let alertController = UIAlertController(title: "Welcome!", message: "Get Eric or Holly to set you up", preferredStyle: .Alert)
-                    
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
-                        print("you have pressed the Cancel button");
-                    }
-                    alertController.addAction(cancelAction)
-                    
+                    let alertController = UIAlertController(title: "Welcome!", message: "First Check To See if Your Hash Name is Already in the System", preferredStyle: .Alert)
                     let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
                         self.performSegueWithIdentifier("getHasherFromTable", sender: nil)
                     }
                     alertController.addAction(OKAction)
-                    
                     self.presentViewController(alertController, animated: true, completion:nil)
                 }
             }
@@ -66,10 +58,7 @@ class ClaimHashIdVC: UIViewController {
     
     @IBAction func addNewHasher(sender: UIButton) {
         DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").updateChildValues([userId : userId])
-        performSegueWithIdentifier("goToHasherPage", sender: nil)
     }
-    
-    //No way out of the hasher picker so you're screwed if you don't exist
     
     @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {
@@ -78,8 +67,6 @@ class ClaimHashIdVC: UIViewController {
                 self.hasherPrimaryKennel.text = "kennel"
                 self.hasherId = sourceViewController.hasherChoiceId
                 confirmSelectionBtn.enabled = true
-            } else if sourceViewController.hasherChoiceId == nil {
-                addSelfAsNewHasherBtn.enabled = true
             }
         }
     }
