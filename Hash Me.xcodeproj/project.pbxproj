@@ -148,6 +148,8 @@
 		DA15804D1C974C790042614A /* HasherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD2CF9E1C95F9960048C2C8 /* HasherData.swift */; };
 		DA5E78191C975A2A003A0E01 /* HasherDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619290C1C94912A00D8C945 /* HasherDataVC.swift */; };
 		DA5E781A1C975A2B003A0E01 /* HasherDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A619290C1C94912A00D8C945 /* HasherDataVC.swift */; };
+		DA8894C61CEA6C1A00B05599 /* TrailAttendeesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8894C51CEA6C1A00B05599 /* TrailAttendeesVC.swift */; };
+		DA8894CA1CEA7BC900B05599 /* TrailAttendeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8894C91CEA7BC900B05599 /* TrailAttendeeCell.swift */; };
 		DAA24C931CDBC91E006AA0B9 /* TrailDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA24C921CDBC91E006AA0B9 /* TrailDetailsVC.swift */; };
 		DAAE71591CB2FD2F00E2FBDC /* HasherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAE71581CB2FD2F00E2FBDC /* HasherCell.swift */; };
 		DAD2CF9F1C95F9960048C2C8 /* HasherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD2CF9E1C95F9960048C2C8 /* HasherData.swift */; };
@@ -226,6 +228,8 @@
 		A6FB475C1C9A0D5700B370CD /* KennelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelData.swift; sourceTree = "<group>"; };
 		A6FB47601C9A0E0A00B370CD /* KennelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelCell.swift; sourceTree = "<group>"; };
 		BF5100A58A6D9E427296C7F2 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA8894C51CEA6C1A00B05599 /* TrailAttendeesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailAttendeesVC.swift; sourceTree = "<group>"; };
+		DA8894C91CEA7BC900B05599 /* TrailAttendeeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailAttendeeCell.swift; sourceTree = "<group>"; };
 		DAA24C921CDBC91E006AA0B9 /* TrailDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailDetailsVC.swift; sourceTree = "<group>"; };
 		DAAE71581CB2FD2F00E2FBDC /* HasherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasherCell.swift; sourceTree = "<group>"; };
 		DAD2CF9E1C95F9960048C2C8 /* HasherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasherData.swift; sourceTree = "<group>"; };
@@ -366,6 +370,7 @@
 				A6FB47601C9A0E0A00B370CD /* KennelCell.swift */,
 				DAAE71581CB2FD2F00E2FBDC /* HasherCell.swift */,
 				A6BA76601CBBE58600D29C66 /* AttendeeCell.swift */,
+				DA8894C91CEA7BC900B05599 /* TrailAttendeeCell.swift */,
 				A6B22DEC1CC7FFC000A4F389 /* HareCell.swift */,
 				A6B22DF41CC9018100A4F389 /* KennelPickerTableCell.swift */,
 				A6B22DF81CC9019C00A4F389 /* HasherPickerTableCell.swift */,
@@ -404,6 +409,7 @@
 				A619290A1C94912A00D8C945 /* TrailListVC.swift */,
 				A64554E21C975BC60016373E /* AddNewTrailVC.swift */,
 				A6CB71361C96210600F27D12 /* ManageTrailVC.swift */,
+				DA8894C51CEA6C1A00B05599 /* TrailAttendeesVC.swift */,
 				DAA24C921CDBC91E006AA0B9 /* TrailDetailsVC.swift */,
 				A6BA76641CBBF32A00D29C66 /* AttendeeDetailsVC.swift */,
 			);
@@ -641,6 +647,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA8894CA1CEA7BC900B05599 /* TrailAttendeeCell.swift in Sources */,
 				A6BBA7B31C9525560030DB53 /* TrailData.swift in Sources */,
 				A6BA76611CBBE58600D29C66 /* AttendeeCell.swift in Sources */,
 				A6C7AEE61CA33D5E0080814C /* AttendeeData.swift in Sources */,
@@ -652,6 +659,7 @@
 				A68864C61CE3A8D900F94A46 /* HashMeButton.swift in Sources */,
 				A6B22DE91CC6CDDB00A4F389 /* HasherPickerVC.swift in Sources */,
 				DAD2CF9F1C95F9960048C2C8 /* HasherData.swift in Sources */,
+				DA8894C61CEA6C1A00B05599 /* TrailAttendeesVC.swift in Sources */,
 				A6CB71371C96210600F27D12 /* ManageTrailVC.swift in Sources */,
 				A6B22DF11CC9016A00A4F389 /* KennelPickerTableVC.swift in Sources */,
 				A6BBA7AF1C9524690030DB53 /* TrailCell.swift in Sources */,
