@@ -31,8 +31,6 @@ class LoginScreenVC: UIViewController {
         checkUserIdStatus { () -> () in
             self.autoLogInIfRecognized()
         }
-
-
     }
     
     func checkUserIdStatus(completed: DownloadComplete) {
