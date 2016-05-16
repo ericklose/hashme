@@ -22,14 +22,7 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         trailTableView.delegate = self
         trailTableView.dataSource = self
         trailTableView.estimatedRowHeight = 150
-
-        print("BACK : ", presentingViewController)
         
-//        if presentingViewController
-            //== ClaimHashIdVC {
-        self.navigationItem.hidesBackButton = true
-//        }
-
         //CREATE HASHER ID TO HASHER DICT AND PASS TO TRAIL CELL (VIA CONFIGURE CELL)
         
         DataService.ds.REF_TRAILS.observeEventType(.Value, withBlock: { snapshot in
