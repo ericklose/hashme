@@ -56,7 +56,7 @@ class DataService {
     //    }
     
     //NEW SYSTEM
-    func updateRefHasherUserId(hasherId: String) {
+    func storeRefHasherUserId(hasherId: String) {
         _REF_HASHER_USERID = hasherId
         _REF_HASHER_CURRENT = Firebase(url: "\(URL_BASE)/hashers/\(REF_HASHER_USERID)")
     }

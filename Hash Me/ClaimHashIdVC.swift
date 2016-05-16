@@ -17,8 +17,9 @@ class ClaimHashIdVC: UIViewController {
     @IBOutlet weak var confirmSelectionBtn: UIButton!
     @IBOutlet weak var addSelfAsNewHasherBtn: UIButton!
     
-    var userId: String!
+    var userId = DataService.ds.REF_UID
     var hasherId: String!
+    var hasherDict: [String: String]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +29,9 @@ class ClaimHashIdVC: UIViewController {
         
         DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
             if let userList = snapshot.value as? Dictionary<String, String> {
-                if let thisUsersHasherId = userList[DataService.ds.REF_UID] {
-                    DataService.ds.updateRefHasherUserId(thisUsersHasherId)
+                self.hasherDict = userList
+                if let thisUsersHasherId = userList[self.userId] {
+                    DataService.ds.storeRefHasherUserId(thisUsersHasherId)
                     self.hasherId = thisUsersHasherId
                     self.performSegueWithIdentifier("fullLogIn", sender: nil)
                 } else {
@@ -52,11 +54,19 @@ class ClaimHashIdVC: UIViewController {
     }
     
     @IBAction func confirmSelectionAsSelf(sender: UIButton) {
-        //make the person search for what might be them
-        //confirm this is you
-        //connect the Ids OR
-        //pop an alert that someone claimed it
-        
+        if hasherDict.allKeysForValue(hasherId) == [] {
+            DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").updateChildValues([userId : hasherId])
+        } else {
+            let alertController = UIAlertController(title: "Awkward!", message: "Someone already said they're this hasher", preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in }
+            alertController.addAction(cancelAction)
+            self.presentViewController(alertController, animated: true, completion:nil)
+        }
+    }
+    
+    @IBAction func addNewHasher(sender: UIButton) {
+        DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").updateChildValues([userId : userId])
+        performSegueWithIdentifier("goToHasherPage", sender: nil)
     }
     
     //No way out of the hasher picker so you're screwed if you don't exist
@@ -65,12 +75,10 @@ class ClaimHashIdVC: UIViewController {
         if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {
             if sourceViewController.hasherChoiceId != nil {
                 self.hasherPrimaryName.text = sourceViewController.hasherChoiceName
-                self.hasherPrimaryKennel.text = "working on it"
+                self.hasherPrimaryKennel.text = "kennel"
                 self.hasherId = sourceViewController.hasherChoiceId
                 confirmSelectionBtn.enabled = true
-                print("RIGHT ", self.hasherId, " + ", sourceViewController.hasherChoiceId)
             } else if sourceViewController.hasherChoiceId == nil {
-                print("WRONG")
                 addSelfAsNewHasherBtn.enabled = true
             }
         }
