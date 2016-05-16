@@ -22,7 +22,8 @@ class LoginScreenVC: UIViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         
-
+        //DataService.ds.REF_BASE.unauth()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -35,8 +36,12 @@ class LoginScreenVC: UIViewController {
     
     func checkUserIdStatus(completed: DownloadComplete) {
         DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
+            print("SNAP: ", snapshot.value)
             if let userList = snapshot.value as? Dictionary<String, String> {
-                if userList[DataService.ds.REF_UID] != nil {
+                print("UL: ", userList)
+                print("REF: ", DataService.ds.REF_UID)
+                if let thisUsersHasherId = userList[DataService.ds.REF_UID] {
+                    DataService.ds.storeRefHasherUserId(thisUsersHasherId)
                     self.userAlreadyConnectedToHasher = true
                     self.SEGUE_LOGGED_IN = "fullLogIn"
                 }
@@ -123,7 +128,19 @@ class LoginScreenVC: UIViewController {
     }
     
     @IBAction func pressedForgotPassword(sender: UIButton) {
-        
+        if emailField.text == "" {
+            emailField.backgroundColor = UIColor.redColor()
+            emailField.placeholder = "Enter Email Address to Reset Password"
+            showErrorAlert("Enter Email Address", msg: "Enter your email address to reset your password")
+        } else {
+            DataService.ds.REF_BASE.resetPasswordForUser(emailField.text, withCompletionBlock: { error in
+                if error != nil {
+                    self.showErrorAlert("Something Went Wrong", msg: "Do it again, but better")
+                } else {
+                    self.showErrorAlert("Password Reset Email Sent", msg: "Check your email")
+                }
+            })
+        }
     }
     
     func showErrorAlert(title: String, msg: String) {

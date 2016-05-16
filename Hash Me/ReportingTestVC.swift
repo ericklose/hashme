@@ -29,26 +29,26 @@ class ReportingTestVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        DataService.ds.REF_TRAILS.observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_TRAILS.childByAppendingPath("-KHWaGste0AeiaJfCXf1").observeEventType(.Value, withBlock: { snapshot in
             
             self.trails = []
-            
-            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                for snap in snapshots {
+            let snap = snapshot
+//            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+//                for snap in snapshots {
                     if let trailDict = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key
                         let trail = TrailData(trailKey: key, dictionary: trailDict)
                         self.mishmash = self.mishmash + trail.trailTitle
                         print("MISHMASH ", self.mishmash)
                         self.trails.append(trail)
-                    }
-                }
+//                    }
+//                }
             }
             
             self.topicOne.text = "Total Trails"
             self.resultOne.text = "\(self.trails.count)"
             
-            self.resultTwo.text = self.mishmash
+            self.resultTwo.text = "self.mishmash"
         })
 
      topicTwo.text = "Trail Title Mashup"
