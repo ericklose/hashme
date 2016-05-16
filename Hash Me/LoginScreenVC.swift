@@ -15,22 +15,43 @@ class LoginScreenVC: UIViewController {
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    var userAlreadyConnectedToHasher = false
+    var SEGUE_LOGGED_IN = "loggedIn"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround() 
+        self.hideKeyboardWhenTappedAround()
         
-        // Do any additional setup after loading the view.
+
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
-            self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+        checkUserIdStatus { () -> () in
+            self.autoLogInIfRecognized()
         }
+
+
     }
     
+    func checkUserIdStatus(completed: DownloadComplete) {
+        DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
+            if let userList = snapshot.value as? Dictionary<String, String> {
+                if userList[DataService.ds.REF_UID] != nil {
+                    self.userAlreadyConnectedToHasher = true
+                    self.SEGUE_LOGGED_IN = "fullLogIn"
+                }
+            }
+            completed()
+        })
+    }
+    
+    func autoLogInIfRecognized() {
+        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
+            self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
+        }
+    }
     
     @IBAction func fbbtnPressed(sender: UIButton!) {
         let facebookLogin = FBSDKLoginManager()
@@ -55,7 +76,7 @@ class LoginScreenVC: UIViewController {
                         DataService.ds.createFirebaseUser(authData.uid, hasher: hasher)
                         
                         NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
-                        self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                        self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
                     }
                 })
             }
@@ -78,7 +99,7 @@ class LoginScreenVC: UIViewController {
                                     let hasher = ["provider": authData.provider!]
                                     DataService.ds.createFirebaseUser(authData.uid, hasher: hasher)
                                 })
-                                self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                                self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
                             }
                         })
                     } else {
@@ -86,12 +107,20 @@ class LoginScreenVC: UIViewController {
                     }
                 } else {
                     NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
-                    self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+                    self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
                 }
             })
             
         } else {
             showErrorAlert("Email and Password Required", msg: "You must enter an email and a password")
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if userAlreadyConnectedToHasher == true {
+            SEGUE_LOGGED_IN = "fullLogIn"
+        } else {
+            SEGUE_LOGGED_IN = "loggedIn"
         }
     }
     
@@ -105,5 +134,4 @@ class LoginScreenVC: UIViewController {
         alert.addAction(action)
         presentViewController(alert, animated: true, completion: nil)
     }
-    
 }
