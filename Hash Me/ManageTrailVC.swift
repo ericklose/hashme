@@ -55,7 +55,8 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround()
+//        This keyboard thing makes cells unclickable ... need to fix somehow
+//        self.hideKeyboardWhenTappedAround()
         trailAttendeeTableView.delegate = self
         trailAttendeeTableView.dataSource = self
         trailHaresTableView.delegate = self
