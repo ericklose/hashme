@@ -21,40 +21,47 @@ class ReportingTestVC: UIViewController {
     @IBOutlet weak var resultThree: UILabel!
     @IBOutlet weak var resultFour: UILabel!
     @IBOutlet weak var resultFive: UILabel!
-
+    
     var trails = [TrailData]()
     var mishmash: String = ""
+    var revenue: Int = 0
+    let thisTrail: String = "-KHWaGste0AeiaJfCXf1"
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        DataService.ds.REF_TRAILS.childByAppendingPath("-KHWaGste0AeiaJfCXf1").observeEventType(.Value, withBlock: { snapshot in
+        
+        DataService.ds.REF_TRAILS.childByAppendingPath(thisTrail).childByAppendingPath("trailAttendees").observeEventType(.Value, withBlock: { snapshot in
             
             self.trails = []
-            let snap = snapshot
-//            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-//                for snap in snapshots {
+            //            let snap = snapshot
+            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+                for snap in snapshots {
                     if let trailDict = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key
+                        print("KEY ??: ", key)
+                        if let trailAttendeeDict = trailDict["trailAttendeePaidAmt:"] {
+                            print("HELLO")
+                            print("AAA ; ", trailAttendeeDict)
+                        }
                         let trail = TrailData(trailKey: key, dictionary: trailDict)
                         self.mishmash = self.mishmash + trail.trailTitle
                         print("MISHMASH ", self.mishmash)
                         self.trails.append(trail)
-//                    }
-//                }
+                    }
+                }
             }
             
             self.topicOne.text = "Total Trails"
             self.resultOne.text = "\(self.trails.count)"
             
             self.resultTwo.text = "self.mishmash"
+            print("trails ", self.trails)
         })
-
-     topicTwo.text = "Trail Title Mashup"
+        
+        topicTwo.text = "Trail Title Mashup"
         
     }
-
-
-
+    
+    
+    
 }

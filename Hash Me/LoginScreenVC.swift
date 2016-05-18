@@ -124,6 +124,7 @@ class LoginScreenVC: UIViewController {
                                                 self.showErrorAlert("Something Went Wrong", msg: "I don't know. Figure it out. Or just try again.")
                                             } else {
                                                 //Logged in from a password change
+                                                self.passwordField.text = ""
                                                 self.showErrorAlert("Password Successfully Changed", msg: "Now use it to log in")
 //  I'd love this to log in directly but it didn't do that right away and I'm sick of this. I should probably delete the lines below but fear losing my place or intent
 //                                                NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
