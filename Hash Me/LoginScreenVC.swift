@@ -36,14 +36,8 @@ class LoginScreenVC: UIViewController {
     
     func checkUserIdStatus(completed: DownloadComplete) {
         DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
-            print("SNAP: ", snapshot.value)
             if let userList = snapshot.value as? Dictionary<String, String> {
                 if DataService.ds.REF_UID != nil {
-                print("UL: ", userList)
-                
-                print("ZZ: ", NSUserDefaults.standardUserDefaults())
-                print("XX: ", NSUserDefaults.standardUserDefaults().valueForKey("uid"))
-                print("REF: ", DataService.ds.REF_UID)
                 if let thisUsersHasherId = userList[DataService.ds.REF_UID] {
                     DataService.ds.storeRefHasherUserId(thisUsersHasherId)
                     self.userAlreadyConnectedToHasher = true
@@ -114,7 +108,7 @@ class LoginScreenVC: UIViewController {
                         self.showErrorAlert("Could Not Login", msg: "Please check your username or password")
                     }
                 } else {
-                    print("AH HA! I assume this is where the error happens")
+                    //Main Email Login
                     NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
                     self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
                 }

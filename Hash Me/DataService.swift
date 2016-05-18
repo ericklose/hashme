@@ -26,7 +26,7 @@ class DataService {
     //REF_HASHER_UID is the ID for the hasher owned by the user. The naming is bad but this was the least destructive way to change it.
     private var _REF_HASHER_USERID: String!
     //REF_UID is the user ID which is logged in. Since it isn't a hasher ID, it really shouldn't be used (unless we want to give Eric & Holly global admin or something).
-    private var _REF_UID = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
+//    private var _REF_UID = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
 //    private var _REF_HASHER_CURRENT = Firebase(url: "\(URL_BASE)/hashers/\(KEY_UID)")
     
     
@@ -47,7 +47,8 @@ class DataService {
     }
     
     var REF_UID: String! {
-        return _REF_UID
+       return NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
+//        return _REF_UID
     }
     
     //ORIGINAL TO REVERT TO
@@ -72,7 +73,7 @@ class DataService {
     
     //SHIT, THIS PROBABLY NEEDS TO BE DISABLED
         var REF_USER_CURRENT: Firebase {
-                    print("uid is: \(KEY_UID)")
+            print("uid is: \(KEY_UID)")
             let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
             let user = Firebase(url: "\(URL_BASE)").childByAppendingPath("hashers").childByAppendingPath(uid)
             return user!

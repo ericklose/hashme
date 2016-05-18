@@ -20,22 +20,30 @@ class ClaimHashIdVC: UIViewController {
     var userId = DataService.ds.REF_UID
     var hasherId: String!
     var hasherDict: [String: String]!
+    var thisIsTheFirstDidLoad: Bool = true
     
-//  EDGE CASE: If the entire data branch doesn't exist the app crashes ... I'm sure this could be fixed but I don't care  
+    //  EDGE CASE: If the entire data branch doesn't exist the app crashes ... I'm sure this could be fixed but I don't care
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("1")
         
         confirmSelectionBtn.enabled = false
-    
+        
         DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
             if let userList = snapshot.value as? Dictionary<String, String> {
+                print("A")
+                print("AB ", KEY_UID)
+                print("ABB ", NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID))
+                print("AA ", self.userId)
                 self.hasherDict = userList
                 if let thisUsersHasherId = userList[self.userId] {
+                    print("B: ")
                     DataService.ds.storeRefHasherUserId(thisUsersHasherId)
                     self.hasherId = thisUsersHasherId
                     self.performSegueWithIdentifier("fullLogIn", sender: nil)
                 } else if self.hasherId == nil {
+                    print("C")
                     let alertController = UIAlertController(title: "Welcome!", message: "First Check To See if Your Hash Self is Already in the System", preferredStyle: .Alert)
                     let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
                         self.performSegueWithIdentifier("getHasherFromTable", sender: nil)
@@ -50,9 +58,13 @@ class ClaimHashIdVC: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        if let _ = hasherDict[self.userId] {
-            self.performSegueWithIdentifier("fullLogIn", sender: nil)
+        if thisIsTheFirstDidLoad == false {
+            if let _ = hasherDict[self.userId] {
+                print("JJ")
+                self.performSegueWithIdentifier("fullLogIn", sender: nil)
+            }
         }
+        thisIsTheFirstDidLoad = false
     }
     
     @IBAction func confirmSelectionAsSelf(sender: UIButton) {
