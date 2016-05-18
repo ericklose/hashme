@@ -64,6 +64,9 @@
 		A68864D31CE3AFDE00F94A46 /* ClaimHashIdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68864D21CE3AFDE00F94A46 /* ClaimHashIdVC.swift */; };
 		A68864D41CE3AFDE00F94A46 /* ClaimHashIdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68864D21CE3AFDE00F94A46 /* ClaimHashIdVC.swift */; };
 		A68864D51CE3AFDE00F94A46 /* ClaimHashIdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68864D21CE3AFDE00F94A46 /* ClaimHashIdVC.swift */; };
+		A68DAC0F1CECECD3004B6782 /* UserPreferencesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68DAC0E1CECECD3004B6782 /* UserPreferencesVC.swift */; };
+		A68DAC101CECECD3004B6782 /* UserPreferencesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68DAC0E1CECECD3004B6782 /* UserPreferencesVC.swift */; };
+		A68DAC111CECECD3004B6782 /* UserPreferencesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68DAC0E1CECECD3004B6782 /* UserPreferencesVC.swift */; };
 		A6A0E3D61C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
 		A6A0E3D71C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
 		A6A0E3D81C9496A00003EE0E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E3D51C9496A00003EE0E /* DataService.swift */; };
@@ -203,6 +206,7 @@
 		A68864C91CE3A97400F94A46 /* HashMeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashMeTextField.swift; sourceTree = "<group>"; };
 		A68864CD1CE3A9A500F94A46 /* HashMeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashMeView.swift; sourceTree = "<group>"; };
 		A68864D21CE3AFDE00F94A46 /* ClaimHashIdVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimHashIdVC.swift; sourceTree = "<group>"; };
+		A68DAC0E1CECECD3004B6782 /* UserPreferencesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferencesVC.swift; sourceTree = "<group>"; };
 		A6A0E3D51C9496A00003EE0E /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		A6A0E3DD1C94A08D0003EE0E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		A6A0E3DE1C94A08D0003EE0E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -356,6 +360,7 @@
 				A619290C1C94912A00D8C945 /* HasherDataVC.swift */,
 				A6764AC71CCAB28900E376F0 /* MapAddressVC.swift */,
 				A6D58C341CE799FE00CA149C /* ReportingTestVC.swift */,
+				A68DAC0E1CECECD3004B6782 /* UserPreferencesVC.swift */,
 				A6764AD01CCC0F0500E376F0 /* Kennels */,
 				A6764ACF1CCC0EEC00E376F0 /* Trails */,
 				A6764AD11CCC0F0F00E376F0 /* Support */,
@@ -671,6 +676,7 @@
 				A68864CE1CE3A9A500F94A46 /* HashMeView.swift in Sources */,
 				A6FB47611C9A0E0A00B370CD /* KennelCell.swift in Sources */,
 				A6271D3C1CCFE5980060E8DB /* KennelMembersVC.swift in Sources */,
+				A68DAC0F1CECECD3004B6782 /* UserPreferencesVC.swift in Sources */,
 				A619290B1C94912A00D8C945 /* TrailListVC.swift in Sources */,
 				A68864D31CE3AFDE00F94A46 /* ClaimHashIdVC.swift in Sources */,
 				A6A349501CB92E5900B919D8 /* ManageKennelVC.swift in Sources */,
@@ -714,6 +720,7 @@
 				DA15804C1C974C780042614A /* HasherData.swift in Sources */,
 				A6B22DEE1CC7FFC000A4F389 /* HareCell.swift in Sources */,
 				A6BA76621CBBE58600D29C66 /* AttendeeCell.swift in Sources */,
+				A68DAC101CECECD3004B6782 /* UserPreferencesVC.swift in Sources */,
 				A68864CF1CE3A9A500F94A46 /* HashMeView.swift in Sources */,
 				A6188D601C9A174600BAE354 /* AppDelegate.swift in Sources */,
 				A6BA76661CBBF32A00D29C66 /* AttendeeDetailsVC.swift in Sources */,
@@ -762,6 +769,7 @@
 				DA15804D1C974C790042614A /* HasherData.swift in Sources */,
 				A6B22DEF1CC7FFC000A4F389 /* HareCell.swift in Sources */,
 				A6BA76631CBBE58600D29C66 /* AttendeeCell.swift in Sources */,
+				A68DAC111CECECD3004B6782 /* UserPreferencesVC.swift in Sources */,
 				A68864D01CE3A9A500F94A46 /* HashMeView.swift in Sources */,
 				A6188D611C9A174700BAE354 /* AppDelegate.swift in Sources */,
 				A6BA76671CBBF32A00D29C66 /* AttendeeDetailsVC.swift in Sources */,
