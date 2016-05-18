@@ -36,15 +36,14 @@ class LoginScreenVC: UIViewController {
     
     func checkUserIdStatus(completed: DownloadComplete) {
         DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
-            print("SNAP: ", snapshot.value)
             if let userList = snapshot.value as? Dictionary<String, String> {
-                print("UL: ", userList)
-                print("REF: ", DataService.ds.REF_UID)
+                if DataService.ds.REF_UID != nil {
                 if let thisUsersHasherId = userList[DataService.ds.REF_UID] {
                     DataService.ds.storeRefHasherUserId(thisUsersHasherId)
                     self.userAlreadyConnectedToHasher = true
                     self.SEGUE_LOGGED_IN = "fullLogIn"
                 }
+            }
             }
             completed()
         })
@@ -76,7 +75,7 @@ class LoginScreenVC: UIViewController {
                         print("logged in! \(authData)")
                         
                         let hasher = ["provider": authData.provider!]
-                        DataService.ds.createFirebaseUser(authData.uid, hasher: hasher)
+                        DataService.ds.createFirebaseUser(authData.uid, user: hasher)
                         
                         NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
                         self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
@@ -100,7 +99,7 @@ class LoginScreenVC: UIViewController {
                                 NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
                                 DataService.ds.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { err, authData in
                                     let hasher = ["provider": authData.provider!]
-                                    DataService.ds.createFirebaseUser(authData.uid, hasher: hasher)
+                                    DataService.ds.createFirebaseUser(authData.uid, user: hasher)
                                 })
                                 self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
                             }
@@ -109,6 +108,7 @@ class LoginScreenVC: UIViewController {
                         self.showErrorAlert("Could Not Login", msg: "Please check your username or password")
                     }
                 } else {
+                    //Main Email Login
                     NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
                     self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
                 }
