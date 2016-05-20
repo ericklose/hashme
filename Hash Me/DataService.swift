@@ -66,12 +66,13 @@ class DataService {
         return _REF_HASHER_USERID
     }
     
+    
+    
 //    var REF_HASHER_CURRENT: Firebase {
 //        return _REF_HASHER_CURRENT
 //    }
     //END OF NEW SYSTEM CHANGES
     
-    //SHIT, THIS PROBABLY NEEDS TO BE DISABLED
         var REF_USER_CURRENT: Firebase {
             print("uid is: \(KEY_UID)")
             let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
@@ -82,4 +83,6 @@ class DataService {
     func createFirebaseUser(uid: String, user: Dictionary<String, String>) {
         REF_HASHERS.childByAppendingPath(uid).setValue(user)
     }
+
+    
 }
