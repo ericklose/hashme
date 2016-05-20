@@ -22,7 +22,7 @@ class LoginScreenVC: UIViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         
-        DataService.ds.REF_BASE.unauth()
+//        DataService.ds.REF_BASE.unauth()
         
     }
     
