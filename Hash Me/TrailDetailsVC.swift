@@ -46,9 +46,12 @@ class TrailDetailsVC: UIViewController {
                     for snap in snapshots {
                         
                         if let hasherDict2 = snap.value as? Dictionary<String, AnyObject> {
-                        
-                        if let hashIdsAndKennelHashNames = hasherDict2["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
+                            
                             for _ in hasherDict2 {
+                                
+                                if let hashIdsAndKennelHashNames = hasherDict2["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
+                                
+                                
                                 if hashIdsAndKennelHashNames[self.trails.trailKennelId] as? String == "primary" || hashIdsAndKennelHashNames[self.trails.trailKennelId] as? NSObject == true {
                                     self.relevantHashName = String(hasherDict2["hasherPrimaryHashName"]!)
                                     self.trailHareNamesDict[snap.key] = self.relevantHashName
@@ -62,7 +65,10 @@ class TrailDetailsVC: UIViewController {
                                     }
                                 }
                             }
-                            
+                                else {
+                                    self.relevantHashName = String(hasherDict2["hasherPrimaryHashName"]!)
+                                    self.trailHareNamesDict[snap.key] = self.relevantHashName
+                                }
                             }
                            
                     }
