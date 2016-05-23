@@ -20,7 +20,8 @@ class TrailAttendeeCell: UITableViewCell {
     @IBOutlet weak var hasherPaid: UISwitch!
     
     var attendee: Attendee!
-    var hashCash = 0
+    var hashCash: Int = 0
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
