@@ -21,7 +21,7 @@ class UserPreferencesVC: UIViewController {
     }
 
     @IBAction func logoutUser(sender: AnyObject) {
-        FirebaseUserSettings.fus.logoutFirebase()
+        logoutFirebase()
     }
     
     @IBAction func changeUserPassword(sender: AnyObject) {
@@ -34,6 +34,7 @@ class UserPreferencesVC: UIViewController {
     }
 
     @IBAction func hideNerdName(sender: AnyObject) {
+        showErrorAlert("I don't know how to do this yet", msg: "But later it'll hide your nerd name from other users for privacy")
     }
     
 }
