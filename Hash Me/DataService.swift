@@ -19,15 +19,11 @@ class DataService {
     private var _REF_TRAILS = Firebase(url: "\(URL_BASE)/trails")
     private var _REF_HASHERS = Firebase(url: "\(URL_BASE)/hashers")
     private var _REF_KENNELS = Firebase(url: "\(URL_BASE)/kennels")
-    //ORIGINAL
-    //private var _REF_HASHER_UID = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
-    //note that the ClaimHasherIdVC now uses REF_UID instead of originally using REF_HASHER_UID so that's a change to undo too if needed
     //NEW
     //REF_HASHER_UID is the ID for the hasher owned by the user. The naming is bad but this was the least destructive way to change it.
     private var _REF_HASHER_USERID: String!
     //REF_UID is the user ID which is logged in. Since it isn't a hasher ID, it really shouldn't be used (unless we want to give Eric & Holly global admin or something).
-//    private var _REF_UID = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
-//    private var _REF_HASHER_CURRENT = Firebase(url: "\(URL_BASE)/hashers/\(KEY_UID)")
+    //    private var _REF_UID = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
     
     
     var REF_BASE: Firebase {
@@ -47,42 +43,28 @@ class DataService {
     }
     
     var REF_UID: String! {
-       return NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
-//        return _REF_UID
+        return NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
     }
     
-    //ORIGINAL TO REVERT TO
-    //    var REF_HASHER_USERID: String {
-    //        return _REF_HASHER_UID!
-    //    }
     
-    //NEW SYSTEM
     func storeRefHasherUserId(hasherId: String) {
         _REF_HASHER_USERID = hasherId
-//        _REF_HASHER_CURRENT = Firebase(url: "\(URL_BASE)/hashers/\(REF_HASHER_USERID)")
     }
     
     var REF_HASHER_USERID: String {
         return _REF_HASHER_USERID
     }
     
-    
-    
-//    var REF_HASHER_CURRENT: Firebase {
-//        return _REF_HASHER_CURRENT
-//    }
-    //END OF NEW SYSTEM CHANGES
-    
-        var REF_USER_CURRENT: Firebase {
-            print("uid is: \(KEY_UID)")
-            let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
-            let user = Firebase(url: "\(URL_BASE)").childByAppendingPath("hashers").childByAppendingPath(uid)
-            return user!
-        }
+    var REF_USER_CURRENT: Firebase {
+        print("uid is: \(KEY_UID)")
+        let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
+        let user = Firebase(url: "\(URL_BASE)").childByAppendingPath("hashers").childByAppendingPath(uid)
+        return user!
+    }
     
     func createFirebaseUser(uid: String, user: Dictionary<String, String>) {
         REF_HASHERS.childByAppendingPath(uid).setValue(user)
     }
-
+    
     
 }

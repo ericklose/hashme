@@ -17,8 +17,6 @@ class UserPreferencesVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
         
     }
 
@@ -29,6 +27,7 @@ class UserPreferencesVC: UIViewController {
     @IBAction func changeUserPassword(sender: AnyObject) {
         //Need to get user email and existing password to here somehow
 //        FirebaseUserSettings.fus.changeFirebasePassword(String, pwd: String)
+        changeFirebasePassword("email", pwd: "current password")
     }
     
     @IBAction func changeUserEmail(sender: AnyObject) {
