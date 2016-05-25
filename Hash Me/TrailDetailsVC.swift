@@ -107,6 +107,14 @@ class TrailDetailsVC: UIViewController {
 
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "trailRsvpList" {
+            if let TrailAttendeesVC = segue.destinationViewController as? TrailAttendeesVC {
+                    TrailAttendeesVC.trails = trails
+            }
+        }
+    }
+    
 }
 
 
