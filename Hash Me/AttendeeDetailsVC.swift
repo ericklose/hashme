@@ -24,6 +24,7 @@ class AttendeeDetailsVC: UIViewController {
     @IBOutlet weak var specificAttendeeReducedPayReason: UITextField!
     
     var specificAttendee: Attendee!
+    var trails: TrailData!
     
     var hashCash: Int = 0
     var trailAttendencePath = DataService.ds.REF_TRAILS

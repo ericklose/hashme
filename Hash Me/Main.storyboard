@@ -2330,36 +2330,52 @@
                                     <constraint firstItem="FwH-tf-fw8" firstAttribute="trailing" secondItem="SP9-8M-rTw" secondAttribute="trailingMargin" id="ZdD-3Y-Nns"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="241" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="39b-4c-OS1">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="74" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="39b-4c-OS1">
                                 <rect key="frame" x="0.0" y="110" width="600" height="490"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="trailAttendeeCell" rowHeight="241" id="iAA-7V-xgu" customClass="TrailAttendeeCell" customModule="Hash_Me" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="241"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="trailAttendeeCell" rowHeight="74" id="iAA-7V-xgu" customClass="TrailAttendeeCell" customModule="Hash_Me" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iAA-7V-xgu" id="PAi-Ai-taE">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="240"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="AoS-sJ-cmb">
-                                                    <rect key="frame" x="8" y="8" width="584" height="62"/>
+                                                    <rect key="frame" x="8" y="8" width="584" height="61"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="5wh-pj-6a6">
-                                                            <rect key="frame" x="0.0" y="0.0" width="319" height="31"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5wh-pj-6a6">
+                                                            <rect key="frame" x="0.0" y="0.0" width="453" height="30"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Existing Hash Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuX-gN-hRO" userLabel="Existing Hash Name Lbl">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="129" height="31"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="138" height="30"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Hash Text" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MTu-p5-9EY">
-                                                                    <rect key="frame" x="131" y="0.0" width="86" height="31"/>
+                                                                    <rect key="frame" x="143" y="0.0" width="88" height="30"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits"/>
+                                                                </textField>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Existing Nerd Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TcA-W0-HSq" userLabel="Existing Nerd Name Lbl">
+                                                                    <rect key="frame" x="236" y="0.0" width="128" height="30"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Nerd Text" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zdu-1T-yMc">
+                                                                    <rect key="frame" x="369" y="0.0" width="84" height="30"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Gng-ef-Y9S">
+                                                            <rect key="frame" x="0.0" y="30" width="211" height="31"/>
+                                                            <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Going?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwr-oQ-bDA">
-                                                                    <rect key="frame" x="219" y="0.0" width="49" height="31"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="49" height="31"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="31" id="K9T-Xx-GGd"/>
                                                                         <constraint firstAttribute="width" constant="49" id="tHs-t6-T06"/>
@@ -2369,26 +2385,14 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="11H-NX-PcY">
-                                                                    <rect key="frame" x="270" y="0.0" width="51" height="31"/>
+                                                                    <rect key="frame" x="54" y="0.0" width="51" height="31"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="49" id="HB1-hM-Dgh"/>
+                                                                        <constraint firstAttribute="height" constant="31" id="OVt-6o-7I5"/>
+                                                                    </constraints>
                                                                 </switch>
-                                                            </subviews>
-                                                        </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Gng-ef-Y9S">
-                                                            <rect key="frame" x="0.0" y="31" width="316" height="31"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Existing Nerd Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TcA-W0-HSq" userLabel="Existing Nerd Name Lbl">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="31"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Nerd Text" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zdu-1T-yMc">
-                                                                    <rect key="frame" x="130" y="0.0" width="84" height="31"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                    <textInputTraits key="textInputTraits"/>
-                                                                </textField>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paid?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJl-qO-sGd">
-                                                                    <rect key="frame" x="216" y="0.0" width="49" height="31"/>
+                                                                    <rect key="frame" x="108" y="0.0" width="49" height="31"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="49" id="0V6-57-y5j"/>
                                                                         <constraint firstAttribute="height" constant="31" id="LIH-Mu-T1B"/>
@@ -2398,11 +2402,33 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bNM-si-Wfz">
-                                                                    <rect key="frame" x="267" y="0.0" width="51" height="31"/>
+                                                                    <rect key="frame" x="162" y="0.0" width="51" height="31"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="31" id="Ivs-TT-zYb"/>
+                                                                        <constraint firstAttribute="width" constant="49" id="eke-wv-gg8"/>
+                                                                    </constraints>
                                                                 </switch>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="gJl-qO-sGd" firstAttribute="leading" secondItem="11H-NX-PcY" secondAttribute="trailing" constant="10" id="Ndw-Ak-h3w"/>
+                                                                <constraint firstItem="gJl-qO-sGd" firstAttribute="leading" secondItem="11H-NX-PcY" secondAttribute="trailing" constant="50" id="pjx-Be-h3y"/>
+                                                            </constraints>
+                                                            <variation key="default">
+                                                                <mask key="constraints">
+                                                                    <exclude reference="Ndw-Ak-h3w"/>
+                                                                    <exclude reference="pjx-Be-h3y"/>
+                                                                </mask>
+                                                            </variation>
                                                         </stackView>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="62" id="VKb-Io-6qB"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="VKb-Io-6qB"/>
+                                                        </mask>
+                                                    </variation>
                                                 </stackView>
                                             </subviews>
                                             <constraints>

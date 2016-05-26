@@ -412,10 +412,10 @@
 			isa = PBXGroup;
 			children = (
 				A619290A1C94912A00D8C945 /* TrailListVC.swift */,
+				DAA24C921CDBC91E006AA0B9 /* TrailDetailsVC.swift */,
+				DA8894C51CEA6C1A00B05599 /* TrailAttendeesVC.swift */,
 				A64554E21C975BC60016373E /* AddNewTrailVC.swift */,
 				A6CB71361C96210600F27D12 /* ManageTrailVC.swift */,
-				DA8894C51CEA6C1A00B05599 /* TrailAttendeesVC.swift */,
-				DAA24C921CDBC91E006AA0B9 /* TrailDetailsVC.swift */,
 				A6BA76641CBBF32A00D29C66 /* AttendeeDetailsVC.swift */,
 			);
 			name = Trails;
