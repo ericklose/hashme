@@ -138,6 +138,9 @@
 		A6E619911CEA7FA100FC091C /* KennelMembersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6271D3B1CCFE5980060E8DB /* KennelMembersVC.swift */; };
 		A6E619921CEA7FAF00FC091C /* HasherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAE71581CB2FD2F00E2FBDC /* HasherCell.swift */; };
 		A6E619931CEA7FAF00FC091C /* HasherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAE71581CB2FD2F00E2FBDC /* HasherCell.swift */; };
+		A6E7F4681CF664DD009BDF02 /* TrailReportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7F4671CF664DD009BDF02 /* TrailReportData.swift */; };
+		A6E7F4691CF664DD009BDF02 /* TrailReportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7F4671CF664DD009BDF02 /* TrailReportData.swift */; };
+		A6E7F46A1CF664DD009BDF02 /* TrailReportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7F4671CF664DD009BDF02 /* TrailReportData.swift */; };
 		A6FB47591C9A0D2B00B370CD /* KennelListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB47581C9A0D2B00B370CD /* KennelListVC.swift */; };
 		A6FB475A1C9A0D2B00B370CD /* KennelListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB47581C9A0D2B00B370CD /* KennelListVC.swift */; };
 		A6FB475B1C9A0D2B00B370CD /* KennelListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB47581C9A0D2B00B370CD /* KennelListVC.swift */; };
@@ -228,6 +231,7 @@
 		A6CB71361C96210600F27D12 /* ManageTrailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageTrailVC.swift; sourceTree = "<group>"; };
 		A6CB713A1C9644FF00F27D12 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A6D58C341CE799FE00CA149C /* ReportingTestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportingTestVC.swift; sourceTree = "<group>"; };
+		A6E7F4671CF664DD009BDF02 /* TrailReportData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailReportData.swift; sourceTree = "<group>"; };
 		A6FB47581C9A0D2B00B370CD /* KennelListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelListVC.swift; sourceTree = "<group>"; };
 		A6FB475C1C9A0D5700B370CD /* KennelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelData.swift; sourceTree = "<group>"; };
 		A6FB47601C9A0E0A00B370CD /* KennelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KennelCell.swift; sourceTree = "<group>"; };
@@ -393,6 +397,7 @@
 				DAD2CF9E1C95F9960048C2C8 /* HasherData.swift */,
 				A6FB475C1C9A0D5700B370CD /* KennelData.swift */,
 				A6C7AEE51CA33D5E0080814C /* AttendeeData.swift */,
+				A6E7F4671CF664DD009BDF02 /* TrailReportData.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -662,6 +667,7 @@
 				A6477B2D1CDCD36300194752 /* KennelMapAnno.swift in Sources */,
 				A6B22DF51CC9018100A4F389 /* KennelPickerTableCell.swift in Sources */,
 				A68864C61CE3A8D900F94A46 /* HashMeButton.swift in Sources */,
+				A6E7F4681CF664DD009BDF02 /* TrailReportData.swift in Sources */,
 				A6B22DE91CC6CDDB00A4F389 /* HasherPickerVC.swift in Sources */,
 				DAD2CF9F1C95F9960048C2C8 /* HasherData.swift in Sources */,
 				DA8894C61CEA6C1A00B05599 /* TrailAttendeesVC.swift in Sources */,
@@ -723,6 +729,7 @@
 				A68DAC101CECECD3004B6782 /* UserPreferencesVC.swift in Sources */,
 				A68864CF1CE3A9A500F94A46 /* HashMeView.swift in Sources */,
 				A6188D601C9A174600BAE354 /* AppDelegate.swift in Sources */,
+				A6E7F4691CF664DD009BDF02 /* TrailReportData.swift in Sources */,
 				A6BA76661CBBF32A00D29C66 /* AttendeeDetailsVC.swift in Sources */,
 				A61929201C94912A00D8C945 /* Hash_MeTests.swift in Sources */,
 				A6BBA7B41C9525560030DB53 /* TrailData.swift in Sources */,
@@ -772,6 +779,7 @@
 				A68DAC111CECECD3004B6782 /* UserPreferencesVC.swift in Sources */,
 				A68864D01CE3A9A500F94A46 /* HashMeView.swift in Sources */,
 				A6188D611C9A174700BAE354 /* AppDelegate.swift in Sources */,
+				A6E7F46A1CF664DD009BDF02 /* TrailReportData.swift in Sources */,
 				A6BA76671CBBF32A00D29C66 /* AttendeeDetailsVC.swift in Sources */,
 				A619292B1C94912A00D8C945 /* Hash_MeUITests.swift in Sources */,
 				A6BBA7B51C9525560030DB53 /* TrailData.swift in Sources */,

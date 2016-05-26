@@ -22,46 +22,56 @@ class ReportingTestVC: UIViewController {
     @IBOutlet weak var resultFour: UILabel!
     @IBOutlet weak var resultFive: UILabel!
     
-    var trails = [TrailData]()
-    var mishmash: String = ""
-    var revenue: Int = 0
-    let thisTrail: String = "-KHWaGste0AeiaJfCXf1"
+//    var trailReport1: TrailReportData!
+//    var revenue: Int = 0
+//    var attendeeCount: Int = 0
+//    var paidAttendee: Int = 0
+    let thisTrail: String = "-KI4iiL6h9hxdyWANBkh"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("confirm here, ", thisTrail)
         
-        DataService.ds.REF_TRAILS.childByAppendingPath(thisTrail).childByAppendingPath("trailAttendees").observeEventType(.Value, withBlock: { snapshot in
-            
-            self.trails = []
-            //            let snap = snapshot
-            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                for snap in snapshots {
-                    if let trailDict = snap.value as? Dictionary<String, AnyObject> {
-                        let key = snap.key
-                        print("KEY ??: ", key)
-                        if let trailAttendeeDict = trailDict["trailAttendeePaidAmt:"] {
-                            print("HELLO")
-                            print("AAA ; ", trailAttendeeDict)
-                        }
-                        let trail = TrailData(trailKey: key, dictionary: trailDict)
-                        self.mishmash = self.mishmash + trail.trailTitle
-                        print("MISHMASH ", self.mishmash)
-                        self.trails.append(trail)
-                    }
-                }
-            }
-            
-            self.topicOne.text = "Total Trails"
-            self.resultOne.text = "\(self.trails.count)"
-            
-            self.resultTwo.text = "self.mishmash"
-            print("trails ", self.trails)
-        })
+        let trailReport1 = TrailReportData(trailKey: thisTrail)
         
-        topicTwo.text = "Trail Title Mashup"
+                    self.topicOne.text = "Attendees"
+                    self.resultOne.text = "\(trailReport1.attendeeCount)"
+        
+        
+//        DataService.ds.REF_TRAILS.childByAppendingPath(thisTrail).childByAppendingPath("trailAttendees").observeEventType(.Value, withBlock: { snapshot in
+//            
+//            self.trails = []
+//            //            let snap = snapshot
+//            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+//                for snap in snapshots {
+//                    if let trailDict = snap.value as? Dictionary<String, AnyObject> {
+//                        let key = snap.key
+//                        print("trailDict: ", trailDict)
+//                        if let trailAttendeeWasThere = trailDict["trailAttendeePresent"] as? Int {
+//                            self.attendeeCount = self.attendeeCount + trailAttendeeWasThere
+//                        }
+//                        if let trailAttendeePaidAmt = trailDict["trailAttendeePaidAmt"] {
+//                            self.revenue = self.revenue + Int(trailAttendeePaidAmt as! NSNumber)
+//                            self.paidAttendee = self.paidAttendee + 1
+//                        }
+//                    }
+//                }
+//            }
+//            self.topicOne.text = "Attendees"
+//            self.resultOne.text = "\(self.attendeeCount)"
+//            
+//            self.topicTwo.text = "Revenue"
+//            self.resultTwo.text = "$ \(self.revenue)"
+//            
+//            self.topicThree.text = "Paid Attendees"
+//            self.resultThree.text = "\(self.paidAttendee)"
+//            
+//            self.topicFour.text = "Rev Per Attendee"
+//            self.resultFour.text = "$ \(round((Double(self.revenue) / Double(self.attendeeCount))*100)/100)"
+//            
+//            self.topicFive.text = "Unpaid Attendees"
+//            self.resultFive.text = "\(self.attendeeCount - self.paidAttendee)"
+//        })
         
     }
-    
-    
-    
 }
