@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Firebase.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Hash Me.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,20 +24,15 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>32944A0066A9A98C86AC16CD78F12DB9</key>
+		<key>5075138BA29F2629028D43DEB00F31AA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>369EBDC18E11B1B14B5EA64026517A29</key>
+		<key>71D4399CA52EC8E104919520880538A5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,17 +42,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B7AC9326D819482593FE118E915409D7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C92947EDA85B6E454DFA0A8626EAEE7A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F8F5E00DD802604734BE96FD8AC95E01</key>
+		<key>904958911272DBA95F7EE99564022AE1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

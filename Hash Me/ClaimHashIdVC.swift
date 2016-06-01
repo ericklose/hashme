@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class ClaimHashIdVC: UIViewController {
     
@@ -17,7 +17,8 @@ class ClaimHashIdVC: UIViewController {
     @IBOutlet weak var confirmSelectionBtn: UIButton!
     @IBOutlet weak var addSelfAsNewHasherBtn: UIButton!
     
-    var userId = DataService.ds.REF_UID
+//    var userId = DataService.ds.REF_UID
+    var userId = "7be00fdd-8aa6-43fe-bb6d-b53c255bab7a"
     var hasherId: String!
     var hasherDict: [String: String]!
     var thisIsTheFirstDidLoad: Bool = true
@@ -30,7 +31,7 @@ class ClaimHashIdVC: UIViewController {
         
         confirmSelectionBtn.enabled = false
         
-        DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_BASE.child("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
             if let userList = snapshot.value as? Dictionary<String, String> {
                 print("A")
                 print("AB ", KEY_UID)
@@ -69,7 +70,7 @@ class ClaimHashIdVC: UIViewController {
     
     @IBAction func confirmSelectionAsSelf(sender: UIButton) {
         if hasherDict.allKeysForValue(hasherId) == [] {
-            DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").updateChildValues([userId : hasherId])
+            DataService.ds.REF_BASE.child("UidToHasherId").updateChildValues([userId : hasherId])
         } else {
             let alertController = UIAlertController(title: "Awkward!", message: "Someone already said they're this hasher", preferredStyle: .Alert)
             let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in }
@@ -79,7 +80,7 @@ class ClaimHashIdVC: UIViewController {
     }
     
     @IBAction func addNewHasher(sender: UIButton) {
-        DataService.ds.REF_BASE.childByAppendingPath("UidToHasherId").updateChildValues([userId : userId])
+        DataService.ds.REF_BASE.child("UidToHasherId").updateChildValues([userId : userId])
     }
     
     @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {

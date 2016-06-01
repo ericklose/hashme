@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class HasherCell: UITableViewCell {
     
@@ -55,7 +55,7 @@ class HasherCell: UITableViewCell {
     }
     
     func editAltHashNameInFirebase(hasherId: String!, altName: String!, altId: String!) {
-        let kennelsAndNamesUrl = DataService.ds.REF_HASHERS.childByAppendingPath(hasherId).childByAppendingPath("hasherKennelsAndNames")
+        let kennelsAndNamesUrl = DataService.ds.REF_HASHERS.child(hasherId).child("hasherKennelsAndNames")
         
         if altName == "" {
             kennelsAndNamesUrl.updateChildValues([altId: true])
@@ -65,9 +65,9 @@ class HasherCell: UITableViewCell {
     }
     
     @IBAction func deleteKennelButtonPressed(sender: AnyObject) {
-        let kennelsAndNamesUrl = DataService.ds.REF_HASHERS.childByAppendingPath(hasherId).childByAppendingPath("hasherKennelsAndNames")
-        kennelsAndNamesUrl.childByAppendingPath(kennelMembershipId as String).removeValue()
-        let kennelMembersUrl = DataService.ds.REF_KENNELS.childByAppendingPath(kennelMembershipId).childByAppendingPath("kennelMembers")
-        kennelMembersUrl.childByAppendingPath(hasherId).removeValue()
+        let kennelsAndNamesUrl = DataService.ds.REF_HASHERS.child(hasherId).child("hasherKennelsAndNames")
+        kennelsAndNamesUrl.child(kennelMembershipId as String).removeValue()
+        let kennelMembersUrl = DataService.ds.REF_KENNELS.child(kennelMembershipId).child("kennelMembers")
+        kennelMembersUrl.child(hasherId).removeValue()
     }
 }

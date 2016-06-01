@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class ReportingTestVC: UIViewController {
     
@@ -38,11 +38,11 @@ class ReportingTestVC: UIViewController {
                     self.resultOne.text = "\(trailReport1.attendeeCount)"
         
         
-//        DataService.ds.REF_TRAILS.childByAppendingPath(thisTrail).childByAppendingPath("trailAttendees").observeEventType(.Value, withBlock: { snapshot in
+//        DataService.ds.REF_TRAILS.child(thisTrail).child("trailAttendees").observeEventType(.Value, withBlock: { snapshot in
 //            
 //            self.trails = []
 //            //            let snap = snapshot
-//            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+//            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
 //                for snap in snapshots {
 //                    if let trailDict = snap.value as? Dictionary<String, AnyObject> {
 //                        let key = snap.key

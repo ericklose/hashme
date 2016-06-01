@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseDatabase
 
 class Attendee: Hasher {
     
@@ -19,9 +19,9 @@ class Attendee: Hasher {
     private var _attendeeVirginSponsor: String!
     private var _attendeeVisitingFrom: String!
     private var _attendeeTrailHashCash: Int!
-    private var _attendeeHasherUrl: Firebase!
-    private var _attendeeTrailUrl: Firebase!
-    private var _attendeeKennelUrl: Firebase!
+    private var _attendeeHasherUrl: FIRDatabaseReference!
+    private var _attendeeTrailUrl: FIRDatabaseReference!
+    private var _attendeeKennelUrl: FIRDatabaseReference!
     
     var attendeeAttending: Bool!
     
@@ -97,9 +97,9 @@ class Attendee: Hasher {
     
     func attendeeSetPaidReducedReason(attendeeId: String, trailId: String, attendeePaidReducedReason: String) {
         if attendeePaidReducedReason == "" {
-            _attendeeHasherUrl.childByAppendingPath("hasherPaidReducedReason").removeValue()
-            _attendeeTrailUrl.childByAppendingPath("trailAttendeePaidReducedReason").removeValue()
-            _attendeeKennelUrl.childByAppendingPath("trailAttendeePaidReducedReason").removeValue()
+            _attendeeHasherUrl.child("hasherPaidReducedReason").removeValue()
+            _attendeeTrailUrl.child("trailAttendeePaidReducedReason").removeValue()
+            _attendeeKennelUrl.child("trailAttendeePaidReducedReason").removeValue()
         } else {
             _attendeeHasherUrl.updateChildValues(["hasherPaidReducedReason" : attendeePaidReducedReason])
             _attendeeTrailUrl.updateChildValues(["trailAttendeePaidReducedReason" : attendeePaidReducedReason])
@@ -108,12 +108,12 @@ class Attendee: Hasher {
     }
     
     func attendeeSetNotPaid(attendeeId: String, trailId: String) {
-        _attendeeHasherUrl.childByAppendingPath("hasherPaidTrailAmt").removeValue()
-        _attendeeTrailUrl.childByAppendingPath("trailAttendeePaidAmt").removeValue()
-        _attendeeKennelUrl.childByAppendingPath("trailAttendeePaidAmt").removeValue()
-        _attendeeHasherUrl.childByAppendingPath("hasherPaidReducedReason").removeValue()
-        _attendeeTrailUrl.childByAppendingPath("trailAttendeePaidReducedReason").removeValue()
-        _attendeeKennelUrl.childByAppendingPath("trailAttendeePaidReducedReason").removeValue()
+        _attendeeHasherUrl.child("hasherPaidTrailAmt").removeValue()
+        _attendeeTrailUrl.child("trailAttendeePaidAmt").removeValue()
+        _attendeeKennelUrl.child("trailAttendeePaidAmt").removeValue()
+        _attendeeHasherUrl.child("hasherPaidReducedReason").removeValue()
+        _attendeeTrailUrl.child("trailAttendeePaidReducedReason").removeValue()
+        _attendeeKennelUrl.child("trailAttendeePaidReducedReason").removeValue()
     }
     
     //STILL MISSING VIRGIN & VISITOR UPDATES
@@ -168,9 +168,9 @@ class Attendee: Hasher {
             }
         }
         
-        self._attendeeHasherUrl = DataService.ds.REF_HASHERS.childByAppendingPath(self.hasherId).childByAppendingPath("trailsAttended").childByAppendingPath(self._attendeeRelevantTrailId)
-        self._attendeeTrailUrl = DataService.ds.REF_TRAILS.childByAppendingPath(self._attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(self.hasherId)
-        self._attendeeKennelUrl = DataService.ds.REF_KENNELS.childByAppendingPath(attendeeInitKennelId).childByAppendingPath("kennelTrails").childByAppendingPath(self._attendeeRelevantTrailId).childByAppendingPath("trailAttendees").childByAppendingPath(self.hasherId)
+        self._attendeeHasherUrl = DataService.ds.REF_HASHERS.child(self.hasherId).child("trailsAttended").child(self._attendeeRelevantTrailId)
+        self._attendeeTrailUrl = DataService.ds.REF_TRAILS.child(self._attendeeRelevantTrailId).child("trailAttendees").child(self.hasherId)
+        self._attendeeKennelUrl = DataService.ds.REF_KENNELS.child(attendeeInitKennelId).child("kennelTrails").child(self._attendeeRelevantTrailId).child("trailAttendees").child(self.hasherId)
         
     }
 }

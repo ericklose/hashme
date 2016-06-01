@@ -8,7 +8,7 @@
 
 import MapKit
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class MapAddressVC: UIViewController, MKMapViewDelegate {
    
@@ -22,7 +22,7 @@ class MapAddressVC: UIViewController, MKMapViewDelegate {
    let locationManager = CLLocationManager()
    
    //Lets pretend we downloaded these from the server
-   //let aKennelAddress = DataService.ds.REF_KENNELS.childByAppendingPath("-KFzXnkjval69MZ5K1k9")
+   //let aKennelAddress = DataService.ds.REF_KENNELS.child("-KFzXnkjval69MZ5K1k9")
    //let addresses = aKennelAddress as [String]
    
    override func viewDidLoad() {
@@ -35,7 +35,7 @@ class MapAddressVC: UIViewController, MKMapViewDelegate {
          
          self.kennels = []
          
-         if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+         if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
             
             for snap in snapshots {
                

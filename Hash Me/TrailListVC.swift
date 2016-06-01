@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -29,7 +29,7 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             
             self.trails = []
             
-            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshots {
                     if let trailDict = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key
@@ -56,10 +56,10 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         trail = trails[indexPath.row]
         
         //HOLLY'S NEW VERSION
-        performSegueWithIdentifier("trailDetails", sender: trail)
+//        performSegueWithIdentifier("trailDetails", sender: trail)
         
         //ERIC'S LEGACY VERSION
-//        performSegueWithIdentifier("manageTrail", sender: trail)
+        performSegueWithIdentifier("manageTrail", sender: trail)
         
     }
     

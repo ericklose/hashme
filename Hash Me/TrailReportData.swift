@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseDatabase
 
 class TrailReportData {
     
@@ -45,10 +45,10 @@ class TrailReportData {
         
         self._trailKey = trailKey
         
-        DataService.ds.REF_TRAILS.childByAppendingPath(self._trailKey).childByAppendingPath("trailAttendees").observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_TRAILS.child(self._trailKey).child("trailAttendees").observeEventType(.Value, withBlock: { snapshot in
 
             
-            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshots {
                     if let trailDict = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key

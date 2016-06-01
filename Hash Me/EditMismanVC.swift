@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class EditMismanVC: UIViewController {
     
@@ -24,8 +24,8 @@ class EditMismanVC: UIViewController {
     var selectedMemberDict: Dictionary<String, String>!
     var existingFullAdmins: Int!
     
-    var kennelAdminUrl: Firebase!
-    var kennelMismanUrl: Firebase!
+    var kennelAdminUrl: FIRDatabaseReference!
+    var kennelMismanUrl: FIRDatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,17 +39,17 @@ class EditMismanVC: UIViewController {
         hasherHashNameLbl.text = selectedMemberDict["hasherHashName"]
         mismanagementKennelName.text = selectedMemberDict["kennelName"]
         
-        kennelAdminUrl = DataService.ds.REF_KENNELS.childByAppendingPath(kennelId).childByAppendingPath("kennelAdmins")
-        kennelMismanUrl = DataService.ds.REF_KENNELS.childByAppendingPath(kennelId).childByAppendingPath("kennelMismanagement")
+        kennelAdminUrl = DataService.ds.REF_KENNELS.child(kennelId).child("kennelAdmins")
+        kennelMismanUrl = DataService.ds.REF_KENNELS.child(kennelId).child("kennelMismanagement")
     }
     
     @IBAction func removeMismanagementRole(sender: UIButton!) {
         let alertController = UIAlertController(title: "Remove Misman Role", message: "This Also Removes Admin Access", preferredStyle: .ActionSheet)
         let remove = UIAlertAction(title: "Remove From Role", style: .Destructive, handler: { (action) -> Void in
             self.mismanagementRoleTitle.text = ""
-            self.kennelMismanUrl.childByAppendingPath(self.hasherId).removeValue()
+            self.kennelMismanUrl.child(self.hasherId).removeValue()
             self.adminLevel = ""
-            self.kennelAdminUrl.childByAppendingPath(self.hasherId).removeValue()
+            self.kennelAdminUrl.child(self.hasherId).removeValue()
             self.updateDetails()
         })
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
@@ -84,7 +84,7 @@ class EditMismanVC: UIViewController {
             })
             let remove = UIAlertAction(title: "Remove as Admin", style: .Destructive) { (action) -> Void in
                 self.adminLevel = "none"
-                self.kennelAdminUrl.childByAppendingPath(self.hasherId).removeValue()
+                self.kennelAdminUrl.child(self.hasherId).removeValue()
                 self.updateDetails()
             }
             let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
@@ -101,7 +101,7 @@ class EditMismanVC: UIViewController {
     
     @IBAction func doneMismanagement(sender: UIButton!) {
         if mismanagementRoleTitle.text != nil && mismanagementRoleTitle.text == "" {
-            kennelMismanUrl.childByAppendingPath(hasherId).removeValue()
+            kennelMismanUrl.child(hasherId).removeValue()
         } else if mismanagementRoleTitle.text != nil {
             kennelMismanUrl.updateChildValues([hasherId : mismanagementRoleTitle.text!])
         }

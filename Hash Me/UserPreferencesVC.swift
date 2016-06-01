@@ -21,13 +21,14 @@ class UserPreferencesVC: UIViewController {
     }
 
     @IBAction func logoutUser(sender: AnyObject) {
-        logoutFirebase()
+//         Doesn't work but needs IBAction hooked up
+//        logoutFirebase()
     }
     
     @IBAction func changeUserPassword(sender: AnyObject) {
         //Need to get user email and existing password to here somehow
 //        FirebaseUserSettings.fus.changeFirebasePassword(String, pwd: String)
-        changeFirebasePassword("email", pwd: "current password")
+//        changeFirebasePassword("email", pwd: "current password")
     }
     
     @IBAction func changeUserEmail(sender: AnyObject) {
