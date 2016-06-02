@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
@@ -84,7 +84,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { hasherSnapshot in
             
-            if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FDataSnapshot] {
+            if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FIRDataSnapshot] {
                 
                 self.trailHareNamesDict = [:]
                 self.attendees = []
@@ -320,13 +320,13 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             firebasePost.setValue(newHasher)
             let newHasherId = firebasePost.key
             
-            let firebasePost2 = DataService.ds.REF_HASHERS.childByAppendingPath(newHasherId).childByAppendingPath("trailsAttended").childByAppendingPath(trails.trailKey)
+            let firebasePost2 = DataService.ds.REF_HASHERS.child(newHasherId).child("trailsAttended").child(trails.trailKey)
             firebasePost2.setValue(newHasherTrails)
             
-            let firebaseTrailPost = DataService.ds.REF_TRAILS.childByAppendingPath(trails.trailKey).childByAppendingPath("trailAttendees").childByAppendingPath(newHasherId)
+            let firebaseTrailPost = DataService.ds.REF_TRAILS.child(trails.trailKey).child("trailAttendees").child(newHasherId)
             firebaseTrailPost.setValue(trailInfo)
             
-            let firebaseKennelTrailPost = DataService.ds.REF_KENNELS.childByAppendingPath(trails.trailKennelId).childByAppendingPath("kennelTrails").childByAppendingPath(trails.trailKey).childByAppendingPath("trailAttendees").childByAppendingPath(newHasherId)
+            let firebaseKennelTrailPost = DataService.ds.REF_KENNELS.child(trails.trailKennelId).child("kennelTrails").child(trails.trailKey).child("trailAttendees").child(newHasherId)
             firebaseTrailPost.setValue(trailInfo)
             
             newHasherHashName.text = ""

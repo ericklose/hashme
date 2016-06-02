@@ -6,7 +6,7 @@
 //  Copyright © 2016 Eric Klose. All rights reserved.
 //
 
-import Firebase
+import FirebaseDatabase
 import UIKit
 
 class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -35,7 +35,7 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         kennelMembersTableView.delegate = self
         kennelMembersTableView.dataSource = self
         
-        DataService.ds.REF_KENNELS.childByAppendingPath(kennels.kennelId).observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_KENNELS.child(kennels.kennelId).observeEventType(.Value, withBlock: { snapshot in
             if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
                 if let misManDict = kennelDict["kennelMismanagement"] as? Dictionary<String, String> {
                     self.mismanagementDict = misManDict
@@ -61,7 +61,7 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
             DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot2 in
-                if let snapshots2 = snapshot2.children.allObjects as? [FDataSnapshot] {
+                if let snapshots2 = snapshot2.children.allObjects as? [FIRDataSnapshot] {
                     for snap2 in snapshots2 {
                         if let hasherNameDict = snap2.value as? Dictionary<String, AnyObject> {
                             let key = snap2.key

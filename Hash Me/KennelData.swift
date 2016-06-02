@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseDatabase
 
 class KennelData {
     
@@ -25,7 +25,7 @@ class KennelData {
     private var _kennelPostalCode: String!
     private var _kennelMismanagement: Dictionary<String, AnyObject>!
     private var _kennelAdmins: Dictionary<String, AnyObject>!
-    private var _kennelUrl: Firebase!
+    private var _kennelUrl: FIRDatabaseReference!
     
     var kennelId: String {
         return _kennelId
@@ -121,7 +121,7 @@ class KennelData {
     
     func kennelSetName(kennelId: String, newKennelName: String) {
         if newKennelName == "" {
-            _kennelUrl.childByAppendingPath("kennelName").removeValue()
+            _kennelUrl.child("kennelName").removeValue()
         } else {
             _kennelUrl.updateChildValues(["kennelName" : newKennelName])
         }
@@ -129,7 +129,7 @@ class KennelData {
     
     func kennelSetDescription(kennelId: String, newKennelDescription: String) {
         if newKennelDescription == "" {
-            _kennelUrl.childByAppendingPath("kennelDescription").removeValue()
+            _kennelUrl.child("kennelDescription").removeValue()
         } else {
             _kennelUrl.updateChildValues(["kennelDescription" : newKennelDescription])
         }
@@ -137,7 +137,7 @@ class KennelData {
     
     func kennelSetSchedule(kennelId: String, newKennelSchedule: String) {
         if newKennelSchedule == "" {
-            _kennelUrl.childByAppendingPath("kennelSchedule").removeValue()
+            _kennelUrl.child("kennelSchedule").removeValue()
         } else {
             _kennelUrl.updateChildValues(["kennelSchedule" : newKennelSchedule])
         }
@@ -145,7 +145,7 @@ class KennelData {
     
     func kennelSetCountry(kennelId: String, newKennelCountry: String) {
         if newKennelCountry == "" {
-            _kennelUrl.childByAppendingPath("kennelCountry").removeValue()
+            _kennelUrl.child("kennelCountry").removeValue()
         } else {
             _kennelUrl.updateChildValues(["kennelCountry" : newKennelCountry])
         }
@@ -153,7 +153,7 @@ class KennelData {
     
     func kennelSetUsState(kennelId: String, newKennelUsState: String) {
         if newKennelUsState == "" {
-            _kennelUrl.childByAppendingPath("kennelUsState").removeValue()
+            _kennelUrl.child("kennelUsState").removeValue()
         } else {
             _kennelUrl.updateChildValues(["kennelUsState" : newKennelUsState])
         }
@@ -161,7 +161,7 @@ class KennelData {
     
     func kennelSetCity(kennelId: String, newKennelCity: String) {
         if newKennelCity == "" {
-            _kennelUrl.childByAppendingPath("kennelCity").removeValue()
+            _kennelUrl.child("kennelCity").removeValue()
         } else {
             _kennelUrl.updateChildValues(["kennelCity" : newKennelCity])
         }
@@ -169,7 +169,7 @@ class KennelData {
     
     func kennelSetPostalCode(kennelId: String, newKennelPostalCode: String) {
         if newKennelPostalCode == "" {
-            _kennelUrl.childByAppendingPath("kennelPostalCode").removeValue()
+            _kennelUrl.child("kennelPostalCode").removeValue()
         } else {
             _kennelUrl.updateChildValues(["kennelPostalCode" : newKennelPostalCode])
         }
@@ -177,17 +177,17 @@ class KennelData {
     
     func kennelSetAdminStatus(kennelId: String, hasherId: String, newKennelAdminStatus: String) {
         if newKennelAdminStatus == "" {
-            _kennelUrl.childByAppendingPath("kennelAdmins").childByAppendingPath(hasherId).removeValue()
+            _kennelUrl.child("kennelAdmins").child(hasherId).removeValue()
         } else if newKennelAdminStatus == "full" || newKennelAdminStatus == "trail" {
-            _kennelUrl.childByAppendingPath("kennelAdmins").updateChildValues([hasherId : newKennelAdminStatus])
+            _kennelUrl.child("kennelAdmins").updateChildValues([hasherId : newKennelAdminStatus])
         }
     }
     
     func kennelSetMismanagementStatus(kennelId: String, hasherId: String, newKennelMismanStatus: String) {
         if newKennelMismanStatus == "" {
-            _kennelUrl.childByAppendingPath("kennelMismanagement").childByAppendingPath(hasherId).removeValue()
+            _kennelUrl.child("kennelMismanagement").child(hasherId).removeValue()
         } else {
-            _kennelUrl.childByAppendingPath("kennelMismanagement").updateChildValues([hasherId : newKennelMismanStatus])
+            _kennelUrl.child("kennelMismanagement").updateChildValues([hasherId : newKennelMismanStatus])
         }
     }
     
@@ -260,7 +260,7 @@ class KennelData {
             self._kennelCityAndRegion = self._kennelCity + ", " + self._kennelCityAndRegion
         }
         
-        self._kennelUrl = DataService.ds.REF_KENNELS.childByAppendingPath(_kennelId)
+        self._kennelUrl = DataService.ds.REF_KENNELS.child(_kennelId)
     }
     
     

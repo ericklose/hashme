@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UISearchBarDelegate {
     
@@ -52,7 +52,7 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 //    func loadKennelData(completed: DownloadComplete) {
 //        DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
 //                
-//                if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+//                if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
 //                    self.kennelPickerNames = ["-Select Kennel-"]
 //                    for snap in snapshots {
 //                        if let kennelDict2 = snap.value as? Dictionary<String, AnyObject> {

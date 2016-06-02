@@ -7,18 +7,18 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseDatabase
 
 //let URL_BASE = "https://hash-me-dev.firebaseio.com/"
-let URL_BASE = "https://hashme.firebaseio.com"
+//let URL_BASE = "https://hashme.firebaseio.com"
 
 class DataService {
     static let ds = DataService()
     
-    private var _REF_BASE = Firebase(url: "\(URL_BASE)")
-    private var _REF_TRAILS = Firebase(url: "\(URL_BASE)/trails")
-    private var _REF_HASHERS = Firebase(url: "\(URL_BASE)/hashers")
-    private var _REF_KENNELS = Firebase(url: "\(URL_BASE)/kennels")
+    private var _REF_BASE = FIRDatabase.database().reference()
+    private var _REF_TRAILS = FIRDatabase.database().referenceWithPath("trails")
+    private var _REF_HASHERS = FIRDatabase.database().referenceWithPath("hashers")
+    private var _REF_KENNELS = FIRDatabase.database().referenceWithPath("kennels")
     //NEW
     //REF_HASHER_UID is the ID for the hasher owned by the user. The naming is bad but this was the least destructive way to change it.
     private var _REF_HASHER_USERID: String!
@@ -26,19 +26,19 @@ class DataService {
     //    private var _REF_UID = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
     
     
-    var REF_BASE: Firebase {
+    var REF_BASE: FIRDatabaseReference {
         return _REF_BASE
     }
     
-    var REF_TRAILS: Firebase {
+    var REF_TRAILS: FIRDatabaseReference {
         return _REF_TRAILS
     }
     
-    var REF_HASHERS: Firebase {
+    var REF_HASHERS: FIRDatabaseReference {
         return _REF_HASHERS
     }
     
-    var REF_KENNELS: Firebase {
+    var REF_KENNELS: FIRDatabaseReference {
         return _REF_KENNELS
     }
     
@@ -55,15 +55,18 @@ class DataService {
         return _REF_HASHER_USERID
     }
     
-    var REF_USER_CURRENT: Firebase {
-        print("uid is: \(KEY_UID)")
-        let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
-        let user = Firebase(url: "\(URL_BASE)").childByAppendingPath("hashers").childByAppendingPath(uid)
-        return user!
+    var REF_USER_CURRENT: FIRDatabaseReference {
+        let uid = "7be00fdd-8aa6-43fe-bb6d-b53c255bab7a"
+        let user = FIRDatabase.database().referenceWithPath("hashers").child(uid)
+        return user
+        //        print("uid is: \(KEY_UID)")
+        //        let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
+        //        let user = FIRDatabase.database().referenceWithPath("hashers").child(uid)
+        //        return user
     }
     
     func createFirebaseUser(uid: String, user: Dictionary<String, String>) {
-        REF_HASHERS.childByAppendingPath(uid).setValue(user)
+        REF_HASHERS.child(uid).setValue(user)
     }
     
     

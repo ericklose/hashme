@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class TrailDetailsVC: UIViewController {
     
@@ -42,7 +42,7 @@ class TrailDetailsVC: UIViewController {
             self.trailHareNamesDict = [:]
             if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
  
-                if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+                if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                     for snap in snapshots {
                         
                         if let hasherDict2 = snap.value as? Dictionary<String, AnyObject> {

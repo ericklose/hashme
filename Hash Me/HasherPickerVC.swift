@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UISearchBarDelegate {
     
@@ -49,7 +49,7 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func loadHasherData(completed: DownloadComplete) {
         DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot in
                 
-                if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+                if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                     self.hasherPickerNames = ["-Select Hasher-"]
                     for snap in snapshots {
                         if let hasherDict2 = snap.value as? Dictionary<String, AnyObject> {

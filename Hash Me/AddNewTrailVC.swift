@@ -81,7 +81,7 @@ class AddNewTrailVC: UIViewController {
         let firebasePost = DataService.ds.REF_TRAILS.childByAutoId()
         let trailRef = firebasePost.key
         firebasePost.setValue(trail)
-        DataService.ds.REF_KENNELS.childByAppendingPath(newTrailKennelId).childByAppendingPath("kennelTrails").childByAppendingPath(trailRef).setValue(trail)
+        DataService.ds.REF_KENNELS.child(newTrailKennelId).child("kennelTrails").child(trailRef).setValue(trail)
         
         newTrailDate.text = ""
         newTrailKennelName.text = ""
@@ -121,14 +121,14 @@ class AddNewTrailVC: UIViewController {
     //        if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {
     //            if sourceViewController.hasherChoiceId == nil {
     //                specificAttendeeVirginSponsorIs.text = ""
-    //                trailAttendencePath.childByAppendingPath("trailAttendeeVirginSponsorIs").removeValue()
-    //                trailsAttendedPath.childByAppendingPath("hasherVirginSponsor").removeValue()
-    //                DataService.ds.REF_HASHERS.childByAppendingPath(specificAttendee.hasherId).childByAppendingPath("hasherOriginalSponsor").removeValue()
+    //                trailAttendencePath.child("trailAttendeeVirginSponsorIs").removeValue()
+    //                trailsAttendedPath.child("hasherVirginSponsor").removeValue()
+    //                DataService.ds.REF_HASHERS.child(specificAttendee.hasherId).child("hasherOriginalSponsor").removeValue()
     //            } else {
     //                specificAttendeeVirginSponsorIs.text = sourceViewController.hasherChoiceName
     //                trailAttendencePath.updateChildValues(["trailAttendeeVirginSponsorIs" : sourceViewController.hasherChoiceId])
     //                trailsAttendedPath.updateChildValues(["hasherVirginSponsor" : sourceViewController.hasherChoiceId])
-    //                DataService.ds.REF_HASHERS.childByAppendingPath(specificAttendee.hasherId).updateChildValues(["hasherOriginalSponsor" : sourceViewController.hasherChoiceId])
+    //                DataService.ds.REF_HASHERS.child(specificAttendee.hasherId).updateChildValues(["hasherOriginalSponsor" : sourceViewController.hasherChoiceId])
     //            }
     //        }
     //    }

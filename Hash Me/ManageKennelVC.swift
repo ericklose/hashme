@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -33,7 +33,7 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         print("kennelID : ", kennels.kennelId)
         
-        DataService.ds.REF_KENNELS.childByAppendingPath(kennels.kennelId).observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_KENNELS.child(kennels.kennelId).observeEventType(.Value, withBlock: { snapshot in
             
             self.trails = []
             

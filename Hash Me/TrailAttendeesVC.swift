@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class TrailAttendeesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
@@ -24,7 +24,7 @@ class TrailAttendeesVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround()
+//        self.hideKeyboardWhenTappedAround()
         trailAttendeeTableView.delegate = self
         trailAttendeeTableView.dataSource = self
         attendeeSearchBar.delegate = self
@@ -39,7 +39,7 @@ class TrailAttendeesVC: UIViewController, UITableViewDataSource, UITableViewDele
     override func viewDidAppear(animated: Bool) {
         DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { hasherSnapshot in
             
-            if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FDataSnapshot] {
+            if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FIRDataSnapshot] {
                 
                 self.attendees = []
                 self.potentialAttendees = []

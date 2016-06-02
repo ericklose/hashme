@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class KennelPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -38,7 +38,7 @@ class KennelPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
             
             self.kennels = []
             
-            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshots {
                     if let kennelDict = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key

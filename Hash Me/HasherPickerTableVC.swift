@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class HasherPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -39,7 +39,7 @@ class HasherPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
             
             self.kennelNamesDict = [:]
             
-            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshots {
                     if let kennelDict = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key
@@ -56,7 +56,7 @@ class HasherPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
             
             self.hashers = []
             
-            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshots {
                     if let hasherDict = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key

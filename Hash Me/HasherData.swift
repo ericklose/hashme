@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseDatabase
 
 class Hasher {
     
@@ -20,7 +20,7 @@ class Hasher {
     private var _kennelInitDict: Dictionary<String, AnyObject>!
     private var _hasherPrimaryHashName: String!
     private var _hasherPrimaryKennel: String!
-    private var _hasherUrl: Firebase!
+    private var _hasherUrl: FIRDatabaseReference!
     
     var kennelAndNameDict: [String: String] = [:]
     var hasher: Hasher!
@@ -90,7 +90,7 @@ class Hasher {
         if nerdName != "" {
             _hasherUrl.updateChildValues(["hasherNerdName" : nerdName])
         } else {
-            _hasherUrl.childByAppendingPath("hasherNerdName").removeValue()
+            _hasherUrl.child("hasherNerdName").removeValue()
         }
     }
     
@@ -115,7 +115,7 @@ class Hasher {
             self._hasherPrimaryKennel = hasherPrimaryKennel
         }
         
-        self._hasherUrl = DataService.ds.REF_HASHERS.childByAppendingPath(self.hasherId)
+        self._hasherUrl = DataService.ds.REF_HASHERS.child(self.hasherId)
     }
     
 }

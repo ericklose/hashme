@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class AttendeeCell: UITableViewCell {
     
@@ -92,7 +92,7 @@ class AttendeeCell: UITableViewCell {
     
     @IBAction func hasherNerdNameAdded(sender: UITextField) {
         if hasherNerdName.text != nil && hasherNerdName.text != "" {
-            DataService.ds.REF_HASHERS.childByAppendingPath(attendee.hasherId).updateChildValues(["hasherNerdName" : hasherNerdName.text!])
+            DataService.ds.REF_HASHERS.child(attendee.hasherId).updateChildValues(["hasherNerdName" : hasherNerdName.text!])
         }
     }
     
