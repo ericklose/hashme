@@ -56,13 +56,13 @@ class DataService {
     }
     
     var REF_USER_CURRENT: FIRDatabaseReference {
-        let uid = "7be00fdd-8aa6-43fe-bb6d-b53c255bab7a"
-        let user = FIRDatabase.database().referenceWithPath("hashers").child(uid)
-        return user
-        //        print("uid is: \(KEY_UID)")
-        //        let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
-        //        let user = FIRDatabase.database().referenceWithPath("hashers").child(uid)
-        //        return user
+//        let uid = "7be00fdd-8aa6-43fe-bb6d-b53c255bab7a"
+//        let user = FIRDatabase.database().referenceWithPath("hashers").child(uid)
+//        return user
+                print("uid is: \(KEY_UID)")
+                let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
+                let user = FIRDatabase.database().referenceWithPath("hashers").child(uid)
+                return user
     }
     
     func createFirebaseUser(uid: String, user: Dictionary<String, String>) {
