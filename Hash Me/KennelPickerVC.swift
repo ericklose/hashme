@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseDatabase
+import Firebase
 
 class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UISearchBarDelegate {
     

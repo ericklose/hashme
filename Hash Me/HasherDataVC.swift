@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseDatabase
+import Firebase
 
 class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     

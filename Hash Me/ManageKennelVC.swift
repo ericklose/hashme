@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseDatabase
+import Firebase
 
 class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     

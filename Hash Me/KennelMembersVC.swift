@@ -6,7 +6,7 @@
 //  Copyright © 2016 Eric Klose. All rights reserved.
 //
 
-import FirebaseDatabase
+import Firebase
 import UIKit
 
 class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSource {

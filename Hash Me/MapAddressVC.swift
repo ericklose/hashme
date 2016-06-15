@@ -8,7 +8,7 @@
 
 import MapKit
 import UIKit
-import FirebaseDatabase
+import Firebase
 
 class MapAddressVC: UIViewController, MKMapViewDelegate {
    

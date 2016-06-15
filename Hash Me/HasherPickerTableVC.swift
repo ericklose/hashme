@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseDatabase
+import Firebase
 
 class HasherPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
