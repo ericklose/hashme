@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FirebaseDatabase
+import Firebase
 
 //let URL_BASE = "https://hash-me-dev.firebaseio.com/"
 //let URL_BASE = "https://hashme.firebaseio.com"

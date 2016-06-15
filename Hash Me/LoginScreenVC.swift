@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
-import FirebaseAuth
+import Firebase
 
 class LoginScreenVC: UIViewController {
     
@@ -26,6 +26,10 @@ class LoginScreenVC: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        try! FIRAuth.auth()?.signOut()
+//        FIRDatabase.database().reference().unau
+//        DataService.ds.REF_BASE.unauth()
         
         checkUserIdStatus { () -> () in
             self.autoLogInIfRecognized()
@@ -99,13 +103,15 @@ class LoginScreenVC: UIViewController {
         if let email = emailField.text where email != "", let pwd = passwordField.text where pwd != "" {
             FIRAuth.auth()!.signInWithEmail(email, password: pwd, completion: { (authData, error) in
                 if error != nil {
+//                    I can get this to fire when it's a new account
                     print("top error level")
                     print(error)
                     if error == STATUS_ACCOUNT_NONEXIST || error == 17011 {
+//                        I don't seem able to get into this level ... the error codes are different anyway
                         FIRAuth.auth()?.createUserWithEmail(email, password: pwd, completion: { (user, error) in
                             if error != nil {
                                 print("one of the error levels")
-                                self.showErrorAlert("Could Not Create Account", msg: "seriously, I dunno")
+                                self.showErrorAlert("Could Not Create Account", msg: "dude, I have no idea")
                             } else {
                                 print("key uid ", KEY_UID)
                                 print("dict thing uid ", user?.uid)
@@ -116,6 +122,8 @@ class LoginScreenVC: UIViewController {
                         //                    LOOK AT DOCS FOR ERROR TRAPPING
                     }
                 }
+                print("no error")
+//                This works fine if it's a recognized user
                 NSUserDefaults.standardUserDefaults().setValue(authData?.uid, forKey: KEY_UID)
                 self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
             })
