@@ -28,8 +28,6 @@ class LoginScreenVC: UIViewController {
         super.viewDidAppear(animated)
         
 //        try! FIRAuth.auth()?.signOut()
-        //        FIRDatabase.database().reference().unau
-        //        DataService.ds.REF_BASE.unauth()
         
         checkUserIdStatus { () -> () in
             self.autoLogInIfRecognized()
