@@ -9,16 +9,15 @@
 import Foundation
 import Firebase
 
-//let URL_BASE = "https://hash-me-dev.firebaseio.com/"
-//let URL_BASE = "https://hashme.firebaseio.com"
+let URL_BASE = FIRDatabase.database().reference()
 
 class DataService {
     static let ds = DataService()
     
-    private var _REF_BASE = FIRDatabase.database().reference()
-    private var _REF_TRAILS = FIRDatabase.database().referenceWithPath("trails")
-    private var _REF_HASHERS = FIRDatabase.database().referenceWithPath("hashers")
-    private var _REF_KENNELS = FIRDatabase.database().referenceWithPath("kennels")
+    private var _REF_BASE = URL_BASE
+    private var _REF_TRAILS = URL_BASE.child("trails")
+    private var _REF_HASHERS = URL_BASE.child("hashers")
+    private var _REF_KENNELS = URL_BASE.child("kennels")
     //NEW
     //REF_HASHER_UID is the ID for the hasher owned by the user. The naming is bad but this was the least destructive way to change it.
     private var _REF_HASHER_USERID: String!
@@ -43,6 +42,9 @@ class DataService {
     }
     
     var REF_UID: String! {
+        print("confirm on this page")
+        print("what's missing? ", KEY_UID)
+        print("this'll prolly crash: ", NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String)
         return NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
     }
     
@@ -59,10 +61,12 @@ class DataService {
 //        let uid = "7be00fdd-8aa6-43fe-bb6d-b53c255bab7a"
 //        let user = FIRDatabase.database().referenceWithPath("hashers").child(uid)
 //        return user
-                print("uid is: \(KEY_UID)")
-                let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
-                let user = FIRDatabase.database().referenceWithPath("hashers").child(uid)
-                return user
+        print("uid is: \(KEY_UID)")
+        let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
+        print("uid also is: ", uid)
+        let user = REF_HASHERS.child(uid)
+        print("user var is: ", user)
+        return user
     }
     
     func createFirebaseUser(uid: String, user: Dictionary<String, String>) {
