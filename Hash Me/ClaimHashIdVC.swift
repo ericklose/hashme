@@ -17,8 +17,8 @@ class ClaimHashIdVC: UIViewController {
     @IBOutlet weak var confirmSelectionBtn: UIButton!
     @IBOutlet weak var addSelfAsNewHasherBtn: UIButton!
     
-//    var userId = DataService.ds.REF_UID
-    var userId = "7be00fdd-8aa6-43fe-bb6d-b53c255bab7a"
+    var userId = DataService.ds.REF_UID
+//    var userId = "7be00fdd-8aa6-43fe-bb6d-b53c255bab7a"
     var hasherId: String!
     var hasherDict: [String: String]!
     var thisIsTheFirstDidLoad: Bool = true
@@ -80,6 +80,9 @@ class ClaimHashIdVC: UIViewController {
     }
     
     @IBAction func addNewHasher(sender: UIButton) {
+        print("wtf: ", NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String)
+        print("wtf2: ", DataService.ds.REF_UID)
+        print("waht's the uid here: ", userId)
         DataService.ds.REF_BASE.child("UidToHasherId").updateChildValues([userId : userId])
     }
     
