@@ -20,7 +20,7 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround() 
+//        self.hideKeyboardWhenTappedAround() 
         kennelListTable.delegate = self
         kennelListTable.dataSource = self
         kennelListTable.estimatedRowHeight = 100
