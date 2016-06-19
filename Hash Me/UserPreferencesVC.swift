@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class UserPreferencesVC: UIViewController {
     
@@ -22,10 +23,12 @@ class UserPreferencesVC: UIViewController {
 
     @IBAction func logoutUser(sender: AnyObject) {
 //         Doesn't work but needs IBAction hooked up
-//        logoutFirebase()
+        try! FIRAuth.auth()?.signOut()
+        performSegueWithIdentifier("logoutSegue", sender: nil)
     }
     
     @IBAction func changeUserPassword(sender: AnyObject) {
+        showErrorAlert("Also non-functional", msg: "Cut me some slack - this shit's complicated!")
         //Need to get user email and existing password to here somehow
 //        FirebaseUserSettings.fus.changeFirebasePassword(String, pwd: String)
 //        changeFirebasePassword("email", pwd: "current password")

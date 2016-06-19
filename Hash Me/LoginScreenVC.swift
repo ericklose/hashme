@@ -27,8 +27,6 @@ class LoginScreenVC: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-//        try! FIRAuth.auth()?.signOut()
-        
         checkUserIdStatus { () -> () in
             self.autoLogInIfRecognized()
         }
@@ -36,16 +34,9 @@ class LoginScreenVC: UIViewController {
     
     func checkUserIdStatus(completed: DownloadComplete) {
         DataService.ds.REF_BASE.child("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
-            print("1 ", NSUserDefaults.standardUserDefaults())
             if let userList = snapshot.value as? Dictionary<String, String> {
-                print("2")
-                //FIGURE OUT NSUserDefaults HERE
-                //OK, so, I'm writing in a value that triggers the auto-log in but am not sure how to see if it's already set?
-                //NSUserDefaults.standardUserDefaults().setValue("7be00fdd-8aa6-43fe-bb6d-b53c255bab7a", forKey: KEY_UID)
                 if DataService.ds.REF_UID != nil {
-                    print("3")
                     if let thisUsersHasherId = userList[DataService.ds.REF_UID] {
-                        print("4")
                         DataService.ds.storeRefHasherUserId(thisUsersHasherId)
                         self.userAlreadyConnectedToHasher = true
                         self.SEGUE_LOGGED_IN = "fullLogIn"
@@ -57,9 +48,7 @@ class LoginScreenVC: UIViewController {
     }
     
     func autoLogInIfRecognized() {
-        print("10")
         if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
-            print("11")
             self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
         }
     }
@@ -67,26 +56,21 @@ class LoginScreenVC: UIViewController {
     //FACEBOOK LATER
     
     @IBAction func attemptFacebookLogin(sender: UIButton!) {
-        //            showErrorAlert("Facebook Not Enabled Yet", msg: "Use email login - Facebook authentication coming soon!")
         
         let facebookLogin = FBSDKLoginManager()
         
         facebookLogin.logInWithReadPermissions(["email"], fromViewController: self) { (facebookResult: FBSDKLoginManagerLoginResult!, facebookError: NSError!) -> Void in
             
             if facebookError != nil {
-                print("Facebook login failed. Error \(facebookError)")
+                self.showErrorAlert("Facebook Login Failed", msg: "\(facebookError)")
             } else {
                 let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
-                print("successfully logged in with facbeook: \(accessToken)")
-                
                 let credential = FIRFacebookAuthProvider.credentialWithAccessToken(accessToken)
                 FIRAuth.auth()?.signInWithCredential(credential, completion: { (authData, error) in
                     
                     if error != nil {
-                        print("login failed (step 2) \(error)")
+                        self.showErrorAlert("Facebook Login Failed on Step 2", msg: "\(facebookError)")
                     } else {
-                        print("logged in! \(authData)")
-                        
                         let hasher = ["provider": credential.provider]
                         DataService.ds.createFirebaseUser(authData!.uid, user: hasher)
                         
@@ -115,7 +99,6 @@ class LoginScreenVC: UIViewController {
                         self.showErrorAlert("Sign In Problem", msg: error!.localizedDescription)
                     }
                 } else {
-                    print("no error")
                     NSUserDefaults.standardUserDefaults().setValue(authData?.uid, forKey: KEY_UID)
                     self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
                 }
