@@ -42,9 +42,6 @@ class DataService {
     }
     
     var REF_UID: String! {
-        print("confirm on this page")
-        print("what's missing? ", KEY_UID)
-        print("this'll prolly crash: ", NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String)
         return NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
     }
     
@@ -58,14 +55,8 @@ class DataService {
     }
     
     var REF_USER_CURRENT: FIRDatabaseReference {
-//        let uid = "7be00fdd-8aa6-43fe-bb6d-b53c255bab7a"
-//        let user = FIRDatabase.database().referenceWithPath("hashers").child(uid)
-//        return user
-        print("uid is: \(KEY_UID)")
         let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
-        print("uid also is: ", uid)
         let user = REF_HASHERS.child(uid)
-        print("user var is: ", user)
         return user
     }
     
