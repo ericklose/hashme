@@ -22,56 +22,41 @@ class ReportingTestVC: UIViewController {
     @IBOutlet weak var resultFour: UILabel!
     @IBOutlet weak var resultFive: UILabel!
     
-//    var trailReport1: TrailReportData!
+    //    var trailReport1: TrailReportData!
 //    var revenue: Int = 0
 //    var attendeeCount: Int = 0
 //    var paidAttendee: Int = 0
     let thisTrail: String = "-KI4iiL6h9hxdyWANBkh"
+    var trailReport1: TrailReportData!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("confirm here, ", thisTrail)
         
-        let trailReport1 = TrailReportData(trailKey: thisTrail)
+//        self.topicOne.text = "Attendees"
+//        self.resultOne.text = "\(trailReport1.attendeeCount)"
+//        self.topicTwo.text = "Paid Attendees"
+//        self.resultTwo.text = "\(trailReport1.paidAttendee)"
+//        self.topicThree.text = "People to Collect From"
+//        self.resultThree.text = "\(trailReport1.attendeeCount - trailReport1.paidAttendee)"
+//        self.topicFour.text = "Revenue"
+//        self.resultFour.text = "\(trailReport1.revenue)"
         
-                    self.topicOne.text = "Attendees"
-                    self.resultOne.text = "\(trailReport1.attendeeCount)"
+        trailReport1 = TrailReportData(trailKey:  thisTrail) { () -> () in
+            self.displayResults()
+        }
         
         
-//        DataService.ds.REF_TRAILS.child(thisTrail).child("trailAttendees").observeEventType(.Value, withBlock: { snapshot in
-//            
-//            self.trails = []
-//            //            let snap = snapshot
-//            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-//                for snap in snapshots {
-//                    if let trailDict = snap.value as? Dictionary<String, AnyObject> {
-//                        let key = snap.key
-//                        print("trailDict: ", trailDict)
-//                        if let trailAttendeeWasThere = trailDict["trailAttendeePresent"] as? Int {
-//                            self.attendeeCount = self.attendeeCount + trailAttendeeWasThere
-//                        }
-//                        if let trailAttendeePaidAmt = trailDict["trailAttendeePaidAmt"] {
-//                            self.revenue = self.revenue + Int(trailAttendeePaidAmt as! NSNumber)
-//                            self.paidAttendee = self.paidAttendee + 1
-//                        }
-//                    }
-//                }
-//            }
-//            self.topicOne.text = "Attendees"
-//            self.resultOne.text = "\(self.attendeeCount)"
-//            
-//            self.topicTwo.text = "Revenue"
-//            self.resultTwo.text = "$ \(self.revenue)"
-//            
-//            self.topicThree.text = "Paid Attendees"
-//            self.resultThree.text = "\(self.paidAttendee)"
-//            
-//            self.topicFour.text = "Rev Per Attendee"
-//            self.resultFour.text = "$ \(round((Double(self.revenue) / Double(self.attendeeCount))*100)/100)"
-//            
-//            self.topicFive.text = "Unpaid Attendees"
-//            self.resultFive.text = "\(self.attendeeCount - self.paidAttendee)"
-//        })
-        
+    }
+    
+    func displayResults() {
+        self.topicOne.text = "Attendees"
+        self.resultOne.text = "\(trailReport1.attendeeCount)"
+        self.topicTwo.text = "Paid Attendees"
+        self.resultTwo.text = "\(trailReport1.paidAttendee)"
+        self.topicThree.text = "People to Collect From"
+        self.resultThree.text = "\(trailReport1.attendeeCount - trailReport1.paidAttendee)"
+        self.topicFour.text = "Revenue"
+        self.resultFour.text = "\(trailReport1.revenue)"
     }
 }

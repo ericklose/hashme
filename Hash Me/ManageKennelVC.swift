@@ -45,11 +45,6 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                         if let finalTrailDict = trailDict[key] as? Dictionary<String, AnyObject> {
                             let trail = TrailData(trailKey: key, dictionary: finalTrailDict)
                             self.trails.append(trail)
-//                            print("1")
-//                            print("trail trailKey" , trail.trailKey)
-//                            print("trails trailKey" , self.trails[0].trailKey)
-//                            print("trail kennelId ", trail.trailKennelId)
-//                            print("trails kennelId ", self.trails[0].trailKennelId)
                         }
                     }
                 }

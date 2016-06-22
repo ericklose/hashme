@@ -15,7 +15,7 @@ class MapAddressVC: UIViewController, MKMapViewDelegate {
    
    @IBOutlet weak var kennelMapView: MKMapView!
    
-    var kennels = [KennelData]()
+   var kennels = [KennelData]()
    
    let regionRadius: CLLocationDistance = 1000
    
