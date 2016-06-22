@@ -16,16 +16,14 @@ class TrailReportData {
     private var _revenue: Int!
     private var _paidAttendee: Int!
     
-    
-//    _paidAttendee = 0
-//    _attendeeCount = 0
-//    _revenue = 0
-    
     var trailKey: String {
         return _trailKey
     }
     
     var revenue: Int {
+        if _revenue == nil {
+            return 0
+        }
         return _revenue
     }
     
@@ -37,38 +35,34 @@ class TrailReportData {
     }
     
     var paidAttendee: Int {
+        if _paidAttendee == nil {
+            return 0
+        }
         return _paidAttendee
     }
     
     
-    init(trailKey: String) {
+    init(trailKey: String, completed: DownloadComplete) {
         
         self._trailKey = trailKey
         
         DataService.ds.REF_TRAILS.child(self._trailKey).child("trailAttendees").observeEventType(.Value, withBlock: { snapshot in
 
-            
+
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshots {
                     if let trailDict = snap.value as? Dictionary<String, AnyObject> {
-                        let key = snap.key
-                        print("trailDict: ", trailDict)
-                        if let attendeeWasThere = trailDict["trailAttendeePresent"] as? Int {
-                            print("made it here")
-                            print("test, ", attendeeWasThere)
-                            self._attendeeCount = self._attendeeCount + 1
-                            print("and here")
+                        if let _ = trailDict["trailAttendeePresent"] as? Int {
+                            self._attendeeCount = self.attendeeCount + 1
                         }
                         if let trailAttendeePaidAmt = trailDict["trailAttendeePaidAmt"] {
-                            self._revenue = self._revenue + Int(trailAttendeePaidAmt as! NSNumber)
-                            self._paidAttendee = self._paidAttendee + 1
+                            self._revenue = self.revenue + Int(trailAttendeePaidAmt as! NSNumber)
+                            self._paidAttendee = self.paidAttendee + 1
                         }
                     }
                 }
             }
-            
+            completed()
         })
     }
-    
-    
 }

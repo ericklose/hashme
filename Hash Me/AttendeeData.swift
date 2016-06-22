@@ -143,8 +143,10 @@ class Attendee: Hasher {
             } else {
                 self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
             }
-        } else {
+        } else if let _ = attendeeInitDict["hasherPrimaryHashName"] as? String {
             self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
+        } else {
+            "No F'ing Name??"
         }
         
         if let attendeeTrailsInfoDict = attendeeInitDict["trailsAttended"] as? Dictionary<String, AnyObject> {
