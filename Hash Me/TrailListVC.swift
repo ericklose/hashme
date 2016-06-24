@@ -14,8 +14,9 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     @IBOutlet weak var trailTableView: UITableView!
     
+    var trailList: TrailData!
     var trails = [TrailData]()
-    
+    //    var trails = TrailData!()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,22 +26,14 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         //CREATE HASHER ID TO HASHER DICT AND PASS TO TRAIL CELL (VIA CONFIGURE CELL)
         
-        DataService.ds.REF_TRAILS.observeEventType(.Value, withBlock: { snapshot in
-            
-            self.trails = []
-            
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                for snap in snapshots {
-                    if let trailDict = snap.value as? Dictionary<String, AnyObject> {
-                        let key = snap.key
-                        let trail = TrailData(trailKey: key, dictionary: trailDict)
-                        self.trails.append(trail)
-                    }
-                }
-            }
+        trailList = TrailData(isFake: "fake")
+        
+        trailList.getTrailInfo() { () -> () in
+            self.trails = self.trailList.trails
             self.trailTableView.reloadData()
-        })
+        }
     }
+    
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -56,7 +49,7 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         trail = trails[indexPath.row]
         
         //HOLLY'S NEW VERSION
-//        performSegueWithIdentifier("trailDetails", sender: trail)
+        //        performSegueWithIdentifier("trailDetails", sender: trail)
         
         //ERIC'S LEGACY VERSION
         performSegueWithIdentifier("manageTrail", sender: trail)
