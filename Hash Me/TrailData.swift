@@ -85,8 +85,6 @@ class TrailData {
     }
     
     var trails: [TrailData] {
-        print("break?")
-        print("hi ", _trails)
         return _trails
     }
     
@@ -131,35 +129,7 @@ class TrailData {
         _trailUrl.setValue(trailDict)
         DataService.ds.REF_KENNELS.child(_trailKennelId).child("kennelTrails").child(trailRef).setValue(trailDict)
     }
-    
-//    init(trailKey: String, completed: DownloadComplete) {
-//        
-//        self._trailKey = trailKey
-//        
-//        DataService.ds.REF_TRAILS.child(self._trailKey).child("trailAttendees").observeEventType(.Value, withBlock: { snapshot in
-//            
-//            
-//            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-//                for snap in snapshots {
-//                    if let trailDict = snap.value as? Dictionary<String, AnyObject> {
-//                        if let _ = trailDict["trailAttendeePresent"] as? Int {
-//                            self._attendeeCount = self.attendeeCount + 1
-//                        }
-//                        if let trailAttendeePaidAmt = trailDict["trailAttendeePaidAmt"] {
-//                            self._revenue = self.revenue + Int(trailAttendeePaidAmt as! NSNumber)
-//                            self._paidAttendee = self.paidAttendee + 1
-//                        }
-//                    }
-//                }
-//            }
-//            completed()
-//        })
-//    }
-    
-    func doNothingAtAll() {
-        print("hey, neat")
-    }
-    
+
     func getTrailInfo(completed: DownloadComplete) {
         DataService.ds.REF_TRAILS.observeEventType(.Value, withBlock: { snapshot in
             
