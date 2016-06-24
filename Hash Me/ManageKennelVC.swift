@@ -31,8 +31,6 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         kennelDetailsTableView.delegate = self
         kennelDetailsTableView.dataSource = self
         
-        print("kennelID : ", kennels.kennelId)
-        
         DataService.ds.REF_KENNELS.child(kennels.kennelId).observeEventType(.Value, withBlock: { snapshot in
             
             self.trails = []
@@ -87,7 +85,7 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var trueRow = indexPath.row
+        let trueRow = indexPath.row
         if trueRow < trails.count {
             if let cell = tableView.dequeueReusableCellWithIdentifier("kennelTrailsCell") as? TrailCell {
                 trails.sortInPlace { $0.trailDate > $1.trailDate }
@@ -103,7 +101,6 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             if let cell2 = tableView.dequeueReusableCellWithIdentifier("kennelMemberCell") as? KennelMemberCell {
                 let mismanagementId = mismanagementArray[(trueRow-trails.count)]
                 cell2.configureCell(mismanagementId, memberRoleDict: mismanagementDict, memberNameDict: mismanagementDict)
-                //cell2.configureCell(mismanagementId, misManDict: mismanagementDict)
                 return cell2
             } else {
                 return KennelMemberCell()
