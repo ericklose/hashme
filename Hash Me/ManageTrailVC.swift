@@ -73,6 +73,11 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         newHasherMinPayLbl.text = "$0"
         newHasherMaxPayLbl.text = "$\((Int(hashCash/20)+1)*20)"
         newHasherCurrentPayLbl.text = "$\(hashCash)"
+        
+        newHasher["hasherPrimaryKennel"] = trails.trailKennelId
+        let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [trails.trailKennelId: "primary"]
+        newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -265,7 +270,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
             } else {
                 newHasherVisitorFrom.text = sourceViewController.kennelChoiceName
-                newHasher["hasherPrimaryKennel"] = newHasherVisitorFrom.text
+                newHasher["hasherPrimaryKennel"] = sourceViewController.kennelChoiceId
                 let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [sourceViewController.kennelChoiceId: "primary"]
                 newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
                 newHasherTrails["hasherVisitingFrom"] = sourceViewController.kennelChoiceId
@@ -319,6 +324,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             let firebasePost = DataService.ds.REF_HASHERS.childByAutoId()
             firebasePost.setValue(newHasher)
             let newHasherId = firebasePost.key
+//            let initializedNewHasher = Hasher(hasherInitId: newHasherId, hasherInitDict: newHasher)
             
             let firebasePost2 = DataService.ds.REF_HASHERS.child(newHasherId).child("trailsAttended").child(trails.trailKey)
             firebasePost2.setValue(newHasherTrails)
@@ -326,9 +332,16 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             let firebaseTrailPost = DataService.ds.REF_TRAILS.child(trails.trailKey).child("trailAttendees").child(newHasherId)
             firebaseTrailPost.setValue(trailInfo)
             
-            let firebaseKennelTrailPost = DataService.ds.REF_KENNELS.child(trails.trailKennelId).child("kennelTrails").child(trails.trailKey).child("trailAttendees").child(newHasherId)
-            firebaseTrailPost.setValue(trailInfo)
+//            let firebaseKennelTrailPost = DataService.ds.REF_KENNELS.child(trails.trailKennelId).child("kennelTrails").child(trails.trailKey).child("trailAttendees").child(newHasherId)
+//            firebaseKennelTrailPost.setValue(kennelInfo)
             
+            if newHasherVisitorFrom == nil || newHasherVisitorFrom.text == "" {
+                DataService.ds.REF_KENNELS.child(trails.trailKennelId).child("kennelMembers").updateChildValues([newHasherId : true])
+            } else {
+                let homeKennel = newHasherTrails["hasherVisitingFrom"] as! String
+                DataService.ds.REF_KENNELS.child(homeKennel).child("kennelMembers").updateChildValues([newHasherId : true])
+            }
+
             newHasherHashName.text = ""
             newHasherHashName.placeholder = "Hash Name"
             newHasherHashName.backgroundColor = nil
@@ -340,6 +353,9 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             newHasherCurrentPayLbl.text = "$\(hashCash)"
             newHasherPaySlider.setValue(Float(hashCash), animated: true)
             newHasherReducedPayReason.text = ""
+            newHasher["hasherPrimaryKennel"] = trails.trailKennelId
+            let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [trails.trailKennelId: "primary"]
+            newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
         }
     }
     

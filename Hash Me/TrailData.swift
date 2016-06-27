@@ -149,7 +149,7 @@ class TrailData {
     }
     
     init(isFake: String) {
-        print("hi: ", isFake)
+        print("Fake Trail Initializer (figure out a better way to do this sometime): ", isFake)
     }
     
     init(trailKey: String, dictionary: Dictionary<String, AnyObject>) {

@@ -171,12 +171,14 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         
         if let sourceViewController = sender.sourceViewController as? KennelPickerTableVC {
             let hasherKennelsArray = kennelAndHashNameDecodeDict.keys
-            let hasherTrailsAndNamesUrl = DataService.ds.REF_HASHERS.child(hasher.hasherId).child("hasherKennelsAndNames")
+//            let hasherTrailsAndNamesUrl = DataService.ds.REF_HASHERS.child(hasher.hasherId).child("hasherKennelsAndNames")
             
             if sourceViewController.kennelChoiceId != nil && !hasherKennelsArray.contains(sourceViewController.kennelChoiceId) {
-                hasherTrailsAndNamesUrl.updateChildValues([sourceViewController.kennelChoiceId! : true])
-                let kennelMembersUrl = DataService.ds.REF_KENNELS.child(sourceViewController.kennelChoiceId).child("kennelMembers")
-                kennelMembersUrl.updateChildValues([hasher.hasherId: true])
+                hasher.editHasherKennelMembership(hasher.hasherId, kennelId: sourceViewController.kennelChoiceId)
+                
+//                hasherTrailsAndNamesUrl.updateChildValues([sourceViewController.kennelChoiceId! : true])
+//                let kennelMembersUrl = DataService.ds.REF_KENNELS.child(sourceViewController.kennelChoiceId).child("kennelMembers")
+//                kennelMembersUrl.updateChildValues([hasher.hasherId: true])
             }
         }
     }

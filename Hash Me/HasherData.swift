@@ -100,6 +100,11 @@ class Hasher {
         }
     }
     
+    func editHasherKennelMembership(hasherId: String, kennelId: String) {
+        DataService.ds.REF_HASHERS.child(hasherId).child("hasherKennelsAndNames").updateChildValues([kennelId : true])
+        DataService.ds.REF_KENNELS.child(kennelId).child("kennelMembers").updateChildValues([hasherId : true])
+    }
+    
     init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>) {
         self._hasherId = hasherInitId
         
