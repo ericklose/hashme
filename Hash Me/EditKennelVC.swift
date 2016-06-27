@@ -15,7 +15,7 @@ class EditKennelVC: UIViewController, MKMapViewDelegate, UIScrollViewDelegate {
     @IBOutlet weak var kennelDescription: UITextView!
     @IBOutlet weak var kennelGeneralSchedule: UITextField!
     @IBOutlet weak var kennelCountry: UITextField!
-    @IBOutlet weak var kennelUsState: UITextField!
+    @IBOutlet weak var kennelState: UITextField!
     @IBOutlet weak var kennelCity: UITextField!
     @IBOutlet weak var kennelPostalCode: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -43,7 +43,7 @@ class EditKennelVC: UIViewController, MKMapViewDelegate, UIScrollViewDelegate {
         kennelName.text = kennel.kennelName
         kennelGeneralSchedule.text = kennel.kennelSchedule
         kennelCountry.text = kennel.kennelCountry
-        kennelUsState.text = kennel.kennelState
+        kennelState.text = kennel.kennelState
         kennelCity.text = kennel.kennelCity
         kennelPostalCode.text = kennel.kennelPostalCode
         kennelDescription.text = kennel.kennelDescription
@@ -123,8 +123,8 @@ class EditKennelVC: UIViewController, MKMapViewDelegate, UIScrollViewDelegate {
         if kennelCountry.text != kennel.kennelCountry {
             kennel.kennelSetCountry(kennel.kennelId, newKennelCountry: kennelCountry.text!)
         }
-        if kennelUsState.text != kennel.kennelState {
-            kennel.kennelSetUsState(kennel.kennelId, newKennelUsState: kennelUsState.text!)
+        if kennelState.text != kennel.kennelState {
+            kennel.kennelSetState(kennel.kennelId, newKennelState: kennelState.text!)
         }
         if kennelCity.text != kennel.kennelCity {
             kennel.kennelSetCity(kennel.kennelId, newKennelCity: kennelCity.text!)
@@ -132,7 +132,7 @@ class EditKennelVC: UIViewController, MKMapViewDelegate, UIScrollViewDelegate {
         if kennelPostalCode.text != kennel.kennelPostalCode {
             kennel.kennelSetPostalCode(kennel.kennelId, newKennelPostalCode: kennelPostalCode.text!)
         }
-        //let kennelMapLocationString: String = kennelCity.text + ", " + kennelUsState.text + ", " + kennelPostalCode.text + ", " + kennelCountry.text
+        //let kennelMapLocationString: String = kennelCity.text + ", " + kennelState.text + ", " + kennelPostalCode.text + ", " + kennelCountry.text
         
         navigationController?.popViewControllerAnimated(true)
     }

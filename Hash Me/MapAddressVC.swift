@@ -16,29 +16,19 @@ class MapAddressVC: UIViewController, MKMapViewDelegate {
    @IBOutlet weak var kennelMapView: MKMapView!
    
    var kennels = [KennelData]()
-   
    let regionRadius: CLLocationDistance = 1000
-   
    let locationManager = CLLocationManager()
-   
-   //Lets pretend we downloaded these from the server
-   //let aKennelAddress = DataService.ds.REF_KENNELS.child("-KFzXnkjval69MZ5K1k9")
-   //let addresses = aKennelAddress as [String]
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      
       kennelMapView.delegate = self
       
       
       DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
          
          self.kennels = []
-         
          if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-            
             for snap in snapshots {
-               
                if let kennelDict = snap.value as? Dictionary<String, AnyObject> {
                   let key = snap.key
                   let kennelName = kennelDict["kennelName"] as? String
@@ -48,14 +38,11 @@ class MapAddressVC: UIViewController, MKMapViewDelegate {
                }
             }
          }
-         for add in self.kennels {
-            print("kennels ", self.kennels)
-            self.getPlacemarkFromAddress(add.kennelLocation)
-            print("address: ", add.kennelLocation)
+         for address in self.kennels {
+            self.getPlacemarkFromAddress(address.kennelLocation)
+            print("address: ", address.kennelLocation)
          }
-
       })
-
    }
    
    override func viewDidAppear(animated: Bool) {
