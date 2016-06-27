@@ -14,7 +14,7 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var kennelListTable: UITableView!
     @IBOutlet weak var newKennelName: UITextField!
     @IBOutlet weak var newKennelCountry: UITextField!
-    @IBOutlet weak var newKennelUsState: UITextField!
+    @IBOutlet weak var newKennelState: UITextField!
     
     var kennels = [KennelData]()
     
@@ -85,7 +85,7 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         let kennel: Dictionary<String, AnyObject> = [
             "kennelName": newKennelName.text!,
             "kennelCountry": newKennelCountry.text!,
-            "kennelUsState": newKennelUsState.text!,
+            "kennelState": newKennelState.text!,
             "name": newKennelName.text!
         ]
         
@@ -94,7 +94,7 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         newKennelName.text = ""
         newKennelCountry.text = ""
-        newKennelUsState.text = ""
+        newKennelState.text = ""
         
         
     }

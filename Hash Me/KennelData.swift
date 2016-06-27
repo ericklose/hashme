@@ -151,11 +151,11 @@ class KennelData {
         }
     }
     
-    func kennelSetUsState(kennelId: String, newKennelUsState: String) {
-        if newKennelUsState == "" {
-            _kennelUrl.child("kennelUsState").removeValue()
+    func kennelSetState(kennelId: String, newKennelState: String) {
+        if newKennelState == "" {
+            _kennelUrl.child("kennelState").removeValue()
         } else {
-            _kennelUrl.updateChildValues(["kennelUsState" : newKennelUsState])
+            _kennelUrl.updateChildValues(["kennelState" : newKennelState])
         }
     }
     
@@ -241,11 +241,16 @@ class KennelData {
         }
         
         if _kennelCountry != nil {
-            self._kennelLocation = self._kennelCountry
+            if _kennelLocation != nil {
+            self._kennelLocation = self._kennelLocation + ", " + self._kennelCountry
             if self._kennelCountry != "USA" {
                 self._kennelCityAndRegion = self._kennelCountry
             }
+            } else if _kennelLocation == nil {
+                self._kennelLocation = self._kennelCountry
+            }
         }
+        
         if _kennelPostalCode != nil {
             self._kennelLocation = self._kennelPostalCode + ", " + self._kennelLocation
         }
