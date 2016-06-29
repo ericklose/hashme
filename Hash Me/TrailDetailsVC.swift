@@ -1,8 +1,8 @@
 //
-//  ManageTrailVC.swift (duplicated from eric's old VC. this is now TrailDetailsVC)
+//  TrailDetailsVC.swift
 //  Hash Me
 //
-//  Created by Eric Klose on 3/13/16.
+//  Created by Holly Klose on 5/13/16.
 //  Copyright © 2016 Eric Klose. All rights reserved.
 //
 
