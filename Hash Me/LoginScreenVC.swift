@@ -53,8 +53,6 @@ class LoginScreenVC: UIViewController {
         }
     }
     
-    //FACEBOOK LATER
-    
     @IBAction func attemptFacebookLogin(sender: UIButton!) {
         
         let facebookLogin = FBSDKLoginManager()
