@@ -105,6 +105,10 @@ class Hasher {
         DataService.ds.REF_KENNELS.child(kennelId).child("kennelMembers").updateChildValues([hasherId : true])
     }
     
+//    init (isFake: String) {
+//        print("Fake Hasher Initializer (figure out a better way to do this sometime): ", isFake)
+//    }
+    
     init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>) {
         self._hasherId = hasherInitId
         

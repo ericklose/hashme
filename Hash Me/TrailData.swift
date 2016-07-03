@@ -88,6 +88,24 @@ class TrailData {
         return _trails
     }
     
+    func getTrailInfo(completed: DownloadComplete) {
+        DataService.ds.REF_TRAILS.observeEventType(.Value, withBlock: { snapshot in
+            
+            self._trails = []
+            
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for snap in snapshots {
+                    if let trailDict = snap.value as? Dictionary<String, AnyObject> {
+                        let key = snap.key
+                        let trail = TrailData(trailKey: key, dictionary: trailDict)
+                        self._trails.append(trail)
+                    }
+                }
+            }
+            completed()
+        })
+    }
+    
     func trailSetDate(trailKey: String, newTrailDate: String) {
         _trailUrl.updateChildValues(["trailDate" : newTrailDate])
         _kennelTrailUrl.updateChildValues(["trailDate" : newTrailDate])
@@ -128,24 +146,6 @@ class TrailData {
         let trailRef = firstAdd.key
         _trailUrl.setValue(trailDict)
         DataService.ds.REF_KENNELS.child(_trailKennelId).child("kennelTrails").child(trailRef).setValue(trailDict)
-    }
-
-    func getTrailInfo(completed: DownloadComplete) {
-        DataService.ds.REF_TRAILS.observeEventType(.Value, withBlock: { snapshot in
-            
-            self._trails = []
-            
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                for snap in snapshots {
-                    if let trailDict = snap.value as? Dictionary<String, AnyObject> {
-                        let key = snap.key
-                        let trail = TrailData(trailKey: key, dictionary: trailDict)
-                        self._trails.append(trail)
-                    }
-                }
-            }
-            completed()
-        })
     }
     
     init(isFake: String) {

@@ -77,6 +77,62 @@ class Attendee: Hasher {
         }
     }
     
+    var attendees = [Attendee]()
+    var potentialAttendees = [Attendee]()
+    
+    
+    func getAttendeeInfo(trails: TrailData, completed: DownloadComplete) {
+        DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { hasherSnapshot in
+
+            if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FIRDataSnapshot] {
+                
+                //    self.trailHareNamesDict = [:]
+                    self.attendees = []
+                    self.potentialAttendees = []
+                //    self.trailRoster = []
+                
+                for hasherSnap in hasherSnapshots {
+                    if let attendeeDataDict = hasherSnap.value as? Dictionary<String, AnyObject> {
+                        //    if self.trails.trailHares[hasherSnap.key] != nil {
+                        //    let hareHashName = attendeeDataDict["hasherPrimaryHashName"] as! String
+                        //    self.trailHareNamesDict[hasherSnap.key] = hareHashName
+                        //    }
+                        if let atThisTrail = attendeeDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
+                            let thisTrail = trails.trailKey
+                            if let thisTrailDict = atThisTrail[thisTrail] as? Dictionary<String, AnyObject> {
+                                if (thisTrailDict["hasherAttendedTrail"] as? Bool) == true {
+                                    let hasherKey = hasherSnap.key
+                                    self.addToAttendeeList(hasherKey, trails: trails, attendeeDataDict: attendeeDataDict, attendeeAttending: true)
+                                }
+                            }
+                            //IF SOME TRAILS ATTENDED BUT NOT THIS ONE
+                         else {
+                            self.addToAttendeeList(hasherSnap.key, trails: trails, attendeeDataDict: attendeeDataDict, attendeeAttending: false)
+                        }
+                    }
+                    //IF ZERO TRAILS ATTENDED IN HASHER DATA
+                    else {
+                            self.addToAttendeeList(hasherSnap.key, trails: trails, attendeeDataDict: attendeeDataDict, attendeeAttending: false)
+                    }
+                    }
+                }
+            }
+            completed()
+        })
+    }
+    
+    func addToAttendeeList(hasherId: String, trails: TrailData, attendeeDataDict: Dictionary<String, AnyObject>, attendeeAttending: Bool) {
+        let potentialAttendee = Attendee(attendeeInitId: hasherId, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: trails.trailKey, attendeeInitKennelId: trails.trailKennelId, attendeeAttendingInit: attendeeAttending, attendeeInitTrailHashCash: trails.trailHashCash)
+        if hasherId == DataService.ds.REF_HASHER_USERID {
+            self.attendees.insert(potentialAttendee, atIndex: 0)
+        } else if attendeeAttending == true {
+            self.attendees.append(potentialAttendee)
+        } else {
+            self.potentialAttendees.append(potentialAttendee)
+        }
+    }
+
+    
     func attendeeSetIsPresent(attendeeId: String, trailId: String, attendeeIsPresent: Bool) {
         if attendeeIsPresent == true {
             _attendeeHasherUrl.updateChildValues(["hasherAttendedTrail" : attendeeIsPresent])
@@ -123,6 +179,10 @@ class Attendee: Hasher {
      From Hasher Class you get HasherId, HasherNerdName
      */
     
+//    init(isFake: String) {
+//        print("Fake Attendee Initializer (figure out a better way to do this sometime): ", isFake)
+////        self.init(isFake: "fake hasher init")
+//    }
     
     convenience init(attendeeInitId: String, attendeeInitDict: Dictionary<String, AnyObject>, attendeeInitTrailId: String, attendeeInitKennelId: String, attendeeAttendingInit: Bool, attendeeInitTrailHashCash: Int) {
         self.init(hasherInitId: attendeeInitId, hasherInitDict: attendeeInitDict)
