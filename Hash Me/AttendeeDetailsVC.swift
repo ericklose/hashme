@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+//import Firebase
 
 class AttendeeDetailsVC: UIViewController {
     

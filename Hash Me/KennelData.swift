@@ -26,6 +26,7 @@ class KennelData {
     private var _kennelMismanagement: Dictionary<String, AnyObject>!
     private var _kennelAdmins: Dictionary<String, AnyObject>!
     private var _kennelUrl: FIRDatabaseReference!
+    private var _kennels: [KennelData]!
     
     var kennelId: String {
         return _kennelId
@@ -119,6 +120,30 @@ class KennelData {
         return _kennelDict
     }
     
+    var kennels: [KennelData] {
+        return _kennels
+    }
+    
+    
+    func getKennelInfo(completed: DownloadComplete) {
+        DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+            
+            self._kennels = []
+            
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for snap in snapshots {
+                    if let kennelDict = snap.value as? Dictionary<String, AnyObject> {
+                        let key = snap.key
+                        let kennelName = kennelDict["kennelName"] as? String
+                        let kennel = KennelData(kennelInitId: key, kennelInitDict: kennelDict, kennelInitName: kennelName!)
+                        self._kennels.append(kennel)
+                    }
+                }
+            }
+            completed()
+        })
+    }
+    
     func kennelSetName(kennelId: String, newKennelName: String) {
         if newKennelName == "" {
             _kennelUrl.child("kennelName").removeValue()
@@ -191,6 +216,9 @@ class KennelData {
         }
     }
     
+    init(isFake: String) {
+        print("Fake Kennel Initializer (figure out a better way to do this sometime): ", isFake)
+    }
     
     init (kennelInitId: String, kennelInitDict: Dictionary<String, AnyObject>, kennelInitName: String) {
         self._kennelId = kennelInitId
