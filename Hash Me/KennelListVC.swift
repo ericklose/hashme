@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+//import Firebase
 
 class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -16,6 +16,7 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var newKennelCountry: UITextField!
     @IBOutlet weak var newKennelState: UITextField!
     
+    var kennelList: KennelData!
     var kennels = [KennelData]()
     
     override func viewDidLoad() {
@@ -25,23 +26,12 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         kennelListTable.dataSource = self
         kennelListTable.estimatedRowHeight = 100
         
+        kennelList = KennelData(isFake: "fake")
         
-        DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
-            
-            self.kennels = []
-            
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                for snap in snapshots {
-                    if let kennelDict = snap.value as? Dictionary<String, AnyObject> {
-                        let key = snap.key
-                        let kennelName = kennelDict["kennelName"] as? String
-                        let kennel = KennelData(kennelInitId: key, kennelInitDict: kennelDict, kennelInitName: kennelName!)
-                        self.kennels.append(kennel)
-                    }
-                }
-            }
+        kennelList.getKennelInfo() { () -> () in
+            self.kennels = self.kennelList.kennels
             self.kennelListTable.reloadData()
-        })
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

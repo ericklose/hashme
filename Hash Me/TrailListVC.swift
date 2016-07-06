@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+//import Firebase
 
 class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -16,15 +16,12 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     var trailList: TrailData!
     var trails = [TrailData]()
-    //    var trails = TrailData!()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         trailTableView.delegate = self
         trailTableView.dataSource = self
         trailTableView.estimatedRowHeight = 150
-        
-        //CREATE HASHER ID TO HASHER DICT AND PASS TO TRAIL CELL (VIA CONFIGURE CELL)
         
         trailList = TrailData(isFake: "fake")
         

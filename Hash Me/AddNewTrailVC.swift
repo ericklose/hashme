@@ -35,12 +35,6 @@ class AddNewTrailVC: UIViewController {
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
     @IBAction func onPressedSaveButton(sender: AnyObject) {
         if (newTrailKennelName.text == "" || newTrailDate.text == "" || newTrailDate.text == "Date Required" || newTrailTitle.text == "") {
             
@@ -93,7 +87,6 @@ class AddNewTrailVC: UIViewController {
         newTrailKennelId = ""
         
         self.navigationController?.popViewControllerAnimated(true)
-        
     }
     
     
@@ -116,7 +109,7 @@ class AddNewTrailVC: UIViewController {
     }
     
     
-    //THIS SHOULD BE FINE SOON
+    //THIS IS FOR HARES
     //    @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
     //        if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {
     //            if sourceViewController.hasherChoiceId == nil {
