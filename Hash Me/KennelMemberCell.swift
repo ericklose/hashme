@@ -31,6 +31,10 @@ class KennelMemberCell: UITableViewCell {
             self.memberRole.text = ""
         }
         self.memberHasherId = memberHasherId
-        self.memberName.text = memberNameDict[memberHasherId]!
+        if let memberName = memberNameDict[memberHasherId] {
+        self.memberName.text = memberName
+        } else {
+            self.memberName.text = "No Name"
+        }
     }
 }

@@ -19,13 +19,22 @@ class TrailData {
     private var _trailDescription: String!
     private var _trailKey: String!
     private var _trailHashCash: Int!
-    private var _trailHares: Dictionary<String, String>!
+//    private var _trailHares: Dictionary<String, String>!
     private var _trailUrl: FIRDatabaseReference!
     private var _kennelTrailUrl: FIRDatabaseReference!
     private var _trails: [TrailData]!
+    private var _trailList: [String]!
+    
+    private var _trailHares: [(String, String, String)]!
+    
+    //HARES SHOULD BE A TUPLE OF HASH ID, RELEVANT NAME, ROLE NAME (Hare vs Bag Car)
     
     var trailDate: String {
         return _trailDate
+    }
+    
+    var trailHares: [(String, String, String)] {
+        return _trailHares
     }
     
     var trailKennelName: String {
@@ -86,6 +95,34 @@ class TrailData {
     
     var trails: [TrailData] {
         return _trails
+    }
+    
+    var trailList: [String] {
+        return _trailList
+    }
+    
+//This isn't used ... eventually I should have ways to generate a trail list on any criteria (time, kennel, etc) and feed that list to the data grabber.
+//Maybe it makes sense to have one function that does all of that, but it seems like a lot of looping to iterate through trails to determine which one(s) to return
+//Probably that's the answer since that's the freaking point of JSON ... though then I need to figure out how to return All (or eliminate that option and always cap it)
+    func getTrailListForKennel(completed: DownloadComplete, kennelId: String) {
+        DataService.ds.REF_KENNELS.child(kennelId).observeEventType(.Value, withBlock: { snapshot in
+            
+            self._trails = []
+            
+            if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
+                if var trailDict = kennelDict["kennelTrails"] as? Dictionary<String, AnyObject> {
+                    for trail in trailDict {
+                        trailDict["trailKennelId"] = kennelId
+                        let key = trail.0
+                        if let finalTrailDict = trailDict[key] as? Dictionary<String, AnyObject> {
+                            let trail = TrailData(trailKey: key, dictionary: finalTrailDict)
+                            self._trails.append(trail)
+                        }
+                    }
+                }
+            }
+            completed()
+        })
     }
     
     func getTrailInfo(completed: DownloadComplete) {
@@ -173,6 +210,8 @@ class TrailData {
         }
         
         if let trailHares = dictionary["trailHares"] as? Dictionary<String, String> {
+            self._trailHares.append((String, String, String))
+            self._trailHares = (200, "OK", true)
             self._trailHares = trailHares
         }
         
