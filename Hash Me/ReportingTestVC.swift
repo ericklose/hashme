@@ -26,7 +26,7 @@ class ReportingTestVC: UIViewController {
 //    var revenue: Int = 0
 //    var attendeeCount: Int = 0
 //    var paidAttendee: Int = 0
-    let thisTrail: String = "-KLHVwxdI3d6ToPzti3v"
+    let thisTrail: String = "-KM0L9COtOLYLVe-PAPh"
     var trailReport1: TrailReportData!
     
     override func viewDidLoad() {
@@ -55,7 +55,7 @@ class ReportingTestVC: UIViewController {
         self.topicTwo.text = "Paid Attendees"
         self.resultTwo.text = "\(trailReport1.paidAttendee)"
         self.topicThree.text = "People to Collect From"
-        self.resultThree.text = "\(trailReport1.attendeeCount - trailReport1.paidAttendee)"
+        self.resultThree.text = "\(trailReport1.attendeeCount - trailReport1.paidAttendee - 3)"
         self.topicFour.text = "Revenue"
         self.resultFour.text = "\(trailReport1.revenue)"
     }
