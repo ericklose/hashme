@@ -19,13 +19,13 @@ class TrailData {
     private var _trailDescription: String!
     private var _trailKey: String!
     private var _trailHashCash: Int!
-//    private var _trailHares: Dictionary<String, String>!
+    private var _trailHares: Dictionary<String, String>!
     private var _trailUrl: FIRDatabaseReference!
     private var _kennelTrailUrl: FIRDatabaseReference!
     private var _trails: [TrailData]!
     private var _trailList: [String]!
     
-    private var _trailHares: [(String, String, String)]!
+//    private var _trailHares: [(String, String, String)]!
     
     //HARES SHOULD BE A TUPLE OF HASH ID, RELEVANT NAME, ROLE NAME (Hare vs Bag Car)
     
@@ -33,9 +33,9 @@ class TrailData {
         return _trailDate
     }
     
-    var trailHares: [(String, String, String)] {
-        return _trailHares
-    }
+//    var trailHares: [(String, String, String)] {
+//        return _trailHares
+//    }
     
     var trailKennelName: String {
         if _trailKennelName == nil {
@@ -68,8 +68,10 @@ class TrailData {
     var trailHares: Dictionary<String, String> {
         if _trailHares == nil {
             _trailHares = ["Hare" : "TBD"]
+            print("TrailData ", _trailHares)
             return _trailHares
         } else {
+            print("TrailData 2", _trailHares)
             return _trailHares
         }
     }
@@ -210,8 +212,6 @@ class TrailData {
         }
         
         if let trailHares = dictionary["trailHares"] as? Dictionary<String, String> {
-            self._trailHares.append((String, String, String))
-            self._trailHares = (200, "OK", true)
             self._trailHares = trailHares
         }
         

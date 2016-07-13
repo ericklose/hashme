@@ -35,54 +35,54 @@ class TrailDetailsVC: UIViewController {
         }
     }
     
-    func downloadHasherDetails(completed: DownloadComplete) {
-        
-    }
-    
-//Holly's old code but this looks like logic already in the Attendee Data initializer
 //    func downloadHasherDetails(completed: DownloadComplete) {
-//        DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot in
-//            self.trailHareNamesDict = [:]
-//            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
-//                
-//                if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-//                    for snap in snapshots {
-//                        
-//                        if let hasherDict2 = snap.value as? Dictionary<String, AnyObject> {
-//                            
-//                            for _ in hasherDict2 {
-//                                
-//                                if let hashIdsAndKennelHashNames = hasherDict2["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
-//                                    
-//                                    
-//                                    if hashIdsAndKennelHashNames[self.trails.trailKennelId] as? String == "primary" || hashIdsAndKennelHashNames[self.trails.trailKennelId] as? NSObject == true {
-//                                        self.relevantHashName = String(hasherDict2["hasherPrimaryHashName"]!)
-//                                        self.trailHareNamesDict[snap.key] = self.relevantHashName
-//                                    } else {
-//                                        if hashIdsAndKennelHashNames[self.trails.trailKennelId] != nil {
-//                                            self.relevantHashName = String(hashIdsAndKennelHashNames[self.trails.trailKennelId]!)
-//                                            self.trailHareNamesDict[snap.key] = self.relevantHashName
-//                                        } else {
-//                                            self.relevantHashName = "Not a member of this kennel"
-//                                            self.trailHareNamesDict[snap.key] = self.relevantHashName
-//                                        }
-//                                    }
-//                                }
-//                                else {
-//                                    self.relevantHashName = String(hasherDict2["hasherPrimaryHashName"]!)
-//                                    self.trailHareNamesDict[snap.key] = self.relevantHashName
-//                                }
-//                            }
-//                            
-//                        }
-//                        
-//                    }
-//                }
-//            }
-//            completed()
-//        })
 //        
 //    }
+    
+//Holly's old code but this looks like logic already in the Attendee Data initializer
+    func downloadHasherDetails(completed: DownloadComplete) {
+        DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot in
+            self.trailHareNamesDict = [:]
+            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
+                
+                if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                    for snap in snapshots {
+                        
+                        if let hasherDict2 = snap.value as? Dictionary<String, AnyObject> {
+                            
+                            for _ in hasherDict2 {
+                                
+                                if let hashIdsAndKennelHashNames = hasherDict2["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
+                                    
+                                    
+                                    if hashIdsAndKennelHashNames[self.trails.trailKennelId] as? String == "primary" || hashIdsAndKennelHashNames[self.trails.trailKennelId] as? NSObject == true {
+                                        self.relevantHashName = String(hasherDict2["hasherPrimaryHashName"]!)
+                                        self.trailHareNamesDict[snap.key] = self.relevantHashName
+                                    } else {
+                                        if hashIdsAndKennelHashNames[self.trails.trailKennelId] != nil {
+                                            self.relevantHashName = String(hashIdsAndKennelHashNames[self.trails.trailKennelId]!)
+                                            self.trailHareNamesDict[snap.key] = self.relevantHashName
+                                        } else {
+                                            self.relevantHashName = "Not a member of this kennel"
+                                            self.trailHareNamesDict[snap.key] = self.relevantHashName
+                                        }
+                                    }
+                                }
+                                else {
+                                    self.relevantHashName = String(hasherDict2["hasherPrimaryHashName"]!)
+                                    self.trailHareNamesDict[snap.key] = self.relevantHashName
+                                }
+                            }
+                            
+                        }
+                        
+                    }
+                }
+            }
+            completed()
+        })
+        
+    }
     
     func updateTrailDetails() {
         
@@ -95,6 +95,7 @@ class TrailDetailsVC: UIViewController {
         
         specificTrailHares.text = ""
         specificTrailBagCar.text = ""
+        print("Holly Code ", trailHareNamesDict)
         for (key, value) in trails.trailHares {
             if value == "Hare" {
                 specificTrailHares.text! += "\(trailHareNamesDict[key]!). "

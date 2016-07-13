@@ -19,6 +19,8 @@ class Attendee: Hasher {
     private var _attendeeVirginSponsor: String!
     private var _attendeeVisitingFrom: String!
     private var _attendeeTrailHashCash: Int!
+    private var _attendeeIsAdmin: Bool!
+    private var _attendeeIsHare: Bool!
     private var _attendeeHasherUrl: FIRDatabaseReference!
     private var _attendeeTrailUrl: FIRDatabaseReference!
     private var _attendeeKennelUrl: FIRDatabaseReference!
@@ -31,6 +33,20 @@ class Attendee: Hasher {
         } else {
             return ""
         }
+    }
+    
+    var attendeeIsAdmin: Bool {
+        if _attendeeIsAdmin == true {
+            return true
+        }
+        return false
+    }
+    
+    var attendeeIsHare: Bool {
+        if _attendeeIsHare == true {
+            return true
+        }
+        return false
     }
     
     var attendeeTrailHashCash: Int {

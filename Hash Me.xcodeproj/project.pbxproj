@@ -403,10 +403,10 @@
 		A619293A1C94915600D8C945 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A6BBA7B21C9525560030DB53 /* TrailData.swift */,
 				DAD2CF9E1C95F9960048C2C8 /* HasherData.swift */,
-				A6FB475C1C9A0D5700B370CD /* KennelData.swift */,
 				A6C7AEE51CA33D5E0080814C /* AttendeeData.swift */,
+				A6BBA7B21C9525560030DB53 /* TrailData.swift */,
+				A6FB475C1C9A0D5700B370CD /* KennelData.swift */,
 				A6E7F4671CF664DD009BDF02 /* TrailReportData.swift */,
 			);
 			name = Model;
