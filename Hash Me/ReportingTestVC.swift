@@ -26,7 +26,7 @@ class ReportingTestVC: UIViewController {
 //    var revenue: Int = 0
 //    var attendeeCount: Int = 0
 //    var paidAttendee: Int = 0
-    let thisTrail: String = "-KM0L9COtOLYLVe-PAPh"
+    let thisTrail: String = "-KMaGj7sF4PmXDysp0tI"
     var trailReport1: TrailReportData!
     
     override func viewDidLoad() {

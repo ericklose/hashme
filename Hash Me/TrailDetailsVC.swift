@@ -29,17 +29,19 @@ class TrailDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("Hares: ", trails.trailHares)
+        
         downloadHasherDetails { () -> () in
-//            print("trailHareNamesDict", self.trailHareNamesDict)
+            //            print("trailHareNamesDict", self.trailHareNamesDict)
             self.updateTrailDetails()
         }
     }
     
-//    func downloadHasherDetails(completed: DownloadComplete) {
-//        
-//    }
+    //    func downloadHasherDetails(completed: DownloadComplete) {
+    //
+    //    }
     
-//Holly's old code but this looks like logic already in the Attendee Data initializer
+    //Holly's old code but this looks like logic already in the Attendee Data initializer
     func downloadHasherDetails(completed: DownloadComplete) {
         DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot in
             self.trailHareNamesDict = [:]
@@ -95,21 +97,46 @@ class TrailDetailsVC: UIViewController {
         
         specificTrailHares.text = ""
         specificTrailBagCar.text = ""
-        print("Holly Code ", trailHareNamesDict)
+        
+        
+        //     This sort of works and sets the hare/bag car as an admin ... but there's no step to fetch the user data to determine a name
+        //     This gets at a core issue of how to populate info on the fly ... how do I now do a lookup to get the hare's relevant name?
+        //     Also, need to detect for bag car, not just hares
         for (key, value) in trails.trailHares {
+            print("keys ", trails.trailHares[key])
+            print("Id ", key)
+            print("value ", trails.trailHares[value])
+            let hareInitDict = ["attendeeIsHare" : true, "attendeeIsAdmin" : true]
+            print("HID ", hareInitDict)
+            let hare = Attendee(attendeeInitId: key, attendeeInitDict: hareInitDict, attendeeInitTrailId: trails.trailKey, attendeeInitKennelId: trails.trailKennelId, attendeeAttendingInit: true, attendeeInitTrailHashCash: trails.trailHashCash)
+            print("init check ", hare.attendeeIsAdmin, hare.attendeeIsHare)
             if value == "Hare" {
-                specificTrailHares.text! += "\(trailHareNamesDict[key]!). "
+                //print to the hare text line
             } else if value == "Bag Car" {
-                specificTrailBagCar.text! += "\(trailHareNamesDict[key]!). "
+                //print to the bag car text line
             }
         }
-
+        
+        //        print("Holly Code ", trailHareNamesDict)
+        //        for (key, value) in trails.trailHares {
+        //            if value == "Hare" {
+        //                print("1 ", specificTrailHares.text)
+        //                print("1a ", key)
+        //                print("1b ", value)
+        //                print("1c ", trailHareNamesDict["-KFGAw81usd76ky-xUUf"])
+        //                print("2 ", trailHareNamesDict[key])
+        //                specificTrailHares.text! += "\(trailHareNamesDict[key]!). "
+        //            } else if value == "Bag Car" {
+        //                specificTrailBagCar.text! += "\(trailHareNamesDict[key]!). "
+        //            }
+        //        }
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "trailRsvpList" {
             if let TrailAttendeesVC = segue.destinationViewController as? TrailAttendeesVC {
-                    TrailAttendeesVC.trails = trails
+                TrailAttendeesVC.trails = trails
             }
         }
     }
