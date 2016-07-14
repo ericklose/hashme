@@ -225,6 +225,18 @@ class Attendee: Hasher {
             "No F'ing Name??"
         }
         
+        if let attendeeIsAdminInit = attendeeInitDict["attendeeIsAdmin"] as? Bool {
+            print("heelow")
+            self._attendeeIsAdmin = attendeeIsAdminInit
+            print("admin? ", self._attendeeIsAdmin)
+        }
+        
+        if let attendeeIsHareInit = attendeeInitDict["attendeeIsHare"] as? Bool {
+                        print("heelow")
+            self._attendeeIsHare = attendeeIsHareInit
+                        print("hare? ", self._attendeeIsHare)
+        }
+        
         if let attendeeTrailsInfoDict = attendeeInitDict["trailsAttended"] as? Dictionary<String, AnyObject> {
             if let attendeeCurrentTrailInfo = attendeeTrailsInfoDict[attendeeRelevantTrailId] as? Dictionary<String, AnyObject> {
                 

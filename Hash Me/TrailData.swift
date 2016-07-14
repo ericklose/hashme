@@ -71,7 +71,8 @@ class TrailData {
             print("TrailData ", _trailHares)
             return _trailHares
         } else {
-            print("TrailData 2", _trailHares)
+//            this seems to work fine
+//            print("TrailData ", _trailHares)
             return _trailHares
         }
     }
