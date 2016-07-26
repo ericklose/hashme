@@ -38,9 +38,25 @@ class TrailCell: UITableViewCell {
         self.trailDate.text = trail.trailDate
         self.trailKennelName.text = trail.trailKennelName
         self.trailKennelId = trail.trailKennelId
-        //self.trailHares.text = trail.trailHares
         self.trailStartLocation.text = trail.trailStartLocation
         self.trailDescription.text = trail.trailDescription
+        self.trailHares.text = ""
+        
+        for (key, value) in trail.trailHares {
+            let hareInitDict = ["attendeeIsHare" : true, "attendeeIsAdmin" : true]
+            let hare = Attendee(attendeeInitId: key, attendeeInitDict: hareInitDict, attendeeInitTrailId: trail.trailKey, attendeeInitKennelId: trail.trailKennelId, attendeeAttendingInit: true, attendeeInitTrailHashCash: trail.trailHashCash)
+            hare.getRelevantHashName(key, kennelId: trail.trailKennelId) { () -> () in
+                if value == "Hare" {
+                    if self.trailHares.text == "" {
+                        self.trailHares.text! += "\(hare.attendeeRelevantHashName)"
+                    } else {
+                        self.trailHares.text! += ", \(hare.attendeeRelevantHashName)"
+                    }
+                    //                } else if value == "Bag Car" {
+                    //                    self.specificTrailBagCar.text! += "\(hare.attendeeRelevantHashName) "
+                }
+            }
+        }
         
     }
     

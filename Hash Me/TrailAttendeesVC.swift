@@ -31,11 +31,6 @@ class TrailAttendeesVC: UIViewController, UITableViewDataSource, UITableViewDele
         attendeeSearchBar.returnKeyType = UIReturnKeyType.Done
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func viewDidAppear(animated: Bool) {
         DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { hasherSnapshot in
             
@@ -130,7 +125,7 @@ class TrailAttendeesVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "attendeeDetails" {
+        if segue.identifier == "trailAttendeeDetails" {
             if let attendeeDetailsVC = segue.destinationViewController as? AttendeeDetailsVC {
                 if let attendeeInCell = sender as? Attendee {
                     attendeeDetailsVC.specificAttendee = attendeeInCell

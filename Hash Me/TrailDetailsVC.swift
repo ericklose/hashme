@@ -29,62 +29,9 @@ class TrailDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Hares: ", trails.trailHares)
-        
-        downloadHasherDetails { () -> () in
-            //            print("trailHareNamesDict", self.trailHareNamesDict)
-            self.updateTrailDetails()
-        }
+        self.updateTrailDetails()
     }
-    
-    //    func downloadHasherDetails(completed: DownloadComplete) {
-    //
-    //    }
-    
-    //Holly's old code but this looks like logic already in the Attendee Data initializer
-    func downloadHasherDetails(completed: DownloadComplete) {
-        DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot in
-            self.trailHareNamesDict = [:]
-            if let hasherDict = snapshot.value as? Dictionary<String, AnyObject> {
-                
-                if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                    for snap in snapshots {
-                        
-                        if let hasherDict2 = snap.value as? Dictionary<String, AnyObject> {
-                            
-                            for _ in hasherDict2 {
-                                
-                                if let hashIdsAndKennelHashNames = hasherDict2["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
-                                    
-                                    
-                                    if hashIdsAndKennelHashNames[self.trails.trailKennelId] as? String == "primary" || hashIdsAndKennelHashNames[self.trails.trailKennelId] as? NSObject == true {
-                                        self.relevantHashName = String(hasherDict2["hasherPrimaryHashName"]!)
-                                        self.trailHareNamesDict[snap.key] = self.relevantHashName
-                                    } else {
-                                        if hashIdsAndKennelHashNames[self.trails.trailKennelId] != nil {
-                                            self.relevantHashName = String(hashIdsAndKennelHashNames[self.trails.trailKennelId]!)
-                                            self.trailHareNamesDict[snap.key] = self.relevantHashName
-                                        } else {
-                                            self.relevantHashName = "Not a member of this kennel"
-                                            self.trailHareNamesDict[snap.key] = self.relevantHashName
-                                        }
-                                    }
-                                }
-                                else {
-                                    self.relevantHashName = String(hasherDict2["hasherPrimaryHashName"]!)
-                                    self.trailHareNamesDict[snap.key] = self.relevantHashName
-                                }
-                            }
-                            
-                        }
-                        
-                    }
-                }
-            }
-            completed()
-        })
-        
-    }
+
     
     func updateTrailDetails() {
         
@@ -94,43 +41,26 @@ class TrailDetailsVC: UIViewController {
         specificTrailDescription.text = trails.trailDescription
         specificTrailTitle.text = trails.trailTitle
         specificHashCash.text = "$\(trails.trailHashCash)"
-        
+
         specificTrailHares.text = ""
         specificTrailBagCar.text = ""
+
         
-        
-        //     This sort of works and sets the hare/bag car as an admin ... but there's no step to fetch the user data to determine a name
-        //     This gets at a core issue of how to populate info on the fly ... how do I now do a lookup to get the hare's relevant name?
-        //     Also, need to detect for bag car, not just hares
         for (key, value) in trails.trailHares {
-            print("keys ", trails.trailHares[key])
-            print("Id ", key)
-            print("value ", trails.trailHares[value])
             let hareInitDict = ["attendeeIsHare" : true, "attendeeIsAdmin" : true]
-            print("HID ", hareInitDict)
             let hare = Attendee(attendeeInitId: key, attendeeInitDict: hareInitDict, attendeeInitTrailId: trails.trailKey, attendeeInitKennelId: trails.trailKennelId, attendeeAttendingInit: true, attendeeInitTrailHashCash: trails.trailHashCash)
-            print("init check ", hare.attendeeIsAdmin, hare.attendeeIsHare)
-            if value == "Hare" {
-                //print to the hare text line
-            } else if value == "Bag Car" {
-                //print to the bag car text line
+            hare.getRelevantHashName(key, kennelId: trails.trailKennelId) { () -> () in
+                if value == "Hare" {
+                    if self.specificTrailHares.text == "" {
+                        self.specificTrailHares.text! += "\(hare.attendeeRelevantHashName)"
+                    } else {
+                        self.specificTrailHares.text! += ", \(hare.attendeeRelevantHashName)"
+                    }
+                } else if value == "Bag Car" {
+                    self.specificTrailBagCar.text! += "\(hare.attendeeRelevantHashName) "
+                }
             }
         }
-        
-        //        print("Holly Code ", trailHareNamesDict)
-        //        for (key, value) in trails.trailHares {
-        //            if value == "Hare" {
-        //                print("1 ", specificTrailHares.text)
-        //                print("1a ", key)
-        //                print("1b ", value)
-        //                print("1c ", trailHareNamesDict["-KFGAw81usd76ky-xUUf"])
-        //                print("2 ", trailHareNamesDict[key])
-        //                specificTrailHares.text! += "\(trailHareNamesDict[key]!). "
-        //            } else if value == "Bag Car" {
-        //                specificTrailBagCar.text! += "\(trailHareNamesDict[key]!). "
-        //            }
-        //        }
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -138,6 +68,21 @@ class TrailDetailsVC: UIViewController {
             if let TrailAttendeesVC = segue.destinationViewController as? TrailAttendeesVC {
                 TrailAttendeesVC.trails = trails
             }
+        } else if segue.identifier == "editTrail" {
+//            Well shit, we never built an Edit Trail page
+            let alertController = UIAlertController(title: "There's no trail edit yet", message: "There's a lot of shit to build. Get of my back!", preferredStyle: .Alert)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
+                print("you have pressed the Cancel button");
+            }
+            alertController.addAction(cancelAction)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                print("you have pressed OK button");
+            }
+            alertController.addAction(OKAction)
+            
+            self.presentViewController(alertController, animated: true, completion:nil)
         }
     }
     
