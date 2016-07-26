@@ -99,12 +99,12 @@ class Attendee: Hasher {
     
     func getAttendeeInfo(trails: TrailData, completed: DownloadComplete) {
         DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { hasherSnapshot in
-
+            
             if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FIRDataSnapshot] {
                 
                 //    self.trailHareNamesDict = [:]
-                    self.attendees = []
-                    self.potentialAttendees = []
+                self.attendees = []
+                self.potentialAttendees = []
                 //    self.trailRoster = []
                 
                 for hasherSnap in hasherSnapshots {
@@ -121,17 +121,44 @@ class Attendee: Hasher {
                                     self.addToAttendeeList(hasherKey, trails: trails, attendeeDataDict: attendeeDataDict, attendeeAttending: true)
                                 }
                             }
-                            //IF SOME TRAILS ATTENDED BUT NOT THIS ONE
-                         else {
+                                //IF SOME TRAILS ATTENDED BUT NOT THIS ONE
+                            else {
+                                self.addToAttendeeList(hasherSnap.key, trails: trails, attendeeDataDict: attendeeDataDict, attendeeAttending: false)
+                            }
+                        }
+                            //IF ZERO TRAILS ATTENDED IN HASHER DATA
+                        else {
                             self.addToAttendeeList(hasherSnap.key, trails: trails, attendeeDataDict: attendeeDataDict, attendeeAttending: false)
                         }
                     }
-                    //IF ZERO TRAILS ATTENDED IN HASHER DATA
-                    else {
-                            self.addToAttendeeList(hasherSnap.key, trails: trails, attendeeDataDict: attendeeDataDict, attendeeAttending: false)
-                    }
-                    }
                 }
+            }
+            completed()
+        })
+    }
+    
+    func getRelevantHashName(hasherId: String, kennelId: String, completed: DownloadComplete) {
+        DataService.ds.REF_HASHERS.child(hasherId).observeEventType(.Value, withBlock: { snapshot in
+            if let attendeeInitDict = snapshot.value as? Dictionary<String, AnyObject> {
+                if let attendeeInitHashNamesDict = attendeeInitDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
+                    if let attendeeNameForThisKennel = attendeeInitHashNamesDict[kennelId] {
+                        if attendeeNameForThisKennel as! NSObject == true {
+                            self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
+                        } else if attendeeNameForThisKennel as! String == "primary" {
+                            self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
+                        } else {
+                            self._attendeeRelevantHashName = attendeeNameForThisKennel as! String
+                        }
+                    } else {
+                        self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
+                    }
+                } else if let _ = attendeeInitDict["hasherPrimaryHashName"] as? String {
+                    self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
+                } else {
+                    self._attendeeRelevantHashName = "No F'ing Name??"
+                }
+            } else {
+                self._attendeeRelevantHashName = "ERR: Missing Hasher"
             }
             completed()
         })
@@ -147,7 +174,7 @@ class Attendee: Hasher {
             self.potentialAttendees.append(potentialAttendee)
         }
     }
-
+    
     
     func attendeeSetIsPresent(attendeeId: String, trailId: String, attendeeIsPresent: Bool) {
         if attendeeIsPresent == true {
@@ -195,10 +222,10 @@ class Attendee: Hasher {
      From Hasher Class you get HasherId, HasherNerdName
      */
     
-//    init(isFake: String) {
-//        print("Fake Attendee Initializer (figure out a better way to do this sometime): ", isFake)
-////        self.init(isFake: "fake hasher init")
-//    }
+    //    init(isFake: String) {
+    //        print("Fake Attendee Initializer (figure out a better way to do this sometime): ", isFake)
+    ////        self.init(isFake: "fake hasher init")
+    //    }
     
     convenience init(attendeeInitId: String, attendeeInitDict: Dictionary<String, AnyObject>, attendeeInitTrailId: String, attendeeInitKennelId: String, attendeeAttendingInit: Bool, attendeeInitTrailHashCash: Int) {
         self.init(hasherInitId: attendeeInitId, hasherInitDict: attendeeInitDict)
@@ -222,19 +249,15 @@ class Attendee: Hasher {
         } else if let _ = attendeeInitDict["hasherPrimaryHashName"] as? String {
             self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
         } else {
-            "No F'ing Name??"
+            self._attendeeRelevantHashName = "No F'ing Name??"
         }
         
         if let attendeeIsAdminInit = attendeeInitDict["attendeeIsAdmin"] as? Bool {
-            print("heelow")
             self._attendeeIsAdmin = attendeeIsAdminInit
-            print("admin? ", self._attendeeIsAdmin)
         }
         
         if let attendeeIsHareInit = attendeeInitDict["attendeeIsHare"] as? Bool {
-                        print("heelow")
             self._attendeeIsHare = attendeeIsHareInit
-                        print("hare? ", self._attendeeIsHare)
         }
         
         if let attendeeTrailsInfoDict = attendeeInitDict["trailsAttended"] as? Dictionary<String, AnyObject> {
