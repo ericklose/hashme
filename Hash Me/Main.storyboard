@@ -2468,6 +2468,7 @@
                                             <outlet property="hasherNerdName" destination="Zdu-1T-yMc" id="fMk-kj-cT4"/>
                                             <outlet property="hasherNerdNameLbl" destination="TcA-W0-HSq" id="WLs-IZ-HWL"/>
                                             <outlet property="hasherPaid" destination="bNM-si-Wfz" id="QFZ-es-ycr"/>
+                                            <outlet property="hasherPaidLbl" destination="gJl-qO-sGd" id="JGg-6k-p9N"/>
                                             <outlet property="hasherRelevantHashName" destination="MTu-p5-9EY" id="YN0-8a-mpi"/>
                                             <outlet property="hasherRelevantHashNameLbl" destination="ZuX-gN-hRO" id="6T8-Mx-FFC"/>
                                         </connections>
@@ -3773,7 +3774,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wj4-Bb-BRh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-221" y="1874"/>
+            <point key="canvasLocation" x="-403" y="1916"/>
         </scene>
         <!--Kennels-->
         <scene sceneID="Jef-0F-rZ6">

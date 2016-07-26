@@ -19,8 +19,11 @@ class TrailAttendeesVC: UIViewController, UITableViewDataSource, UITableViewDele
     var trails: TrailData!
     var attendees = [Attendee]()
     var filteredHashers = [Attendee]()
-    var potentialAttendees = [Attendee]()
+//    var potentialAttendees = [Attendee]()
     var trailRoster = [Attendee]()
+    var fakeAttendee: Attendee!
+    var userIsAdmin = false
+    var userIsHare = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,96 +35,81 @@ class TrailAttendeesVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     override func viewDidAppear(animated: Bool) {
-        DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { hasherSnapshot in
-            
-            if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FIRDataSnapshot] {
-                
-                self.attendees = []
-                self.potentialAttendees = []
-                self.trailRoster = []
-                
-                for hasherSnap in hasherSnapshots {
-                    
-                    if let attendeeDataDict = hasherSnap.value as? Dictionary<String, AnyObject> {
-                        
-                            if let atThisTrail = attendeeDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
-                                let thisTrail = self.trails.trailKey
-                                if let thisTrailDict = atThisTrail[thisTrail] as? Dictionary<String, AnyObject> {
-                                    if (thisTrailDict["hasherAttendedTrail"] as? Bool) == true {
-                                        let hasherKey = hasherSnap.key
-                                        self.addPotential(hasherKey, attendeeDataDict: attendeeDataDict, attendeeAttending: true)
-                                    }
-                                }
-                                //IF SOME TRAILS ATTENDED, BUT NOT THIS ONE
-                                else {
-                                    self.addPotential(hasherSnap.key, attendeeDataDict: attendeeDataDict, attendeeAttending: false)
-                                }
-                            }
-                            //IF ZERO TRAILS ATTENDED IN HASHER DATA
-                            else {
-                              self.addPotential(hasherSnap.key, attendeeDataDict: attendeeDataDict, attendeeAttending: false)
-                        }
-                    }
+        fakeAttendee = Attendee(attendeeInitId: "fake", attendeeInitDict: [:], attendeeInitTrailId: "fake", attendeeInitKennelId: "fake", attendeeAttendingInit: false, attendeeInitTrailHashCash: 0)
+        
+        fakeAttendee.getAttendeeInfo(trails) { () -> () in
+            self.trailRoster = self.fakeAttendee.unpaidAttendees + self.fakeAttendee.attendees + self.fakeAttendee.potentialAttendees
+
+            for user in self.trailRoster {
+                if case user.hasherId = DataService.ds.REF_HASHER_USERID {
+                    self.userIsAdmin = user.attendeeIsAdmin
+                    print("admin status: ", user.attendeeRelevantHashName, self.userIsAdmin)
+                    self.userIsHare = user.attendeeIsHare
+                    print("hare status: ", user.attendeeRelevantHashName, self.userIsHare)
                 }
             }
             
-            self.trailRoster = self.attendees + self.potentialAttendees
             self.trailAttendeeTableView.reloadData()
-        })
-    }
-    
-    func addPotential(hasherKey: String, attendeeDataDict: Dictionary <String, AnyObject>, attendeeAttending: Bool) {
-        let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennelId, attendeeAttendingInit: attendeeAttending, attendeeInitTrailHashCash: self.trails.trailHashCash)
-        if hasherKey == DataService.ds.REF_HASHER_USERID {
-            self.attendees.insert(potentialAttendee, atIndex: 0)
-        } else if attendeeAttending == true {
-            self.attendees.append(potentialAttendee)
-        } else {
-            self.potentialAttendees.append(potentialAttendee)
+            
         }
     }
+
+//      I THINK THIS IS ALL BEING DONE IN ATTENDEE DATA
+//    func addPotential(hasherKey: String, attendeeDataDict: Dictionary <String, AnyObject>, attendeeAttending: Bool) {
+//        let potentialAttendee = Attendee(attendeeInitId: hasherKey, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: self.trails.trailKey, attendeeInitKennelId: self.trails.trailKennelId, attendeeAttendingInit: attendeeAttending, attendeeInitTrailHashCash: self.trails.trailHashCash)
+//        if hasherKey == DataService.ds.REF_HASHER_USERID {
+//            self.attendees.insert(potentialAttendee, atIndex: 0)
+//        } else if attendeeAttending == true {
+//            self.attendees.append(potentialAttendee)
+//        } else {
+//            self.potentialAttendees.append(potentialAttendee)
+//        }
+//    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-            return 63
+        return 63
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-   
-            if inSearchMode {
-                return filteredHashers.count
-            } else {
-                return trailRoster.count
-            }
+        if inSearchMode {
+            return filteredHashers.count
+        } else {
+            return trailRoster.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? TrailAttendeeCell {
-                let hasherResult: Attendee!
-                if inSearchMode {
-                    hasherResult = filteredHashers[indexPath.row]
-                } else {
-                    hasherResult = trailRoster[indexPath.row]
-                }
-                cell.configureCell(hasherResult, hashCash: self.trails.trailHashCash)
-                return cell
+        if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? TrailAttendeeCell {
+            let hasherResult: Attendee!
+            if inSearchMode {
+                hasherResult = filteredHashers[indexPath.row]
             } else {
-                return TrailAttendeeCell()
+                hasherResult = trailRoster[indexPath.row]
             }
+            cell.configureCell(hasherResult, hashCash: self.trails.trailHashCash, userIsAdmin: self.userIsAdmin)
+            return cell
+        } else {
+            return TrailAttendeeCell()
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            let specificAttendee: Attendee!
-            
-            if inSearchMode {
-                specificAttendee = filteredHashers[indexPath.row]
-            } else {
-                specificAttendee = trailRoster[indexPath.row]
-            }
-            performSegueWithIdentifier("trailAttendeeDetails", sender: specificAttendee)
+        let specificAttendee: Attendee!
+        
+        if inSearchMode {
+            specificAttendee = filteredHashers[indexPath.row]
+        } else {
+            specificAttendee = trailRoster[indexPath.row]
+        }
+        if userIsAdmin == true {
+        performSegueWithIdentifier("trailAttendeeDetails", sender: specificAttendee)
+        } else {
+            showErrorAlert("Only Admins Can Edit Attendees", msg: "You need to be an admin of this kennel to be able to record and change attendance")
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -156,18 +144,7 @@ class TrailAttendeesVC: UIViewController, UITableViewDataSource, UITableViewDele
     //NEED TO ADD ABILITY FOR ONLY ADMIN TO MARK PAID (AND HIDE PAID SWITCH IF NOT ADMIN
     //NEED TO LET CLICKING ON ROW GO TO ADD/EDIT HASHER VC, JUST LIKE ADD HASHER DOES, ALSO MOVE ADD HASHER BUTTON TO TOP BAR
     
-//    @IBAction func sliderValueChanged(sender: UISlider) {
-//        let selectedValue = Int(sender.value)
-//        newHasherCurrentPayLbl.text = "$" + String(stringInterpolationSegment: selectedValue)
-//    }
     
-//    @IBAction func newHasherPaidToggled(sender: UISwitch) {
-//        if newHasherPaidToggle.on == true {
-//            newHasherAttendingToggle.setOn(true, animated: true)
-//            newHasherCurrentPayLbl.text = "$\(hashCash)"
-//            newHasherPaySlider.setValue(Float(hashCash), animated: true)
-//        }
-//    }
     
 }
 

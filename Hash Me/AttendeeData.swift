@@ -36,17 +36,17 @@ class Attendee: Hasher {
     }
     
     var attendeeIsAdmin: Bool {
-        if _attendeeIsAdmin == true {
-            return true
+        if _attendeeIsAdmin != true {
+            return false
         }
-        return false
+        return true
     }
     
     var attendeeIsHare: Bool {
-        if _attendeeIsHare == true {
-            return true
+        if _attendeeIsHare != true {
+            return false
         }
-        return false
+        return true
     }
     
     var attendeeTrailHashCash: Int {
@@ -95,30 +95,40 @@ class Attendee: Hasher {
     
     var attendees = [Attendee]()
     var potentialAttendees = [Attendee]()
+    var unpaidAttendees = [Attendee]()
+    var trailAdminList = [:]
     
     
     func getAttendeeInfo(trails: TrailData, completed: DownloadComplete) {
+        DataService.ds.REF_KENNELS.child(trails.trailKennelId).observeEventType(.Value, withBlock: { snapshot in
+            if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
+                if let kennelAdminList = kennelDict["kennelAdmins"] as? Dictionary<String, String> {
+                    self.trailAdminList = kennelAdminList
+                }
+            }
+        })
+        
         DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { hasherSnapshot in
             
             if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FIRDataSnapshot] {
                 
-                //    self.trailHareNamesDict = [:]
                 self.attendees = []
                 self.potentialAttendees = []
-                //    self.trailRoster = []
+                self.unpaidAttendees = []
                 
                 for hasherSnap in hasherSnapshots {
-                    if let attendeeDataDict = hasherSnap.value as? Dictionary<String, AnyObject> {
-                        //    if self.trails.trailHares[hasherSnap.key] != nil {
-                        //    let hareHashName = attendeeDataDict["hasherPrimaryHashName"] as! String
-                        //    self.trailHareNamesDict[hasherSnap.key] = hareHashName
-                        //    }
+                    if var attendeeDataDict = hasherSnap.value as? Dictionary<String, AnyObject> {
+                        if self.trailAdminList[hasherSnap.key] != nil {
+                            attendeeDataDict["attendeeIsAdmin"] = true
+                        }
                         if let atThisTrail = attendeeDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
-                            let thisTrail = trails.trailKey
-                            if let thisTrailDict = atThisTrail[thisTrail] as? Dictionary<String, AnyObject> {
+//                            LEGACY: Probably bad code, delete in a few weeks
+//                            let thisTrail = trails.trailKey
+                            if let thisTrailDict = atThisTrail[trails.trailKey] as? Dictionary<String, AnyObject> {
                                 if (thisTrailDict["hasherAttendedTrail"] as? Bool) == true {
-                                    let hasherKey = hasherSnap.key
-                                    self.addToAttendeeList(hasherKey, trails: trails, attendeeDataDict: attendeeDataDict, attendeeAttending: true)
+//                                    LEGACY: Probably bad code, delete in a few weeks
+//                                    let hasherKey = hasherSnap.key
+                                    self.addToAttendeeList(hasherSnap.key, trails: trails, attendeeDataDict: attendeeDataDict, attendeeAttending: true)
                                 }
                             }
                                 //IF SOME TRAILS ATTENDED BUT NOT THIS ONE
@@ -167,8 +177,10 @@ class Attendee: Hasher {
     func addToAttendeeList(hasherId: String, trails: TrailData, attendeeDataDict: Dictionary<String, AnyObject>, attendeeAttending: Bool) {
         let potentialAttendee = Attendee(attendeeInitId: hasherId, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: trails.trailKey, attendeeInitKennelId: trails.trailKennelId, attendeeAttendingInit: attendeeAttending, attendeeInitTrailHashCash: trails.trailHashCash)
         if hasherId == DataService.ds.REF_HASHER_USERID {
-            self.attendees.insert(potentialAttendee, atIndex: 0)
-        } else if attendeeAttending == true {
+            self.unpaidAttendees.insert(potentialAttendee, atIndex: 0)
+        } else if (attendeeAttending == true) && (attendeePaidAmount == 0) {
+            self.unpaidAttendees.append(potentialAttendee)
+        } else if (attendeeAttending == true) && (attendeePaidAmount > 0) {
             self.attendees.append(potentialAttendee)
         } else {
             self.potentialAttendees.append(potentialAttendee)

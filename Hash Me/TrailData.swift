@@ -68,11 +68,8 @@ class TrailData {
     var trailHares: Dictionary<String, String> {
         if _trailHares == nil {
             _trailHares = ["Hare" : "TBD"]
-            print("TrailData ", _trailHares)
             return _trailHares
         } else {
-//            this seems to work fine
-//            print("TrailData ", _trailHares)
             return _trailHares
         }
     }
