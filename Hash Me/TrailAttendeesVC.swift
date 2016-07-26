@@ -121,7 +121,7 @@ class TrailAttendeesVC: UIViewController, UITableViewDataSource, UITableViewDele
             } else {
                 specificAttendee = trailRoster[indexPath.row]
             }
-            performSegueWithIdentifier("attendeeDetails", sender: specificAttendee)
+            performSegueWithIdentifier("trailAttendeeDetails", sender: specificAttendee)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
