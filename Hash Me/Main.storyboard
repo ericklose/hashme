@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--HasherDataVC-->
@@ -801,10 +800,10 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Tcx-KS-lGl">
                                                             <rect key="frame" x="8" y="8" width="544" height="194"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ApD-gZ-jDK">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ApD-gZ-jDK">
                                                                     <rect key="frame" x="0.0" y="0.0" width="544" height="33"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="12/24/2019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QSC-8z-iLN">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12/24/2019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QSC-8z-iLN">
                                                                             <rect key="frame" x="0.0" y="0.0" width="85" height="33"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="30" id="9ap-EM-vEL"/>
@@ -822,7 +821,7 @@
                                                                                 </mask>
                                                                             </variation>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="Boston H3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mv5-rf-uG3">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Boston H3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mv5-rf-uG3">
                                                                             <rect key="frame" x="90" y="0.0" width="454" height="33"/>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -840,7 +839,7 @@
                                                                         </mask>
                                                                     </variation>
                                                                 </stackView>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WFg-aH-iM6">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WFg-aH-iM6">
                                                                     <rect key="frame" x="0.0" y="33" width="544" height="34"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j4p-WR-UZG">
@@ -874,10 +873,10 @@
                                                                         </mask>
                                                                     </variation>
                                                                 </stackView>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rmi-XE-yKp">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rmi-XE-yKp">
                                                                     <rect key="frame" x="0.0" y="67" width="544" height="33"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="Hares:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zzv-81-7ke">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Hares:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zzv-81-7ke">
                                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="33"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="50" id="L7o-WO-iE0"/>
@@ -886,7 +885,7 @@
                                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="Your Momma's Maximus, Semi-Consensual Nipple" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTk-hv-LfE">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Your Momma's Maximus, Semi-Consensual Nipple" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTk-hv-LfE">
                                                                             <rect key="frame" x="50" y="0.0" width="494" height="33"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -902,7 +901,7 @@
                                                                         </mask>
                                                                     </variation>
                                                                 </stackView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRw-0O-czk">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRw-0O-czk">
                                                                     <rect key="frame" x="0.0" y="100" width="544" height="94"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="100" id="Yl8-8U-ZAT"/>
@@ -1003,18 +1002,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="0Ib-e1-Pkx">
-                        <rightBarButtonItems>
-                            <barButtonItem title="+ Add" id="fcX-m2-shq">
-                                <connections>
-                                    <segue destination="BWH-it-D2D" kind="show" identifier="addNewTrail" id="2ZC-bZ-Vkg"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Other Add" id="kI7-uD-m9R">
-                                <connections>
-                                    <segue destination="BWH-it-D2D" kind="show" id="JHF-fa-1gD"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="+ Add" id="fcX-m2-shq">
+                            <connections>
+                                <segue destination="BWH-it-D2D" kind="show" identifier="addNewTrail" id="2ZC-bZ-Vkg"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="trailTableView" destination="pOb-S4-jhQ" id="iLw-sQ-b1b"/>
@@ -2304,7 +2296,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nbV-g4-myZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3978" y="-904"/>
+            <point key="canvasLocation" x="4798" y="-792"/>
         </scene>
         <!--Trail AttendeesVC-->
         <scene sceneID="2o5-ey-5Ds">
@@ -2325,17 +2317,6 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6QX-zc-ZGW">
-                                <rect key="frame" x="506" y="20" width="74" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="74" id="PfS-M3-vFe"/>
-                                    <constraint firstAttribute="height" constant="30" id="cC1-pV-OMQ"/>
-                                </constraints>
-                                <state key="normal" title="+ Hasher"/>
-                                <connections>
-                                    <segue destination="l5R-Ak-DPy" kind="show" identifier="addHasher" id="idS-Pv-ohc"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="74" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="39b-4c-OS1">
                                 <rect key="frame" x="0.0" y="108" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2484,10 +2465,8 @@
                             <constraint firstAttribute="bottom" secondItem="39b-4c-OS1" secondAttribute="bottom" id="CXF-j6-Kta"/>
                             <constraint firstAttribute="trailing" secondItem="39b-4c-OS1" secondAttribute="trailing" id="ERk-Zx-fV9"/>
                             <constraint firstItem="39b-4c-OS1" firstAttribute="top" secondItem="SBo-Xc-9Ko" secondAttribute="bottom" id="FuK-A2-jbo"/>
-                            <constraint firstItem="6QX-zc-ZGW" firstAttribute="top" secondItem="yy1-bF-Sj1" secondAttribute="top" constant="5" id="H88-QN-JTD"/>
                             <constraint firstItem="39b-4c-OS1" firstAttribute="width" secondItem="yy1-bF-Sj1" secondAttribute="width" id="HEn-B1-VYn"/>
                             <constraint firstItem="39b-4c-OS1" firstAttribute="leading" secondItem="yy1-bF-Sj1" secondAttribute="leading" id="JYg-Pk-vht"/>
-                            <constraint firstAttribute="trailing" secondItem="6QX-zc-ZGW" secondAttribute="trailing" constant="10" id="cXH-2s-ARE"/>
                             <constraint firstItem="SBo-Xc-9Ko" firstAttribute="leading" secondItem="yy1-bF-Sj1" secondAttribute="leading" id="ccb-Db-Djf"/>
                             <constraint firstItem="39b-4c-OS1" firstAttribute="centerX" secondItem="yy1-bF-Sj1" secondAttribute="centerX" id="efS-yH-hmj"/>
                             <constraint firstItem="39b-4c-OS1" firstAttribute="top" secondItem="Byo-5d-XMs" secondAttribute="bottom" id="gRM-Tq-Ouq"/>
@@ -2503,6 +2482,8 @@
                             </mask>
                         </variation>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="attendeeSearchBar" destination="SBo-Xc-9Ko" id="RcE-gs-ztA"/>
                         <outlet property="trailAttendeeTableView" destination="39b-4c-OS1" id="xvH-al-Nh2"/>
@@ -2911,7 +2892,7 @@
                     </prototypes>
                 </tableView>
             </objects>
-            <point key="canvasLocation" x="4939" y="3"/>
+            <point key="canvasLocation" x="4941" y="104"/>
         </scene>
         <!--Add New TrailVC-->
         <scene sceneID="dsI-z6-h4i">
