@@ -18,6 +18,7 @@ class TrailAttendeeCell: UITableViewCell {
     @IBOutlet weak var hasherNerdNameLbl: UILabel!
     @IBOutlet weak var hasherAttendingTrailToggle: UISwitch!
     @IBOutlet weak var hasherPaid: UISwitch!
+    @IBOutlet weak var hasherPaidLbl: UILabel!
     
     var attendee: Attendee!
     var hashCash: Int = 0
@@ -33,7 +34,7 @@ class TrailAttendeeCell: UITableViewCell {
         
     }
     
-    func configureCell(attendee: Attendee, hashCash: Int) {
+    func configureCell(attendee: Attendee, hashCash: Int, userIsAdmin: Bool) {
         self.attendee = attendee
         self.hashCash = hashCash
         
@@ -69,6 +70,20 @@ class TrailAttendeeCell: UITableViewCell {
             self.hasherRelevantHashNameLbl.hidden = false
             self.hasherRelevantHashName.text = ""
             self.hasherRelevantHashNameLbl.text = attendee.attendeeRelevantHashName
+        }
+        
+        if userIsAdmin == false {
+            if attendee.hasherId == DataService.ds.REF_HASHER_USERID {
+                self.hasherAttendingTrailToggle.userInteractionEnabled = true
+            } else {
+                self.hasherAttendingTrailToggle.userInteractionEnabled = false
+            }
+            self.hasherPaid.hidden = true
+            self.hasherRelevantHashName.hidden = true
+            self.hasherRelevantHashNameLbl.hidden = false
+            self.hasherNerdName.hidden = true
+            self.hasherNerdNameLbl.hidden = false
+            self.hasherPaidLbl.hidden = true
         }
     }
     
