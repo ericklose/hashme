@@ -2350,7 +2350,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="AoS-sJ-cmb">
                                                     <rect key="frame" x="8" y="8" width="584" height="61"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5wh-pj-6a6">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5wh-pj-6a6">
                                                             <rect key="frame" x="0.0" y="0.0" width="476" height="30"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Existing Hash Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuX-gN-hRO" userLabel="Existing Hash Name Lbl">
@@ -2370,10 +2370,13 @@
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nerd Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zdu-1T-yMc">
+                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nerd Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zdu-1T-yMc">
                                                                     <rect key="frame" x="381" y="0.0" width="95" height="30"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
+                                                                    <connections>
+                                                                        <action selector="hasherNerdNameAdded:" destination="iAA-7V-xgu" eventType="editingDidEnd" id="nvE-QP-9XX"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                         </stackView>
@@ -2396,6 +2399,9 @@
                                                                         <constraint firstAttribute="width" constant="49" id="HB1-hM-Dgh"/>
                                                                         <constraint firstAttribute="height" constant="31" id="OVt-6o-7I5"/>
                                                                     </constraints>
+                                                                    <connections>
+                                                                        <action selector="toggleAttendingToggle:" destination="iAA-7V-xgu" eventType="touchUpInside" id="2mV-D4-LyX"/>
+                                                                    </connections>
                                                                 </switch>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paid?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJl-qO-sGd">
                                                                     <rect key="frame" x="108" y="0.0" width="49" height="31"/>
@@ -2413,6 +2419,9 @@
                                                                         <constraint firstAttribute="height" constant="31" id="Ivs-TT-zYb"/>
                                                                         <constraint firstAttribute="width" constant="49" id="eke-wv-gg8"/>
                                                                     </constraints>
+                                                                    <connections>
+                                                                        <action selector="hasherPaidToggleToggled:" destination="iAA-7V-xgu" eventType="touchUpInside" id="1Cr-yn-EHs"/>
+                                                                    </connections>
                                                                 </switch>
                                                             </subviews>
                                                             <constraints>
