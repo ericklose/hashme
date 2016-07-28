@@ -122,12 +122,8 @@ class Attendee: Hasher {
                             attendeeDataDict["attendeeIsAdmin"] = true
                         }
                         if let atThisTrail = attendeeDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
-//                            LEGACY: Probably bad code, delete in a few weeks
-//                            let thisTrail = trails.trailKey
                             if let thisTrailDict = atThisTrail[trails.trailKey] as? Dictionary<String, AnyObject> {
                                 if (thisTrailDict["hasherAttendedTrail"] as? Bool) == true {
-//                                    LEGACY: Probably bad code, delete in a few weeks
-//                                    let hasherKey = hasherSnap.key
                                     self.addToAttendeeList(hasherSnap.key, trails: trails, attendeeDataDict: attendeeDataDict, attendeeAttending: true)
                                 }
                             }
@@ -178,9 +174,9 @@ class Attendee: Hasher {
         let potentialAttendee = Attendee(attendeeInitId: hasherId, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: trails.trailKey, attendeeInitKennelId: trails.trailKennelId, attendeeAttendingInit: attendeeAttending, attendeeInitTrailHashCash: trails.trailHashCash)
         if hasherId == DataService.ds.REF_HASHER_USERID {
             self.unpaidAttendees.insert(potentialAttendee, atIndex: 0)
-        } else if (attendeeAttending == true) && (attendeePaidAmount == 0) {
+        } else if (attendeeAttending == true && potentialAttendee.attendeePaidAmount == 0) {
             self.unpaidAttendees.append(potentialAttendee)
-        } else if (attendeeAttending == true) && (attendeePaidAmount > 0) {
+        } else if (attendeeAttending == true && potentialAttendee.attendeePaidAmount > 0) {
             self.attendees.append(potentialAttendee)
         } else {
             self.potentialAttendees.append(potentialAttendee)

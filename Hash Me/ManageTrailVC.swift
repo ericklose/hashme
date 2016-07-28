@@ -86,7 +86,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         fakeAttendee = Attendee(attendeeInitId: "fake", attendeeInitDict: [:], attendeeInitTrailId: "fake", attendeeInitKennelId: "fake", attendeeAttendingInit: false, attendeeInitTrailHashCash: 0)
         
         fakeAttendee.getAttendeeInfo(trails) { () -> () in
-            self.trailRoster = self.fakeAttendee.attendees + self.fakeAttendee.potentialAttendees
+            self.trailRoster = self.fakeAttendee.unpaidAttendees + self.fakeAttendee.attendees + self.fakeAttendee.potentialAttendees
             self.trailAttendeeTableView.reloadData()
             self.trailHaresTableView.reloadData()
         }

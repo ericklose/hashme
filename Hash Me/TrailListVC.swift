@@ -46,7 +46,7 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         trail = trails[indexPath.row]
         
         //HOLLY'S NEW VERSION
-      performSegueWithIdentifier("trailDetails", sender: trail)
+        performSegueWithIdentifier("trailDetails", sender: trail)
         
         //ERIC'S LEGACY VERSION
 //        performSegueWithIdentifier("manageTrail", sender: trail)
