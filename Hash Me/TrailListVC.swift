@@ -32,35 +32,35 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return trails.count
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let trail: TrailData!
-        trail = trails[indexPath.row]
+        trail = trails[(indexPath as NSIndexPath).row]
         
         //HOLLY'S NEW VERSION
-      performSegueWithIdentifier("trailDetails", sender: trail)
+//        performSegueWithIdentifier("trailDetails", sender: trail)
         
         //ERIC'S LEGACY VERSION
-//        performSegueWithIdentifier("manageTrail", sender: trail)
+        performSegue(withIdentifier: "manageTrail", sender: trail)
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return trailTableView.estimatedRowHeight
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        trails.sortInPlace { $0.trailDate > $1.trailDate }
-        let trail = trails[indexPath.row]
-        if let cell = tableView.dequeueReusableCellWithIdentifier("trailCell") as? TrailCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        trails.sort { $0.trailDate > $1.trailDate }
+        let trail = trails[(indexPath as NSIndexPath).row]
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "trailCell") as? TrailCell {
             cell.configureCell(trail)
             return cell
         } else {
@@ -68,15 +68,15 @@ class TrailListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "trailDetails" {
-            if let TrailDetailsVC = segue.destinationViewController as? TrailDetailsVC {
+            if let TrailDetailsVC = segue.destination as? TrailDetailsVC {
                 if let trailInCell = sender as? TrailData {
                     TrailDetailsVC.trails = trailInCell
                 }
             }
         } else if segue.identifier == "manageTrail" {
-            if let ManageTrailVC = segue.destinationViewController as? ManageTrailVC {
+            if let ManageTrailVC = segue.destination as? ManageTrailVC {
                 if let trailInCell = sender as? TrailData {
                     ManageTrailVC.trails = trailInCell
                 }

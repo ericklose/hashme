@@ -20,11 +20,11 @@ class HareCell: UITableViewCell {
         //Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func configureCell(hareId: String, hares: Dictionary<String, String>, hareNameDict: Dictionary<String, String>) {
+    func configureCell(_ hareId: String, hares: Dictionary<String, String>, hareNameDict: Dictionary<String, String>) {
         //print("c'mon", hares, hareNameDict)
         self.hareId = hareId
         self.roleTitle.text = hares[hareId]! + ": "

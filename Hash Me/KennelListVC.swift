@@ -34,29 +34,29 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return kennels.count
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let kennel: KennelData!
-        kennel = kennels[indexPath.row]
-        performSegueWithIdentifier("manageKennel", sender: kennel)
+        kennel = kennels[(indexPath as NSIndexPath).row]
+        performSegue(withIdentifier: "manageKennel", sender: kennel)
                 
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return kennelListTable.estimatedRowHeight
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let kennel = kennels[indexPath.row]
-        if let cell = tableView.dequeueReusableCellWithIdentifier("kennelCell") as? KennelCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let kennel = kennels[(indexPath as NSIndexPath).row]
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "kennelCell") as? KennelCell {
             cell.configureCell(kennel)
             return cell
         } else {
@@ -66,17 +66,17 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
 
 
-    @IBAction func addNewKennel(sender: UIButton) {
+    @IBAction func addNewKennel(_ sender: UIButton) {
         postKennelToFirebase()
     }
 
     func postKennelToFirebase() {
         
         let kennel: Dictionary<String, AnyObject> = [
-            "kennelName": newKennelName.text!,
-            "kennelCountry": newKennelCountry.text!,
-            "kennelState": newKennelState.text!,
-            "name": newKennelName.text!
+            "kennelName": newKennelName.text! as AnyObject,
+            "kennelCountry": newKennelCountry.text! as AnyObject,
+            "kennelState": newKennelState.text! as AnyObject,
+            "name": newKennelName.text! as AnyObject
         ]
         
         let firebasePost = DataService.ds.REF_KENNELS.childByAutoId()
@@ -89,9 +89,9 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "manageKennel" {
-            if let manageKennelVC = segue.destinationViewController as? ManageKennelVC {
+            if let manageKennelVC = segue.destination as? ManageKennelVC {
                 if let kennelInCell = sender as? KennelData {
                     manageKennelVC.kennels = kennelInCell
                 }

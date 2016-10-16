@@ -11,16 +11,16 @@ import Firebase
 
 class Hasher {
     
-    private var _hasherId: String!
-    private var _hasherNerdName: String!
-    private var _hasherHashNames: Dictionary<String, AnyObject>!
-    private var _hasherKennelMemberships: Dictionary<String, AnyObject>!
-    private var _hasherTrailsAttended: Array<String>?
-    private var _hasherTrailsHared: Array<String>?
-    private var _kennelInitDict: Dictionary<String, AnyObject>!
-    private var _hasherPrimaryHashName: String!
-    private var _hasherPrimaryKennel: String!
-    private var _hasherUrl: FIRDatabaseReference!
+    fileprivate var _hasherId: String!
+    fileprivate var _hasherNerdName: String!
+    fileprivate var _hasherHashNames: Dictionary<String, AnyObject>!
+    fileprivate var _hasherKennelMemberships: Dictionary<String, AnyObject>!
+    fileprivate var _hasherTrailsAttended: Array<String>?
+    fileprivate var _hasherTrailsHared: Array<String>?
+    fileprivate var _kennelInitDict: Dictionary<String, AnyObject>!
+    fileprivate var _hasherPrimaryHashName: String!
+    fileprivate var _hasherPrimaryKennel: String!
+    fileprivate var _hasherUrl: FIRDatabaseReference!
     
     var kennelAndNameDict: [String: String] = [:]
     var hasher: Hasher!
@@ -85,7 +85,7 @@ class Hasher {
         }
     }
     
-    func editNerdNameInFirebase(hasherId: String, nerdName: String) {
+    func editNerdNameInFirebase(_ hasherId: String, nerdName: String) {
         
         if nerdName != "" {
             _hasherUrl.updateChildValues(["hasherNerdName" : nerdName])
@@ -94,13 +94,13 @@ class Hasher {
         }
     }
     
-    func editPrimaryHashNameInFirebase(hasherId: String, primaryName: String!) {
+    func editPrimaryHashNameInFirebase(_ hasherId: String, primaryName: String!) {
         if primaryName != "" {
             _hasherUrl.updateChildValues(["hasherPrimaryHashName" : primaryName])
         }
     }
     
-    func editHasherKennelMembership(hasherId: String, kennelId: String) {
+    func editHasherKennelMembership(_ hasherId: String, kennelId: String) {
         DataService.ds.REF_HASHERS.child(hasherId).child("hasherKennelsAndNames").updateChildValues([kennelId : true])
         DataService.ds.REF_KENNELS.child(kennelId).child("kennelMembers").updateChildValues([hasherId : true])
     }

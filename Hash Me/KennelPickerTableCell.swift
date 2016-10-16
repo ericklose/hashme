@@ -19,13 +19,13 @@ class KennelPickerTableCell: UITableViewCell {
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
-    func configureCell(kennel: KennelData) {
+    func configureCell(_ kennel: KennelData) {
         self.kennelName.text = kennel.kennelName
         self.kennelCityAndRegion.text = kennel.kennelCityAndRegion
         self.kennelCountryKennel.text = "Country: " + kennel.kennelCountry

@@ -31,10 +31,10 @@ class TrailAttendeesVC: UIViewController, UITableViewDataSource, UITableViewDele
         trailAttendeeTableView.delegate = self
         trailAttendeeTableView.dataSource = self
         attendeeSearchBar.delegate = self
-        attendeeSearchBar.returnKeyType = UIReturnKeyType.Done
+        attendeeSearchBar.returnKeyType = UIReturnKeyType.done
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         fakeAttendee = Attendee(attendeeInitId: "fake", attendeeInitDict: [:], attendeeInitTrailId: "fake", attendeeInitKennelId: "fake", attendeeAttendingInit: false, attendeeInitTrailHashCash: 0)
         
         fakeAttendee.getAttendeeInfo(trails) { () -> () in
@@ -66,15 +66,15 @@ class TrailAttendeesVC: UIViewController, UITableViewDataSource, UITableViewDele
 //        }
 //    }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 63
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if inSearchMode {
             return filteredHashers.count
         } else {
@@ -82,13 +82,13 @@ class TrailAttendeesVC: UIViewController, UITableViewDataSource, UITableViewDele
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? TrailAttendeeCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "trailAttendeeCell") as? TrailAttendeeCell {
             let hasherResult: Attendee!
             if inSearchMode {
-                hasherResult = filteredHashers[indexPath.row]
+                hasherResult = filteredHashers[(indexPath as NSIndexPath).row]
             } else {
-                hasherResult = trailRoster[indexPath.row]
+                hasherResult = trailRoster[(indexPath as NSIndexPath).row]
             }
             cell.configureCell(hasherResult, hashCash: self.trails.trailHashCash, userIsAdmin: self.userIsAdmin)
             return cell
@@ -97,44 +97,50 @@ class TrailAttendeesVC: UIViewController, UITableViewDataSource, UITableViewDele
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let specificAttendee: Attendee!
         
         if inSearchMode {
-            specificAttendee = filteredHashers[indexPath.row]
+            specificAttendee = filteredHashers[(indexPath as NSIndexPath).row]
         } else {
-            specificAttendee = trailRoster[indexPath.row]
+            specificAttendee = trailRoster[(indexPath as NSIndexPath).row]
         }
         if userIsAdmin == true {
-        performSegueWithIdentifier("trailAttendeeDetails", sender: specificAttendee)
+        performSegue(withIdentifier: "trailAttendeeDetails", sender: specificAttendee)
         } else {
             showErrorAlert("Only Admins Can Edit Attendees", msg: "You need to be an admin of this kennel to be able to record and change attendance")
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "trailAttendeeDetails" {
-            if let attendeeDetailsVC = segue.destinationViewController as? AttendeeDetailsVC {
+            if let attendeeDetailsVC = segue.destination as? AttendeeDetailsVC {
                 if let attendeeInCell = sender as? Attendee {
                     attendeeDetailsVC.specificAttendee = attendeeInCell
                 }
             }
+//        } else if segue.identifier == "trailNewHasher" {
+//            if let attendeeDetailsVC = segue.destinationViewController as? AttendeeDetailsVC {
+//                if let trailNewHasher = sender {
+//                    AttendeeDetailsVC.isNewHasher = true
+//                }
+//            }
         }
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == nil || searchBar.text == "" {
             inSearchMode = false
             view.endEditing(true)
             self.trailAttendeeTableView.reloadData()
         } else {
             inSearchMode = true
-            let lower = searchBar.text!.lowercaseString
-            filteredHashers = trailRoster.filter({$0.attendeeRelevantHashName.lowercaseString.rangeOfString(lower) != nil || $0.hasherNerdName.lowercaseString.rangeOfString(lower) != nil})
+            let lower = searchBar.text!.lowercased()
+            filteredHashers = trailRoster.filter({$0.attendeeRelevantHashName.lowercased().range(of: lower) != nil || $0.hasherNerdName.lowercased().range(of: lower) != nil})
             self.trailAttendeeTableView.reloadData()
         }
     }

@@ -33,7 +33,7 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         kennelPicker.delegate = self
         kennelPicker.dataSource = self
         kennelSearchBar.delegate = self
-        kennelSearchBar.returnKeyType = UIReturnKeyType.Done
+        kennelSearchBar.returnKeyType = UIReturnKeyType.done
         
         
         for (key, _) in hasherKennelIdsAndNamesDict {
@@ -67,11 +67,11 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 //        })
 //    }
     
-    func numberOfComponentsInPickerView(kennelPicker: UIPickerView) -> Int {
+    func numberOfComponents(in kennelPicker: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(kennelPicker: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ kennelPicker: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if inSearchMode {
             return filteredKennelPickerNames.count
         } else {
@@ -79,7 +79,7 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
-    func pickerView(kennelPicker: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ kennelPicker: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if inSearchMode {
             return filteredKennelPickerNames[row]
         } else {
@@ -87,7 +87,7 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
-    func pickerView(kennelPicker: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ kennelPicker: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if inSearchMode {
             kennelSelected.text = filteredKennelPickerNames[row]
             self.kennelChoiceName = filteredKennelPickerNames[row]
@@ -97,24 +97,24 @@ class KennelPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == nil || searchBar.text == "" {
             inSearchMode = false
             view.endEditing(true)
             self.kennelPicker.reloadAllComponents()
         } else {
             inSearchMode = true
-            let lower = searchBar.text!.lowercaseString
-            filteredKennelPickerNames = kennelPickerNames.filter({$0.lowercaseString.rangeOfString(lower) != nil})
+            let lower = searchBar.text!.lowercased()
+            filteredKennelPickerNames = kennelPickerNames.filter({$0.lowercased().range(of: lower) != nil})
             self.kennelPicker.reloadAllComponents()
         }
     }
     
-    @IBAction func kennelPickerSaved(sender: UIButton) {
+    @IBAction func kennelPickerSaved(_ sender: UIButton) {
         if self.kennelChoiceName != nil && self.kennelChoiceName != "-Select Kennel-" {
             kennelChoiceId = hasherKennelIdsAndNamesDict[kennelChoiceName]!
         } else if inSearchMode && self.kennelChoiceName == nil {

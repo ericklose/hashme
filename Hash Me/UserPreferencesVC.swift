@@ -21,23 +21,23 @@ class UserPreferencesVC: UIViewController {
         
     }
 
-    @IBAction func logoutUser(sender: AnyObject) {
+    @IBAction func logoutUser(_ sender: AnyObject) {
 //         Doesn't work but needs IBAction hooked up
         try! FIRAuth.auth()?.signOut()
-        performSegueWithIdentifier("logoutSegue", sender: nil)
+        performSegue(withIdentifier: "logoutSegue", sender: nil)
     }
     
-    @IBAction func changeUserPassword(sender: AnyObject) {
+    @IBAction func changeUserPassword(_ sender: AnyObject) {
         showErrorAlert("Also non-functional", msg: "Cut me some slack - this shit's complicated!")
         //Need to get user email and existing password to here somehow
 //        FirebaseUserSettings.fus.changeFirebasePassword(String, pwd: String)
 //        changeFirebasePassword("email", pwd: "current password")
     }
     
-    @IBAction func changeUserEmail(sender: AnyObject) {
+    @IBAction func changeUserEmail(_ sender: AnyObject) {
     }
 
-    @IBAction func hideNerdName(sender: AnyObject) {
+    @IBAction func hideNerdName(_ sender: AnyObject) {
         showErrorAlert("I don't know how to do this yet", msg: "But later it'll hide your nerd name from other users for privacy")
     }
     

@@ -60,10 +60,10 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         kennelListTableView.reloadData()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         if newHasherIsSelected == true {
             meOrSelectedHasherId = hasherChoiceId //sent from hasher picker VC
-            returnToMyDataBtn.hidden = false
+            returnToMyDataBtn.isHidden = false
         } else {
             meOrSelectedHasherId = DataService.ds.REF_HASHER_USERID
         }
@@ -73,16 +73,16 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
 }
     
-    func downloadHasherDetails(completed: DownloadComplete) {
+    func downloadHasherDetails(_ completed: @escaping DownloadComplete) {
         
-        DataService.ds.REF_HASHERS.child(meOrSelectedHasherId).observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_HASHERS.child(meOrSelectedHasherId).observe(.value, with: { snapshot in
             
             self.kennelMembershipIds = []
             self.kennelAndHashNameDecodeDict = [:]
             self.kennelAndNameDict = [:]
             
             if var hasherDict = snapshot.value as? Dictionary<String, AnyObject>{
-                DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+                DataService.ds.REF_KENNELS.observe(.value, with: { snapshot in
                     if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                         for snap in snapshots {
                             if let kennelDict2 = snap.value as? Dictionary<String, AnyObject> {
@@ -92,7 +92,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                             }
                         }
                     }
-                    hasherDict["addedKennelDict"] = self.kennelAndNameDict
+                    hasherDict["addedKennelDict"] = self.kennelAndNameDict as AnyObject?
                     self.hasher = Hasher(hasherInitId: self.meOrSelectedHasherId, hasherInitDict: hasherDict)
                     self.kennelAndHashNameDecodeDict = [:]
                     if let hashNamesAndKennels = hasherDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
@@ -100,7 +100,7 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                             if value as? String == "primary" {
                                 //take primary kennel and hashname out of table
                                 
-                            } else if value as! NSObject == true {
+                            } else if value as! Bool == true {
                                 self.kennelAndHashNameDecodeDict[key] = ""
                             }else {
                                 self.kennelAndHashNameDecodeDict[key] = (value as! String)
@@ -114,51 +114,51 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         })
     }
     
-    @IBAction func returnToMyDataBtnPressed(sender: AnyObject) {
-        returnToMyDataBtn.hidden = true
+    @IBAction func returnToMyDataBtnPressed(_ sender: AnyObject) {
+        returnToMyDataBtn.isHidden = true
         newHasherIsSelected = false
         viewDidAppear(true)
     }
     
     
-    @IBAction func editNerdNamePressed(sender: AnyObject) {
-        nerdNameTxtFld.hidden = false
-        nerdNameLbl.hidden = true
-        nerdNamePencil.hidden = true
-        updateInfoBtn.hidden = false
+    @IBAction func editNerdNamePressed(_ sender: AnyObject) {
+        nerdNameTxtFld.isHidden = false
+        nerdNameLbl.isHidden = true
+        nerdNamePencil.isHidden = true
+        updateInfoBtn.isHidden = false
     }
     
-    @IBAction func updateInfoPressed(sender: AnyObject) {
+    @IBAction func updateInfoPressed(_ sender: AnyObject) {
         hasher.editNerdNameInFirebase(hasher.hasherId, nerdName: nerdNameTxtFld.text!)
         hasher.editPrimaryHashNameInFirebase(hasher.hasherId, primaryName: primaryHashNameTxtFld.text)
         
-        nerdNameTxtFld.hidden = true
-        updateInfoBtn.hidden = true
-        nerdNamePencil.hidden = false
-        nerdNameLbl.hidden = false
-        primaryHashNameTxtFld.hidden = true
-        primaryHashNameLbl.hidden = false
-        primaryHashNamePencil.hidden = false
+        nerdNameTxtFld.isHidden = true
+        updateInfoBtn.isHidden = true
+        nerdNamePencil.isHidden = false
+        nerdNameLbl.isHidden = false
+        primaryHashNameTxtFld.isHidden = true
+        primaryHashNameLbl.isHidden = false
+        primaryHashNamePencil.isHidden = false
         
-        updateInfoBtn.hidden = true
+        updateInfoBtn.isHidden = true
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return kennelMembershipIds.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 30
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let kennelMembershipId = kennelMembershipIds[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let kennelMembershipId = kennelMembershipIds[(indexPath as NSIndexPath).row]
         
-        if let cell = tableView.dequeueReusableCellWithIdentifier("hasherCell") as? HasherCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "hasherCell") as? HasherCell {
             cell.configureCell(hasher.hasherId, kennelMembershipId: kennelMembershipId, kennelAndHashNameDecodeDict: kennelAndHashNameDecodeDict, kennelAndNameDict: kennelAndNameDict)
             return cell
         } else {
@@ -167,9 +167,9 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         
     }
     //TABLE to add new kennels
-    @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
+    @IBAction func getKennelFromKennelPickerVC(_ sender: UIStoryboardSegue) {
         
-        if let sourceViewController = sender.sourceViewController as? KennelPickerTableVC {
+        if let sourceViewController = sender.source as? KennelPickerTableVC {
             let hasherKennelsArray = kennelAndHashNameDecodeDict.keys
 //            let hasherTrailsAndNamesUrl = DataService.ds.REF_HASHERS.child(hasher.hasherId).child("hasherKennelsAndNames")
             
@@ -183,9 +183,9 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "pickHasherPrimaryKennel" {
-            if let KennelPickerVC = segue.destinationViewController as? KennelPickerVC {
+            if let KennelPickerVC = segue.destination as? KennelPickerVC {
                 
                 let hasherKennelsArray = kennelAndHashNameDecodeDict.keys
                 for key in hasherKennelsArray {
@@ -197,33 +197,33 @@ class HasherDataVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     //PICKER to select/change primary kennel
-    @IBAction func getKennelFromOriginalKennelPicker(sender: UIStoryboardSegue) {
-        
-        if let sourceViewController = sender.sourceViewController as? KennelPickerVC {
-            let primaryKennelUrl = DataService.ds.REF_HASHERS.child(hasher.hasherId)
-            let hasherKennelsAndNamesUrl = DataService.ds.REF_HASHERS.child(hasher.hasherId).child("hasherKennelsAndNames")
-            
-            if sourceViewController.kennelChoiceId != nil {
-                if hasherPrimaryKennel != nil {
-                    hasherKennelsAndNamesUrl.updateChildValues([hasherPrimaryKennel as! String: true])
-                    primaryKennelUrl.updateChildValues(["hasherPrimaryKennel" : sourceViewController.kennelChoiceId!])
-                } else {
-                    primaryKennelUrl.updateChildValues(["hasherPrimaryKennel" : sourceViewController.kennelChoiceId!])
-                }
-                hasherKennelsAndNamesUrl.updateChildValues([sourceViewController.kennelChoiceId : "primary"])
-            }
-        }
+//    @IBAction func getKennelFromOriginalKennelPicker(_ sender: UIStoryboardSegue) {
+//        
+//        if let sourceViewController = sender.source as? KennelPickerVC {
+//            let primaryKennelUrl = DataService.ds.REF_HASHERS.child(hasher.hasherId)
+//            let hasherKennelsAndNamesUrl = DataService.ds.REF_HASHERS.child(hasher.hasherId).child("hasherKennelsAndNames")
+//            
+//            if sourceViewController.kennelChoiceId != nil {
+//                if hasherPrimaryKennel != nil {
+//                    hasherKennelsAndNamesUrl.updateChildValues([hasherPrimaryKennel as String: true])
+//                    primaryKennelUrl.updateChildValues(["hasherPrimaryKennel" : sourceViewController.kennelChoiceId!])
+//                } else {
+//                    primaryKennelUrl.updateChildValues(["hasherPrimaryKennel" : sourceViewController.kennelChoiceId!])
+//                }
+//                hasherKennelsAndNamesUrl.updateChildValues([sourceViewController.kennelChoiceId : "primary"])
+//            }
+//        }
+//    }
+    
+    @IBAction func editPrimaryHashNamePressed(_ sender: AnyObject) {
+        primaryHashNameTxtFld.isHidden = false
+        primaryHashNameLbl.isHidden = true
+        primaryHashNamePencil.isHidden = true
+        updateInfoBtn.isHidden = false
     }
     
-    @IBAction func editPrimaryHashNamePressed(sender: AnyObject) {
-        primaryHashNameTxtFld.hidden = false
-        primaryHashNameLbl.hidden = true
-        primaryHashNamePencil.hidden = true
-        updateInfoBtn.hidden = false
-    }
-    
-    @IBAction func getHasherFromHasherPicker(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as? HasherPickerVC {
+    @IBAction func getHasherFromHasherPicker(_ sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? HasherPickerVC {
             if sourceViewController.hasherChoiceId != nil {
                self.hasherChoiceId = sourceViewController.hasherChoiceId
                 newHasherIsSelected = true

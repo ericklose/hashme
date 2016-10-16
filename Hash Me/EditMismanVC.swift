@@ -32,7 +32,7 @@ class EditMismanVC: UIViewController {
 //        self.hideKeyboardWhenTappedAround()
         
         mismanagementRoleTitle.text = selectedMemberDict["currentRole"]
-        mismanagementRoleAdminLbl.text = selectedMemberDict["currentAdminLevel"]?.capitalizedString
+        mismanagementRoleAdminLbl.text = selectedMemberDict["currentAdminLevel"]?.capitalized
         existingFullAdmins = Int(selectedMemberDict["existingFullAdmins"]!)
         kennelId = selectedMemberDict["kennelId"]
         hasherId = selectedMemberDict["hasherId"]
@@ -43,51 +43,51 @@ class EditMismanVC: UIViewController {
         kennelMismanUrl = DataService.ds.REF_KENNELS.child(kennelId).child("kennelMismanagement")
     }
     
-    @IBAction func removeMismanagementRole(sender: UIButton!) {
-        let alertController = UIAlertController(title: "Remove Misman Role", message: "This Also Removes Admin Access", preferredStyle: .ActionSheet)
-        let remove = UIAlertAction(title: "Remove From Role", style: .Destructive, handler: { (action) -> Void in
+    @IBAction func removeMismanagementRole(_ sender: UIButton!) {
+        let alertController = UIAlertController(title: "Remove Misman Role", message: "This Also Removes Admin Access", preferredStyle: .actionSheet)
+        let remove = UIAlertAction(title: "Remove From Role", style: .destructive, handler: { (action) -> Void in
             self.mismanagementRoleTitle.text = ""
             self.kennelMismanUrl.child(self.hasherId).removeValue()
             self.adminLevel = ""
             self.kennelAdminUrl.child(self.hasherId).removeValue()
             self.updateDetails()
         })
-        let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
             print("Cancel Button Pressed")
         }
         alertController.addAction(remove)
         alertController.addAction(cancel)
         
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func changeAdminLevel(sender: UIButton!) {
+    @IBAction func changeAdminLevel(_ sender: UIButton!) {
         
         if selectedMemberDict["currentAdminLevel"] == "full" && existingFullAdmins <= 1 {
-            let alertController = UIAlertController(title: "There Must Always be a Full Admin per Kennel", message: "Make Someone an Admin Before Un-Admining This Hasher", preferredStyle: .Alert)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
+            let alertController = UIAlertController(title: "There Must Always be a Full Admin per Kennel", message: "Make Someone an Admin Before Un-Admining This Hasher", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction!) in
             }
             alertController.addAction(cancelAction)
-            self.presentViewController(alertController, animated: true, completion:nil)
+            self.present(alertController, animated: true, completion:nil)
         } else {
             
-            let alertController = UIAlertController(title: "Admin Level", message: "There Must Always be a Full Admin per Kennel", preferredStyle: .ActionSheet)
-            let full = UIAlertAction(title: "Full Kennel Admin", style: .Default, handler: { (action) -> Void in
-                self.adminLevel = "full"
-                self.kennelAdminUrl.updateChildValues([self.hasherId : self.adminLevel])
-                self.updateDetails()
+            let alertController = UIAlertController(title: "Admin Level", message: "There Must Always be a Full Admin per Kennel", preferredStyle: .actionSheet)
+            let full = UIAlertAction(title: "Full Kennel Admin", style: .default, handler: { (action) -> Void in
+//                self.adminLevel = "full"
+//                self.kennelAdminUrl.updateChildValues([self.hasherId : self.adminLevel])
+//                self.updateDetails()
             })
-            let trail = UIAlertAction(title: "Trail Admin Only", style: .Default, handler: { (action) -> Void in
-                self.adminLevel = "trail"
-                self.kennelAdminUrl.updateChildValues([self.hasherId : self.adminLevel])
-                self.updateDetails()
+            let trail = UIAlertAction(title: "Trail Admin Only", style: .default, handler: { (action) -> Void in
+//                self.adminLevel = "trail"
+//                self.kennelAdminUrl.updateChildValues([self.hasherId : self.adminLevel])
+//                self.updateDetails()
             })
-            let remove = UIAlertAction(title: "Remove as Admin", style: .Destructive) { (action) -> Void in
-                self.adminLevel = "none"
-                self.kennelAdminUrl.child(self.hasherId).removeValue()
-                self.updateDetails()
+            let remove = UIAlertAction(title: "Remove as Admin", style: .destructive) { (action) -> Void in
+//                self.adminLevel = "none"
+//                self.kennelAdminUrl.child(self.hasherId).removeValue()
+//                self.updateDetails()
             }
-            let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
                 print("Cancel Button Pressed")
             }
             alertController.addAction(remove)
@@ -95,20 +95,20 @@ class EditMismanVC: UIViewController {
             alertController.addAction(full)
             alertController.addAction(cancel)
             
-            presentViewController(alertController, animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
         }
     }
     
-    @IBAction func doneMismanagement(sender: UIButton!) {
-        if mismanagementRoleTitle.text != nil && mismanagementRoleTitle.text == "" {
-            kennelMismanUrl.child(hasherId).removeValue()
-        } else if mismanagementRoleTitle.text != nil {
-            kennelMismanUrl.updateChildValues([hasherId : mismanagementRoleTitle.text!])
-        }
-        self.navigationController?.popViewControllerAnimated(true)
+    @IBAction func doneMismanagement(_ sender: UIButton!) {
+//        if mismanagementRoleTitle.text != nil && mismanagementRoleTitle.text == "" {
+//            kennelMismanUrl.child(hasherId).removeValue()
+//        } else if mismanagementRoleTitle.text != nil {
+//            kennelMismanUrl.updateChildValues([hasherId : mismanagementRoleTitle.text!])
+//        }
+//        self.navigationController?.popViewController(animated: true)
     }
     
     func updateDetails() {
-        mismanagementRoleAdminLbl.text = adminLevel.capitalizedString
+        mismanagementRoleAdminLbl.text = adminLevel.capitalized
     }
 }

@@ -25,13 +25,13 @@ class HasherCell: UITableViewCell {
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
-    func configureCell(hasherId: String, kennelMembershipId: String, kennelAndHashNameDecodeDict: Dictionary<String, String>, kennelAndNameDict: Dictionary<String, String>) {
+    func configureCell(_ hasherId: String, kennelMembershipId: String, kennelAndHashNameDecodeDict: Dictionary<String, String>, kennelAndNameDict: Dictionary<String, String>) {
         self.hasherId = hasherId
         self.kennelMembershipId = kennelMembershipId
         kennelNameLbl.text = kennelAndNameDict[kennelMembershipId]
@@ -39,22 +39,22 @@ class HasherCell: UITableViewCell {
         altHashNameTxtFld.text = kennelAndHashNameDecodeDict[kennelMembershipId]
     }
     
-    @IBAction func altHashNameEditPencilPressed(sender: AnyObject) {
-        altHashNameTxtFld.hidden = false
-        hashNameLbl.hidden = true
-        editButton.hidden = true
-        enterBtn.hidden = false
+    @IBAction func altHashNameEditPencilPressed(_ sender: AnyObject) {
+        altHashNameTxtFld.isHidden = false
+        hashNameLbl.isHidden = true
+        editButton.isHidden = true
+        enterBtn.isHidden = false
     }
     
-    @IBAction func enterBtnForEditAltHashNamePressed(sender: AnyObject) {
+    @IBAction func enterBtnForEditAltHashNamePressed(_ sender: AnyObject) {
         editAltHashNameInFirebase(hasherId, altName: altHashNameTxtFld.text, altId: kennelMembershipId)
-        altHashNameTxtFld.hidden = true
-        hashNameLbl.hidden = false
-        editButton.hidden = false
-        enterBtn.hidden = true
+        altHashNameTxtFld.isHidden = true
+        hashNameLbl.isHidden = false
+        editButton.isHidden = false
+        enterBtn.isHidden = true
     }
     
-    func editAltHashNameInFirebase(hasherId: String!, altName: String!, altId: String!) {
+    func editAltHashNameInFirebase(_ hasherId: String!, altName: String!, altId: String!) {
         let kennelsAndNamesUrl = DataService.ds.REF_HASHERS.child(hasherId).child("hasherKennelsAndNames")
         
         if altName == "" {
@@ -64,7 +64,7 @@ class HasherCell: UITableViewCell {
         }
     }
     
-    @IBAction func deleteKennelButtonPressed(sender: AnyObject) {
+    @IBAction func deleteKennelButtonPressed(_ sender: AnyObject) {
         let kennelsAndNamesUrl = DataService.ds.REF_HASHERS.child(hasherId).child("hasherKennelsAndNames")
         kennelsAndNamesUrl.child(kennelMembershipId as String).removeValue()
         let kennelMembersUrl = DataService.ds.REF_KENNELS.child(kennelMembershipId).child("kennelMembers")

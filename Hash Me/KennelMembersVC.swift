@@ -34,7 +34,7 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         kennelMembersTableView.delegate = self
         kennelMembersTableView.dataSource = self
         
-        DataService.ds.REF_KENNELS.child(kennels.kennelId).observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_KENNELS.child(kennels.kennelId).observe(.value, with: { snapshot in
             if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
                 if let misManDict = kennelDict["kennelMismanagement"] as? Dictionary<String, String> {
                     self.mismanagementDict = misManDict
@@ -59,14 +59,14 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }
                 }
             }
-            DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot2 in
+            DataService.ds.REF_HASHERS.observe(.value, with: { snapshot2 in
                 if let snapshots2 = snapshot2.children.allObjects as? [FIRDataSnapshot] {
                     for snap2 in snapshots2 {
                         if let hasherNameDict = snap2.value as? Dictionary<String, AnyObject> {
                             let key = snap2.key
                             if let hasherHashNamesDict = hasherNameDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
                                 if let memberNameForThisKennel = hasherHashNamesDict[self.kennels.kennelId] {
-                                    if memberNameForThisKennel as! NSObject == true || memberNameForThisKennel as! String == "primary" {
+                                    if memberNameForThisKennel as! Bool == true || memberNameForThisKennel as! String == "primary" {
                                         self.relevantNameList[key] = hasherNameDict["hasherPrimaryHashName"] as! String
                                     } else {
                                         self.relevantNameList[key] = memberNameForThisKennel as! String
@@ -85,26 +85,26 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         })
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         updateKennelDetails()
         
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return kennelMemberArray.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if kennelMemberArray.count == 0 {
             return KennelMemberCell()
         } else {
             if let _ = mismanagementDict {
-                if let cell = tableView.dequeueReusableCellWithIdentifier("kennelMemberCell") as? KennelMemberCell {
-                    let mismanagementId = kennelMemberArray[indexPath.row]
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "kennelMemberCell") as? KennelMemberCell {
+                    let mismanagementId = kennelMemberArray[(indexPath as NSIndexPath).row]
                     cell.configureCell(mismanagementId, memberRoleDict: mismanagementDict, memberNameDict: relevantNameList)
                     return cell
                 } else {
@@ -115,9 +115,9 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         return KennelMemberCell()
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let selectedMemberId = kennelMemberArray[indexPath.row]
+        let selectedMemberId = kennelMemberArray[(indexPath as NSIndexPath).row]
         let selectedMemberName = relevantNameList[selectedMemberId]
         
         var selectedMemberDict: Dictionary<String, String> = ["hasherId" : selectedMemberId]
@@ -143,33 +143,33 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         if userIsKennelFullAdmin == false {
-            let alertController = UIAlertController(title: "Future Link to Profile", message: "just a tease for now", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Future Link to Profile", message: "just a tease for now", preferredStyle: .alert)
             
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction!) in
                 print("you have pressed the Cancel button");
             }
             alertController.addAction(cancelAction)
             
-            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
                 print("you have pressed OK button");
             }
             alertController.addAction(OKAction)
             
-            self.presentViewController(alertController, animated: true, completion:nil)
+            self.present(alertController, animated: true, completion:nil)
             
         } else if userIsKennelFullAdmin == true {
-            let alertController = UIAlertController(title: "What Do You Want to Do", message: "because you're an admin", preferredStyle: .ActionSheet)
-            let profile = UIAlertAction(title: "View Member Profile", style: .Default, handler: { (action) -> Void in
+            let alertController = UIAlertController(title: "What Do You Want to Do", message: "because you're an admin", preferredStyle: .actionSheet)
+            let profile = UIAlertAction(title: "View Member Profile", style: .default, handler: { (action) -> Void in
                 print("Profile Button Pressed")
             })
-            let mmRole = UIAlertAction(title: "Add/Edit Mismanagement Role", style: .Default, handler: { (action) -> Void in
+            let mmRole = UIAlertAction(title: "Add/Edit Mismanagement Role", style: .default, handler: { (action) -> Void in
                 
-                self.performSegueWithIdentifier("editMismanagementRole", sender: selectedMemberDict)
+                self.performSegue(withIdentifier: "editMismanagementRole", sender: selectedMemberDict)
             })
             //            let kick = UIAlertAction(title: "Kick From Kennel", style: .Destructive) { (action) -> Void in
             //                print("Delete Button Pressed")
             //            }
-            let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
                 print("Cancel Button Pressed")
             }
             //            alertController.addAction(kick)
@@ -177,28 +177,28 @@ class KennelMembersVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             alertController.addAction(profile)
             alertController.addAction(cancel)
             
-            presentViewController(alertController, animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
             
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editKennel" {
-            if let editKennelVC = segue.destinationViewController as? EditKennelVC {
+            if let editKennelVC = segue.destination as? EditKennelVC {
                 if let kennels = kennels as? KennelData {
                     editKennelVC.kennel = kennels
                 }
             }
         }
         if segue.identifier == "manageTrail" {
-            if let manageTrailVC = segue.destinationViewController as? ManageTrailVC {
+            if let manageTrailVC = segue.destination as? ManageTrailVC {
                 if let trailInCell = sender as? TrailData {
                     manageTrailVC.trails = trailInCell
                 }
             }
         }
         if segue.identifier == "editMismanagementRole" {
-            if let editMismanVC = segue.destinationViewController as? EditMismanVC {
+            if let editMismanVC = segue.destination as? EditMismanVC {
                 if let selectedMemberDict = sender {
                     editMismanVC.selectedMemberDict = selectedMemberDict as! Dictionary<String, String>
                 }

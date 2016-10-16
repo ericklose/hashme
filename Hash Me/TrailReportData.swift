@@ -11,10 +11,10 @@ import Firebase
 
 class TrailReportData {
     
-    private var _trailKey: String!
-    private var _attendeeCount: Int!
-    private var _revenue: Int!
-    private var _paidAttendee: Int!
+    fileprivate var _trailKey: String!
+    fileprivate var _attendeeCount: Int!
+    fileprivate var _revenue: Int!
+    fileprivate var _paidAttendee: Int!
     
     var trailKey: String {
         return _trailKey
@@ -42,11 +42,11 @@ class TrailReportData {
     }
     
     
-    init(trailKey: String, completed: DownloadComplete) {
+    init(trailKey: String, completed: @escaping DownloadComplete) {
         
         self._trailKey = trailKey
         
-        DataService.ds.REF_TRAILS.child(self._trailKey).child("trailAttendees").observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_TRAILS.child(self._trailKey).child("trailAttendees").observe(.value, with: { snapshot in
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshots {
                     if let trailDict = snap.value as? Dictionary<String, AnyObject> {

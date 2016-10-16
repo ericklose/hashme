@@ -31,14 +31,14 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         kennelDetailsTableView.delegate = self
         kennelDetailsTableView.dataSource = self
         
-        DataService.ds.REF_KENNELS.child(kennels.kennelId).observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_KENNELS.child(kennels.kennelId).observe(.value, with: { snapshot in
             
             self.trails = []
             
             if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
                 if var trailDict = kennelDict["kennelTrails"] as? Dictionary<String, AnyObject> {
                     for trail in trailDict {
-                        trailDict["trailKennelId"] = self.kennels.kennelId
+                        trailDict["trailKennelId"] = self.kennels.kennelId as AnyObject?
                         let key = trail.0
                         if let finalTrailDict = trailDict[key] as? Dictionary<String, AnyObject> {
                             let trail = TrailData(trailKey: key, dictionary: finalTrailDict)
@@ -58,38 +58,38 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         })
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         updateKennelDetails()
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row < trails.count {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).row < trails.count {
             let trail: TrailData!
-            trail = trails[indexPath.row]
-            performSegueWithIdentifier("manageTrail", sender: trail)
+            trail = trails[(indexPath as NSIndexPath).row]
+            performSegue(withIdentifier: "manageTrail", sender: trail)
         }
-        if indexPath.row >= trails.count && indexPath.row < (trails.count+mismanagementArray.count) {
+        if (indexPath as NSIndexPath).row >= trails.count && (indexPath as NSIndexPath).row < (trails.count+mismanagementArray.count) {
 //            let kennel: KennelData!
 //            kennel = kennels[indexPath.row]
-            performSegueWithIdentifier("kennelMembers", sender: kennels)
+            performSegue(withIdentifier: "kennelMembers", sender: kennels)
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return trails.count + mismanagementArray.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let trueRow = indexPath.row
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let trueRow = (indexPath as NSIndexPath).row
         if trueRow < trails.count {
-            if let cell = tableView.dequeueReusableCellWithIdentifier("kennelTrailsCell") as? TrailCell {
-                trails.sortInPlace { $0.trailDate > $1.trailDate }
-                let trail = trails[indexPath.row]
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "kennelTrailsCell") as? TrailCell {
+                trails.sort { $0.trailDate > $1.trailDate }
+                let trail = trails[(indexPath as NSIndexPath).row]
                 cell.configureCell(trail)
                 return cell
             } else {
@@ -98,7 +98,7 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         if trueRow >= trails.count && trueRow < (trails.count+mismanagementArray.count) {
-            if let cell2 = tableView.dequeueReusableCellWithIdentifier("kennelMemberCell") as? KennelMemberCell {
+            if let cell2 = tableView.dequeueReusableCell(withIdentifier: "kennelMemberCell") as? KennelMemberCell {
                 let mismanagementId = mismanagementArray[(trueRow-trails.count)]
                 cell2.configureCell(mismanagementId, memberRoleDict: mismanagementDict, memberNameDict: mismanagementDict)
                 return cell2
@@ -109,23 +109,23 @@ class ManageKennelVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         return TrailCell()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editKennel" {
-            if let editKennelVC = segue.destinationViewController as? EditKennelVC {
+            if let editKennelVC = segue.destination as? EditKennelVC {
                 if let kennels = kennels as? KennelData {
                     editKennelVC.kennel = kennels
                 }
             }
         }
         if segue.identifier == "manageTrail" {
-            if let manageTrailVC = segue.destinationViewController as? ManageTrailVC {
+            if let manageTrailVC = segue.destination as? ManageTrailVC {
                 if let trailInCell = sender as? TrailData {
                     manageTrailVC.trails = trailInCell
                 }
             }
         }
         if segue.identifier == "kennelMembers" {
-            if let kennelMembersVC = segue.destinationViewController as? KennelMembersVC {
+            if let kennelMembersVC = segue.destination as? KennelMembersVC {
                 if let kennelPicked = kennels as? KennelData {
                     kennelMembersVC.kennels = kennelPicked
                 }

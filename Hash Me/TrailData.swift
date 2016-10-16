@@ -11,19 +11,19 @@ import Firebase
 
 class TrailData {
     
-    private var _trailDate: String!
-    private var _trailKennelName: String!
-    private var _trailKennelId: String!
-    private var _trailTitle: String!
-    private var _trailStartLocation: String!
-    private var _trailDescription: String!
-    private var _trailKey: String!
-    private var _trailHashCash: Int!
-    private var _trailHares: Dictionary<String, String>!
-    private var _trailUrl: FIRDatabaseReference!
-    private var _kennelTrailUrl: FIRDatabaseReference!
-    private var _trails: [TrailData]!
-    private var _trailList: [String]!
+    fileprivate var _trailDate: String!
+    fileprivate var _trailKennelName: String!
+    fileprivate var _trailKennelId: String!
+    fileprivate var _trailTitle: String!
+    fileprivate var _trailStartLocation: String!
+    fileprivate var _trailDescription: String!
+    fileprivate var _trailKey: String!
+    fileprivate var _trailHashCash: Int!
+    fileprivate var _trailHares: Dictionary<String, String>!
+    fileprivate var _trailUrl: FIRDatabaseReference!
+    fileprivate var _kennelTrailUrl: FIRDatabaseReference!
+    fileprivate var _trails: [TrailData]!
+    fileprivate var _trailList: [String]!
     
 //    private var _trailHares: [(String, String, String)]!
     
@@ -104,15 +104,15 @@ class TrailData {
 //This isn't used ... eventually I should have ways to generate a trail list on any criteria (time, kennel, etc) and feed that list to the data grabber.
 //Maybe it makes sense to have one function that does all of that, but it seems like a lot of looping to iterate through trails to determine which one(s) to return
 //Probably that's the answer since that's the freaking point of JSON ... though then I need to figure out how to return All (or eliminate that option and always cap it)
-    func getTrailListForKennel(completed: DownloadComplete, kennelId: String) {
-        DataService.ds.REF_KENNELS.child(kennelId).observeEventType(.Value, withBlock: { snapshot in
+    func getTrailListForKennel(_ completed: @escaping DownloadComplete, kennelId: String) {
+        DataService.ds.REF_KENNELS.child(kennelId).observe(.value, with: { snapshot in
             
             self._trails = []
             
             if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
                 if var trailDict = kennelDict["kennelTrails"] as? Dictionary<String, AnyObject> {
                     for trail in trailDict {
-                        trailDict["trailKennelId"] = kennelId
+                        trailDict["trailKennelId"] = kennelId as AnyObject?
                         let key = trail.0
                         if let finalTrailDict = trailDict[key] as? Dictionary<String, AnyObject> {
                             let trail = TrailData(trailKey: key, dictionary: finalTrailDict)
@@ -125,8 +125,8 @@ class TrailData {
         })
     }
     
-    func getTrailInfo(completed: DownloadComplete) {
-        DataService.ds.REF_TRAILS.observeEventType(.Value, withBlock: { snapshot in
+    func getTrailInfo(_ completed: @escaping DownloadComplete) {
+        DataService.ds.REF_TRAILS.observe(.value, with: { snapshot in
             
             self._trails = []
             
@@ -143,42 +143,42 @@ class TrailData {
         })
     }
     
-    func trailSetDate(trailKey: String, newTrailDate: String) {
+    func trailSetDate(_ trailKey: String, newTrailDate: String) {
         _trailUrl.updateChildValues(["trailDate" : newTrailDate])
         _kennelTrailUrl.updateChildValues(["trailDate" : newTrailDate])
     }
     
-    func trailSetDescription(trailKey: String, newTrailDescription: String) {
+    func trailSetDescription(_ trailKey: String, newTrailDescription: String) {
         _trailUrl.updateChildValues(["trailDescription" : newTrailDescription])
         _kennelTrailUrl.updateChildValues(["trailDescription" : newTrailDescription])
     }
     
-    func trailSetHashCash(trailKey: String, newTrailHashCash: Int) {
+    func trailSetHashCash(_ trailKey: String, newTrailHashCash: Int) {
         _trailUrl.updateChildValues(["trailHashCash" : newTrailHashCash])
         _kennelTrailUrl.updateChildValues(["trailHashCash" : newTrailHashCash])
     }
     
-    func trailSetTitle(trailKey: String, newTrailTitle: String) {
+    func trailSetTitle(_ trailKey: String, newTrailTitle: String) {
         _trailUrl.updateChildValues(["trailTitle" : newTrailTitle])
         _kennelTrailUrl.updateChildValues(["trailTitle" : newTrailTitle])
     }
     
-    func trailSetStartLocation(trailKey: String, newTrailStartLocation: String) {
+    func trailSetStartLocation(_ trailKey: String, newTrailStartLocation: String) {
         _trailUrl.updateChildValues(["trailStartLocation" : newTrailStartLocation])
         _kennelTrailUrl.updateChildValues(["trailStartLocation" : newTrailStartLocation])
     }
     
-    func trailAddHare(trailKey: String, newTrailHareHasherId: String, trailRole: String) {
+    func trailAddHare(_ trailKey: String, newTrailHareHasherId: String, trailRole: String) {
         _trailUrl.child("trailHares").updateChildValues([newTrailHareHasherId : trailRole])
         _kennelTrailUrl.child("trailHares").updateChildValues([newTrailHareHasherId : trailRole])
     }
     
-    func trailRemoveHare(trailKey: String, exTrailHareHasherId: String) {
+    func trailRemoveHare(_ trailKey: String, exTrailHareHasherId: String) {
         _trailUrl.child("trailHares").child(exTrailHareHasherId).removeValue()
         _kennelTrailUrl.child("trailHares").child(exTrailHareHasherId).removeValue()
     }
     
-    func trailAddTrail(trailDict: Dictionary<String, AnyObject>) {
+    func trailAddTrail(_ trailDict: Dictionary<String, AnyObject>) {
         let firstAdd = DataService.ds.REF_TRAILS.childByAutoId()
         let trailRef = firstAdd.key
         _trailUrl.setValue(trailDict)

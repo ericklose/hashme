@@ -19,7 +19,7 @@ class KennelTrailsCell: UITableViewCell {
     //THIS ISN"T BEING USED - INSTEAD NORMAL TRAIL CELL IS BEING RECYCLED (AND WORKING OK SO FAR)
     
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state

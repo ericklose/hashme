@@ -31,11 +31,11 @@ class HasherPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
         hasherPickerTableView.delegate = self
         hasherPickerTableView.dataSource = self
         hasherPickerTableSearchBar.delegate = self
-        hasherPickerTableSearchBar.returnKeyType = UIReturnKeyType.Done
+        hasherPickerTableSearchBar.returnKeyType = UIReturnKeyType.done
         hasherPickerTableView.tableFooterView = UIView()
         
         
-        DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_KENNELS.observe(.value, with: { snapshot in
             
             self.kennelNamesDict = [:]
             
@@ -52,7 +52,7 @@ class HasherPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
         })
         
         
-        DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_HASHERS.observe(.value, with: { snapshot in
             
             self.hashers = []
             
@@ -71,11 +71,11 @@ class HasherPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if hashers == nil {
             return 0
         } else if inSearchMode {
@@ -85,13 +85,13 @@ class HasherPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("hasherPickerCell") as? HasherPickerTableCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "hasherPickerCell") as? HasherPickerTableCell {
             let hasherResult: Hasher!
             if inSearchMode {
-                hasherResult = filteredHashers[indexPath.row]
+                hasherResult = filteredHashers[(indexPath as NSIndexPath).row]
             } else {
-                hasherResult = hashers[indexPath.row]
+                hasherResult = hashers[(indexPath as NSIndexPath).row]
             }
             cell.configureCell(hasherResult, kennelNamesDict: kennelNamesDict)
             return cell
@@ -100,36 +100,36 @@ class HasherPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("getHasherFromTable", sender: indexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "getHasherFromTable", sender: indexPath)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "getHasherFromTable" {
             let selectedIndex = hasherPickerTableView.indexPathForSelectedRow
             if inSearchMode {
-                hasherChoice = filteredHashers[selectedIndex!.row]
+                hasherChoice = filteredHashers[(selectedIndex! as NSIndexPath).row]
             } else {
-                hasherChoice = hashers[selectedIndex!.row]
+                hasherChoice = hashers[(selectedIndex! as NSIndexPath).row]
             }
             hasherChoiceId = hasherChoice.hasherId
             hasherChoiceName = hasherChoice.hasherPrimaryHashName
         }
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == nil || searchBar.text == "" {
             inSearchMode = false
             view.endEditing(true)
             self.hasherPickerTableView.reloadData()
         } else {
             inSearchMode = true
-            let lower = searchBar.text!.lowercaseString
-            filteredHashers = hashers.filter({$0.hasherPrimaryHashName.lowercaseString.rangeOfString(lower) != nil || $0.hasherNerdName.lowercaseString.rangeOfString(lower) != nil})
+            let lower = searchBar.text!.lowercased()
+            filteredHashers = hashers.filter({$0.hasherPrimaryHashName.lowercased().range(of: lower) != nil || $0.hasherNerdName.lowercased().range(of: lower) != nil})
             self.hasherPickerTableView.reloadData()
         }
     }

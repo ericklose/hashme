@@ -20,7 +20,7 @@ let KEY_UID = "uid"
 let STATUS_ACCOUNT_NONEXIST = -8
 
 extension Dictionary where Value : Equatable {
-    func allKeysForValue(val : Value) -> [Key] {
+    func allKeysForValue(_ val : Value) -> [Key] {
         return self.filter { $1 == val }.map { $0.0 }
     }
 }
@@ -39,7 +39,7 @@ extension UIViewController {
 
     //FIX LATER
     
-    func changeFirebasePassword(email: String, pwd: String) {
+    func changeFirebasePassword(_ email: String, pwd: String) {
         self.showErrorAlert("This Doesn't Work Yet", msg: "I'll fix it when I can but you can't change your password just yet")
 //        var passwordTextField: UITextField?
 //        var passwordVerifyTextField: UITextField?
@@ -85,11 +85,11 @@ extension UIViewController {
     }
     
     
-    func showErrorAlert(title: String, msg: String) {
-        let alert = UIAlertController(title: title, message: msg, preferredStyle: .Alert)
-        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+    func showErrorAlert(_ title: String, msg: String) {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(action)
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
 }
