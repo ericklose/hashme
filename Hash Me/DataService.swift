@@ -14,13 +14,13 @@ let URL_BASE = FIRDatabase.database().reference()
 class DataService {
     static let ds = DataService()
     
-    private var _REF_BASE = URL_BASE
-    private var _REF_TRAILS = URL_BASE.child("trails")
-    private var _REF_HASHERS = URL_BASE.child("hashers")
-    private var _REF_KENNELS = URL_BASE.child("kennels")
+    fileprivate var _REF_BASE = URL_BASE
+    fileprivate var _REF_TRAILS = URL_BASE.child("trails")
+    fileprivate var _REF_HASHERS = URL_BASE.child("hashers")
+    fileprivate var _REF_KENNELS = URL_BASE.child("kennels")
     //NEW
     //REF_HASHER_UID is the ID for the hasher owned by the user. The naming is bad but this was the least destructive way to change it.
-    private var _REF_HASHER_USERID: String!
+    fileprivate var _REF_HASHER_USERID: String!
     //REF_UID is the user ID which is logged in. Since it isn't a hasher ID, it really shouldn't be used (unless we want to give Eric & Holly global admin or something).
     //    private var _REF_UID = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
     
@@ -42,11 +42,11 @@ class DataService {
     }
     
     var REF_UID: String! {
-        return NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String
+        return UserDefaults.standard.value(forKey: KEY_UID) as? String
     }
     
     
-    func storeRefHasherUserId(hasherId: String) {
+    func storeRefHasherUserId(_ hasherId: String) {
         _REF_HASHER_USERID = hasherId
     }
     
@@ -55,12 +55,12 @@ class DataService {
     }
     
     var REF_USER_CURRENT: FIRDatabaseReference {
-        let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
+        let uid = UserDefaults.standard.value(forKey: KEY_UID) as! String
         let user = REF_HASHERS.child(uid)
         return user
     }
     
-    func createFirebaseUser(uid: String, user: Dictionary<String, String>) {
+    func createFirebaseUser(_ uid: String, user: Dictionary<String, String>) {
         REF_HASHERS.child(uid).setValue(user)
     }
     

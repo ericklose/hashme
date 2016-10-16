@@ -24,7 +24,7 @@ class MapAddressVC: UIViewController, MKMapViewDelegate {
       kennelMapView.delegate = self
       
       
-      DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+      DataService.ds.REF_KENNELS.observe(.value, with: { snapshot in
          
          self.kennels = []
          if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
@@ -39,63 +39,63 @@ class MapAddressVC: UIViewController, MKMapViewDelegate {
             }
          }
          for address in self.kennels {
-            self.getPlacemarkFromAddress(address.kennelLocation)
+//            self.getPlacemarkFromAddress(address.kennelLocation)
             print("address: ", address.kennelLocation)
          }
       })
    }
    
-   override func viewDidAppear(animated: Bool) {
+   override func viewDidAppear(_ animated: Bool) {
       locationAuthStatus()
    }
    
    func locationAuthStatus() {
-      if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
+      if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
          kennelMapView.showsUserLocation = true
       } else {
          locationManager.requestWhenInUseAuthorization()
       }
    }
    
-   func centerMapOnLocation(location: CLLocation) {
+   func centerMapOnLocation(_ location: CLLocation) {
       let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2, regionRadius * 2)
       kennelMapView.setRegion(coordinateRegion, animated: true)
    }
    
-   func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+   func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
       
       if let loc = userLocation.location {
          centerMapOnLocation(loc)
       }
    }
    
-   func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
       
-      if annotation.isKindOfClass(KennelMapAnno) {
+      if annotation.isKind(of: KennelMapAnno.self) {
          let annoView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Default")
-         annoView.pinTintColor = UIColor.blackColor()
+         annoView.pinTintColor = UIColor.black
          annoView.animatesDrop = true
          return annoView
-      } else if annotation.isKindOfClass(MKUserLocation) {
+      } else if annotation.isKind(of: MKUserLocation.self) {
          return nil
       }
       return nil
    }
    
-   func createAnnotationForLocation(location: CLLocation) {
+   func createAnnotationForLocation(_ location: CLLocation) {
       let kennelMap = KennelMapAnno(coordinate: location.coordinate)
       kennelMapView.addAnnotation(kennelMap)
    }
    
-   func getPlacemarkFromAddress(address: String) {
-      CLGeocoder().geocodeAddressString(address) { (placemarks: [CLPlacemark]?, error: NSError?) -> Void in
-         if let marks = placemarks where marks.count > 0 {
-            if let loc = marks[0].location {
-               //We have a valid location with coordinates
-               self.createAnnotationForLocation(loc)
-            }
-         }
-      }
-   }
+//   func getPlacemarkFromAddress(_ address: String) {
+//      CLGeocoder().geocodeAddressString(address) { (placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+//         if let marks = placemarks , marks.count > 0 {
+//            if let loc = marks[0].location {
+//               //We have a valid location with coordinates
+//               self.createAnnotationForLocation(loc)
+//            }
+//         }
+//      } as! CLGeocodeCompletionHandler
+//   }
    
 }

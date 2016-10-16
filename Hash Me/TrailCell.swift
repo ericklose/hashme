@@ -26,13 +26,13 @@ class TrailCell: UITableViewCell {
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
-    func configureCell(trail: TrailData) {
+    func configureCell(_ trail: TrailData) {
         self.trail = trail
         
         self.trailDate.text = trail.trailDate
@@ -44,7 +44,7 @@ class TrailCell: UITableViewCell {
         
         for (key, value) in trail.trailHares {
             let hareInitDict = ["attendeeIsHare" : true, "attendeeIsAdmin" : true]
-            let hare = Attendee(attendeeInitId: key, attendeeInitDict: hareInitDict, attendeeInitTrailId: trail.trailKey, attendeeInitKennelId: trail.trailKennelId, attendeeAttendingInit: true, attendeeInitTrailHashCash: trail.trailHashCash)
+            let hare = Attendee(attendeeInitId: key, attendeeInitDict: hareInitDict as Dictionary<String, AnyObject>, attendeeInitTrailId: trail.trailKey, attendeeInitKennelId: trail.trailKennelId, attendeeAttendingInit: true, attendeeInitTrailHashCash: trail.trailHashCash)
             hare.getRelevantHashName(key, kennelId: trail.trailKennelId) { () -> () in
                 if value == "Hare" {
                     if self.trailHares.text == "" {

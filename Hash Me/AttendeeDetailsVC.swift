@@ -12,6 +12,7 @@ import UIKit
 class AttendeeDetailsVC: UIViewController {
     
     @IBOutlet weak var specificAttendeeRelevantHashName: UILabel!
+    @IBOutlet weak var specificAttendeeHashNameField: UITextField!
     @IBOutlet weak var specificAttendeeNerdName: UITextField!
     @IBOutlet weak var specificAttendeeAttendingToggle: UISwitch!
     @IBOutlet weak var specificAttendeePaidToggle: UISwitch!
@@ -26,6 +27,7 @@ class AttendeeDetailsVC: UIViewController {
     var specificAttendee: Attendee!
     var trails: TrailData!
     
+//    var isNewHasher: Bool = false
     var hashCash: Int = 0
     var trailAttendencePath = DataService.ds.REF_TRAILS
     var trailsAttendedPath = DataService.ds.REF_HASHERS
@@ -36,12 +38,19 @@ class AttendeeDetailsVC: UIViewController {
         
         hashCash = specificAttendee.attendeeTrailHashCash
         
-        specificAttendeeRelevantHashName.text = specificAttendee.hasherPrimaryHashName
+//        if isNewHasher == false {
+//            specificAttendeeHashNameField.hidden = true
+//            specificAttendeeRelevantHashName.hidden = false
+            specificAttendeeRelevantHashName.text = specificAttendee.hasherPrimaryHashName
+//        } else if isNewHasher == true {
+//            specificAttendeeRelevantHashName.hidden = true
+//            specificAttendeeHashNameField.hidden = false
+//        }
+        
         specificAttendeeNerdName.text = specificAttendee.hasherNerdName
         
         specificAttendeeVisitingFrom.text = specificAttendee.attendeeVisitingFrom
         specificAttendeeVirginSponsorIs.text = specificAttendee.attendeeVirginSponsor
-        
         
         specificAttendeePaySlider.maximumValue = Float(((hashCash/20)+1)*20)
         specificAttendeePaySlider.setValue(Float(specificAttendee.attendeePaidAmount), animated: true)
@@ -57,15 +66,15 @@ class AttendeeDetailsVC: UIViewController {
         specificAttendeeNerdName.text = specificAttendee.hasherNerdName
         
         if specificAttendee.attendeeAttending == true {
-            specificAttendeeAttendingToggle.on = true
+            specificAttendeeAttendingToggle.isOn = true
         } else {
-            specificAttendeeAttendingToggle.on = false
+            specificAttendeeAttendingToggle.isOn = false
         }
         
         if Int(specificAttendee.attendeePaidAmount) > 0 {
-            specificAttendeePaidToggle.on = true
+            specificAttendeePaidToggle.isOn = true
         } else {
-            specificAttendeePaidToggle.on = false
+            specificAttendeePaidToggle.isOn = false
         }
         
         specificAttendeeVirginSponsorIs.text = specificAttendee.attendeeVirginSponsor
@@ -83,12 +92,7 @@ class AttendeeDetailsVC: UIViewController {
     
     
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func updateNerdName(sender: UITextField) {
+    @IBAction func updateNerdName(_ sender: UITextField) {
         if specificAttendeeNerdName.text == "" || specificAttendeeNerdName.text == nil {
             DataService.ds.REF_HASHERS.child(specificAttendee.hasherId).child("hasherNerdName").removeValue()
         } else {
@@ -96,28 +100,28 @@ class AttendeeDetailsVC: UIViewController {
         }
     }
     
-    @IBAction func toggleAttendingToggle(sender: UISwitch) {
-        self.specificAttendee.attendeeSetIsPresent(specificAttendee.hasherId, trailId: specificAttendee.attendeeRelevantTrailId, attendeeIsPresent: sender.on)
+    @IBAction func toggleAttendingToggle(_ sender: UISwitch) {
+        self.specificAttendee.attendeeSetIsPresent(specificAttendee.hasherId, trailId: specificAttendee.attendeeRelevantTrailId, attendeeIsPresent: sender.isOn)
         
-        if specificAttendeeAttendingToggle.on == false {
+        if specificAttendeeAttendingToggle.isOn == false {
             specificAttendeePaidToggle.setOn(false, animated: true)
         }
     }
     
-    @IBAction func hasherPaidFullToggleToggled(sender: UISwitch) {
-        if specificAttendeePaidToggle.on == true {
+    @IBAction func hasherPaidFullToggleToggled(_ sender: UISwitch) {
+        if specificAttendeePaidToggle.isOn == true {
             self.specificAttendee.attendeeSetPaidAmt(specificAttendee.hasherId, trailId: specificAttendee.attendeeRelevantTrailId, attendeePaid: hashCash)
             specificAttendeeAttendingToggle.setOn(true, animated: true)
             toggleAttendingToggle(specificAttendeePaidToggle)
             specificAttendeeCurrentPayLbl.text = "$\(hashCash)"
             specificAttendeePaySlider.setValue(Float(hashCash), animated: true)
-        } else if specificAttendeePaidToggle.on == false {
+        } else if specificAttendeePaidToggle.isOn == false {
             self.specificAttendee.attendeeSetNotPaid(specificAttendee.hasherId, trailId: specificAttendee.attendeeRelevantTrailId)
             specificAttendeeReducedPayReason.text = ""
         }
     }
     
-    @IBAction func sliderValueChanged(sender: UISlider) {
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
         let selectedValue = Int(sender.value)
         if Int(selectedValue) > 0 {
             specificAttendeePaidToggle.setOn(true, animated: true)
@@ -126,17 +130,17 @@ class AttendeeDetailsVC: UIViewController {
         self.specificAttendee.attendeeSetPaidAmt(specificAttendee.hasherId, trailId: specificAttendee.attendeeRelevantTrailId, attendeePaid: selectedValue)
     }
     
-    @IBAction func hasherPaidDiscountReason(sender: UITextField) {
+    @IBAction func hasherPaidDiscountReason(_ sender: UITextField) {
         specificAttendee.attendeeSetPaidReducedReason(specificAttendee.hasherId, trailId: specificAttendee.attendeeRelevantTrailId, attendeePaidReducedReason: specificAttendeeReducedPayReason.text!)
     }
     
     
-    @IBAction func savespecificAttendeeDetails(sender: UIButton) {
-        navigationController?.popViewControllerAnimated(true)
+    @IBAction func savespecificAttendeeDetails(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as? KennelPickerTableVC {
+    @IBAction func getKennelFromKennelPickerVC(_ sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? KennelPickerTableVC {
             if sourceViewController.kennelChoiceId == nil {
                 specificAttendeeVisitingFrom.text = ""
                 trailAttendencePath.child("trailAttendeeVisitingFrom").removeValue()
@@ -149,8 +153,8 @@ class AttendeeDetailsVC: UIViewController {
         }
     }
     
-    @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {
+    @IBAction func getHasherFromHasherPickerVC(_ sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? HasherPickerTableVC {
             if sourceViewController.hasherChoiceId == nil {
                 specificAttendeeVirginSponsorIs.text = ""
                 trailAttendencePath.child("trailAttendeeVirginSponsorIs").removeValue()

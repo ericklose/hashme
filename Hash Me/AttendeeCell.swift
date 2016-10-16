@@ -27,70 +27,70 @@ class AttendeeCell: UITableViewCell {
         
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
     }
     
-    func configureCell(attendee: Attendee, hashCash: Int) {
+    func configureCell(_ attendee: Attendee, hashCash: Int) {
         self.attendee = attendee
         self.hashCash = hashCash
         
         if attendee.hasherNerdName == "" || attendee.hasherNerdName == "Incognito" {
-            self.hasherNerdNameLbl.hidden = true
-            self.hasherNerdName.hidden = false
+            self.hasherNerdNameLbl.isHidden = true
+            self.hasherNerdName.isHidden = false
             self.hasherNerdName.text = ""
         } else {
             self.hasherNerdNameLbl.text = attendee.hasherNerdName
-            self.hasherNerdNameLbl.hidden = false
-            self.hasherNerdName.hidden = true
+            self.hasherNerdNameLbl.isHidden = false
+            self.hasherNerdName.isHidden = true
         }
         
         if attendee.attendeeAttending == true {
-            self.hasherAttendingTrailToggle.on = true
+            self.hasherAttendingTrailToggle.isOn = true
         } else {
-            self.hasherAttendingTrailToggle.on = false
+            self.hasherAttendingTrailToggle.isOn = false
         }
         
         if Int(attendee.attendeePaidAmount) > 0 {
-            self.hasherPaid.on = true
-            self.hasherAttendingTrailToggle.on = true
+            self.hasherPaid.isOn = true
+            self.hasherAttendingTrailToggle.isOn = true
         } else {
-            self.hasherPaid.on = false
+            self.hasherPaid.isOn = false
         }
         
         if attendee.attendeeRelevantHashName == "" {
-            self.hasherRelevantHashNameLbl.hidden = true
-            self.hasherRelevantHashName.hidden = false
+            self.hasherRelevantHashNameLbl.isHidden = true
+            self.hasherRelevantHashName.isHidden = false
             self.hasherRelevantHashNameLbl.text = ""
         } else {
-            self.hasherRelevantHashName.hidden = true
-            self.hasherRelevantHashNameLbl.hidden = false
+            self.hasherRelevantHashName.isHidden = true
+            self.hasherRelevantHashNameLbl.isHidden = false
             self.hasherRelevantHashName.text = ""
             self.hasherRelevantHashNameLbl.text = attendee.attendeeRelevantHashName
         }
     }
     
-    @IBAction func toggleAttendingToggle(sender: UISwitch) {
-        self.attendee.attendeeSetIsPresent(attendee.hasherId, trailId: attendee.attendeeRelevantTrailId, attendeeIsPresent: sender.on)
+    @IBAction func toggleAttendingToggle(_ sender: UISwitch) {
+        self.attendee.attendeeSetIsPresent(attendee.hasherId, trailId: attendee.attendeeRelevantTrailId, attendeeIsPresent: sender.isOn)
         
-        if hasherAttendingTrailToggle.on == false {
+        if hasherAttendingTrailToggle.isOn == false {
             hasherPaid.setOn(false, animated: true)
         }
     }
     
-    @IBAction func hasherPaidToggleToggled(sender: UISwitch) {
-        if hasherPaid.on == true {
+    @IBAction func hasherPaidToggleToggled(_ sender: UISwitch) {
+        if hasherPaid.isOn == true {
             self.attendee.attendeeSetPaidAmt(attendee.hasherId, trailId: attendee.attendeeRelevantTrailId, attendeePaid: hashCash)
             hasherAttendingTrailToggle.setOn(true, animated: true)
             toggleAttendingToggle(hasherPaid)
-        } else if hasherPaid.on == false {
+        } else if hasherPaid.isOn == false {
             self.attendee.attendeeSetNotPaid(attendee.hasherId, trailId: attendee.attendeeRelevantTrailId)
         }
     }
     
     
-    @IBAction func hasherNerdNameAdded(sender: UITextField) {
+    @IBAction func hasherNerdNameAdded(_ sender: UITextField) {
         if hasherNerdName.text != nil && hasherNerdName.text != "" {
             DataService.ds.REF_HASHERS.child(attendee.hasherId).updateChildValues(["hasherNerdName" : hasherNerdName.text!])
         }

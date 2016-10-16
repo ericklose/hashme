@@ -20,11 +20,11 @@ class KennelMemberCell: UITableViewCell {
         //Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func configureCell(memberHasherId: String, memberRoleDict: Dictionary<String, String>, memberNameDict: Dictionary<String, String>) {
+    func configureCell(_ memberHasherId: String, memberRoleDict: Dictionary<String, String>, memberNameDict: Dictionary<String, String>) {
         if let mmRole = memberRoleDict[memberHasherId] {
             self.memberRole.text = mmRole
         } else {

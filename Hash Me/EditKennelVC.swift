@@ -33,12 +33,12 @@ class EditKennelVC: UIViewController, MKMapViewDelegate, UIScrollViewDelegate {
         self.hideKeyboardWhenTappedAround()
         kennelMapView.delegate = self
         scrollView.delegate = self
-        kennelMapView.zoomEnabled = true
-        kennelMapView.rotateEnabled = true
+        kennelMapView.isZoomEnabled = true
+        kennelMapView.isRotateEnabled = true
         kennelMapView.showsCompass = true
         kennelMapView.showsScale = true
         kennelMapView.showsUserLocation = true
-        getPlacemarkFromAddress(kennel.kennelCityAndRegion)
+//        getPlacemarkFromAddress(kennel.kennelCityAndRegion)
         
         kennelName.text = kennel.kennelName
         kennelGeneralSchedule.text = kennel.kennelSchedule
@@ -50,18 +50,18 @@ class EditKennelVC: UIViewController, MKMapViewDelegate, UIScrollViewDelegate {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         locationAuthStatus()
     }
     
-    func centerMapOnLocation(location: CLLocation) {
+    func centerMapOnLocation(_ location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2, regionRadius * 2)
         kennelMapView.setRegion(coordinateRegion, animated: true)
     }
 
 // THIS IS NOT WORKING AT ALL BUT DOESN'T MATTER FOR THIS KENNEL USAGE
     func locationAuthStatus() {
-        if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             kennelMapView.showsUserLocation = true
         } else {
             locationManager.requestWhenInUseAuthorization()
@@ -76,20 +76,20 @@ class EditKennelVC: UIViewController, MKMapViewDelegate, UIScrollViewDelegate {
 //        }
 //    }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        if annotation.isKindOfClass(KennelMapAnno) {
+        if annotation.isKind(of: KennelMapAnno.self) {
             let annoView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Default")
-            annoView.pinTintColor = UIColor.redColor()
+            annoView.pinTintColor = UIColor.red
             annoView.animatesDrop = true
             return annoView
-        } else if annotation.isKindOfClass(MKUserLocation) {
+        } else if annotation.isKind(of: MKUserLocation.self) {
             return nil
         }
         return nil
     }
     
-    func createAnnotationForLocation(location: CLLocationCoordinate2D) {
+    func createAnnotationForLocation(_ location: CLLocationCoordinate2D) {
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
         annotation.title = kennel.kennelName
@@ -97,19 +97,19 @@ class EditKennelVC: UIViewController, MKMapViewDelegate, UIScrollViewDelegate {
         kennelMapView.addAnnotation(annotation)
     }
     
-    func getPlacemarkFromAddress(address: String) {
-        CLGeocoder().geocodeAddressString(address) { (placemarks: [CLPlacemark]?, error: NSError?) -> Void in
-            if let marks = placemarks where marks.count > 0 {
-                if let loc = marks[0].location {
-                    self.createAnnotationForLocation(loc.coordinate)
-                    self.centerMapOnLocation(loc)
-                }
-            }
-        }
-    }
+//    func getPlacemarkFromAddress(_ address: String) {
+//        CLGeocoder().geocodeAddressString(address) { (placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+//            if let marks = placemarks , marks.count > 0 {
+//                if let loc = marks[0].location {
+//                    self.createAnnotationForLocation(loc.coordinate)
+//                    self.centerMapOnLocation(loc)
+//                }
+//            }
+//        } as! CLGeocodeCompletionHandler
+//    }
     
     
-    @IBAction func kennelSaveBtnPressed(sender: UIButton) {
+    @IBAction func kennelSaveBtnPressed(_ sender: UIButton) {
         
         if kennelName.text != kennel.kennelName && kennelName.text != "" {
             kennel.kennelSetName(kennel.kennelId, newKennelName: kennelName.text!)
@@ -134,7 +134,7 @@ class EditKennelVC: UIViewController, MKMapViewDelegate, UIScrollViewDelegate {
         }
         //let kennelMapLocationString: String = kennelCity.text + ", " + kennelState.text + ", " + kennelPostalCode.text + ", " + kennelCountry.text
         
-        navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewController(animated: true)
     }
     
 }

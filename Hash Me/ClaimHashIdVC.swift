@@ -29,28 +29,28 @@ class ClaimHashIdVC: UIViewController {
         super.viewDidLoad()
         print("1")
         
-        confirmSelectionBtn.enabled = false
+        confirmSelectionBtn.isEnabled = false
         
-        DataService.ds.REF_BASE.child("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_BASE.child("UidToHasherId").observe(.value, with: { snapshot in
             if let userList = snapshot.value as? Dictionary<String, String> {
                 print("A")
                 print("AB ", KEY_UID)
-                print("ABB ", NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID))
+                print("ABB ", UserDefaults.standard.value(forKey: KEY_UID))
                 print("AA ", self.userId)
                 self.hasherDict = userList
-                if let thisUsersHasherId = userList[self.userId] {
+                if let thisUsersHasherId = userList[self.userId!] {
                     print("B: ")
                     DataService.ds.storeRefHasherUserId(thisUsersHasherId)
                     self.hasherId = thisUsersHasherId
-                    self.performSegueWithIdentifier("fullLogIn", sender: nil)
+                    self.performSegue(withIdentifier: "fullLogIn", sender: nil)
                 } else if self.hasherId == nil {
                     print("C")
-                    let alertController = UIAlertController(title: "Welcome!", message: "First Check To See if Your Hash Self is Already in the System", preferredStyle: .Alert)
-                    let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-                        self.performSegueWithIdentifier("getHasherFromTable", sender: nil)
+                    let alertController = UIAlertController(title: "Welcome!", message: "First Check To See if Your Hash Self is Already in the System", preferredStyle: .alert)
+                    let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
+                        self.performSegue(withIdentifier: "getHasherFromTable", sender: nil)
                     }
                     alertController.addAction(OKAction)
-                    self.presentViewController(alertController, animated: true, completion:nil)
+                    self.present(alertController, animated: true, completion:nil)
                 } else {
                     //No action -- this is triggered on returning from the hasher selector
                 }
@@ -58,41 +58,41 @@ class ClaimHashIdVC: UIViewController {
         })
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         if thisIsTheFirstDidLoad == false {
-            if let _ = hasherDict[self.userId] {
+            if let _ = hasherDict[self.userId!] {
                 print("JJ")
-                self.performSegueWithIdentifier("fullLogIn", sender: nil)
+                self.performSegue(withIdentifier: "fullLogIn", sender: nil)
             }
         }
         thisIsTheFirstDidLoad = false
     }
     
-    @IBAction func confirmSelectionAsSelf(sender: UIButton) {
+    @IBAction func confirmSelectionAsSelf(_ sender: UIButton) {
         if hasherDict.allKeysForValue(hasherId) == [] {
-            DataService.ds.REF_BASE.child("UidToHasherId").updateChildValues([userId : hasherId])
+            DataService.ds.REF_BASE.child("UidToHasherId").updateChildValues([userId! : hasherId])
         } else {
-            let alertController = UIAlertController(title: "Awkward!", message: "Someone already said they're this hasher", preferredStyle: .Alert)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in }
+            let alertController = UIAlertController(title: "Awkward!", message: "Someone already said they're this hasher", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction!) in }
             alertController.addAction(cancelAction)
-            self.presentViewController(alertController, animated: true, completion:nil)
+            self.present(alertController, animated: true, completion:nil)
         }
     }
     
-    @IBAction func addNewHasher(sender: UIButton) {
-        print("wtf: ", NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as? String)
+    @IBAction func addNewHasher(_ sender: UIButton) {
+        print("wtf: ", UserDefaults.standard.value(forKey: KEY_UID) as? String)
         print("wtf2: ", DataService.ds.REF_UID)
         print("waht's the uid here: ", userId)
-        DataService.ds.REF_BASE.child("UidToHasherId").updateChildValues([userId : userId])
+        DataService.ds.REF_BASE.child("UidToHasherId").updateChildValues([userId! : userId])
     }
     
-    @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {
+    @IBAction func getHasherFromHasherPickerVC(_ sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? HasherPickerTableVC {
             if sourceViewController.hasherChoiceId != nil {
                 self.hasherPrimaryName.text = sourceViewController.hasherChoiceName
                 self.hasherPrimaryKennel.text = "kennel"
                 self.hasherId = sourceViewController.hasherChoiceId
-                confirmSelectionBtn.enabled = true
+                confirmSelectionBtn.isEnabled = true
             }
         }
     }

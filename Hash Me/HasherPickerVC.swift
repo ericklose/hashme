@@ -31,9 +31,9 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         hasherPicker.delegate = self
         hasherPicker.dataSource = self
         hasherSearchBar.delegate = self
-        hasherSearchBar.returnKeyType = UIReturnKeyType.Done
+        hasherSearchBar.returnKeyType = UIReturnKeyType.done
         
-        addNewHasherBtn.enabled = false
+        addNewHasherBtn.isEnabled = false
         
         loadHasherData { () -> () in
             self.hasherPicker.reloadAllComponents()
@@ -46,8 +46,8 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         // Dispose of any resources that can be recreated.
     }
     
-    func loadHasherData(completed: DownloadComplete) {
-        DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { snapshot in
+    func loadHasherData(_ completed: @escaping DownloadComplete) {
+        DataService.ds.REF_HASHERS.observe(.value, with: { snapshot in
                 
                 if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                     self.hasherPickerNames = ["-Select Hasher-"]
@@ -65,11 +65,11 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if inSearchMode {
             return filteredHasherPickerNames.count
         } else {
@@ -77,7 +77,7 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if inSearchMode {
             return filteredHasherPickerNames[row]
         } else {
@@ -85,7 +85,7 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if inSearchMode {
             hasherSelected.text = filteredHasherPickerNames[row]
             self.hasherChoiceName = filteredHasherPickerNames[row]
@@ -95,24 +95,24 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == nil || searchBar.text == "" {
             inSearchMode = false
             view.endEditing(true)
             self.hasherPicker.reloadAllComponents()
         } else {
             inSearchMode = true
-            let lower = searchBar.text!.lowercaseString
-            filteredHasherPickerNames = hasherPickerNames.filter({$0.lowercaseString.rangeOfString(lower) != nil})
+            let lower = searchBar.text!.lowercased()
+            filteredHasherPickerNames = hasherPickerNames.filter({$0.lowercased().range(of: lower) != nil})
             self.hasherPicker.reloadAllComponents()
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if self.hasherChoiceName != nil && self.hasherChoiceName != "-Select Hasher-" {
             hasherChoiceId = hasherDecoderDict[hasherChoiceName]!
         } else {
@@ -120,12 +120,12 @@ class HasherPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
-    @IBAction func saveHasherBtnPressed(sender: UIButton) {
+    @IBAction func saveHasherBtnPressed(_ sender: UIButton) {
         if inSearchMode && self.hasherChoiceName == nil {
             self.hasherChoiceName = filteredHasherPickerNames[0]
-            performSegueWithIdentifier("pickAnotherHasherToEdit", sender: sender)
+            performSegue(withIdentifier: "pickAnotherHasherToEdit", sender: sender)
         } else {
-        performSegueWithIdentifier("pickAnotherHasherToEdit", sender: sender)
+        performSegue(withIdentifier: "pickAnotherHasherToEdit", sender: sender)
         }
            }
 

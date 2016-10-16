@@ -11,22 +11,22 @@ import Firebase
 
 class KennelData {
     
-    private var _kennelId: String!
-    private var _kennelName: String!
-    private var _kennelDict: Dictionary<String, AnyObject>!
-    private var _kennelDescription: String!
-    private var _kennelLocation: String!
-    private var _kennelMapLocation: String!
-    private var _kennelCityAndRegion: String!
-    private var _kennelSchedule: String!
-    private var _kennelCountry: String!
-    private var _kennelState: String!
-    private var _kennelCity: String!
-    private var _kennelPostalCode: String!
-    private var _kennelMismanagement: Dictionary<String, AnyObject>!
-    private var _kennelAdmins: Dictionary<String, AnyObject>!
-    private var _kennelUrl: FIRDatabaseReference!
-    private var _kennels: [KennelData]!
+    fileprivate var _kennelId: String!
+    fileprivate var _kennelName: String!
+    fileprivate var _kennelDict: Dictionary<String, AnyObject>!
+    fileprivate var _kennelDescription: String!
+    fileprivate var _kennelLocation: String!
+    fileprivate var _kennelMapLocation: String!
+    fileprivate var _kennelCityAndRegion: String!
+    fileprivate var _kennelSchedule: String!
+    fileprivate var _kennelCountry: String!
+    fileprivate var _kennelState: String!
+    fileprivate var _kennelCity: String!
+    fileprivate var _kennelPostalCode: String!
+    fileprivate var _kennelMismanagement: Dictionary<String, AnyObject>!
+    fileprivate var _kennelAdmins: Dictionary<String, AnyObject>!
+    fileprivate var _kennelUrl: FIRDatabaseReference!
+    fileprivate var _kennels: [KennelData]!
     
     var kennelId: String {
         return _kennelId
@@ -125,8 +125,8 @@ class KennelData {
     }
     
     
-    func getKennelInfo(completed: DownloadComplete) {
-        DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+    func getKennelInfo(_ completed: @escaping DownloadComplete) {
+        DataService.ds.REF_KENNELS.observe(.value, with: { snapshot in
             
             self._kennels = []
             
@@ -144,7 +144,7 @@ class KennelData {
         })
     }
     
-    func kennelSetName(kennelId: String, newKennelName: String) {
+    func kennelSetName(_ kennelId: String, newKennelName: String) {
         if newKennelName == "" {
             _kennelUrl.child("kennelName").removeValue()
         } else {
@@ -152,7 +152,7 @@ class KennelData {
         }
     }
     
-    func kennelSetDescription(kennelId: String, newKennelDescription: String) {
+    func kennelSetDescription(_ kennelId: String, newKennelDescription: String) {
         if newKennelDescription == "" {
             _kennelUrl.child("kennelDescription").removeValue()
         } else {
@@ -160,7 +160,7 @@ class KennelData {
         }
     }
     
-    func kennelSetSchedule(kennelId: String, newKennelSchedule: String) {
+    func kennelSetSchedule(_ kennelId: String, newKennelSchedule: String) {
         if newKennelSchedule == "" {
             _kennelUrl.child("kennelSchedule").removeValue()
         } else {
@@ -168,7 +168,7 @@ class KennelData {
         }
     }
     
-    func kennelSetCountry(kennelId: String, newKennelCountry: String) {
+    func kennelSetCountry(_ kennelId: String, newKennelCountry: String) {
         if newKennelCountry == "" {
             _kennelUrl.child("kennelCountry").removeValue()
         } else {
@@ -176,7 +176,7 @@ class KennelData {
         }
     }
     
-    func kennelSetState(kennelId: String, newKennelState: String) {
+    func kennelSetState(_ kennelId: String, newKennelState: String) {
         if newKennelState == "" {
             _kennelUrl.child("kennelState").removeValue()
         } else {
@@ -184,7 +184,7 @@ class KennelData {
         }
     }
     
-    func kennelSetCity(kennelId: String, newKennelCity: String) {
+    func kennelSetCity(_ kennelId: String, newKennelCity: String) {
         if newKennelCity == "" {
             _kennelUrl.child("kennelCity").removeValue()
         } else {
@@ -192,7 +192,7 @@ class KennelData {
         }
     }
     
-    func kennelSetPostalCode(kennelId: String, newKennelPostalCode: String) {
+    func kennelSetPostalCode(_ kennelId: String, newKennelPostalCode: String) {
         if newKennelPostalCode == "" {
             _kennelUrl.child("kennelPostalCode").removeValue()
         } else {
@@ -200,7 +200,7 @@ class KennelData {
         }
     }
     
-    func kennelSetAdminStatus(kennelId: String, hasherId: String, newKennelAdminStatus: String) {
+    func kennelSetAdminStatus(_ kennelId: String, hasherId: String, newKennelAdminStatus: String) {
         if newKennelAdminStatus == "" {
             _kennelUrl.child("kennelAdmins").child(hasherId).removeValue()
         } else if newKennelAdminStatus == "full" || newKennelAdminStatus == "trail" {
@@ -208,7 +208,7 @@ class KennelData {
         }
     }
     
-    func kennelSetMismanagementStatus(kennelId: String, hasherId: String, newKennelMismanStatus: String) {
+    func kennelSetMismanagementStatus(_ kennelId: String, hasherId: String, newKennelMismanStatus: String) {
         if newKennelMismanStatus == "" {
             _kennelUrl.child("kennelMismanagement").child(hasherId).removeValue()
         } else {

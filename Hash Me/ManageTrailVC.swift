@@ -42,8 +42,8 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var topContentBlock: UIView!
     
     var newHasher: Dictionary<String, AnyObject> = [:]
-    var trailInfo: Dictionary<String, AnyObject> = ["trailAttendeePresent" : true]
-    var newHasherTrails: Dictionary<String, AnyObject> = ["hasherAttendedTrail": true]
+    var trailInfo: Dictionary<String, AnyObject> = ["trailAttendeePresent" : true as AnyObject]
+    var newHasherTrails: Dictionary<String, AnyObject> = ["hasherAttendedTrail": true as AnyObject]
     
     var trails: TrailData!
     var attendees = [Attendee]()
@@ -63,25 +63,25 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         trailHaresTableView.delegate = self
         trailHaresTableView.dataSource = self
         attendeeSearchBar.delegate = self
-        attendeeSearchBar.returnKeyType = UIReturnKeyType.Done
+        attendeeSearchBar.returnKeyType = UIReturnKeyType.done
         
         updateTrailDetails()
         
-        newHasherPaidToggle.on = false
-        newHasherAttendingToggle.on = false
+        newHasherPaidToggle.isOn = false
+        newHasherAttendingToggle.isOn = false
         newHasherPaySlider.maximumValue = Float(((hashCash/20)+1)*20)
         newHasherPaySlider.setValue(Float(hashCash), animated: true)
         newHasherMinPayLbl.text = "$0"
         newHasherMaxPayLbl.text = "$\((Int(hashCash/20)+1)*20)"
         newHasherCurrentPayLbl.text = "$\(hashCash)"
         
-        newHasher["hasherPrimaryKennel"] = trails.trailKennelId
-        let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [trails.trailKennelId: "primary"]
-        newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
+        newHasher["hasherPrimaryKennel"] = trails.trailKennelId as AnyObject?
+        let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [trails.trailKennelId: "primary" as AnyObject]
+        newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames as AnyObject?
 
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         fakeAttendee = Attendee(attendeeInitId: "fake", attendeeInitDict: [:], attendeeInitTrailId: "fake", attendeeInitKennelId: "fake", attendeeAttendingInit: false, attendeeInitTrailHashCash: 0)
         
@@ -102,11 +102,11 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         specificTrailDescription.text = trails.trailDescription
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         if(tableView == self.trailHaresTableView) {
             return 23
         } else {
@@ -114,7 +114,7 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(tableView == self.trailHaresTableView) {
             return trails.trailHares.count
         } else {
@@ -126,23 +126,23 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == trailHaresTableView {
             let hares = [String](trails.trailHares.keys)
-            let hare = hares[indexPath.row]
-            if let hareCell = tableView.dequeueReusableCellWithIdentifier("hareCell") as? HareCell {
+            let hare = hares[(indexPath as NSIndexPath).row]
+            if let hareCell = tableView.dequeueReusableCell(withIdentifier: "hareCell") as? HareCell {
                 hareCell.configureCell(hare, hares: trails.trailHares, hareNameDict: trailHareNamesDict)
                 return hareCell
             } else {
                 return HareCell()
             }
         } else {
-            if let cell = tableView.dequeueReusableCellWithIdentifier("trailAttendeeCell") as? AttendeeCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "trailAttendeeCell") as? AttendeeCell {
                 let hasherResult: Attendee!
                 if inSearchMode {
-                    hasherResult = filteredHashers[indexPath.row]
+                    hasherResult = filteredHashers[(indexPath as NSIndexPath).row]
                 } else {
-                    hasherResult = trailRoster[indexPath.row]
+                    hasherResult = trailRoster[(indexPath as NSIndexPath).row]
                 }
                 cell.configureCell(hasherResult, hashCash: self.trails.trailHashCash)
                 return cell
@@ -152,24 +152,24 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(tableView == self.trailHaresTableView) {
             
         } else {
             let specificAttendee: Attendee!
             
             if inSearchMode {
-                specificAttendee = filteredHashers[indexPath.row]
+                specificAttendee = filteredHashers[(indexPath as NSIndexPath).row]
             } else {
-                specificAttendee = trailRoster[indexPath.row]
+                specificAttendee = trailRoster[(indexPath as NSIndexPath).row]
             }
-            performSegueWithIdentifier("attendeeDetails", sender: specificAttendee)
+            performSegue(withIdentifier: "attendeeDetails", sender: specificAttendee)
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "attendeeDetails" {
-            if let attendeeDetailsVC = segue.destinationViewController as? AttendeeDetailsVC {
+            if let attendeeDetailsVC = segue.destination as? AttendeeDetailsVC {
                 if let attendeeInCell = sender as? Attendee {
                     attendeeDetailsVC.specificAttendee = attendeeInCell
                 }
@@ -177,61 +177,61 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == nil || searchBar.text == "" {
             inSearchMode = false
-            topContentBlock.hidden = false
+            topContentBlock.isHidden = false
             topContentBlock.frame.size.height = 440
             view.endEditing(true)
             self.trailAttendeeTableView.reloadData()
         } else {
             inSearchMode = true
-            topContentBlock.hidden = true
+            topContentBlock.isHidden = true
             topContentBlock.frame.size.height = 0
-            let lower = searchBar.text!.lowercaseString
-            filteredHashers = trailRoster.filter({$0.attendeeRelevantHashName.lowercaseString.rangeOfString(lower) != nil || $0.hasherNerdName.lowercaseString.rangeOfString(lower) != nil})
+            let lower = searchBar.text!.lowercased()
+            filteredHashers = trailRoster.filter({$0.attendeeRelevantHashName.lowercased().range(of: lower) != nil || $0.hasherNerdName.lowercased().range(of: lower) != nil})
             self.trailAttendeeTableView.reloadData()
         }
     }
     
-    @IBAction func sliderValueChanged(sender: UISlider) {
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
         let selectedValue = Int(sender.value)
         newHasherCurrentPayLbl.text = "$" + String(stringInterpolationSegment: selectedValue)
     }
     
-    @IBAction func newHasherPaidToggled(sender: UISwitch) {
-        if newHasherPaidToggle.on == true {
+    @IBAction func newHasherPaidToggled(_ sender: UISwitch) {
+        if newHasherPaidToggle.isOn == true {
             newHasherAttendingToggle.setOn(true, animated: true)
             newHasherCurrentPayLbl.text = "$\(hashCash)"
             newHasherPaySlider.setValue(Float(hashCash), animated: true)
         }
     }
     
-    @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as? KennelPickerTableVC {
+    @IBAction func getKennelFromKennelPickerVC(_ sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? KennelPickerTableVC {
             if sourceViewController.kennelChoiceId == nil {
                 newHasherVisitorFrom.text = ""
-                newHasher["hasherPrimaryKennel"] = trails.trailKennelId
-                let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [trails.trailKennelId: "primary"]
-                newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
+                newHasher["hasherPrimaryKennel"] = trails.trailKennelId as AnyObject?
+                let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [trails.trailKennelId: "primary" as AnyObject]
+                newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames as AnyObject?
             } else {
                 newHasherVisitorFrom.text = sourceViewController.kennelChoiceName
-                newHasher["hasherPrimaryKennel"] = sourceViewController.kennelChoiceId
-                let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [sourceViewController.kennelChoiceId: "primary"]
-                newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
-                newHasherTrails["hasherVisitingFrom"] = sourceViewController.kennelChoiceId
-                trailInfo["trailAttendeeVisitingFrom"] = sourceViewController.kennelChoiceId
-                newHasherTrails["hasherVisitedKennel"] = trails.trailKennelId
+                newHasher["hasherPrimaryKennel"] = sourceViewController.kennelChoiceId as AnyObject?
+                let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [sourceViewController.kennelChoiceId: "primary" as AnyObject]
+                newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames as AnyObject?
+                newHasherTrails["hasherVisitingFrom"] = sourceViewController.kennelChoiceId as AnyObject?
+                trailInfo["trailAttendeeVisitingFrom"] = sourceViewController.kennelChoiceId as AnyObject?
+                newHasherTrails["hasherVisitedKennel"] = trails.trailKennelId as AnyObject?
             }
         }
     }
     
-    @IBAction func getHasherFromHasherPickerVC(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as? HasherPickerTableVC {
+    @IBAction func getHasherFromHasherPickerVC(_ sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? HasherPickerTableVC {
             if sourceViewController.hasherChoiceId == nil {
                 newHasherVirginSponsorIs.text = ""
                 newHasher["hasherVirginSponsor"] = nil
@@ -239,35 +239,35 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 trailInfo["trailAttendeeVirginSponsorIs"] = nil
             } else {
                 newHasherVirginSponsorIs.text = sourceViewController.hasherChoiceName
-                newHasher["hasherVirginSponsor"] = sourceViewController.hasherChoiceId
-                newHasherTrails["hasherVirginSponsor"] = sourceViewController.hasherChoiceId
-                trailInfo["trailAttendeeVirginSponsorIs"] = sourceViewController.hasherChoiceId
+                newHasher["hasherVirginSponsor"] = sourceViewController.hasherChoiceId as AnyObject?
+                newHasherTrails["hasherVirginSponsor"] = sourceViewController.hasherChoiceId as AnyObject?
+                trailInfo["trailAttendeeVirginSponsorIs"] = sourceViewController.hasherChoiceId as AnyObject?
             }
         }
     }
     
-    @IBAction func addNewHasher(sender: UIButton) {
+    @IBAction func addNewHasher(_ sender: UIButton) {
         
         if newHasherHashName.text == nil || newHasherHashName.text == "" {
             
             newHasherHashName.placeholder = "Hash Name Required"
-            newHasherHashName.backgroundColor = UIColor.redColor()
+            newHasherHashName.backgroundColor = UIColor.red
             
         } else {
-            newHasher["hasherPrimaryHashName"] = newHasherHashName.text!
+            newHasher["hasherPrimaryHashName"] = newHasherHashName.text! as AnyObject?
             
             if newHasherNerdName.text != nil && newHasherNerdName.text != "" {
-                newHasher["hasherNerdName"] = newHasherNerdName.text
+                newHasher["hasherNerdName"] = newHasherNerdName.text as AnyObject?
             }
             
-            if newHasherAttendingToggle.on == true {
-                if newHasherPaidToggle.on == true {
-                    newHasherTrails["hasherPaidTrailAmt"] = Int(newHasherPaySlider.value)
-                    trailInfo["trailAttendeePaidAmt"] = Int(newHasherPaySlider.value)
+            if newHasherAttendingToggle.isOn == true {
+                if newHasherPaidToggle.isOn == true {
+                    newHasherTrails["hasherPaidTrailAmt"] = Int(newHasherPaySlider.value) as AnyObject?
+                    trailInfo["trailAttendeePaidAmt"] = Int(newHasherPaySlider.value) as AnyObject?
                 }
                 if newHasherReducedPayReason.text != nil && newHasherReducedPayReason.text != "" {
-                    newHasherTrails["hasherPaidReducedReason"] = newHasherReducedPayReason.text
-                    trailInfo["trailAttendeePaidReducedReason"] = newHasherReducedPayReason.text
+                    newHasherTrails["hasherPaidReducedReason"] = newHasherReducedPayReason.text as AnyObject?
+                    trailInfo["trailAttendeePaidReducedReason"] = newHasherReducedPayReason.text as AnyObject?
                 }
             }
             
@@ -296,16 +296,16 @@ class ManageTrailVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             newHasherHashName.placeholder = "Hash Name"
             newHasherHashName.backgroundColor = nil
             newHasherNerdName.text = ""
-            newHasherAttendingToggle.on = false
-            newHasherPaidToggle.on = false
+            newHasherAttendingToggle.isOn = false
+            newHasherPaidToggle.isOn = false
             newHasherVisitorFrom.text = ""
             newHasherVirginSponsorIs.text = ""
             newHasherCurrentPayLbl.text = "$\(hashCash)"
             newHasherPaySlider.setValue(Float(hashCash), animated: true)
             newHasherReducedPayReason.text = ""
-            newHasher["hasherPrimaryKennel"] = trails.trailKennelId
-            let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [trails.trailKennelId: "primary"]
-            newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames
+            newHasher["hasherPrimaryKennel"] = trails.trailKennelId as AnyObject?
+            let newHasherKennelsAndNames: Dictionary<String, AnyObject> = [trails.trailKennelId: "primary" as AnyObject]
+            newHasher["hasherKennelsAndName"] = newHasherKennelsAndNames as AnyObject?
         }
     }
     

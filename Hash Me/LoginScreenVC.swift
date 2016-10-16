@@ -24,7 +24,7 @@ class LoginScreenVC: UIViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         checkUserIdStatus { () -> () in
@@ -32,8 +32,8 @@ class LoginScreenVC: UIViewController {
         }
     }
     
-    func checkUserIdStatus(completed: DownloadComplete) {
-        DataService.ds.REF_BASE.child("UidToHasherId").observeEventType(.Value, withBlock: { snapshot in
+    func checkUserIdStatus(_ completed: @escaping DownloadComplete) {
+        DataService.ds.REF_BASE.child("UidToHasherId").observe(.value, with: { snapshot in
             if let userList = snapshot.value as? Dictionary<String, String> {
                 if DataService.ds.REF_UID != nil {
                     if let thisUsersHasherId = userList[DataService.ds.REF_UID] {
@@ -48,23 +48,23 @@ class LoginScreenVC: UIViewController {
     }
     
     func autoLogInIfRecognized() {
-        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
-            self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
+        if UserDefaults.standard.value(forKey: KEY_UID) != nil {
+            self.performSegue(withIdentifier: self.SEGUE_LOGGED_IN, sender: nil)
         }
     }
     
-    @IBAction func attemptFacebookLogin(sender: UIButton!) {
+    @IBAction func attemptFacebookLogin(_ sender: UIButton!) {
         
         let facebookLogin = FBSDKLoginManager()
         
-        facebookLogin.logInWithReadPermissions(["email"], fromViewController: self) { (facebookResult: FBSDKLoginManagerLoginResult!, facebookError: NSError!) -> Void in
+        facebookLogin.logIn(withReadPermissions: ["email"], from: self) { (facebookResult: FBSDKLoginManagerLoginResult?, facebookError: Error?) -> Void in
             
             if facebookError != nil {
                 self.showErrorAlert("Facebook Login Failed", msg: "\(facebookError)")
             } else {
-                let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
-                let credential = FIRFacebookAuthProvider.credentialWithAccessToken(accessToken)
-                FIRAuth.auth()?.signInWithCredential(credential, completion: { (authData, error) in
+                let accessToken = FBSDKAccessToken.current().tokenString
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken!)
+                FIRAuth.auth()?.signIn(with: credential, completion: { (authData, error) in
                     
                     if error != nil {
                         self.showErrorAlert("Facebook Login Failed on Step 2", msg: "\(facebookError)")
@@ -72,19 +72,19 @@ class LoginScreenVC: UIViewController {
                         let hasher = ["provider": credential.provider]
                         DataService.ds.createFirebaseUser(authData!.uid, user: hasher)
                         
-                        NSUserDefaults.standardUserDefaults().setValue(authData!.uid, forKey: KEY_UID)
-                        self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
+                        UserDefaults.standard.setValue(authData!.uid, forKey: KEY_UID)
+                        self.performSegue(withIdentifier: self.SEGUE_LOGGED_IN, sender: nil)
                     }
                 })
             }
         }
     }
     
-    @IBAction func attemptEmailLogin(sender: UIButton!) {
-        if let email = emailField.text where email != "", let pwd = passwordField.text where pwd != "" {
-            FIRAuth.auth()!.signInWithEmail(email, password: pwd, completion: { (authData, error) in
+    @IBAction func attemptEmailLogin(_ sender: UIButton!) {
+        if let email = emailField.text , email != "", let pwd = passwordField.text , pwd != "" {
+            FIRAuth.auth()!.signIn(withEmail: email, password: pwd, completion: { (authData, error) in
                 if error != nil {
-                    if error!.code == 17011 {
+                    if error!._code == 17011 {
                         self.createEmailAccount(email, pwd: pwd)
                         //                    } else if let tempPassword = authData!.providerData.["isTemporaryPassword"] {
                         //                        //TEMP PASSWORD
@@ -97,8 +97,8 @@ class LoginScreenVC: UIViewController {
                         self.showErrorAlert("Sign In Problem", msg: error!.localizedDescription)
                     }
                 } else {
-                    NSUserDefaults.standardUserDefaults().setValue(authData?.uid, forKey: KEY_UID)
-                    self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
+                    UserDefaults.standard.setValue(authData?.uid, forKey: KEY_UID)
+                    self.performSegue(withIdentifier: self.SEGUE_LOGGED_IN, sender: nil)
                 }
             })
         } else {
@@ -106,19 +106,19 @@ class LoginScreenVC: UIViewController {
         }
     }
     
-    func createEmailAccount(email: String, pwd: String) {
-        FIRAuth.auth()?.createUserWithEmail(email, password: pwd, completion: { (user, err) in
+    func createEmailAccount(_ email: String, pwd: String) {
+        FIRAuth.auth()?.createUser(withEmail: email, password: pwd, completion: { (user, err) in
             if err != nil {
                 self.showErrorAlert("Account Creation Problem", msg: err!.localizedDescription)
             } else {
-                NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
-                self.performSegueWithIdentifier(self.SEGUE_LOGGED_IN, sender: nil)
+                UserDefaults.standard.setValue(user?.uid, forKey: KEY_UID)
+                self.performSegue(withIdentifier: self.SEGUE_LOGGED_IN, sender: nil)
             }
         })
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if userAlreadyConnectedToHasher == true {
             SEGUE_LOGGED_IN = "fullLogIn"
         } else {
@@ -127,7 +127,7 @@ class LoginScreenVC: UIViewController {
     }
     
     // LATER, BUT DON'T BREAK NOW
-    @IBAction func pressedForgotPassword(sender: UIButton) {
+    @IBAction func pressedForgotPassword(_ sender: UIButton) {
         //        if emailField.text == "" {
         //            emailField.backgroundColor = UIColor.redColor()
         //            emailField.placeholder = "Enter Email Address to Reset Password"

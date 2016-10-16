@@ -35,17 +35,17 @@ class AddNewTrailVC: UIViewController {
         
     }
     
-    @IBAction func onPressedSaveButton(sender: AnyObject) {
+    @IBAction func onPressedSaveButton(_ sender: AnyObject) {
         if (newTrailKennelName.text == "" || newTrailDate.text == "" || newTrailDate.text == "Date Required" || newTrailTitle.text == "") {
             
             self.newTrailDate.text = "Date Required"
-            self.newTrailDate.backgroundColor = UIColor.redColor()
+            self.newTrailDate.backgroundColor = UIColor.red
             
             self.newTrailTitle.text = "Title Required"
-            self.newTrailTitle.backgroundColor = UIColor.redColor()
+            self.newTrailTitle.backgroundColor = UIColor.red
             
             self.newTrailKennelName.text = "Kennel Required"
-            self.newTrailKennelName.backgroundColor = UIColor.redColor()
+            self.newTrailKennelName.backgroundColor = UIColor.red
             
         } else {
             
@@ -57,19 +57,19 @@ class AddNewTrailVC: UIViewController {
     func postTrailToFirebase() {
         
         var trail: Dictionary<String, AnyObject> = [
-            "trailDate": newTrailDate.text!,
-            "trailKennelName": newTrailKennelName.text!,
-            "trailKennelId": newTrailKennelId,
-            "trailTitle": newTrailTitle.text!,
-            "trailHares": newTrailHares.text!,
-            "trailStartLocation": newTrailStartLocation.text!,
-            "trailDescription": newTrailDescription.text!
+            "trailDate": newTrailDate.text! as AnyObject,
+            "trailKennelName": newTrailKennelName.text! as AnyObject,
+            "trailKennelId": newTrailKennelId as AnyObject,
+            "trailTitle": newTrailTitle.text! as AnyObject,
+            "trailHares": newTrailHares.text! as AnyObject,
+            "trailStartLocation": newTrailStartLocation.text! as AnyObject,
+            "trailDescription": newTrailDescription.text! as AnyObject
         ]
         
         if newTrailHashCash.text == "" {
-            trail["trailHashCash"] = 0
+            trail["trailHashCash"] = 0 as AnyObject?
         } else {
-            trail["trailHashCash"] = Int(newTrailHashCash.text!)
+            trail["trailHashCash"] = Int(newTrailHashCash.text!) as AnyObject?
         }
         
         let firebasePost = DataService.ds.REF_TRAILS.childByAutoId()
@@ -86,18 +86,18 @@ class AddNewTrailVC: UIViewController {
         newTrailDescription.text = ""
         newTrailKennelId = ""
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
-    @IBAction func trailDatePicker(sender: UIButton) {
-        let dateFormatter = NSDateFormatter()
+    @IBAction func trailDatePicker(_ sender: UIButton) {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YY HH:mm"
-        newTrailDate.text = dateFormatter.stringFromDate(datePicker.date)
+        newTrailDate.text = dateFormatter.string(from: datePicker.date)
     }
     
-    @IBAction func getKennelFromKennelPickerVC(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as? KennelPickerTableVC {
+    @IBAction func getKennelFromKennelPickerVC(_ sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? KennelPickerTableVC {
             if sourceViewController.kennelChoiceId == nil {
                 newTrailKennelName.text = ""
                 newTrailKennelId = nil

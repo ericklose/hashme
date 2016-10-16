@@ -30,11 +30,11 @@ class KennelPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
         kennelPickerTableView.delegate = self
         kennelPickerTableView.dataSource = self
         kennelPickerTableSearchBar.delegate = self
-        kennelPickerTableSearchBar.returnKeyType = UIReturnKeyType.Done
+        kennelPickerTableSearchBar.returnKeyType = UIReturnKeyType.done
         kennelPickerTableView.tableFooterView = UIView()
         
         
-        DataService.ds.REF_KENNELS.observeEventType(.Value, withBlock: { snapshot in
+        DataService.ds.REF_KENNELS.observe(.value, with: { snapshot in
             
             self.kennels = []
             
@@ -53,11 +53,11 @@ class KennelPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if kennels == nil {
             return 0
         } else if inSearchMode {
@@ -67,13 +67,13 @@ class KennelPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("kennelPickerCell") as? KennelPickerTableCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "kennelPickerCell") as? KennelPickerTableCell {
             let kennelResult: KennelData!
             if inSearchMode {
-                kennelResult = filteredKennels[indexPath.row]
+                kennelResult = filteredKennels[(indexPath as NSIndexPath).row]
             } else {
-                kennelResult = kennels[indexPath.row]
+                kennelResult = kennels[(indexPath as NSIndexPath).row]
             }
             cell.configureCell(kennelResult)
             return cell
@@ -82,36 +82,36 @@ class KennelPickerTableVC: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("getKennelFromTable", sender: indexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "getKennelFromTable", sender: indexPath)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "getKennelFromTable" {
             let selectedIndex = kennelPickerTableView.indexPathForSelectedRow
             if inSearchMode {
-                kennelChoice = filteredKennels[selectedIndex!.row]
+                kennelChoice = filteredKennels[(selectedIndex! as NSIndexPath).row]
             } else {
-                kennelChoice = kennels[selectedIndex!.row]
+                kennelChoice = kennels[(selectedIndex! as NSIndexPath).row]
             }
             kennelChoiceId = kennelChoice.kennelId
             kennelChoiceName = kennelChoice.kennelName
         }
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == nil || searchBar.text == "" {
             inSearchMode = false
             view.endEditing(true)
             self.kennelPickerTableView.reloadData()
         } else {
             inSearchMode = true
-            let lower = searchBar.text!.lowercaseString
-            filteredKennels = kennels.filter({$0.kennelName.lowercaseString.rangeOfString(lower) != nil})
+            let lower = searchBar.text!.lowercased()
+            filteredKennels = kennels.filter({$0.kennelName.lowercased().range(of: lower) != nil})
             self.kennelPickerTableView.reloadData()
         }
     }

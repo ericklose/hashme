@@ -11,19 +11,19 @@ import Firebase
 
 class Attendee: Hasher {
     
-    private var _attendeeRelevantHashName: String!
-    private var _attendeeRelevantTrailId: String!
-    private var _attendeePaidAmount: Int!
-    private var _attendeePaidNotes: String!
-    private var _attendeeHomeKennel: String!
-    private var _attendeeVirginSponsor: String!
-    private var _attendeeVisitingFrom: String!
-    private var _attendeeTrailHashCash: Int!
-    private var _attendeeIsAdmin: Bool!
-    private var _attendeeIsHare: Bool!
-    private var _attendeeHasherUrl: FIRDatabaseReference!
-    private var _attendeeTrailUrl: FIRDatabaseReference!
-    private var _attendeeKennelUrl: FIRDatabaseReference!
+    fileprivate var _attendeeRelevantHashName: String!
+    fileprivate var _attendeeRelevantTrailId: String!
+    fileprivate var _attendeePaidAmount: Int!
+    fileprivate var _attendeePaidNotes: String!
+    fileprivate var _attendeeHomeKennel: String!
+    fileprivate var _attendeeVirginSponsor: String!
+    fileprivate var _attendeeVisitingFrom: String!
+    fileprivate var _attendeeTrailHashCash: Int!
+    fileprivate var _attendeeIsAdmin: Bool!
+    fileprivate var _attendeeIsHare: Bool!
+    fileprivate var _attendeeHasherUrl: FIRDatabaseReference!
+    fileprivate var _attendeeTrailUrl: FIRDatabaseReference!
+    fileprivate var _attendeeKennelUrl: FIRDatabaseReference!
     
     var attendeeAttending: Bool!
     
@@ -96,11 +96,11 @@ class Attendee: Hasher {
     var attendees = [Attendee]()
     var potentialAttendees = [Attendee]()
     var unpaidAttendees = [Attendee]()
-    var trailAdminList = [:]
+    var trailAdminList = [String:String]()
     
     
-    func getAttendeeInfo(trails: TrailData, completed: DownloadComplete) {
-        DataService.ds.REF_KENNELS.child(trails.trailKennelId).observeEventType(.Value, withBlock: { snapshot in
+    func getAttendeeInfo(_ trails: TrailData, completed: @escaping DownloadComplete) {
+        DataService.ds.REF_KENNELS.child(trails.trailKennelId).observe(.value, with: { snapshot in
             if let kennelDict = snapshot.value as? Dictionary<String, AnyObject> {
                 if let kennelAdminList = kennelDict["kennelAdmins"] as? Dictionary<String, String> {
                     self.trailAdminList = kennelAdminList
@@ -108,7 +108,7 @@ class Attendee: Hasher {
             }
         })
         
-        DataService.ds.REF_HASHERS.observeEventType(.Value, withBlock: { hasherSnapshot in
+        DataService.ds.REF_HASHERS.observe(.value, with: { hasherSnapshot in
             
             if let hasherSnapshots = hasherSnapshot.children.allObjects as? [FIRDataSnapshot] {
                 
@@ -119,7 +119,7 @@ class Attendee: Hasher {
                 for hasherSnap in hasherSnapshots {
                     if var attendeeDataDict = hasherSnap.value as? Dictionary<String, AnyObject> {
                         if self.trailAdminList[hasherSnap.key] != nil {
-                            attendeeDataDict["attendeeIsAdmin"] = true
+                            attendeeDataDict["attendeeIsAdmin"] = true as AnyObject?
                         }
                         if let atThisTrail = attendeeDataDict["trailsAttended"] as? Dictionary<String, AnyObject> {
                             if let thisTrailDict = atThisTrail[trails.trailKey] as? Dictionary<String, AnyObject> {
@@ -143,12 +143,12 @@ class Attendee: Hasher {
         })
     }
     
-    func getRelevantHashName(hasherId: String, kennelId: String, completed: DownloadComplete) {
-        DataService.ds.REF_HASHERS.child(hasherId).observeEventType(.Value, withBlock: { snapshot in
+    func getRelevantHashName(_ hasherId: String, kennelId: String, completed: @escaping DownloadComplete) {
+        DataService.ds.REF_HASHERS.child(hasherId).observe(.value, with: { snapshot in
             if let attendeeInitDict = snapshot.value as? Dictionary<String, AnyObject> {
                 if let attendeeInitHashNamesDict = attendeeInitDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
                     if let attendeeNameForThisKennel = attendeeInitHashNamesDict[kennelId] {
-                        if attendeeNameForThisKennel as! NSObject == true {
+                        if attendeeNameForThisKennel as! Bool == true {
                             self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
                         } else if attendeeNameForThisKennel as! String == "primary" {
                             self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
@@ -170,10 +170,10 @@ class Attendee: Hasher {
         })
     }
     
-    func addToAttendeeList(hasherId: String, trails: TrailData, attendeeDataDict: Dictionary<String, AnyObject>, attendeeAttending: Bool) {
+    func addToAttendeeList(_ hasherId: String, trails: TrailData, attendeeDataDict: Dictionary<String, AnyObject>, attendeeAttending: Bool) {
         let potentialAttendee = Attendee(attendeeInitId: hasherId, attendeeInitDict: attendeeDataDict, attendeeInitTrailId: trails.trailKey, attendeeInitKennelId: trails.trailKennelId, attendeeAttendingInit: attendeeAttending, attendeeInitTrailHashCash: trails.trailHashCash)
         if hasherId == DataService.ds.REF_HASHER_USERID {
-            self.unpaidAttendees.insert(potentialAttendee, atIndex: 0)
+            self.unpaidAttendees.insert(potentialAttendee, at: 0)
         } else if (attendeeAttending == true && potentialAttendee.attendeePaidAmount == 0) {
             self.unpaidAttendees.append(potentialAttendee)
         } else if (attendeeAttending == true && potentialAttendee.attendeePaidAmount > 0) {
@@ -184,7 +184,7 @@ class Attendee: Hasher {
     }
     
     
-    func attendeeSetIsPresent(attendeeId: String, trailId: String, attendeeIsPresent: Bool) {
+    func attendeeSetIsPresent(_ attendeeId: String, trailId: String, attendeeIsPresent: Bool) {
         if attendeeIsPresent == true {
             _attendeeHasherUrl.updateChildValues(["hasherAttendedTrail" : attendeeIsPresent])
             _attendeeTrailUrl.updateChildValues(["trailAttendeePresent" : attendeeIsPresent])
@@ -196,13 +196,13 @@ class Attendee: Hasher {
         }
     }
     
-    func attendeeSetPaidAmt(attendeeId: String, trailId: String, attendeePaid: Int) {
+    func attendeeSetPaidAmt(_ attendeeId: String, trailId: String, attendeePaid: Int) {
         _attendeeHasherUrl.updateChildValues(["hasherPaidTrailAmt" : attendeePaid])
         _attendeeTrailUrl.updateChildValues(["trailAttendeePaidAmt" : attendeePaid])
         _attendeeKennelUrl.updateChildValues(["trailAttendeePaidAmt" : attendeePaid])
     }
     
-    func attendeeSetPaidReducedReason(attendeeId: String, trailId: String, attendeePaidReducedReason: String) {
+    func attendeeSetPaidReducedReason(_ attendeeId: String, trailId: String, attendeePaidReducedReason: String) {
         if attendeePaidReducedReason == "" {
             _attendeeHasherUrl.child("hasherPaidReducedReason").removeValue()
             _attendeeTrailUrl.child("trailAttendeePaidReducedReason").removeValue()
@@ -214,7 +214,7 @@ class Attendee: Hasher {
         }
     }
     
-    func attendeeSetNotPaid(attendeeId: String, trailId: String) {
+    func attendeeSetNotPaid(_ attendeeId: String, trailId: String) {
         _attendeeHasherUrl.child("hasherPaidTrailAmt").removeValue()
         _attendeeTrailUrl.child("trailAttendeePaidAmt").removeValue()
         _attendeeKennelUrl.child("trailAttendeePaidAmt").removeValue()
@@ -241,16 +241,38 @@ class Attendee: Hasher {
         self._attendeeRelevantTrailId = attendeeInitTrailId
         self.attendeeAttending = attendeeAttendingInit
         self._attendeeTrailHashCash = attendeeInitTrailHashCash
-        
+//        print("A", self.hasherId)
         if let attendeeInitHashNamesDict = attendeeInitDict["hasherKennelsAndNames"] as? Dictionary<String, AnyObject> {
+            print("B", self.hasherId)
             if let attendeeNameForThisKennel = attendeeInitHashNamesDict[attendeeInitKennelId] {
-                if attendeeNameForThisKennel as! NSObject == true {
+                print("C", self.hasherId)
+                
+                
+                if attendeeNameForThisKennel as? String == "primary" {
                     self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
-                } else if attendeeNameForThisKennel as! String == "primary" {
+                } else if attendeeNameForThisKennel as? Bool == true {
+                    print("D", attendeeNameForThisKennel, " + ", self.hasherId)
                     self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
                 } else {
                     self._attendeeRelevantHashName = attendeeNameForThisKennel as! String
+                    print("side 1", self.hasherId)
                 }
+                
+                
+//                if attendeeNameForThisKennel as! Bool == true {
+//                    print("D", attendeeNameForThisKennel, " + ", self.hasherId)
+//                    self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
+//                } else if attendeeNameForThisKennel as? String == "primary" {
+//                    self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
+//                } else {
+//                    self._attendeeRelevantHashName = attendeeNameForThisKennel as! String
+//                    print("side 1", self.hasherId)
+//                }
+                
+                
+                
+                
+                print("side 3", self.hasherId)
             } else {
                 self._attendeeRelevantHashName = attendeeInitDict["hasherPrimaryHashName"] as! String
             }
