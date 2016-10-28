@@ -30,15 +30,19 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         kennelList.getKennelInfo() { () -> () in
             self.kennels = self.kennelList.kennels
+            print("reload happens?")
             self.kennelListTable.reloadData()
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        print("1xxx")
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(" numRows :", kennels.count)
+        kennelListTable.backgroundColor = color.red
         return kennels.count
     }
     
@@ -55,11 +59,14 @@ class KennelListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("are were here")
         let kennel = kennels[(indexPath as NSIndexPath).row]
         if let cell = tableView.dequeueReusableCell(withIdentifier: "kennelCell") as? KennelCell {
+            print("line test")
             cell.configureCell(kennel)
             return cell
         } else {
+            print("fail, I guess")
             return KennelCell()
         }
         
