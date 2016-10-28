@@ -133,9 +133,11 @@ class KennelData {
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshots {
                     if let kennelDict = snap.value as? Dictionary<String, AnyObject> {
+//                        print("loading dict")
                         let key = snap.key
                         let kennelName = kennelDict["kennelName"] as? String
                         let kennel = KennelData(kennelInitId: key, kennelInitDict: kennelDict, kennelInitName: kennelName!)
+//                        print("kennel ingo: ", kennelDict)
                         self._kennels.append(kennel)
                     }
                 }

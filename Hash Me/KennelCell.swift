@@ -29,7 +29,7 @@ class KennelCell: UITableViewCell {
 
     func configureCell(_ kennel: KennelData) {
         self.kennel = kennel
-        
+        print("cell: ", kennel.kennelName)
         self.kennelName.text = kennel.kennelName
         self.kennelLocation.text = kennel.kennelLocation
         self.kennelSchedule.text = kennel.kennelSchedule
